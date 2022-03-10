@@ -26,54 +26,24 @@ namespace SE104_N10_QuanLySieuThi
             InitializeComponent();
         }
 
-
-        private void sect3_MouseEnter(object sender, MouseEventArgs e)
-        {
-            sect3.Foreground = new SolidColorBrush(Colors.Yellow);
-
-        }
-
-        private void sect3_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            sect3.Foreground = (Brush)bc.ConvertFrom("#D800FF00");
-
-        }
-
-        private void sect2_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            sect2.Foreground = (Brush)bc.ConvertFrom("#F757F4");
-
-        }
-
-        private void sect2_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            sect2.Foreground = (Brush)bc.ConvertFrom("#D800FF00");
-        }
-
-        private void sect1_MouseEnter(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            sect1.Foreground = (Brush)bc.ConvertFrom("#57E4F7");
-
-        }
-
-        private void sect1_MouseLeave(object sender, MouseEventArgs e)
-        {
-            var bc = new BrushConverter();
-            sect1.Foreground = (Brush)bc.ConvertFrom("#D800FF00");
-        }
-
-        private void sect1_Click(object sender, RoutedEventArgs e)
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        private void btnSell_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(e.Uri.ToString());
+
+        }
+
+        private void bntHumanRes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnReport_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

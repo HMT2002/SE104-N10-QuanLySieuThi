@@ -26,57 +26,52 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="1">
-            <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://www.youtube.com/">
-                   link yt
-            </Hyperlink>
-        </TextBlock>
-        
-        <Button x:Name="sect1"
+        <Button x:Name="btnBuy"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,5,0,0"
                 Width="150"
-                Height="30"
+                Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 FontFamily="Times New Roman"
                 Foreground="#D800FF00" 
-                Content="section 1" 
-                MouseEnter="sect1_MouseEnter"
-                MouseLeave="sect1_MouseLeave"
-                Click="sect1_Click"
+                Content="Nhập kho" Click="btnBuy_Click" 
                 
                 />
-        <Button x:Name="sect2"
+        <Button x:Name="btnSell"
                 Grid.Column="0" Grid.Row="0" 
-                Margin="0,40,0,0"
+                Margin="0,65,0,0"
                 Width="150"
-                Height="30"
+                Height="50"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                FontFamily="Times New Roman"
-                Foreground="#D800FF00" 
-                Content="secion 2"
-                MouseEnter="sect2_MouseEnter"
-                MouseLeave="sect2_MouseLeave"
-                
-                />
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Bán hàng" Click="btnSell_Click"
+            />
+        <Button x:Name="bntHumanRes"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,125,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Nhân sự" Click="bntHumanRes_Click"
+            />
+        <Button x:Name="btnReport"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,185,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Báo cáo" Click="btnReport_Click"
+            />
 
-        <Button x:Name="sect3"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,75,0,0"
-                Width="150"
-                Height="30"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"   
-                FontFamily="Times New Roman"
-                Foreground="#D800FF00"  
-                Content="secion 3"
-                MouseEnter="sect3_MouseEnter"
-                MouseLeave="sect3_MouseLeave"
-                
-                
-                />
 
     </Grid>
 </Window>
