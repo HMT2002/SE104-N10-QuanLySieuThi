@@ -69,9 +69,13 @@
                 VerticalAlignment="Top"     
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
-                Content="Báo cáo" Click="btnReport_Click"
+                Content="Báo cáo thống kê" Click="btnReport_Click"
             />
 
-
+        <TabPanel x:Name="pTaskTab"
+                  Grid.Column="1" Grid.Row="1"
+                  Background="#FFB3F9F9"
+                  
+            />
     </Grid>
 </Window>
