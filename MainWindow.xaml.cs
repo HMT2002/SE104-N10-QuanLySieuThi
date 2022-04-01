@@ -28,7 +28,7 @@ namespace SE104_N10_QuanLySieuThi
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-
+            int i = 1;
         }
 
         private void btnSell_Click(object sender, RoutedEventArgs e)
