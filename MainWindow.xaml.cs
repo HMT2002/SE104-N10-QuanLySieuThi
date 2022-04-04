@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE104_N10_QuanLySieuThi.pages;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -59,6 +60,17 @@ namespace SE104_N10_QuanLySieuThi
         private void btnSetting_Click(object sender, RoutedEventArgs e)
         {
             fraMain.Content = new paSetting();
+
+        }
+
+        private void btnManage_Click(object sender, RoutedEventArgs e)
+        {
+           fraMain.Content = new paManage();
+        }
+
+        private void btnStatic_Click(object sender, RoutedEventArgs e)
+        {
+            fraMain.Content = new paStatic();
 
         }
     }

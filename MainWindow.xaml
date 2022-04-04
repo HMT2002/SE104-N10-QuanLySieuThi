@@ -97,9 +97,33 @@
                 Content="Cài đặt" Click="btnSetting_Click"
             />
 
+        <Button x:Name="btnManage"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,375,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Quản lí" Click="btnManage_Click"
+            />
+
+        <Button x:Name="btnStatic"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,435,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Thống kê" Click="btnStatic_Click"
+            />
+
         <Button x:Name="btnLogout"
                 Grid.Column="0" Grid.Row="0" 
-                Margin="0,507,0,0"
+                Margin="0,495,0,0"
                 Width="150"
                 Height="50"
                 HorizontalAlignment="Left"

@@ -93,6 +93,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\paManage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\paProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\paSetting.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\paStatic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,6 +124,9 @@
     <Compile Include="pages\paHome.xaml.cs">
       <DependentUpon>paHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\paManage.xaml.cs">
+      <DependentUpon>paManage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\paProduct.xaml.cs">
       <DependentUpon>paProduct.xaml</DependentUpon>
     </Compile>
@@ -124,6 +135,9 @@
     </Compile>
     <Compile Include="pages\paSetting.xaml.cs">
       <DependentUpon>paSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\paStatic.xaml.cs">
+      <DependentUpon>paStatic.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
