@@ -31,7 +31,6 @@ namespace SE104_N10_QuanLySieuThi
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
             fraMain.Content = new paBuy();
-
         }
 
         private void btnSell_Click(object sender, RoutedEventArgs e)
