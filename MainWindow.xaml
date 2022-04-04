@@ -14,10 +14,10 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="180"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
@@ -26,9 +26,56 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <Button x:Name="btnHome"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,15,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Trang chủ" Click="btnHome_Click"
+            />
+        
+        <Button x:Name="btnSell"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,75,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Đơn hàng" Click="btnSell_Click"
+            />
+
+        <Button x:Name="btnProduct"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,135,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Sản phẩm" Click="btnProduct_Click"
+            />
+        <Button x:Name="btnCustomer"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,195,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Khách hàng" Click="btnCustomer_Click"
+            />
+
         <Button x:Name="btnBuy"
                 Grid.Column="0" Grid.Row="0" 
-                Margin="0,5,0,0"
+                Margin="0,255,0,0"
                 Width="150"
                 Height="50"
                 HorizontalAlignment="Left"
@@ -36,43 +83,32 @@
                 FontFamily="Times New Roman"
                 Foreground="#D800FF00" 
                 Content="Nhập kho" Click="btnBuy_Click" 
-                
+             
                 />
-        <Button x:Name="btnSell"
+        <Button x:Name="btnSetting"
                 Grid.Column="0" Grid.Row="0" 
-                Margin="0,65,0,0"
+                Margin="0,315,0,0"
                 Width="150"
                 Height="50"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"     
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
-                Content="Bán hàng" Click="btnSell_Click"
-            />
-        <Button x:Name="bntHumanRes"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,125,0,0"
-                Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
-                FontFamily="Times New Roman"           
-                Foreground="#D800FF00"    
-                Content="Nhân sự" Click="bntHumanRes_Click"
-            />
-        <Button x:Name="btnReport"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,185,0,0"
-                Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
-                FontFamily="Times New Roman"           
-                Foreground="#D800FF00"    
-                Content="Báo cáo thống kê" Click="btnReport_Click"
+                Content="Cài đặt" Click="btnSetting_Click"
             />
 
-        <TabPanel x:Name="pTaskTab"
+        <Button x:Name="btnLogout"
+                Grid.Column="0" Grid.Row="0" 
+                Margin="0,507,0,0"
+                Width="150"
+                Height="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"     
+                FontFamily="Times New Roman"           
+                Foreground="#D800FF00"    
+                Content="Đăng xuất"
+            />
+        <Frame x:Name="fraMain"
                   Grid.Column="1" Grid.Row="1"
                   Background="#FFB3F9F9"
                   

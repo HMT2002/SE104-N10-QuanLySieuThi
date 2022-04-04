@@ -24,25 +24,42 @@ namespace SE104_N10_QuanLySieuThi
         public MainWindow()
         {
             InitializeComponent();
+            fraMain.Content = new paHome();
+
         }
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
+            fraMain.Content = new paBuy();
 
         }
 
         private void btnSell_Click(object sender, RoutedEventArgs e)
         {
+            fraMain.Content = new paSell();
 
         }
 
-        private void bntHumanRes_Click(object sender, RoutedEventArgs e)
+        private void btnHome_Click(object sender, RoutedEventArgs e)
         {
+            fraMain.Content = new paHome();
+        }
+
+        private void btnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            fraMain.Content = new paProduct();
 
         }
 
-        private void btnReport_Click(object sender, RoutedEventArgs e)
+        private void btnCustomer_Click(object sender, RoutedEventArgs e)
         {
+            fraMain.Content = new paCustomer();
+
+        }
+
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            fraMain.Content = new paSetting();
 
         }
     }
