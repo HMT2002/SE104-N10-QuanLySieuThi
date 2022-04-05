@@ -14,7 +14,8 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"></ColumnDefinition>
@@ -132,10 +133,14 @@
                 Foreground="#D800FF00"    
                 Content="Đăng xuất"
             />
-        <Frame x:Name="fraMain"
-                  Grid.Column="1" Grid.Row="1"
-                  Background="#FFB3F9F9"
-                  
-            />
+        <Frame x:Name="fraMain" 
+               Grid.Column="1" Grid.Row="1"
+               Background="#FFB3F9F9"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+               HorizontalContentAlignment="Stretch"
+               VerticalContentAlignment="Stretch"
+               
+               />
     </Grid>
 </Window>

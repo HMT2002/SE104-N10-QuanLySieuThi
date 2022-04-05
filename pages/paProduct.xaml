@@ -11,6 +11,20 @@
       >
 
     <Grid>
-        
+        <Button x:Name="bntTest"
+                Width="200"
+                Height="200"
+                Margin="0,0,0,0" 
+                Click="bntTest_Click"
+                
+            />
+        <Image x:Name="imgTest"
+               Height="100" 
+               Margin="560,212,0,0" 
+               Width="100"
+               Stretch="Fill"
+               
+            />
+
     </Grid>
 </Page>
