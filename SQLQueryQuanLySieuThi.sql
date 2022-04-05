@@ -54,3 +54,5 @@ INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (0, 'test',)
 
 
 select PICNAME from HINHANH where PICID =1
+
+delete from HINHANH where PICID = 1

@@ -25,15 +25,25 @@ namespace SE104_N10_QuanLySieuThi
     /// </summary>
     public partial class paProduct : Page
     {
- 
-        SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
-        SqlCommand command;
+        
+        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
+        public SqlCommand command;
 
         public paProduct()
         {
             InitializeComponent();
         }
 
+
+
+        private void bntTest_Click(object sender, RoutedEventArgs e)
+        {
+            chonHinhAnh(imgTest);
+            moHinhAnh(imgTest);
+        }
+        private void executeSQLComm(string comm)
+        {
+        }
         public byte[] convertImgToByte(BitmapImage bitimg)
         {
             MemoryStream memStream = new MemoryStream();
@@ -42,7 +52,6 @@ namespace SE104_N10_QuanLySieuThi
             encoder.Save(memStream);
             return memStream.ToArray();
         }
-
         public BitmapImage convertImgFromByte(byte[] array)
         {
             using (var ms = new System.IO.MemoryStream(array))
@@ -55,17 +64,7 @@ namespace SE104_N10_QuanLySieuThi
                 return image;
             }
         }
-
-        private void bntTest_Click(object sender, RoutedEventArgs e)
-        {
-            //chonHinhAnh();
-            //moHinhAnh();
-        }
-        private void executeSQLComm(string comm)
-        {
-        }
-
-        private void chonHinhAnh()
+        public void chonHinhAnh(Image img)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
@@ -77,12 +76,11 @@ namespace SE104_N10_QuanLySieuThi
                 int id = 0; /*Không được phép trùng do là khóa chính, phải là int */
                 addBinaryArrIntoSQL(convertImgToByte(temp),name,id);
                 BitmapImage res = convertImgFromByte(convertImgToByte(temp));
-                imgTest.Source = res;
+                img.Source = res;
             }
 
         }
-
-        private void moHinhAnh()
+        public void moHinhAnh(Image img)
         {
             ketnoi.Open();
             BitmapImage res = new BitmapImage();
@@ -101,10 +99,9 @@ namespace SE104_N10_QuanLySieuThi
                 }
             }
             ketnoi.Close();
-            imgTest.Source = res;
+            img.Source = res;
         }
-
-        private void addBinaryArrIntoSQL(byte[] bytearr,string picname,int picid)
+        public void addBinaryArrIntoSQL(byte[] bytearr,string picname,int picid)
         {
             ketnoi.Open();
             using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES ("+picid+", '"+picname+"',@binaryValue)", ketnoi))
