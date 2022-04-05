@@ -58,30 +58,59 @@ namespace SE104_N10_QuanLySieuThi
 
         private void bntTest_Click(object sender, RoutedEventArgs e)
         {
+            //chonHinhAnh();
+            //moHinhAnh();
+        }
+        private void executeSQLComm(string comm)
+        {
+        }
+
+        private void chonHinhAnh()
+        {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 //HowKTeam
                 BitmapImage temp = new BitmapImage(new Uri(dialog.FileName));
-                addBinaryArrIntoSQL(convertImgToByte(temp));
-                BitmapImage res =convertImgFromByte(convertImgToByte(temp));
+                string name = "test"/*được phép trùng*/;
+                int id = 0; /*Không được phép trùng do là khóa chính, phải là int */
+                addBinaryArrIntoSQL(convertImgToByte(temp),name,id);
+                BitmapImage res = convertImgFromByte(convertImgToByte(temp));
                 imgTest.Source = res;
             }
 
         }
-        private void executeSQLComm(string comm)
-        {
 
-        }
-
-        private void addBinaryArrIntoSQL(byte[] bytearr)
+        private void moHinhAnh()
         {
             ketnoi.Open();
-            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (3, 'test_3',@binaryValue)", ketnoi))
+            BitmapImage res = new BitmapImage();
+            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = 4", ketnoi);
+            using (SqlDataReader d = cmd.ExecuteReader())
+            {
+                if (d.Read())
+                {
+                    byte[] bytearr = (byte[])d["PICBI"];
+                    res = convertImgFromByte(bytearr);
+                    //Do stuff with salt and pass
+                }
+                else
+                {
+                    // NO User with email exists
+                }
+            }
+            ketnoi.Close();
+            imgTest.Source = res;
+        }
+
+        private void addBinaryArrIntoSQL(byte[] bytearr,string picname,int picid)
+        {
+            ketnoi.Open();
+            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES ("+picid+", '"+picname+"',@binaryValue)", ketnoi))
             {
                 // Replace 8000, below, with the correct size of the field
-                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 8000).Value = bytearr;
+                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 999999).Value = bytearr;
                 cmd.ExecuteNonQuery();
             }
             ketnoi.Close();
