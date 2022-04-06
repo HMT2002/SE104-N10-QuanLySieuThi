@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
+using SE104_N10_QuanLySieuThi.classes;
 
 namespace SE104_N10_QuanLySieuThi
 {
@@ -32,14 +33,30 @@ namespace SE104_N10_QuanLySieuThi
         public paProduct()
         {
             InitializeComponent();
+            System.Windows.Controls.Button btntest = new System.Windows.Controls.Button();
+            btntest.Click += bntNewTest_Click;
         }
 
+        private void bntNewTest_Click(object sender, EventArgs e)
+        {
+            try
+            {
 
+                
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+        }
 
         private void bntTest_Click(object sender, RoutedEventArgs e)
         {
+            //HinhAnh anh = new HinhAnh(1,"test_01", dataAnhDuocChonTuDatabase(1));
+            //moHinhAnhTuDatabase(imgTest,anh.Id);
             chonHinhAnh(imgTest);
-            moHinhAnh(imgTest);
+
         }
         private void executeSQLComm(string comm)
         {
@@ -64,6 +81,26 @@ namespace SE104_N10_QuanLySieuThi
                 return image;
             }
         }
+        public byte[] dataAnhDuocChonTuDatabase(int id)
+        {
+            ketnoi.Open();
+            byte[] data=new byte[9999];
+            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID ="+id, ketnoi);
+            using (SqlDataReader d = cmd.ExecuteReader())
+            {
+                if (d.Read())
+                {
+                    data = (byte[])d["PICBI"];
+                    //Do stuff with salt and pass
+                }
+                else
+                {
+                    // NO User with email exists
+                }
+            }
+            ketnoi.Close();
+            return data;
+        }
         public void chonHinhAnh(Image img)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -72,19 +109,29 @@ namespace SE104_N10_QuanLySieuThi
             {
                 //HowKTeam
                 BitmapImage temp = new BitmapImage(new Uri(dialog.FileName));
+
                 string name = "test"/*được phép trùng*/;
                 int id = 0; /*Không được phép trùng do là khóa chính, phải là int */
-                addBinaryArrIntoSQL(convertImgToByte(temp),name,id);
+                try
+                {
+                    //addBinaryArrIntoSQL(convertImgToByte(temp), name, id);
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+
                 BitmapImage res = convertImgFromByte(convertImgToByte(temp));
                 img.Source = res;
             }
 
         }
-        public void moHinhAnh(Image img)
+        public void moHinhAnhTuDataBase(Image img,int id)
         {
             ketnoi.Open();
             BitmapImage res = new BitmapImage();
-            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = 4", ketnoi);
+            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = "+id, ketnoi);
             using (SqlDataReader d = cmd.ExecuteReader())
             {
                 if (d.Read())
@@ -106,7 +153,7 @@ namespace SE104_N10_QuanLySieuThi
             ketnoi.Open();
             using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES ("+picid+", '"+picname+"',@binaryValue)", ketnoi))
             {
-                // Replace 8000, below, with the correct size of the field
+                // Replace 999999, below, with the correct size of the field
                 cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 999999).Value = bytearr;
                 cmd.ExecuteNonQuery();
             }

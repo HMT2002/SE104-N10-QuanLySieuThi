@@ -134,12 +134,10 @@
                 Content="Đăng xuất"
             />
         <Frame x:Name="fraMain" 
-               Grid.Column="1" Grid.Row="1"
+               Grid.Column="1" Grid.Row="0"
                Background="#FFB3F9F9"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
-               HorizontalContentAlignment="Stretch"
-               VerticalContentAlignment="Stretch"
+               HorizontalContentAlignment="Left"
+               VerticalContentAlignment="Top"
                
                />
     </Grid>

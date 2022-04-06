@@ -127,7 +127,7 @@ namespace SE104_N10_QuanLySieuThi
 
         private void btnProduct_Click(object sender, RoutedEventArgs e)
         {
-            fraMain.Content = new paProduct();
+            fraMain.NavigationService.Navigate(new paProduct());
         }
 
         private void btnCustomer_Click(object sender, RoutedEventArgs e)
