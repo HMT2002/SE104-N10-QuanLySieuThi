@@ -17,70 +17,84 @@ namespace SE104_N10_QuanLySieuThi.classes
         private int id;
         private string name;
         private byte[] data;
+        BitmapImage bitimg;
+        Image img;
 
-        public HinhAnh(int id, string name, byte[] data)
+        public HinhAnh(int id, string name, byte[] data=null, BitmapImage bitimg=null,Image img=null)
         {
             this.id = id;
             this.name = name;
             this.data = data;
+            this.bitimg = bitimg;
+
+            if (img == null)
+            {
+                this.img = new Image();
+                this.img.Source = this.bitimg;
+            }
+            else
+                this.img = img;
+
         }
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public byte[] Data { get => data; set => data = value; }
+        public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
+        public Image Img { get => img; set => img = value; }
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
-        public byte[] convertImgToByte(BitmapImage bitimg)
+        public byte[] convertImgToByte()
         {
             MemoryStream memStream = new MemoryStream();
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bitimg));
+            encoder.Frames.Add(BitmapFrame.Create(this.bitimg));
             encoder.Save(memStream);
             return memStream.ToArray();
         }
 
-        public BitmapImage convertImgFromByte(byte[] array)
+        public BitmapImage convertImgFromByte()
         {
-            using (var ms = new System.IO.MemoryStream(array))
+            using (var ms = new System.IO.MemoryStream(this.data))
             {
-                var image = new BitmapImage();
-                image.BeginInit();
-                image.CacheOption = BitmapCacheOption.OnLoad; // here
-                image.StreamSource = ms;
-                image.EndInit();
-                return image;
+                this.Bitimg = new BitmapImage();
+                this.Bitimg.BeginInit();
+                this.Bitimg.CacheOption = BitmapCacheOption.OnLoad; // here
+                this.Bitimg.StreamSource = ms;
+                this.Bitimg.EndInit();
+                return this.Bitimg;
             }
         }
 
-        public void chonHinhAnh(Image img)
+        public void chooseImgAndAddToDatabase()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 //HowKTeam
-                BitmapImage temp = new BitmapImage(new Uri(dialog.FileName));
-                string name = "test"/*được phép trùng*/;
-                int id = 0; /*Không được phép trùng do là khóa chính, phải là int */
-                addBinaryArrIntoSQL(convertImgToByte(temp), name, id);
-                BitmapImage res = convertImgFromByte(convertImgToByte(temp));
-                img.Source = res;
-            }
+                this.bitimg = new BitmapImage(new Uri(dialog.FileName));
+                /*this. name được phép trùng*/;
+                /*this.id Không được phép trùng do là khóa chính, phải là int */
+                this.data = convertImgToByte();
+                this.img.Source = this.bitimg;
+                addBinaryArrIntoSQL();
 
+            }
         }
 
-        public void moHinhAnh(Image img)
+        public void openImgFromDatabase()
         {
-            ketnoi.Open();
-            BitmapImage res = new BitmapImage();
-            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = 4", ketnoi);
+            this.ketnoi.Open();
+            this.bitimg = new BitmapImage();
+            SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = "+this.Id.ToString(), this.ketnoi);
             using (SqlDataReader d = cmd.ExecuteReader())
             {
                 if (d.Read())
                 {
-                    byte[] bytearr = (byte[])d["PICBI"];
-                    res = convertImgFromByte(bytearr);
+                    this.data = (byte[])d["PICBI"];
+                    this.bitimg = convertImgFromByte();
                     //Do stuff with salt and pass
                 }
                 else
@@ -88,20 +102,20 @@ namespace SE104_N10_QuanLySieuThi.classes
                     // NO User with email exists
                 }
             }
-            ketnoi.Close();
-            img.Source = res;
+            this.ketnoi.Close();
+            this.img.Source = this.bitimg;
         }
 
-        public void addBinaryArrIntoSQL(byte[] bytearr, string picname, int picid)
+        public void addBinaryArrIntoSQL()
         {
-            ketnoi.Open();
-            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (" + picid + ", '" + picname + "',@binaryValue)", ketnoi))
+            this.ketnoi.Open();
+            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (" + this.id + ", '" + this.name + "',@binaryValue)", this.ketnoi))
             {
                 // Replace 8000, below, with the correct size of the field
-                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 999999).Value = bytearr;
+                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 999999).Value = this.data;
                 cmd.ExecuteNonQuery();
             }
-            ketnoi.Close();
+            this.ketnoi.Close();
         }
     }
 }
