@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using System.Diagnostics;
-using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
 using SE104_N10_QuanLySieuThi.classes;
@@ -33,22 +32,7 @@ namespace SE104_N10_QuanLySieuThi
         public paProduct()
         {
             InitializeComponent();
-        }
-        private void bntTest_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtId.Text == "")
-            {
-                return;
-            }
-            int id = Int32.Parse(txtId.Text);
-            saveImgToDatabaseWithId(id);
-        }
-        private void btnTestChoose_Click(object sender, RoutedEventArgs e)
-        {
-            if (txtId.Text == "") {
-                return;
-            }
-            openImgFromDatabaseWithId(Int32.Parse(txtId.Text));
+            createButtons();
         }
         private void openImgFromDatabaseWithId(int id)
         {
@@ -56,7 +40,6 @@ namespace SE104_N10_QuanLySieuThi
             try
             {
                 anh.openImgFromDatabase();
-                imgTest.Source = anh.Bitimg;
             }
             catch(Exception ex) 
             {
@@ -75,6 +58,36 @@ namespace SE104_N10_QuanLySieuThi
                 System.Windows.Forms.MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void createButtons()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                HinhAnh anh = new HinhAnh(i, "test");
+                Button btn = new Button();
+                btn.Height = 50;
+                btn.Width = 50;
+                anh.Img.Height = 20;
+                anh.Img.Width = 20;
+                Thickness myThickness = new Thickness();
+                myThickness.Bottom = 20;
+                myThickness.Left = 0;
+                myThickness.Right = 0;
+                myThickness.Top = 0;
+                anh.Img.Margin = myThickness;
+
+                anh.Img.Stretch=Stretch.Fill;
+                btn.Content = anh.Img;
+                myThickness = new Thickness();
+                myThickness.Bottom = 0;
+                myThickness.Left = 120 * (i % 5);
+                myThickness.Right = 0;
+                myThickness.Top = -400 + 120 * (i / 5);
+                btn.Margin = myThickness;
+
+                grdMain.Children.Add(btn);
+            }
         }
     }
 }

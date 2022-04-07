@@ -53,6 +53,6 @@ primary key(PICID)
 INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (0, 'test',)
 
 
-select PICNAME from HINHANH where PICID =1
+select * from HINHANH 
 
 delete from HINHANH where PICID = 1

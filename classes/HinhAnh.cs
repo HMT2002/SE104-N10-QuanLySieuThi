@@ -35,6 +35,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             else
                 this.img = img;
 
+            openImgFromDatabase();
         }
 
         public int Id { get => id; set => id = value; }
@@ -112,7 +113,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (" + this.id + ", '" + this.name + "',@binaryValue)", this.ketnoi))
             {
                 // Replace 8000, below, with the correct size of the field
-                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 999999).Value = this.data;
+                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 3999999).Value = this.data;
                 cmd.ExecuteNonQuery();
             }
             this.ketnoi.Close();

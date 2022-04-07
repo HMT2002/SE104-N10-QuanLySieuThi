@@ -8,34 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="paProduct"
       Background="#8F40E8"
+
       >
 
     <Grid x:Name="grdMain">
-        <Button x:Name="bntTest"
-                Width="150"
-                Height="150"
-                Margin="330,155,320,144.6" 
-                Click="bntTest_Click"
-                >
-        </Button>
-        <Image x:Name="imgTest"
-                    Height="60"
-                    Width="60"
-                    Margin="503,245,237,144.6"
-                    Stretch="Uniform"
-                />
-        <Button x:Name="btnTestChoose"
-                Width="50"
-                Height="50"
-                Margin="383,310,367,89.6" Click="btnTestChoose_Click"
-            />
-        <TextBox x:Name="txtId"
-            HorizontalAlignment="Left"
-                 Height="23"
-                 Width="120"
-                 Margin="384,360,0,0"
-                 TextWrapping="Wrap" 
-                 VerticalAlignment="Top"
-        />
+        
+        
+        
     </Grid>
 </Page>
