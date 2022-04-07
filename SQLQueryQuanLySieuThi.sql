@@ -33,6 +33,16 @@ GIA money,
 primary key(MASP)
 )
 
+drop table SANPHAM
+
+CREATE TABLE NHACUNGCAP(
+MACC char(5),
+TEN varchar(40),
+SODT varchar(20),
+XUATXU varchar(40),
+primary key(MACC)
+)
+
 CREATE TABLE HOADON(
 SOHD int,
 NGHD smalldatetime,

@@ -20,9 +20,7 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private float price;
 
-        private string xuatxu;
-
-
+        NhaCungCap supplier;
 
         public HinhAnh Anh { get => anh; set => anh = value; }
         public string Name { get => name; set => name = value; }
@@ -30,6 +28,6 @@ namespace SE104_N10_QuanLySieuThi.classes
         public float Price { get => price; set => price = value; }
         public int Id { get => id; set => id = value; }
         public string Dvt { get => dvt; set => dvt = value; }
-        public string Xuatxu { get => xuatxu; set => xuatxu = value; }
+        public NhaCungCap Supplier { get => supplier; set => supplier = value; }
     }
 }
