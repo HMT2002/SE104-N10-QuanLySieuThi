@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi"
       mc:Ignorable="d" 
-      d:DesignHeight="530" d:DesignWidth="1000"
+      d:DesignHeight="520" d:DesignWidth="1000"
       Title="paBuy"
       Background="#6CF605"
       >

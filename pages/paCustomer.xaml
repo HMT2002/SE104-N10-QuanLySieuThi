@@ -8,6 +8,8 @@
       d:DesignHeight="530" d:DesignWidth="1000"
       Title="paCustomer"
       Background="#81B4FA"
+      MinHeight="520"
+      MinWidth="1000"
       >
 
     <Grid>

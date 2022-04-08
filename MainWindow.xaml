@@ -18,8 +18,9 @@
         Height="600"
         Width="1200"
         ResizeMode="NoResize"
+        DataContext="{StaticResource MainVM}"
         >
-    <Grid>
+    <Grid x:Name="grMain">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -139,8 +140,8 @@
         <Frame x:Name="fraMain" 
                Grid.Column="1" Grid.Row="0"
                Background="#FFB3F9F9"
-               HorizontalContentAlignment="Left"
-               VerticalContentAlignment="Top"
+               HorizontalContentAlignment="Stretch"
+               VerticalContentAlignment="Stretch"
                
                />
     </Grid>
