@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
         mc:Ignorable="d"
-        
+        xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -18,20 +20,36 @@
         Height="600"
         Width="1200"
         ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="mainWindow"
         DataContext="{StaticResource MainVM}"
         >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCmd}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid x:Name="grMain">
-        <Grid.ColumnDefinitions>
+        
+               <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions> 
+                <Grid Grid.Row="0">
+            <uc:ucControlBar Tag="{Binding Title,ElementName=mainWindow}"></uc:ucControlBar>
+        </Grid>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="180"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
 
         </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
 
-        <Button x:Name="btnHome"
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Button x:Name="btnHome"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,15,0,0"
                 Width="150"
@@ -42,8 +60,7 @@
                 Foreground="#D800FF00"    
                 Content="Trang chủ" Click="btnHome_Click"
             />
-        
-        <Button x:Name="btnSell"
+            <Button x:Name="btnSell"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,75,0,0"
                 Width="150"
@@ -54,8 +71,7 @@
                 Foreground="#D800FF00"    
                 Content="Đơn hàng" Click="btnSell_Click"
             />
-
-        <Button x:Name="btnProduct"
+            <Button x:Name="btnProduct"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,135,0,0"
                 Width="150"
@@ -66,7 +82,7 @@
                 Foreground="#D800FF00"    
                 Content="Sản phẩm" Click="btnProduct_Click"
             />
-        <Button x:Name="btnCustomer"
+            <Button x:Name="btnCustomer"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,195,0,0"
                 Width="150"
@@ -77,8 +93,7 @@
                 Foreground="#D800FF00"    
                 Content="Khách hàng" Click="btnCustomer_Click"
             />
-
-        <Button x:Name="btnBuy"
+            <Button x:Name="btnBuy"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,255,0,0"
                 Width="150"
@@ -90,7 +105,7 @@
                 Content="Nhập kho" Click="btnBuy_Click" 
              
                 />
-        <Button x:Name="btnSetting"
+            <Button x:Name="btnSetting"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,315,0,0"
                 Width="150"
@@ -101,8 +116,7 @@
                 Foreground="#D800FF00"    
                 Content="Cài đặt" Click="btnSetting_Click"
             />
-
-        <Button x:Name="btnManage"
+            <Button x:Name="btnManage"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,375,0,0"
                 Width="150"
@@ -113,8 +127,7 @@
                 Foreground="#D800FF00"    
                 Content="Quản lí" Click="btnManage_Click"
             />
-
-        <Button x:Name="btnStatic"
+            <Button x:Name="btnStatic"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,435,0,0"
                 Width="150"
@@ -125,8 +138,7 @@
                 Foreground="#D800FF00"    
                 Content="Thống kê" Click="btnStatic_Click"
             />
-
-        <Button x:Name="btnLogout"
+            <Button x:Name="btnLogout"
                 Grid.Column="0" Grid.Row="0" 
                 Margin="0,495,0,0"
                 Width="150"
@@ -137,12 +149,15 @@
                 Foreground="#D800FF00"    
                 Content="Đăng xuất"
             />
-        <Frame x:Name="fraMain" 
-               Grid.Column="1" Grid.Row="0"
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+               <Frame x:Name="fraMain" 
                Background="#FFB3F9F9"
                HorizontalContentAlignment="Stretch"
                VerticalContentAlignment="Stretch"
                
                />
+        </Grid>-->
+
     </Grid>
 </Window>

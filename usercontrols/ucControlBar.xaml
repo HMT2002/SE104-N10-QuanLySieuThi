@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="SE104_N10_QuanLySieuThi.usercontrols.ucControlBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
+                             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             x:Name="ucMainControlBar"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             
+             mc:Ignorable="d" 
+             
+             
+             >
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="MouseLeftButtonDown">
+            <i:InvokeCommandAction Command="{Binding MouseMoveWindowCmd}" CommandParameter="{Binding ElementName=ucMainControlBar}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    
+    <Grid>
+        <materialDesign:ColorZone>
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Right">
+                    <ToolBarTray DockPanel.Dock="Right" Orientation="Horizontal">
+                        <ToolBar
+                         Style="{StaticResource MaterialDesignToolBar}" Background="AliceBlue">
+                            <Button 
+                                Command="{Binding MinWindowCmd}"
+                                CommandParameter="{Binding ElementName=ucMainControlBar}"
+                                ToolTip="Thu nhỏ" 
+                                ToolBar.OverflowMode="AsNeeded"
+                                Background="#F0F8FF">
+                                <materialDesign:PackIcon Kind="WindowMinimize" />
+                            </Button>
+                            <Button                                 
+                                Command="{Binding MaxWindowCmd}"
+                                CommandParameter="{Binding ElementName=ucMainControlBar}"
+                                ToolTip="Phóng to"
+                                ToolBar.OverflowMode="AsNeeded" 
+                                Background="#62B3F9">
+                                <materialDesign:PackIcon Kind="WindowMaximize" />
+                            </Button>
+                            <Button
+                                Command="{Binding CloseWindowCmd}"
+                                CommandParameter="{Binding ElementName=ucMainControlBar}"
+                                ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded" Background="#FF2800">
+                                 <materialDesign:PackIcon Kind="WindowClose" />
+                            </Button>
+                        
+                        </ToolBar>
+                </ToolBarTray>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Left">
+                    <materialDesign:Card>
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Margin="16 32 0 0 "
+                            Text="{Binding Tag,ElementName=ucMainControlBar}"
+                            >
+                            
+                        </TextBlock>
+                    </materialDesign:Card>
+                </StackPanel>
+
+            </DockPanel>
+        </materialDesign:ColorZone>
+    </Grid>
+</UserControl>

@@ -5,6 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
+        
+        
+        xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
                 xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -13,12 +16,19 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="winLogin" Height="450" Width="800">
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Title="winLogin" Height="450" Width="800"
+        Name="LoginWin"
+        >
     <Grid>
-        <materialDesign:Card HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="Đăng nhập">
-                
-            </TextBlock>
-        </materialDesign:Card>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
+        </Grid>
     </Grid>
 </Window>

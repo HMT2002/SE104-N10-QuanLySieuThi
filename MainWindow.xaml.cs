@@ -33,48 +33,48 @@ namespace SE104_N10_QuanLySieuThi
         {
             InitializeComponent();
         }
-        private void btnBuy_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paBuy();
-        }
+        //private void btnBuy_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paBuy();
+        //}
 
-        private void btnSell_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paSell();
+        //private void btnSell_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paSell();
 
-        }
+        //}
 
-        private void btnHome_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paHome();
-        }
+        //private void btnHome_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paHome();
+        //}
 
-        private void btnProduct_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.NavigationService.Navigate(new paProduct());
-        }
+        //private void btnProduct_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.NavigationService.Navigate(new paProduct());
+        //}
 
-        private void btnCustomer_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paCustomer();
+        //private void btnCustomer_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paCustomer();
 
-        }
+        //}
 
-        private void btnSetting_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paSetting();
+        //private void btnSetting_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paSetting();
 
-        }
+        //}
 
-        private void btnManage_Click(object sender, RoutedEventArgs e)
-        {
-           fraMain.Content = new paManage();
-        }
+        //private void btnManage_Click(object sender, RoutedEventArgs e)
+        //{
+        //   fraMain.Content = new paManage();
+        //}
 
-        private void btnStatic_Click(object sender, RoutedEventArgs e)
-        {
-            fraMain.Content = new paStatic();
+        //private void btnStatic_Click(object sender, RoutedEventArgs e)
+        //{
+        //    fraMain.Content = new paStatic();
 
-        }
+        //}
     }
 }
