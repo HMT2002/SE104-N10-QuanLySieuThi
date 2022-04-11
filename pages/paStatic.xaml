@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="520" d:DesignWidth="1000"
+      d:DesignHeight="620" d:DesignWidth="1120"
       Title="paStatic"
       Background="#00008B"
       >

@@ -33,48 +33,72 @@ namespace SE104_N10_QuanLySieuThi
         {
             InitializeComponent();
         }
-        //private void btnBuy_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paBuy();
-        //}
+        private void btnBuy_Click(object sender, RoutedEventArgs e)
+        {
+            paBuy page = new paBuy();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
+        }
 
-        //private void btnSell_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paSell();
+        private void btnSell_Click(object sender, RoutedEventArgs e)
+        {
+            paSell page = new paSell();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
 
-        //}
+        }
 
-        //private void btnHome_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paHome();
-        //}
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            paHome page = new paHome();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
+        }
 
-        //private void btnProduct_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.NavigationService.Navigate(new paProduct());
-        //}
+        private void btnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            paProduct page = new paProduct();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
+        }
 
-        //private void btnCustomer_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paCustomer();
+        private void btnCustomer_Click(object sender, RoutedEventArgs e)
+        {
+            paCustomer page = new paCustomer();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
 
-        //}
+        }
 
-        //private void btnSetting_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paSetting();
+        private void btnSetting_Click(object sender, RoutedEventArgs e)
+        {
+            paSetting page = new paSetting();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
 
-        //}
+        }
 
-        //private void btnManage_Click(object sender, RoutedEventArgs e)
-        //{
-        //   fraMain.Content = new paManage();
-        //}
+        private void btnManage_Click(object sender, RoutedEventArgs e)
+        {
+            paManage page = new paManage();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
+        }
 
-        //private void btnStatic_Click(object sender, RoutedEventArgs e)
-        //{
-        //    fraMain.Content = new paStatic();
+        private void btnStatic_Click(object sender, RoutedEventArgs e)
+        {
+            paStatic page = new paStatic();
+            page.Height = fraMain.MinHeight;
+            page.Width = fraMain.MinWidth;
+            fraMain.Content = page;
 
-        //}
+        }
     }
 }

@@ -17,8 +17,8 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="MainWindow"
-        Height="600"
-        Width="1200"
+        Height="700"
+        Width="1300"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -32,132 +32,110 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="grMain">
-        
-               <Grid.RowDefinitions>
+
+        <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions> 
-                <Grid Grid.Row="0">
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title,ElementName=mainWindow}"></uc:ucControlBar>
         </Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+        <Grid Grid.Row="1">
 
-        </Grid.ColumnDefinitions>
-
-
-
-        <Grid Grid.Row="1" Grid.Column="0">
-            <Button x:Name="btnHome"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,15,0,0"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Button x:Name="btnHome"
+                Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"    
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Trang chủ" Click="btnHome_Click"
             />
-            <Button x:Name="btnSell"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,75,0,0"
+                    <Button x:Name="btnSell"
+                Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"   
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Đơn hàng" Click="btnSell_Click"
             />
-            <Button x:Name="btnProduct"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,135,0,0"
+                    <Button x:Name="btnProduct"
+                Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"    
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Sản phẩm" Click="btnProduct_Click"
             />
-            <Button x:Name="btnCustomer"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,195,0,0"
+                    <Button x:Name="btnCustomer"
+                            Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"   
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Khách hàng" Click="btnCustomer_Click"
             />
-            <Button x:Name="btnBuy"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,255,0,0"
+                    <Button x:Name="btnBuy"
+                    Margin="0 10 0 0"
                 Width="150"
                 Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
                 FontFamily="Times New Roman"
                 Foreground="#D800FF00" 
                 Content="Nhập kho" Click="btnBuy_Click" 
              
                 />
-            <Button x:Name="btnSetting"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,315,0,0"
+                    <Button x:Name="btnSetting"
+                    Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50" 
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Cài đặt" Click="btnSetting_Click"
             />
-            <Button x:Name="btnManage"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,375,0,0"
+                    <Button x:Name="btnManage"
+                    Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50" 
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Quản lí" Click="btnManage_Click"
             />
-            <Button x:Name="btnStatic"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,435,0,0"
+                    <Button x:Name="btnStatic"
+                    Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"   
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Thống kê" Click="btnStatic_Click"
             />
-            <Button x:Name="btnLogout"
-                Grid.Column="0" Grid.Row="0" 
-                Margin="0,495,0,0"
+                    <Button x:Name="btnLogout"
+                        Margin="0 10 0 0"
                 Width="150"
-                Height="50"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"     
+                Height="50"   
                 FontFamily="Times New Roman"           
                 Foreground="#D800FF00"    
                 Content="Đăng xuất"
             />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Frame x:Name="fraMain"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       MinHeight="620"
+                       MinWidth="1120"
+                       >
+                    
+                </Frame>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
-               <Frame x:Name="fraMain" 
-               Background="#FFB3F9F9"
-               HorizontalContentAlignment="Stretch"
-               VerticalContentAlignment="Stretch"
-               
-               />
-        </Grid>-->
+
 
     </Grid>
 </Window>
