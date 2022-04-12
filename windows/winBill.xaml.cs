@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace SE104_N10_QuanLySieuThi.windows
 {
     /// <summary>
-    /// Interaction logic for winProduct.xaml
+    /// Interaction logic for winBill.xaml
     /// </summary>
-    public partial class winProduct : Window
+    public partial class winBill : Window
     {
-        public winProduct()
+        public winBill()
         {
             InitializeComponent();
         }

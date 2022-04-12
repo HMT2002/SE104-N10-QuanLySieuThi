@@ -28,7 +28,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCmd}" />
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCmd}" CommandParameter="{Binding ElementName=mainWindow}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="grMain">
@@ -130,6 +130,7 @@
                        VerticalAlignment="Stretch"
                        MinHeight="620"
                        MinWidth="1120"
+                       Margin="0 10 0 10"
                        >
                     
                 </Frame>

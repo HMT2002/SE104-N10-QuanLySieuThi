@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
         
-        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -19,7 +19,11 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Title="winLogin" Height="450" Width="800"
+        Width="350"
+        Height="450"
+        
+        Title="winLogin" 
+        DataContext="{StaticResource LoginVM}"
         Name="LoginWin"
         >
     <Grid>
@@ -30,5 +34,58 @@
         <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
         </Grid>
+        <Grid Grid.Row="1">
+            <Grid
+                Height="240"
+                Margin="35,80"
+                VerticalAlignment="Bottom">
+                <Label
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Content="LOGIN"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="Gray" />
+                <StackPanel Margin="15" VerticalAlignment="Center">
+                    <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Username"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding UserName}" />
+                    <PasswordBox
+                        Name="FloatingPasswordBox"
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Password"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                        
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
+                    </PasswordBox>
+                </StackPanel>
+            </Grid>
+            <Button
+                Width="150"
+                Margin="100,0,100.4,69.8"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Command="{Binding LoginCommand}"
+                CommandParameter="{Binding ElementName=LoginWin}"
+                Content="LOGIN"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
+        </Grid>
+        
     </Grid>
 </Window>

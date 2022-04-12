@@ -8,10 +8,20 @@
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paProduct"
       Background="#8F40E8"
-
+      x:Name="ProductPage"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      DataContext="{StaticResource ProductVM }"
       >
 
     <Grid x:Name="grdMain">
-
+        <Button
+  Style="{StaticResource MaterialDesignRaisedDarkButton}"
+  Width="100"
+  ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+  Content="Bill"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="1010,10,10,578" 
+                Command="{Binding BillCommand}"
+                CommandParameter="{Binding ElementName=ProductPage}"
+            />
     </Grid>
 </Page>

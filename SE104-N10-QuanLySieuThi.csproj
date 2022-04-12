@@ -76,20 +76,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="classes\Account.cs" />
     <Compile Include="usercontrols\ucControlBar.xaml.cs">
       <DependentUpon>ucControlBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="windows\winAddProduct.xaml.cs">
       <DependentUpon>winAddProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\winBill.xaml.cs">
+      <DependentUpon>winBill.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\winLogin.xaml.cs">
       <DependentUpon>winLogin.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="windows\winProduct.xaml.cs">
-      <DependentUpon>winProduct.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -153,11 +156,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\winLogin.xaml">
+    <Page Include="windows\winBill.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="windows\winProduct.xaml">
+    <Page Include="windows\winLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -18,10 +18,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public MainViewModel()
         {
 
-            LoadedWindowCmd = new RelayCommand<object>((p) => { return true; }, (p) => {
+            LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
                 IsLoad = true;
-                winLogin win = new winLogin();
-                win.ShowDialog();
+                p.Hide();
+                winLogin loginWindow = new winLogin();
+                loginWindow.ShowDialog();
+                if (loginWindow.DataContext == null)
+                    return;
+                var loginVM = loginWindow.DataContext as LoginViewModel;
+
+                if (loginVM.IsLogin)
+                {
+                    p.Show();
+
+                }
+                else
+                {
+                    p.Close();
+                }
             });
         }
     }

@@ -75,7 +75,22 @@ PICBI varbinary(MAX),
 primary key(PICID)
 )
 
+CREATE TABLE ACCOUNT(
+ACC varchar(20),
+PRI int,
+PASS varchar(20),
+primary key (ACC)
+)
 
-select * from HINHANH 
+alter table KHACHHANG add ACC varchar(20)
+alter table KHACHHANG add constraint LK_TK_KHACHHANG foreign key(ACC) references ACCOUNT(ACC)
+alter table NHANVIEN add ACC varchar(20)
+alter table NHANVIEN add constraint LK_TK_NHANVIEN foreign key(ACC) references ACCOUNT(ACC)
+
+insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
+insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
+insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
+
+select ACC from ACCOUNT 
 
 delete from HINHANH where PICID = 1
