@@ -91,6 +91,7 @@ insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
 
-select ACC from ACCOUNT 
+select * from ACCOUNT 
 
 delete from HINHANH where PICID = 1
+delete from ACCOUNT where ACC = 'test'
