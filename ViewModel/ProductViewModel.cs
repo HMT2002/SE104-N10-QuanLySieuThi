@@ -20,9 +20,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ProducViewModel()
         {
-            BillCommand = new RelayCommand<Page>((p) => { return true; }, (p) => { Bill(p); });
+            BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Bill(p); });
         }
-        void Bill(Page p)
+        void Bill(object p)
         {
             winBill win = new winBill();
             win.Show();

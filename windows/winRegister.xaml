@@ -1,4 +1,4 @@
-﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winLogin"
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winRegister"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,9 +22,9 @@
         Width="350"
         Height="450"
         
-        Title="winLogin" 
+        Title="winRegister" 
         DataContext="{StaticResource LoginVM}"
-        Name="LoginWin"
+        Name="RegistWin"
         >
     <Grid>
         <Grid.RowDefinitions>
@@ -32,7 +32,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
+            <uc:ucControlBar Tag="{Binding Title,ElementName=RegistWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
             <Grid
@@ -40,10 +40,10 @@
                 Margin="35,80"
                 VerticalAlignment="Bottom">
                 <Label
-                    Margin="5"
+                    Margin="0 0 0 0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Content="LOGIN"
+                    Content="REGIST CUSTOMER"
                     FontSize="18"
                     FontWeight="Bold"
                     Foreground="Gray" />
@@ -62,29 +62,33 @@
                         FontFamily="Champagne &amp; Limousines"
                         FontSize="18"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                        
+
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PasswordChanged">
                                 <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                        
+
+                    </PasswordBox>
+
+                    <PasswordBox
+                        Name="FloatingRePasswordBox"
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Re-enter Password"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding RePasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingRePasswordBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
                     </PasswordBox>
                 </StackPanel>
             </Grid>
-            <Button
-                Width="150"
-                Margin="100,0,100.4,69.8"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding LoginCommand}"
-                CommandParameter="{Binding ElementName=LoginWin}"
-                Content="LOGIN"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
+
             <Button
                 Width="150"
                 Margin="100,0,100.4,30.8"
@@ -93,12 +97,12 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding RegistCommand}"
-                CommandParameter="{Binding ElementName=LoginWin}"
-                Content="REGIST"
+                Command="{Binding CreateAccountCommand}"
+                CommandParameter="{Binding ElementName=RegistWin}"
+                Content="CREATE ACCOUNT"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
         </Grid>
-        
+
     </Grid>
 </Window>

@@ -60,5 +60,23 @@ namespace SE104_N10_QuanLySieuThi.classes
                 return false;
             }
         }
+
+        public bool RegistCustomer()
+        {
+
+            this.ketnoi.Open();
+            try
+            {
+                SqlCommand cmd = new SqlCommand(@"insert into ACCOUNT(ACC,PRI,PASS) values('"+this.Acc.ToString()+"',0,'"+this.Password.ToString()+"')", this.ketnoi);
+                cmd.ExecuteReader();
+                this.ketnoi.Close();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                this.ketnoi.Close();
+                return false;
+            }
+        }
     }
 }
