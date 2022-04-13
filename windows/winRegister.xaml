@@ -27,6 +27,7 @@
         Name="RegistWin"
         >
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -35,10 +36,24 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=RegistWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
+            <Button
+                Width="75"
+                Margin="7,8,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="top"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Command="{Binding BackCmd}"
+                CommandParameter="{Binding ElementName=RegistWin}"
+                Content="BACK"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Style="{StaticResource MaterialDesignRaisedButton}" />
             <Grid
                 Height="240"
                 Margin="35,80"
                 VerticalAlignment="Bottom">
+
                 <Label
                     Margin="0 0 0 0"
                     HorizontalAlignment="Center"
@@ -97,7 +112,7 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding CreateAccountCommand}"
+                Command="{Binding CreateAccountCmd}"
                 CommandParameter="{Binding ElementName=RegistWin}"
                 Content="CREATE ACCOUNT"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

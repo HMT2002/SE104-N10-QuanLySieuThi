@@ -28,9 +28,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _ConfirmPassword;
         public string CurrentPassword { get => _CurrentPassword; set { _CurrentPassword = value; OnPropertyChanged(); } }
         private string _CurrentPassword;
-        public ICommand LoginCommand { get; set; }
-        public ICommand RegistCommand { get; set; }
-        public ICommand CreateAccountCommand { get; set; }
+        public ICommand LoginCmd { get; set; }
+        public ICommand RegistCmd { get; set; }
+        public ICommand CreateAccountCmd { get; set; }
+        public ICommand BackCmd { get; set; }
 
         public ICommand CloseCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
@@ -46,14 +47,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Password = "";
             RePassword = "";
             UserName = "";
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
-            RegistCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Regist(p); });
-            CreateAccountCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { CreateAccount(p); });
+            LoginCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            RegistCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Regist(p); });
+            CreateAccountCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { CreateAccount(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             ChangepasswordCommand = new RelayCommand<object>((parameter) => true, (parameter) => ChangePW());
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
             RePasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { RePassword = p.Password; });
+            BackCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Back(p); });
+        }
 
+        void Back(Window p)
+        {
+            if (p == null)
+                return;
+            Password = "";
+            RePassword = "";
+            UserName = "";
+            winLogin win = new winLogin();
+            win.ShowDialog();
+            p.Close();
         }
         private void ChangePW()
         {
@@ -63,6 +76,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
+            Password = "";
+            RePassword = "";
+            UserName = "";
             winRegister win = new winRegister();
             win.ShowDialog();
             p.Close();
@@ -100,7 +116,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-
             Account acc = new Account(UserName, Password);
 
             if (acc.CheckUser()==true)
