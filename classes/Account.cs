@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace SE104_N10_QuanLySieuThi.classes
 {
-    class Account
+    public class Account
     {
         private string acc;
         private int pri;
@@ -19,7 +19,11 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.Acc = acc;
             this.Password = password;
         }
-
+        public Account()
+        {
+            this.Acc = null;
+            this.Password = null;
+        }
         public string Acc { get => acc; set => acc = value; }
         public int Pri { get => pri; set => pri = value; }
         public string Password { get => password; set => password = value; }

@@ -86,6 +86,7 @@ alter table KHACHHANG add ACC varchar(20)
 alter table KHACHHANG add constraint LK_TK_KHACHHANG foreign key(ACC) references ACCOUNT(ACC)
 alter table NHANVIEN add ACC varchar(20)
 alter table NHANVIEN add constraint LK_TK_NHANVIEN foreign key(ACC) references ACCOUNT(ACC)
+alter table CTHD add constraint LK_HOADON foreign key(SOHD) references HOADON(SOHD)
 
 insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')

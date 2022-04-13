@@ -126,6 +126,7 @@
             </Grid>
             <Grid Grid.Column="1">
                 <Frame x:Name="fraMain"
+                       NavigationUIVisibility="Hidden"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Stretch"
                        MinHeight="620"

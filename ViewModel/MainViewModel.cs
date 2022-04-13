@@ -1,4 +1,5 @@
-﻿using SE104_N10_QuanLySieuThi.windows;
+﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,30 +15,36 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
+        public Account LoginAcc { get => loginAcc; set => loginAcc = value; }
+
+        public Account loginAcc;
 
         public MainViewModel()
         {
+            loginAcc = new Account();
+            LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
+        }
 
-            LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) =>
+        void Start(Window p)
+        {
+            IsLoad = true;
+            p.Hide();
+            winLogin loginWindow = new winLogin();
+            loginWindow.ShowDialog();
+            if (loginWindow.DataContext == null)
+                return;
+            var loginVM = loginWindow.DataContext as LoginViewModel;
+
+            if (loginVM.IsLogin)
             {
-                IsLoad = true;
-                p.Hide();
-                winLogin loginWindow = new winLogin();
-                loginWindow.ShowDialog();
-                if (loginWindow.DataContext == null)
-                    return;
-                var loginVM = loginWindow.DataContext as LoginViewModel;
-
-                if (loginVM.IsLogin)
-                {
-                    p.Show();
-
-                }
-                else
-                {
-                    p.Close();
-                }
-            });
+                loginAcc = loginVM.Acc;
+                p.Show();
+                //MessageBox.Show("welcome " + loginAcc.Acc + " " + loginAcc.Password+" "+loginAcc.Pri.ToString());
+            }
+            else
+            {
+                p.Close();
+            }
         }
     }
 }

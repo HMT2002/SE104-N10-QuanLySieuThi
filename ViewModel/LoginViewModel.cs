@@ -37,12 +37,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand RePasswordChangedCommand { get; set; }
         public ICommand ChangepasswordCommand { get; set; }
-
+        private Account acc;
+        public Account Acc { get => acc; set => acc = value; }
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
         public LoginViewModel()
         {
+            Acc = new Account();
             IsLogin = false;
             Password = "";
             RePassword = "";
@@ -90,12 +92,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             if (Password.CompareTo(RePassword) == 0)
             {
-                Account acc = new Account(UserName, Password);
+                Acc = new Account(UserName, Password);
 
-                if (acc.RegistCustomer() == true)
+                if (Acc.RegistCustomer() == true)
                 {
                     IsLogin = true;
-                    MessageBox.Show("Welcome " + UserName + " " + Password);
                     p.Close();
                 }
                 else
@@ -116,12 +117,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            Account acc = new Account(UserName, Password);
+            Acc = new Account(UserName, Password);
 
-            if (acc.CheckUser()==true)
+            if (Acc.CheckUser()==true)
             {
                 IsLogin = true;
-                MessageBox.Show("Welcome "+UserName+" "+Password);
                 p.Close();
             }
             else
