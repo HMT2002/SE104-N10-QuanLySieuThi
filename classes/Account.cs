@@ -41,10 +41,10 @@ namespace SE104_N10_QuanLySieuThi.classes
                 {
                     if (d.Read())
                     {
-                        if (this.acc == (string)d["ACC"])
+                        if (this.acc.CompareTo((string)d["ACC"]) ==0 )
                         {
                             testpassword = (string)d["PASS"];
-                            if (testpassword == this.Password)
+                            if (testpassword.CompareTo(this.Password) == 0)
                             {
                                 this.Pri = (int)d["PRI"];
                                 this.ketnoi.Close();

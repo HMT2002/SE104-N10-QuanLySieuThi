@@ -1,4 +1,4 @@
-CREATE DATABASE QUANLYSIEUTHI
+﻿CREATE DATABASE QUANLYSIEUTHI
 
 use QUANLYSIEUTHI
 
@@ -7,7 +7,7 @@ set dateformat dmy
 drop table KHACHHANG
 CREATE TABLE KHACHHANG(
 MAKH varchar(10),
-HOTEN varchar(40),
+HOTEN nvarchar(40),
 SODT varchar(20),
 NGSINH smalldatetime,
 NGDK smalldatetime,
@@ -19,7 +19,7 @@ primary key(MAKH)
 
 CREATE TABLE NHANVIEN(
  MANV varchar(10),
- HOTEN varchar(40),
+ HOTEN nvarchar(40),
  SODT varchar(20),
  NGVL smalldatetime,
  LUONG money,
@@ -30,18 +30,24 @@ constraint LK_HINHANH_NV foreign key(PICID) references HINHANH(PICID),
 
 CREATE TABLE NHACUNGCAP(
 MACC varchar(10),
-TEN varchar(40),
+TEN nvarchar(40),
 SODT varchar(20),
-XUATXU varchar(40),
-PICID int,
-constraint LK_HINHANH_CC foreign key(PICID) references HINHANH(PICID),
+XUATXU nvarchar(40),
+
 primary key(MACC)
 )
 
+insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC001','Coca Corp','09999999','Mỹ')
+insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC002','Nestle Corp','09999998','Anh')
+insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC003','Amazon Corp','09999997','Canada')
+insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC004','Tribeco Corp','09999996','Thái')
+delete from NHACUNGCAP
+select MACC,TEN,SODT,XUATXU from NHACUNGCAP where MACC='CC001'
+
 CREATE TABLE SANPHAM(
 MASP varchar(10),
-TENSP varchar(40),
-DVT varchar(20),
+TENSP nvarchar(40),
+DVT nvarchar(20),
 PICID int,
 constraint LK_HINHANH_SP foreign key(PICID) references HINHANH(PICID),
 MACC varchar(10),
@@ -49,6 +55,7 @@ constraint LK_CUNGCAP foreign key(MACC) references NHACUNGCAP(MACC),
 GIA money,
 primary key(MASP)
 )
+
 
 CREATE TABLE HOADON(
 SOHD int,
@@ -81,6 +88,8 @@ PRI int,
 PASS varchar(20),
 primary key (ACC)
 )
+
+select MACC,TEN,SODT,XUATXU from NHACUNGCAP
 
 alter table KHACHHANG add ACC varchar(20)
 alter table KHACHHANG add constraint LK_TK_KHACHHANG foreign key(ACC) references ACCOUNT(ACC)
