@@ -44,23 +44,34 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void LoadProductFromDatabase(Grid g)
         {
-            SanPham supplier = new SanPham();
-            supplier.getAllProductFromDatabase();
+            KhachHang supplier = new KhachHang();
+            supplier.getAllCustomerFromDatabase();
             for (int i = 0; i < supplier.ListAll.Count; i++)
             {
                 Button btn = new Button();
-                btn.Content = supplier.ListAll[i].Name;
+                btn.Content = supplier.ListAll[i].Anh.Img;
                 btn.Height = 50;
                 btn.Width = 120;
                 Thickness myThickness = new Thickness();
                 myThickness.Bottom = 0;
-                myThickness.Left = 120 * (i % 5);
+                myThickness.Left = 250 * (i % 5);
                 myThickness.Right = 0;
-                myThickness.Top = -400 + 120 * (i / 5);
+                myThickness.Top = -400 + 250 * (i / 5);
                 btn.Margin = myThickness;
+                btn.Click += ClickId;
+                btn.Tag = supplier.ListAll[i].Id;
                 g.Children.Add(btn);
             }
         }
+
+        private void ClickId(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            KhachHang kh = new KhachHang();
+            kh.getSpecificCustomerFromDatabase(btn.Tag.ToString());
+
+        }
+
         void Bill(object p)
         {
             winBill win = new winBill();

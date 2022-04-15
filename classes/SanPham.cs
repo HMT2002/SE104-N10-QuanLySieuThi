@@ -54,7 +54,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.listAll = null;
         }
 
-        void getSpecificProducrFromDatabase(string id)
+        void getSpecificProductFromDatabase(string id)
         {
             this.ketnoi.Open();
             SqlCommand cmd = new SqlCommand(@"select MASP,TENSP,SODT,DVT,MACC,GIA,SL from SANPHAM where MASP='" + id + "'", this.ketnoi);

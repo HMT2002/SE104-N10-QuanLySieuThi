@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.classes
 {
-    class HinhAnh
+    public class HinhAnh
     {
         private int id;
         private string name;
@@ -36,6 +36,11 @@ namespace SE104_N10_QuanLySieuThi.classes
                 this.img = img;
 
             openImgFromDatabase();
+        }
+
+        public HinhAnh()
+        {
+
         }
 
         public int Id { get => id; set => id = value; }
@@ -89,6 +94,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         {
             this.ketnoi.Open();
             this.bitimg = new BitmapImage();
+            this.img = new Image();
             SqlCommand cmd = new SqlCommand(@"select PICBI from HINHANH where PICID = "+this.Id.ToString(), this.ketnoi);
             using (SqlDataReader d = cmd.ExecuteReader())
             {
@@ -103,18 +109,25 @@ namespace SE104_N10_QuanLySieuThi.classes
                     // NO User with email exists
                 }
             }
-            this.ketnoi.Close();
             this.img.Source = this.bitimg;
+            this.ketnoi.Close();
         }
 
         public void addBinaryArrIntoSQL()
         {
             this.ketnoi.Open();
-            using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (" + this.id + ", '" + this.name + "',@binaryValue)", this.ketnoi))
+            try
             {
-                // Replace 8000, below, with the correct size of the field
-                cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 3999999).Value = this.data;
-                cmd.ExecuteNonQuery();
+                using (SqlCommand cmd = new SqlCommand(@"INSERT INTO HINHANH (PICID, PICNAME, PICBI) VALUES (" + this.id + ", '" + this.name + "',@binaryValue)", this.ketnoi))
+                {
+                    // Replace 8000, below, with the correct size of the field
+                    cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 3999999).Value = this.data;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
             this.ketnoi.Close();
         }

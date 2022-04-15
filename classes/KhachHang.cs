@@ -22,13 +22,15 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private decimal revenue;
 
+        HinhAnh anh;
+
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
         private DataTable datatable = new DataTable();
         private SqlDataAdapter adapter = new SqlDataAdapter();
 
         private List<KhachHang> listAll;
 
-        public KhachHang(string id, string name, string phone, DateTime startdate, DateTime birth, decimal revenue, List<KhachHang> listAll)
+        public KhachHang(string id, string name, string phone, DateTime startdate, DateTime birth, decimal revenue, List<KhachHang> listAll,HinhAnh anh)
         {
             this.id = id;
             this.name = name;
@@ -37,41 +39,44 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.birth = birth;
             this.revenue = revenue;
             this.listAll = listAll;
+            this.Anh = anh;
         }
 
         public KhachHang()
         {
         }
 
-        void getSpecificProducrFromDatabase(string id)
+        public void getSpecificCustomerFromDatabase(string id)
         {
             this.ketnoi.Open();
-            SqlCommand cmd = new SqlCommand(@"select MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO from KHACHHANG where MAKH='" + id + "'", this.ketnoi);
+            this.anh = new HinhAnh();
+            SqlCommand cmd = new SqlCommand(@"select MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,PICID from KHACHHANG where MAKH='" + id + "'", this.ketnoi);
             using (SqlDataReader d = cmd.ExecuteReader())
             {
                 if (d.Read())
                 {
-                    this.id = (string)d["MANV"];
+                    this.id = (string)d["MAKH"];
                     this.name = (string)d["HOTEN"];
-                    this.phone = (string)d["SODY"];
+                    this.phone = (string)d["SODT"];
                     this.birth = (DateTime)d["NGSINH"];
                     this.startdate = (DateTime)d["NGDK"];
                     this.revenue = (decimal)d["DOANHSO"];
+                    this.anh.Id = (int)d["PICID"];
+                    this.anh.openImgFromDatabase();
                     //Do stuff with salt and pass
                 }
                 else
                 {
                     // NO User with email exists
                 }
-
             }
             this.ketnoi.Close();
         }
-        public void getAllProductFromDatabase()
+        public void getAllCustomerFromDatabase()
         {
             listAll = new List<KhachHang>();
             ketnoi.Open();
-            SqlCommand cmd = new SqlCommand(@"select MAKH,HOTEN,SODT,NGSINH,DOANHSO from KHACHHANG", this.ketnoi);
+            SqlCommand cmd = new SqlCommand(@"select MAKH,HOTEN,SODT,NGDK,NGSINH,DOANHSO,PICID from KHACHHANG", this.ketnoi);
 
             Adapter = new SqlDataAdapter();
             Adapter.SelectCommand = cmd;
@@ -89,6 +94,9 @@ namespace SE104_N10_QuanLySieuThi.classes
                 item.startdate = (DateTime)Datatable.Rows[i]["NGDK"];
                 item.birth = (DateTime)Datatable.Rows[i]["NGSINH"];
                 item.revenue=(decimal)Datatable.Rows[i]["DOANHSO"];
+                item.anh = new HinhAnh();
+                item.anh.Id = (int)Datatable.Rows[i]["PICID"];
+                item.anh.openImgFromDatabase();
                 listAll.Add(item);
 
                 //all of suppliers
@@ -104,5 +112,6 @@ namespace SE104_N10_QuanLySieuThi.classes
         public List<KhachHang> ListAll { get => listAll; set => listAll = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         public DataTable Datatable { get => datatable; set => datatable = value; }
+        public HinhAnh Anh { get => anh; set => anh = value; }
     }
 }
