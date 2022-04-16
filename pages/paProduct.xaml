@@ -33,5 +33,19 @@
                 Command="{Binding BillCommand}"
                 CommandParameter="{Binding ElementName=ProductPage}"
             />
+        <Button
+            x:Name="btnCountClick"
+  Style="{StaticResource MaterialDesignRaisedLightButton}"
+  Width="150"
+  ToolTip="Resource name: MaterialDesignRaisedLightButton"
+  Content="{Binding OrClickMeCount}"
+  Command="{Binding IncrementOrClickMeCountCommand }" CommandParameter="{Binding ElementName=btnCountClick}"
+  IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            >
+            <Button.InputBindings>
+                <MouseBinding Gesture="RightClick" Command="{Binding DecreasementOrClickMeCountCommand}"
+                              CommandParameter="{Binding ElementName=btnCountClick}"/>
+            </Button.InputBindings>
+        </Button>
     </Grid>
 </Page>

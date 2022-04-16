@@ -19,9 +19,10 @@ namespace SE104_N10_QuanLySieuThi.windows
     /// </summary>
     public partial class winBill : Window
     {
-        public winBill()
+        public winBill(int count)
         {
             InitializeComponent();
+            lblCount.Content = count.ToString();
         }
     }
 }

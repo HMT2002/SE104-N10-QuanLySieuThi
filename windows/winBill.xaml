@@ -46,6 +46,7 @@
                     FontWeight="Bold"
                     Foreground="Gray" />
                 <Label
+                    x:Name="lblCount"
                     Margin="5 100 0 10"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"

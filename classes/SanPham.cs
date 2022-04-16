@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.classes
 {
     class SanPham
     {
         private string id;
-
-        private HinhAnh anh;
 
         private string name;
 
@@ -30,10 +32,9 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private List<SanPham> listAll;
 
-        public SanPham(string id, HinhAnh anh, string name, string dvt, int amount, decimal price, NhaCungCap supplier,List<SanPham> listAll)
+        public SanPham(string id, string name, string dvt, int amount, decimal price, NhaCungCap supplier,List<SanPham> listAll)
         {
             this.id = id;
-            this.anh = anh;
             this.name = name;
             this.dvt = dvt;
             this.amount = amount;
@@ -42,10 +43,10 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.listAll = listAll;
         }
 
+
         public SanPham()
         {
             this.id = null;
-            this.anh = null;
             this.name = null;
             this.dvt = null;
             this.amount = 0;
@@ -53,7 +54,6 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.supplier = null;
             this.listAll = null;
         }
-
         void getSpecificProductFromDatabase(string id)
         {
             this.ketnoi.Open();
@@ -112,7 +112,95 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         }
 
-        public HinhAnh Anh { get => anh; set => anh = value; }
+        private byte[] data;
+        BitmapImage bitimg;
+        Image img;
+
+        public byte[] Data { get => data; set => data = value; }
+        public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
+        public Image Img { get => img; set => img = value; }
+        public byte[] convertImgToByte()
+        {
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(this.bitimg));
+            encoder.Save(memStream);
+            return memStream.ToArray();
+        }
+
+        public BitmapImage convertImgFromByte()
+        {
+            using (var ms = new System.IO.MemoryStream(this.data))
+            {
+                this.Bitimg = new BitmapImage();
+                this.Bitimg.BeginInit();
+                this.Bitimg.CacheOption = BitmapCacheOption.OnLoad; // here
+                this.Bitimg.StreamSource = ms;
+                this.Bitimg.EndInit();
+                return this.Bitimg;
+            }
+        }
+
+        public void chooseImgAndAddToDatabase()
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                //HowKTeam
+                this.bitimg = new BitmapImage(new Uri(dialog.FileName));
+                /*this. name được phép trùng*/
+                ;
+                /*this.id Không được phép trùng do là khóa chính, phải là int */
+                this.data = convertImgToByte();
+                this.img.Source = this.bitimg;
+                addBinaryArrIntoSQL();
+
+            }
+        }
+
+        public void openImgFromDatabase()
+        {
+            this.ketnoi.Open();
+            this.bitimg = new BitmapImage();
+            this.img = new Image();
+            SqlCommand cmd = new SqlCommand(@"select PICBI from SANPHAM where MASP = " + this.Id.ToString(), this.ketnoi);
+            using (SqlDataReader d = cmd.ExecuteReader())
+            {
+                if (d.Read())
+                {
+                    this.data = (byte[])d["PICBI"];
+                    this.bitimg = convertImgFromByte();
+                    //Do stuff with salt and pass
+                }
+                else
+                {
+                    // NO User with email exists
+                }
+            }
+            this.img.Source = this.bitimg;
+            this.ketnoi.Close();
+        }
+
+        public void addBinaryArrIntoSQL()
+        {
+            this.ketnoi.Open();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(@"update SANPHAM set PICBI = @binaryValue where MASP = '"+this.id+"'", this.ketnoi))
+                {
+                    // Replace 8000, below, with the correct size of the field
+                    cmd.Parameters.Add("@binaryValue", SqlDbType.VarBinary, 5999999).Value = this.data;
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            this.ketnoi.Close();
+        }
+
         public string Name { get => name; set => name = value; }
         public int Amount { get => amount; set => amount = value; }
         public decimal Price { get => price; set => price = value; }
