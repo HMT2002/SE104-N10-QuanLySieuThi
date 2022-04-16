@@ -5,11 +5,108 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       mc:Ignorable="d" 
+      
       d:DesignHeight="620" d:DesignWidth="1120"
-      Title="paManage"
-      Background="#A561A8">
+      Background="#A561A8"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      DataContext="{StaticResource ManageVM }"
+      
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
 
-    <Grid>
-        
+      x:Name="ManagePage"
+      Title="paManage"
+      
+      >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCmd}" CommandParameter="{Binding ElementName=ProductPage}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid x:Name="grdMain">
+        <StackPanel Margin="15" VerticalAlignment="Center">
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Username"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding UserName}" />
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Name"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Name}" />
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Phone"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Phone}" />
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Email"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Mail}" />
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Employee ID"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Id}" />
+            <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Salary"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Salary}" />
+
+            <PasswordBox
+                        Name="FloatingPasswordBox"
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Password"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="18"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </PasswordBox>
+            <DatePicker
+                Width="140"
+                materialDesign:HintAssist.Hint="Joined date"
+                Style="{StaticResource MaterialDesignOutlinedDatePicker}"
+                Text="{Binding Joineddate}"
+                />
+            <Button
+                Width="150"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.Value="-1"
+                Command="{Binding CreateEmployeeCmd}"
+                CommandParameter="{Binding ElementName=ManagePage}"
+                Content="CREATE"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Style="{StaticResource MaterialDesignRaisedButton}" Margin="470,0,469.6,0" />
+            <Button Width="150"
+                    Content="Pick img"
+                    Margin="0,10,10,0"
+                    Command="{Binding PickImage}"
+                    CommandParameter="{Binding ElementName=ManagePage}"
+                    />
+
+        </StackPanel>
+
     </Grid>
 </Page>
