@@ -69,12 +69,6 @@
                         VerticalAlignment="Center"
                             Text="{Binding Position}"
                             />
-                        <!--<CheckBox Command="{Binding CheckedCmd}"
-                                  x:Name="chckBox"
-                                  CommandParameter="{Binding ElementName=chckBox}"
-                                  >
-                            
-                        </CheckBox>-->
                     </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -163,7 +157,7 @@
                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
                             Content="_THÊM"
                             Command="{Binding CreateEmployeeCmd}"
-                            CommandParameter="{Binding ElementName=grdItem}"
+                            CommandParameter="{Binding ElementName=stackpnItem}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                     </Grid>
                     <Grid Grid.Row="1">
@@ -172,7 +166,7 @@
                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
                             Content="_XÓA"
                             Command="{Binding DeleteEmployeeCmd}"
-                            CommandParameter="{Binding ElementName=grdItem}"
+                            CommandParameter="{Binding ElementName=stackpnItem}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                     </Grid>
@@ -182,7 +176,7 @@
                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
                             Content="_SỬA"
                             Command="{Binding ModifyEmployeeCmd}"
-                            CommandParameter="{Binding ElementName=grdItem}"
+                            CommandParameter="{Binding ElementName=stackpnItem}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                     </Grid>
                 </Grid>
@@ -209,13 +203,25 @@
             </Grid>
         </materialDesign:Card>
         <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="250" x:Name="cardItems">
-            <Grid x:Name="grdItem">
-                <i:Interaction.Triggers>
+            <ScrollViewer  HorizontalAlignment="Left" Height="250" VerticalAlignment="Bottom" Width="1080" VerticalScrollBarVisibility="Auto">
+                <ItemsControl>
+                    <ItemsControl.ItemsPanel >
+                        <ItemsPanelTemplate >
+                            <UniformGrid Columns="5" 
+                                         x:Name="stackpnItem"
+                                         >
+                <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="Loaded">
-                        <i:InvokeCommandAction Command="{Binding LoadedGridItemCmd}" CommandParameter="{Binding ElementName=grdItem}" />
+                        <i:InvokeCommandAction Command="{Binding LoadedGridItemCmd}" CommandParameter="{Binding ElementName=stackpnItem}" />
                     </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </Grid>
+                </i:Interaction.Triggers>-->
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+            </ItemsControl>
+            </ScrollViewer>
+
         </materialDesign:Card>
     </Grid>
 </Page>

@@ -202,25 +202,34 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         public void openImgFromDatabase()
         {
-            this.ketnoi.Open();
-            this.bitimg = new BitmapImage();
-            this.img = new Image();
-            SqlCommand cmd = new SqlCommand(@"select PICBI from NHANVIEN where MANV = " + this.Id.ToString(), this.ketnoi);
-            using (SqlDataReader d = cmd.ExecuteReader())
+
+            try
             {
-                if (d.Read())
+                this.ketnoi.Open();
+
+                this.bitimg = new BitmapImage();
+                this.img = new Image();
+                SqlCommand cmd = new SqlCommand(@"select PICBI from NHANVIEN where MANV = '" + this.Id + "'", this.ketnoi);
+                using (SqlDataReader d = cmd.ExecuteReader())
                 {
-                    this.data = (byte[])d["PICBI"];
-                    this.bitimg = convertImgFromByte();
-                    //Do stuff with salt and pass
+                    if (d.Read())
+                    {
+                        this.data = (byte[])d["PICBI"];
+                        this.bitimg = convertImgFromByte();
+                        //Do stuff with salt and pass
+                    }
+                    else
+                    {
+                        // NO User with email exists
+                    }
                 }
-                else
-                {
-                    // NO User with email exists
-                }
+                this.img.Source = this.bitimg;
+                this.ketnoi.Close();
             }
-            this.img.Source = this.bitimg;
-            this.ketnoi.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show("openImgFromDatabase: "+ex.Message);
+            }
         }
 
         public void addBinaryArrIntoSQL()

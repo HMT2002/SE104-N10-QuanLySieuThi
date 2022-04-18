@@ -1,12 +1,14 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -25,13 +27,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand CreateEmployeeCmd { get; set; }
         public ICommand DeleteEmployeeCmd { get; set; }
         public ICommand ModifyEmployeeCmd { get; set; }
-
         public ICommand PickImage { get; set; }
-
         public ICommand LoadedGridItemCmd { get; set; }
-
-        public ICommand CheckedCmd { get; set; }
-
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
         private string _Name;
@@ -69,39 +66,31 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Joineddate = DateTime.Now;
             Birthday = DateTime.Now;
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
-            CreateEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { CreateEmployee(p); });
-            DeleteEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { DeleteEmployee(p); });
-            ModifyEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { ModifyEmployee(p); });
+            CreateEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { CreateEmployee(p); });
+            DeleteEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { DeleteEmployee(p); });
+            ModifyEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { ModifyEmployee(p); });
 
             PickImage = new RelayCommand<Button>((p) => {btnAvatar=p; return true; }, (p) => { Imagepick(p);});
-            LoadedGridItemCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadedGridItem(p); });
-            CheckedCmd = new RelayCommand<CheckBox>((p) => { return true; }, (p) => { CheckedPush(p); });
-
+            LoadedGridItemCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { LoadedGridItem(p); });
             nv.getAllEmployeeFromDatabase();
 
         }
 
-        private void ModifyEmployee(Grid p)
+        private void ModifyEmployee(UniformGrid p)
         {
             try
             {
-                DeleteEmployee(p);
-                nv = new NhanVien();
-                nv.Id = Id;
-                nv.Name = Name;
-                nv.Acc = new Account();
-                nv.Acc.Acc = UserName;
-                nv.Acc.Password = Password;
-                nv.Mail = Mail;
-                nv.Phone = Phone;
-                nv.Salary = Salary;
-                nv.Startdate = Joineddate.ToString("dd/MM/yyyy");
-                nv.Position = Position;
-                nv.Cmnd = CMND;
-                nv.Birthday = Birthday.ToString("dd/MM/yyyy");
-                nv.RegistEmployee();
-                MessageBox.Show("sửa ngon");
-
+                if (nv.DeleteEmployee())
+                {
+                    p.Children.Clear();
+                    CreateEmployee(p);
+                    LoadedGridItem(p);
+                }
+                else
+                {
+                    MessageBox.Show("fail sửa");
+                    return;
+                }
             }
             catch (Exception ex)
             {
@@ -110,13 +99,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        private void DeleteEmployee(Grid p)
+        private void DeleteEmployee(UniformGrid p)
         {
             if (nv.DeleteEmployee())
             {
-                MessageBox.Show("Xoá thành công");
                 p.Children.Clear();
-
                 Password = "";
                 UserName = "";
                 Mail = "";
@@ -127,21 +114,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 Joineddate = DateTime.Now;
                 Birthday = DateTime.Now;
                 btnAvatar.Content = null;
+
                 LoadedGridItem(p);
             }
             else
             {
-                MessageBox.Show("fail");
+                MessageBox.Show("fail xoá");
                 return;
             }
         }
 
-        private void CheckedPush(CheckBox p)
-        {
-            MessageBox.Show("lêu lêu");
-        }
-
-        private void LoadedGridItem(Grid p)
+        private void LoadedGridItem(UniformGrid p)
         {
             try {
             NhanVien supplier = new NhanVien();
@@ -151,12 +134,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 Button btn = new Button();
                 btn.Height = 50;
                 btn.Width = 120;
-                Thickness myThickness = new Thickness();
-                myThickness.Bottom = 0;
-                myThickness.Left = 250 * (i % 5);
-                myThickness.Right = 0;
-                myThickness.Top = -400 + 250 * (i / 5);
-                btn.Margin = myThickness;
                 btn.Click += ClickId;
                 btn.Tag = supplier.ListAll[i].Id;
                 btn.Content = supplier.ListAll[i].Img;
@@ -177,18 +154,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             nv.getSpecificEmployeeFromDatabase(btn.Tag.ToString());
             Id = nv.Id;
             Name = nv.Name;
+            Mail = nv.Mail;
+            Salary = nv.Salary;
+            Phone = nv.Phone;
+            CMND = nv.Cmnd;
+            Position = nv.Position;
+            Joineddate = DateTime.Parse(nv.Startdate);
+            Birthday = DateTime.Parse(nv.Birthday);
             btnAvatar.Content = nv.Img;
         }
 
-        private void CreateEmployee(Grid p)
+        private void CreateEmployee(UniformGrid p)
         {
             try
             {
-
-                Button btn = new Button();
-                btn.Height = 50;
-                btn.Width = 120;
-                btn.Click += ClickId;
                 nv.Id = Id;
                 nv.Name = Name;
                 nv.Acc = new Account();
@@ -201,32 +180,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 nv.Position = Position;
                 nv.Cmnd = CMND;
                 nv.Birthday = Birthday.ToString("dd/MM/yyyy");
-                btn.Tag = Id;
+
                 if (nv.RegistEmployee())
                 {
-                    MessageBox.Show("Tạo thành công");
+                    nv.openImgFromDatabase();
                 }
                 else
                 {
-                    MessageBox.Show("fail");
+                    MessageBox.Show("fail tạo");
                     return;
                 }
-                nv.openImgFromDatabase();
-                btn.Content = nv.Img;
-
-                Thickness myThickness = new Thickness();
-                for (int i = 0; i < nv.ListAll.Count; i++)
-                {
-                    myThickness.Bottom = 0;
-                    myThickness.Left = 250 * (i % 5);
-                    myThickness.Right = 0;
-                    myThickness.Top = -400 + 250 * (i / 5);
-                }
-
-                btn.Margin = myThickness;
-
-                p.Children.Add(btn);
-
+                LoadedGridItem(p);
             }
             catch (Exception ex)
             {
