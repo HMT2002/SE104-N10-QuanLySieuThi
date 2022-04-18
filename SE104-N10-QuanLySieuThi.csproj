@@ -81,6 +81,7 @@
       <DependentUpon>ucControlBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BuyViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -225,10 +226,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ImageResource\" />
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="pages\52aef02361b592ebcba4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pages\photo_photography_image_picture_add-128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets" Condition="Exists('packages\MaterialDesignThemes.4.3.0\build\MaterialDesignThemes.targets')" />

@@ -33,9 +33,12 @@ CREATE TABLE NHANVIEN(
  LUONG money,
  ACC varchar(20),
  MAIL nvarchar(50),
+ POSITION nvarchar(20),
+ CMND nvarchar(20),
+ NGSINH nvarchar(20),
  primary key(MANV)
 )
-insert into NHANVIEN(MANV,HOTEN,SODT,NGVL,LUONG,MAIL,ACC)values('NV001','Trần Văn A','079123456','2000-10-31',9000000,'123@gmail.com','1')
+alter table NHANVIEN add NGSINH nvarchar(20)
 
 select * from NHANVIEN
 delete from NHANVIEN

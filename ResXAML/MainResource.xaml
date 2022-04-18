@@ -7,4 +7,6 @@
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:ProducViewModel x:Key="ProductVM"></viewmodel:ProducViewModel>
     <viewmodel:ManageViewModel x:Key="ManageVM"></viewmodel:ManageViewModel>
+    <viewmodel:BuyViewModel x:Key="BuyVM"></viewmodel:BuyViewModel>
+    
 </ResourceDictionary>

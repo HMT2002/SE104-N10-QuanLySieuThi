@@ -29,13 +29,19 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private decimal salary;
 
+        private string position;
+
+        private string cmnd;
+
+        private string birthday;
+
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
         private DataTable datatable = new DataTable();
         private SqlDataAdapter adapter = new SqlDataAdapter();
 
         private List<NhanVien> listAll;
 
-        public NhanVien(string id, string name, string phone, string startdate, decimal salary,List<NhanVien> listAll,string mail,Account acc)
+        public NhanVien(string id, string name, string phone, string startdate, decimal salary,string position,string cmnd,List<NhanVien> listAll,string mail,Account acc,string birthday)
         {
             this.id = id;
             this.name = name;
@@ -45,10 +51,23 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.listAll = listAll;
             this.mail = mail;
             this.acc = acc;
+            this.position = position;
+            this.cmnd = cmnd;
+            this.birthday = birthday;
         }
         public NhanVien()
         {
-
+            this.id = null;
+            this.name = null;
+            this.phone = null;
+            this.startdate = null;
+            this.salary = 0;
+            this.listAll = null;
+            this.mail = null;
+            this.acc = null;
+            this.position = null;
+            this.cmnd = null;
+            this.birthday = null;
         }
         public void getSpecificEmployeeFromDatabase(string id)
         {
@@ -62,12 +81,16 @@ namespace SE104_N10_QuanLySieuThi.classes
                     this.name = (string)d["HOTEN"];
                     this.phone = (string)d["SODT"];
                     this.startdate = (string)d["NGVL"];
-                    this.salary = (int)d["LUONG"];
+                    this.salary = (decimal)d["LUONG"];
                     this.data = (byte[])d["PICBI"];
                     this.bitimg = this.convertImgFromByte();
                     this.img = new Image();
                     this.img.Source = this.bitimg;
                     this.mail = (string)d["MAIL"];
+                    this.position = (string)d["POSITION"];
+                    this.cmnd = (string)d["CMND"];
+                    this.birthday = (string)d["NGSINH"];
+
                     //Do stuff with salt and pass
                 }
                 else
@@ -80,33 +103,44 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
         public void getAllEmployeeFromDatabase()
         {
-            listAll = new List<NhanVien>();
-            ketnoi.Open();
-            SqlCommand cmd = new SqlCommand(@"select * from NHANVIEN", this.ketnoi);
-
-            Adapter = new SqlDataAdapter();
-            Adapter.SelectCommand = cmd;
-
-            Datatable = new DataTable();
-            Adapter.Fill(Datatable);
-            ketnoi.Close();
-
-            for (int i = 0; i < Datatable.Rows.Count; i++)
+            try
             {
-                NhanVien item = new NhanVien();
-                item.id = Datatable.Rows[i]["MANV"].ToString();
-                item.name = Datatable.Rows[i]["HOTEN"].ToString();
-                item.phone = Datatable.Rows[i]["SODT"].ToString();
-                item.startdate = (string)Datatable.Rows[i]["NGVL"];
-                item.salary = (decimal)Datatable.Rows[i]["LUONG"];
-                item.data = (byte[])Datatable.Rows[i]["PICBI"];
-                item.bitimg = item.convertImgFromByte();
-                item.img = new Image();
-                item.img.Source = item.bitimg;
-                item.mail = (string)Datatable.Rows[i]["MAIL"];
-                listAll.Add(item);
+                listAll = new List<NhanVien>();
+                ketnoi.Open();
+                SqlCommand cmd = new SqlCommand(@"select * from NHANVIEN", this.ketnoi);
 
-                //all of suppliers
+                Adapter = new SqlDataAdapter();
+                Adapter.SelectCommand = cmd;
+
+                Datatable = new DataTable();
+                Adapter.Fill(Datatable);
+                ketnoi.Close();
+
+                for (int i = 0; i < Datatable.Rows.Count; i++)
+                {
+                    NhanVien item = new NhanVien();
+                    item.id = Datatable.Rows[i]["MANV"].ToString();
+                    item.name = Datatable.Rows[i]["HOTEN"].ToString();
+                    item.phone = Datatable.Rows[i]["SODT"].ToString();
+                    item.startdate = (string)Datatable.Rows[i]["NGVL"];
+                    item.salary = (decimal)Datatable.Rows[i]["LUONG"];
+                    item.data = (byte[])Datatable.Rows[i]["PICBI"];
+                    item.bitimg = item.convertImgFromByte();
+                    item.img = new Image();
+                    item.img.Source = item.bitimg;
+                    item.mail = (string)Datatable.Rows[i]["MAIL"];
+                    item.position = (string)Datatable.Rows[i]["POSITION"];
+                    item.cmnd = (string)Datatable.Rows[i]["CMND"];
+                    item.birthday = (string)Datatable.Rows[i]["NGSINH"];
+                    listAll.Add(item);
+
+                    //all of suppliers
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -184,6 +218,10 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         public void addBinaryArrIntoSQL()
         {
+            if (this.bitimg == null)
+            {
+                return;
+            }
             this.ketnoi.Open();
             try
             {
@@ -211,6 +249,9 @@ namespace SE104_N10_QuanLySieuThi.classes
         public DataTable Datatable { get => datatable; set => datatable = value; }
         public string Mail { get => mail; set => mail = value; }
         public Account Acc { get => acc; set => acc = value; }
+        public string Position { get => position; set => position = value; }
+        public string Cmnd { get => cmnd; set => cmnd = value; }
+        public string Birthday { get => birthday; set => birthday = value; }
 
         public bool RegistEmployee()
         {
@@ -218,8 +259,8 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.ketnoi.Open();
             try
             {
-                using (SqlCommand cmd = new SqlCommand(@"insert into NHANVIEN(MANV,HOTEN,SODT,NGVL,LUONG,MAIL,ACC)values('"+this.id+
-                    "','"+this.name+"','"+this.phone+"','"+this.startdate+"','"+this.salary+"','"+this.mail+"','"+this.acc.Acc+"')", this.ketnoi))
+                using (SqlCommand cmd = new SqlCommand(@"insert into NHANVIEN(MANV,HOTEN,SODT,NGVL,LUONG,MAIL,POSITION,CMND,NGSINH)values('"+this.id+
+                    "','"+this.name+"','"+this.phone+"','"+this.startdate+"','"+this.salary+"','"+this.mail+"','" + this.position + "','" + this.cmnd + "','" + this.birthday + "')", this.ketnoi))
                 {
                     cmd.ExecuteNonQuery();
 

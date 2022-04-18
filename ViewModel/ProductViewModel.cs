@@ -60,7 +60,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public void LoadGrid(Grid p)
         {
             //LoadProductFromDatabase(p);
-            LoadEmployeeFromdatabase(p);
+            //LoadEmployeeFromdatabase(p);
         }
 
         private void LoadEmployeeFromdatabase(Grid g)
