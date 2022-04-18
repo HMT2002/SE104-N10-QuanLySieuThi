@@ -141,7 +141,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             }
         }
 
-        public void chooseImgAndAddToDatabase()
+        public void chooseImg()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
@@ -154,7 +154,6 @@ namespace SE104_N10_QuanLySieuThi.classes
                 /*this.id Không được phép trùng do là khóa chính, phải là int */
                 this.data = convertImgToByte();
                 this.img.Source = this.bitimg;
-                addBinaryArrIntoSQL();
 
             }
         }
@@ -210,5 +209,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         public DataTable Datatable { get => datatable; set => datatable = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         internal List<SanPham> ListAll { get => listAll; set => listAll = value; }
+
+
     }
 }

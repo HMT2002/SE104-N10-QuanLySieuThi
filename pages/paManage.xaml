@@ -24,7 +24,7 @@
     </i:Interaction.Triggers>
     <Grid x:Name="grdMain">
 
-        <materialDesign:Card Margin="20" VerticalAlignment="Top" MaxHeight="300">
+        <materialDesign:Card Margin="20" VerticalAlignment="Top" Height="250" MaxHeight="250">
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="Grid">
@@ -69,6 +69,12 @@
                         VerticalAlignment="Center"
                             Text="{Binding Position}"
                             />
+                        <!--<CheckBox Command="{Binding CheckedCmd}"
+                                  x:Name="chckBox"
+                                  CommandParameter="{Binding ElementName=chckBox}"
+                                  >
+                            
+                        </CheckBox>-->
                     </Grid>
                     <Grid Grid.Row="3">
                         <Grid.ColumnDefinitions>
@@ -134,16 +140,15 @@
                 </Grid>
                 <Grid Grid.Column="2">
                     <Button x:Name="bntPickImage"
+                            
                             Command="{Binding PickImage}"
                             CommandParameter="{Binding ElementName=bntPickImage}"
                             Height="auto"
                             Width="auto"
+                            Content="{Binding imgAvatar}"
                             Background="AliceBlue"
                             >
-                        <Image Source="photo_photography_image_picture_add-128.png"
-                               Stretch="Uniform"
-                               >
-                        </Image>
+
                     </Button>
                 </Grid>
                 <Grid Grid.Column="3">
@@ -166,6 +171,8 @@
                             Style="{StaticResource MaterialDesignRaisedLightButton}"
                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
                             Content="_XÓA"
+                            Command="{Binding DeleteEmployeeCmd}"
+                            CommandParameter="{Binding ElementName=grdItem}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                     </Grid>
@@ -174,6 +181,8 @@
                             Style="{StaticResource MaterialDesignRaisedLightButton}"
                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
                             Content="_SỬA"
+                            Command="{Binding ModifyEmployeeCmd}"
+                            CommandParameter="{Binding ElementName=grdItem}"
                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                     </Grid>
                 </Grid>

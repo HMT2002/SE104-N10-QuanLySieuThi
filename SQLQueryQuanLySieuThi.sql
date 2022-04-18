@@ -41,7 +41,8 @@ CREATE TABLE NHANVIEN(
 alter table NHANVIEN add NGSINH nvarchar(20)
 
 select * from NHANVIEN
-delete from NHANVIEN
+delete from NHANVIEN 
+update NHANVIEN where MANV='NV001' 
 
 CREATE TABLE NHACUNGCAP(
 MACC varchar(10),

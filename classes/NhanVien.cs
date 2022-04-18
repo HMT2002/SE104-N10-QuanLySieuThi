@@ -71,35 +71,42 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
         public void getSpecificEmployeeFromDatabase(string id)
         {
-            this.ketnoi.Open();
-            SqlCommand cmd = new SqlCommand(@"select * from NHANVIEN where MANV='" + id + "'", this.ketnoi);
-            using (SqlDataReader d = cmd.ExecuteReader())
+            try
             {
-                if (d.Read())
+                this.ketnoi.Open();
+                SqlCommand cmd = new SqlCommand(@"select * from NHANVIEN where MANV='" + id + "'", this.ketnoi);
+                using (SqlDataReader d = cmd.ExecuteReader())
                 {
-                    this.id = (string)d["MANV"];
-                    this.name = (string)d["HOTEN"];
-                    this.phone = (string)d["SODT"];
-                    this.startdate = (string)d["NGVL"];
-                    this.salary = (decimal)d["LUONG"];
-                    this.data = (byte[])d["PICBI"];
-                    this.bitimg = this.convertImgFromByte();
-                    this.img = new Image();
-                    this.img.Source = this.bitimg;
-                    this.mail = (string)d["MAIL"];
-                    this.position = (string)d["POSITION"];
-                    this.cmnd = (string)d["CMND"];
-                    this.birthday = (string)d["NGSINH"];
+                    if (d.Read())
+                    {
+                        this.id = (string)d["MANV"];
+                        this.name = (string)d["HOTEN"];
+                        this.phone = (string)d["SODT"];
+                        this.startdate = (string)d["NGVL"];
+                        this.salary = (decimal)d["LUONG"];
+                        this.data = (byte[])d["PICBI"];
+                        this.bitimg = this.convertImgFromByte();
+                        this.img = new Image();
+                        this.img.Source = this.bitimg;
+                        this.mail = (string)d["MAIL"];
+                        this.position = (string)d["POSITION"];
+                        this.cmnd = (string)d["CMND"];
+                        this.birthday = (string)d["NGSINH"];
 
-                    //Do stuff with salt and pass
+                        //Do stuff with salt and pass
+                    }
+                    else
+                    {
+                        // NO User with email exists
+                    }
                 }
-                else
-                {
-                    // NO User with email exists
-                }
-
+                this.ketnoi.Close();
             }
-            this.ketnoi.Close();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
         public void getAllEmployeeFromDatabase()
         {
@@ -140,7 +147,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("getAllEmployeeFromDatabase: " + ex.Message);
             }
 
         }
@@ -256,11 +263,57 @@ namespace SE104_N10_QuanLySieuThi.classes
         public bool RegistEmployee()
         {
 
-            this.ketnoi.Open();
             try
             {
+                this.ketnoi.Open();
                 using (SqlCommand cmd = new SqlCommand(@"insert into NHANVIEN(MANV,HOTEN,SODT,NGVL,LUONG,MAIL,POSITION,CMND,NGSINH)values('"+this.id+
                     "','"+this.name+"','"+this.phone+"','"+this.startdate+"','"+this.salary+"','"+this.mail+"','" + this.position + "','" + this.cmnd + "','" + this.birthday + "')", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                this.addBinaryArrIntoSQL();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool DeleteEmployee()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"delete from NHANVIEN where MANV = '"+this.id+"'", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool ModifyEmployee()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"update into NHANVIEN(MANV,HOTEN,SODT,NGVL,LUONG,MAIL,POSITION,CMND,NGSINH)values('" + this.id +
+                    "','" + this.name + "','" + this.phone + "','" + this.startdate + "','" + this.salary + "','" + this.mail + "','" + this.position + "','" + this.cmnd + "','" + this.birthday + "')", this.ketnoi))
                 {
                     cmd.ExecuteNonQuery();
 

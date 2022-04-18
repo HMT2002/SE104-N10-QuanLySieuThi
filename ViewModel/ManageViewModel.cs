@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -15,16 +16,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         NhanVien nv = new NhanVien();
 
+        public Button btnAvatar = new Button();
+
         public ICommand LoadedPageCmd { get; set; }
 
         public ICommand PasswordChangedCommand { get; set; }
 
         public ICommand CreateEmployeeCmd { get; set; }
+        public ICommand DeleteEmployeeCmd { get; set; }
+        public ICommand ModifyEmployeeCmd { get; set; }
 
         public ICommand PickImage { get; set; }
 
         public ICommand LoadedGridItemCmd { get; set; }
 
+        public ICommand CheckedCmd { get; set; }
 
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
@@ -64,10 +70,75 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Birthday = DateTime.Now;
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             CreateEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { CreateEmployee(p); });
-            PickImage = new RelayCommand<Button>((p) => { return true; }, (p) => { Imagepick(p); });
+            DeleteEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { DeleteEmployee(p); });
+            ModifyEmployeeCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { ModifyEmployee(p); });
+
+            PickImage = new RelayCommand<Button>((p) => {btnAvatar=p; return true; }, (p) => { Imagepick(p);});
             LoadedGridItemCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadedGridItem(p); });
+            CheckedCmd = new RelayCommand<CheckBox>((p) => { return true; }, (p) => { CheckedPush(p); });
+
             nv.getAllEmployeeFromDatabase();
 
+        }
+
+        private void ModifyEmployee(Grid p)
+        {
+            try
+            {
+                DeleteEmployee(p);
+                nv = new NhanVien();
+                nv.Id = Id;
+                nv.Name = Name;
+                nv.Acc = new Account();
+                nv.Acc.Acc = UserName;
+                nv.Acc.Password = Password;
+                nv.Mail = Mail;
+                nv.Phone = Phone;
+                nv.Salary = Salary;
+                nv.Startdate = Joineddate.ToString("dd/MM/yyyy");
+                nv.Position = Position;
+                nv.Cmnd = CMND;
+                nv.Birthday = Birthday.ToString("dd/MM/yyyy");
+                nv.RegistEmployee();
+                MessageBox.Show("sửa ngon");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void DeleteEmployee(Grid p)
+        {
+            if (nv.DeleteEmployee())
+            {
+                MessageBox.Show("Xoá thành công");
+                p.Children.Clear();
+
+                Password = "";
+                UserName = "";
+                Mail = "";
+                Id = "";
+                Position = "";
+                Phone = "";
+                Salary = 0;
+                Joineddate = DateTime.Now;
+                Birthday = DateTime.Now;
+                btnAvatar.Content = null;
+                LoadedGridItem(p);
+            }
+            else
+            {
+                MessageBox.Show("fail");
+                return;
+            }
+        }
+
+        private void CheckedPush(CheckBox p)
+        {
+            MessageBox.Show("lêu lêu");
         }
 
         private void LoadedGridItem(Grid p)
@@ -103,9 +174,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void ClickId(object sender, EventArgs e)
         {
             Button btn = sender as Button;
-            NhanVien kh = new NhanVien();
-            kh.getSpecificEmployeeFromDatabase(btn.Tag.ToString());
-            Id = kh.Id;
+            nv.getSpecificEmployeeFromDatabase(btn.Tag.ToString());
+            Id = nv.Id;
+            Name = nv.Name;
+            btnAvatar.Content = nv.Img;
         }
 
         private void CreateEmployee(Grid p)
@@ -168,7 +240,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void Imagepick(Button p)
         {
             nv.chooseImg();
-            p.Content = new Image() { Source = nv.Bitimg };
+            btnAvatar.Content = nv.Img;
         }
 
         void LoadPage(Page p)
