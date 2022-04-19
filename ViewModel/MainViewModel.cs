@@ -1,4 +1,5 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.pages;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,50 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public Account loginAcc;
 
+        public Page pageProduct { get; set; }
+
+        public Page pageManage { get; set; }
+
+
+        public Page pageSell { get; set; }
+
+
+        public Page pageBuy { get; set; }
+
+        public Page pageStatic { get; set; }
+
+        public Page pageSetting { get; set; }
+
+
+        public Page pageCustomer { get; set; }
+
+
+        public Page pageHome { get; set; }
+
+        public ICommand ChangeTab { get; set; }
+
         public MainViewModel()
         {
             loginAcc = new Account();
+
+            pageProduct = new paProduct();
+
+
+            pageBuy = new paBuy();
+
+            pageSell = new paSell();
+
+            pageManage = new paManage();
+
+            pageSetting = new paSetting();
+
+            pageCustomer = new paCustomer();
+
+            pageHome = new paHome();
+
+            pageStatic = new paStatic();
+
+
             LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
         }
 

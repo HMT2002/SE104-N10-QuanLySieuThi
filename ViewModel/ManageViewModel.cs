@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class ManageViewModel:BaseViewModel
+    public class ManageViewModel:BaseViewModel
     {
         NhanVien nv = new NhanVien();
 

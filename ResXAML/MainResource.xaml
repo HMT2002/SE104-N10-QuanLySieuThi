@@ -8,5 +8,10 @@
     <viewmodel:ProducViewModel x:Key="ProductVM"></viewmodel:ProducViewModel>
     <viewmodel:ManageViewModel x:Key="ManageVM"></viewmodel:ManageViewModel>
     <viewmodel:BuyViewModel x:Key="BuyVM"></viewmodel:BuyViewModel>
-    
+    <viewmodel:BillViewModel x:Key="BillVM"></viewmodel:BillViewModel>
+    <viewmodel:HomeViewModel x:Key="HomeVM"></viewmodel:HomeViewModel>
+    <viewmodel:SellViewModel x:Key="SellVM"></viewmodel:SellViewModel>
+    <viewmodel:SettingViewModel x:Key="SettingVM"></viewmodel:SettingViewModel>
+    <viewmodel:StaticViewModel x:Key="StaticVM"></viewmodel:StaticViewModel>
+    <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
 </ResourceDictionary>

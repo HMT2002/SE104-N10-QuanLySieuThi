@@ -7,10 +7,10 @@
       mc:Ignorable="d" 
       
       d:DesignHeight="620" d:DesignWidth="1120"
-      Background="#8F40E8"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       DataContext="{StaticResource ProductVM }"
-      
+      Background="#8F40E8"
+
       x:Name="ProductPage"
       Title="paProduct"
       

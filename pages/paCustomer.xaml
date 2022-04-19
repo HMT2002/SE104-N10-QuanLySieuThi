@@ -9,6 +9,12 @@
       Title="paCustomer"
       Background="#81B4FA"
 
+      
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      DataContext="{StaticResource CustomerVM}"
+      x:Name="CustomerPage"
+      
       >
 
     <Grid>
