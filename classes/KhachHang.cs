@@ -30,13 +30,17 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private decimal revenue;
 
+        private string gender;
+
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
         private DataTable datatable = new DataTable();
         private SqlDataAdapter adapter = new SqlDataAdapter();
 
         private List<KhachHang> listAll;
 
-        public KhachHang(string id, string name, string phone, DateTime startdate, DateTime birth, decimal revenue, List<KhachHang> listAll,string mail)
+        private Account acc;
+
+        public KhachHang(string id, string name, string phone, DateTime startdate, DateTime birth, decimal revenue, List<KhachHang> listAll,string mail,string gender,Account acc)
         {
             this.id = id;
             this.name = name;
@@ -46,6 +50,8 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.revenue = revenue;
             this.listAll = listAll;
             this.mail = mail;
+            this.gender = gender;
+            this.acc = acc;
         }
 
         public KhachHang()
@@ -140,7 +146,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             }
         }
 
-        public void chooseImgAndAddToDatabase()
+        public void chooseImg()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Chon anh(*.jpg; *.png; *.gif) | *.jpg; *.png; *.gif";
@@ -153,7 +159,7 @@ namespace SE104_N10_QuanLySieuThi.classes
                 /*this.id Không được phép trùng do là khóa chính, phải là int */
                 this.data = this.convertImgToByte();
                 this.img.Source = this.bitimg;
-                this.addBinaryArrIntoSQL();
+                //this.addBinaryArrIntoSQL();
 
             }
         }
@@ -213,5 +219,80 @@ namespace SE104_N10_QuanLySieuThi.classes
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         public DataTable Datatable { get => datatable; set => datatable = value; }
         public string Mail { get => mail; set => mail = value; }
+        public string Gender { get => gender; set => gender = value; }
+        public Account Acc { get => acc; set => acc = value; }
+
+        public bool RegistCustomer()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,GENDER,MAIL,ACC)values
+('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth.ToString("dd/MM/yyyy") + "','" + this.startdate.ToString("dd/MM/yyyy") + "',0,'" + this.gender + "','"+this.mail+"','"+this.acc.Acc+"')"
+, this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                this.addBinaryArrIntoSQL();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool DeleteEmployee()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"delete from NHANVIEN where MANV = '" + this.id + "'", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool ModifyEmployee()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"update into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,GENDER)values
+('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth.ToString("dd/MM/yyyy") + "','" + this.startdate.ToString("dd/MM/yyyy") + "',0,'" + this.gender + "')"
+, this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                this.addBinaryArrIntoSQL();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
     }
 }

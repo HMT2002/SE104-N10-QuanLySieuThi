@@ -108,6 +108,12 @@
     <Compile Include="windows\winRegister.xaml.cs">
       <DependentUpon>winRegister.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\winRegistInformation.xaml.cs">
+      <DependentUpon>winRegistInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\winVerifyMail.xaml.cs">
+      <DependentUpon>winVerifyMail.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -183,6 +189,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\winRegister.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winRegistInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winVerifyMail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

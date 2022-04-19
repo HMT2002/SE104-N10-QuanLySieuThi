@@ -16,13 +16,13 @@ ACC varchar(20),
 PICID int,
 PICBI varbinary(MAX),
 MAIL nvarchar(50),
+GENDER nvarchar(20),
 primary key(MAKH)
 )
-insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH001','Nguyễn Văn A','079123456','2000-10-31','2014-9-8',30000)
+insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,GENDER)values('KH001','Nguyễn Văn A','079123456','2000-10-31','2014-9-8',30000,'nam')
 insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH002','Trần Văn B','079654321','2010-2-1','2012-6-17',450000)
 insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH003','Lê Văn C','079123654','1935-4-1','2020-8-3',7840000)
 insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH004','Lý Văn D','079321456','1999-7-3','2018-7-14',470000)
-
 
 select * from KHACHHANG
 CREATE TABLE NHANVIEN(
@@ -36,6 +36,7 @@ CREATE TABLE NHANVIEN(
  POSITION nvarchar(20),
  CMND nvarchar(20),
  NGSINH nvarchar(20),
+ GENDER nvarchar(20),
  primary key(MANV)
 )
 alter table NHANVIEN add NGSINH nvarchar(20)
@@ -117,3 +118,4 @@ insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
 
 select * from ACCOUNT 
+delete from ACCOUNT where ACC='tuee'

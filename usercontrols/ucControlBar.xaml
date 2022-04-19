@@ -55,13 +55,7 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Left">
                     <materialDesign:Card>
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            Margin="16 32 0 0 "
-                            Text="{Binding Tag,ElementName=ucMainControlBar}"
-                            >
-                            
-                        </TextBlock>
+
                     </materialDesign:Card>
                 </StackPanel>
 

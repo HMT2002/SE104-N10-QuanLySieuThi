@@ -1,4 +1,4 @@
-﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winRegister"
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winRegistInformation"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -22,18 +22,16 @@
         Width="350"
         Height="450"
         
-        Title="winRegister" 
+        Title="winRegistInformation" 
         DataContext="{StaticResource LoginVM}"
-        Name="RegistWin"
-        >
+        Name="RegistInformationWin">
     <Grid>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:ucControlBar Tag="{Binding Title,ElementName=RegistWin}"></uc:ucControlBar>
+            <uc:ucControlBar Tag="{Binding Title,ElementName=RegistInformationWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
             <Button
@@ -50,7 +48,7 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
             <Grid
-                Height="240"
+                Height="300"
                 Margin="35,80"
                 VerticalAlignment="Bottom">
 
@@ -63,16 +61,47 @@
                     FontWeight="Bold"
                     Foreground="Gray" />
                 <StackPanel Margin="15" VerticalAlignment="Center">
+
                     <TextBox
                         Margin="0,10"
-                        materialDesign:HintAssist.Hint="Mail address"
+                        materialDesign:HintAssist.Hint="Real name"
                         FontFamily="Champagne &amp; Limousines"
-                        FontSize="18"
+                        FontSize="8"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding MailAdress}" />
+                        Text="{Binding Name}" />
+                    <TextBox
+                        Margin="0,10"
+                        materialDesign:HintAssist.Hint="Phone"
+                        FontFamily="Champagne &amp; Limousines"
+                        FontSize="8"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Phone}" />
+                    <DatePicker
+                        Width="250"
+                        Height="40"
+                        FontSize="8"
+                        materialDesign:HintAssist.Hint="Ngày sinh"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                            SelectedDate="{Binding Birthday}"
+                            />
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton IsChecked="{Binding IsMale}" 
+                                     Command="{Binding CheckedIsMaleCmd}"
+                                     Content="Male" 
+                                     Style="{StaticResource MaterialDesignLightRadioButton}"
+                                     >
+                        </RadioButton>
+                        <RadioButton IsChecked="{Binding IsFeMale}" 
+                                     Command="{Binding CheckedIsFemaleCmd}"
+                                     Content="Female"
+                                     Style="{StaticResource MaterialDesignLightRadioButton}">
+                        </RadioButton>
+                    </StackPanel>
+  
+
+
                 </StackPanel>
             </Grid>
-
             <Button
                 Width="150"
                 Margin="100,0,100.4,30.8"
@@ -81,12 +110,11 @@
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
                 materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
                 materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding SendVerifyCmd}"
-                CommandParameter="{Binding ElementName=RegistWin}"
-                Content="SEND VERIFY"
+                Command="{Binding CreateAccountCmd}"
+                CommandParameter="{Binding ElementName=RegistInformationWin}"
+                Content="CREATE ACCOUNT"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
         </Grid>
-
     </Grid>
 </Window>
