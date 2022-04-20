@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:SE104_N10_QuanLySieuThi.ViewModel"
-                    
-                    >
+                    xmlns:viewmodel="clr-namespace:SE104_N10_QuanLySieuThi.ViewModel" 
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
     <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
     <viewmodel:ProducViewModel x:Key="ProductVM"></viewmodel:ProducViewModel>
