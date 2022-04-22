@@ -18,6 +18,51 @@
       >
 
     <Grid>
-        
+                <materialDesign:Card>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue"></materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue"></materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue"></materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue">
+                                <Button
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                            Content="_Button"
+                            VerticalAlignment="Bottom"
+                            Margin="20"
+                            Command="{Binding BuyProductCmd}"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Page>
