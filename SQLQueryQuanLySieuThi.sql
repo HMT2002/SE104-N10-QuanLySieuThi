@@ -77,6 +77,12 @@ insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP001','Coca cola','chai'
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP002','Lays','chai','CC002',15000,40)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP003','Singum','chai','CC003',8000,130)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP004','C2','chai','CC004',7000,50)
+insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP005','0 độ','chai','CC004',7000,50)
+
+insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP006','7up','chai','CC004',7000,50)
+
+insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP007','Sting','chai','CC004',7000,50)
+
 select * from SANPHAM
 
 CREATE TABLE HOADON(

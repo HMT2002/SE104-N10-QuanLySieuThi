@@ -11,6 +11,8 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 
 namespace SE104_N10_QuanLySieuThi.ViewModel

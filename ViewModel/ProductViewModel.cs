@@ -1,7 +1,10 @@
-﻿using SE104_N10_QuanLySieuThi.classes;
+﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
+using SE104_N10_QuanLySieuThi.classes;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -10,13 +13,19 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     class ProducViewModel : BaseViewModel
     {
+        public SanPham sp=new SanPham();
+        public ObservableCollection<SanPham> SP { get; set; }
+        ItemsControl itemsControl = new ItemsControl();
+
         public ICommand BillCommand { get; set; }
 
         public ICommand LoadedPageCmd { get; set; }
+        public ICommand LoadedItemCtrlCmd { get; set; }
 
         public ICommand LoadedGridCmd { get; set; }
 
@@ -26,17 +35,39 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand IncrementOrClickMeCountCommand { get; set; }
         public ICommand DecreasementOrClickMeCountCommand { get; set; }
 
+        public bool isMainLoaded=false;
+
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
         public ProducViewModel()
         {
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
+            sp = new SanPham();
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Bill(p); });
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
             IncrementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Increase(p); });
             DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
+            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
+            sp.getAllProductFromDatabase();
+        }
+
+
+        private void AddItemIntoItemCtrol(ItemsControl p)
+        {
+            p.ItemsSource = sp.ListAll;
+            //for (int i = 0; i < sp.ListAll.Count; i++)
+            //{
+                
+            //    Button btn = new Button();
+            //    btn.Width = 100;
+            //    btn.Height = 100;
+            //    btn.Content = new Image(){Source = sp.ListAll[i].Bitimg };
+            //    p.Items.Add(btn);
+            //}
         }
 
         private void Decrease(Button p)
@@ -63,53 +94,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //LoadEmployeeFromdatabase(p);
         }
 
-        private void LoadEmployeeFromdatabase(Grid g)
-        {
-            NhanVien supplier = new NhanVien();
-            supplier.getAllEmployeeFromDatabase();
-            for (int i = 0; i < supplier.ListAll.Count; i++)
-            {
-                Button btn = new Button();
-                btn.Height = 50;
-                btn.Width = 120;
-                Thickness myThickness = new Thickness();
-                myThickness.Bottom = 0;
-                myThickness.Left = 250 * (i % 5);
-                myThickness.Right = 0;
-                myThickness.Top = -400 + 250 * (i / 5);
-                btn.Margin = myThickness;
-                btn.Click += ClickId;
-                btn.Tag = supplier.ListAll[i].Id;
-                btn.Content = supplier.ListAll[i].Img;
-                g.Children.Add(btn);
-            }
-        }
-
         void LoadPage(Page p)
         {
 
-        }
-
-        void LoadProductFromDatabase(Grid g)
-        {
-            KhachHang supplier = new KhachHang();
-            supplier.getAllCustomerFromDatabase();
-            for (int i = 0; i < supplier.ListAll.Count; i++)
-            {
-                Button btn = new Button();
-                btn.Height = 50;
-                btn.Width = 120;
-                Thickness myThickness = new Thickness();
-                myThickness.Bottom = 0;
-                myThickness.Left = 250 * (i % 5);
-                myThickness.Right = 0;
-                myThickness.Top = -400 + 250 * (i / 5);
-                btn.Margin = myThickness;
-                btn.Click += ClickId;
-                btn.Tag = supplier.ListAll[i].Id;
-                btn.Content = supplier.ListAll[i].Img;
-                g.Children.Add(btn);
-            }
         }
 
         private void ClickId(object sender, EventArgs e)

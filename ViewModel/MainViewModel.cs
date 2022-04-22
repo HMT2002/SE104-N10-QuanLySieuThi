@@ -44,6 +44,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public MainViewModel()
         {
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
             loginAcc = new Account();
 
             pageProduct = new paProduct();

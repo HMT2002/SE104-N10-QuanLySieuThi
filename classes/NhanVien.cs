@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE104_N10_QuanLySieuThi.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 
@@ -41,6 +43,9 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private List<NhanVien> listAll;
 
+        public ICommand ClickedItemCtrlCmd { get; set; }
+
+
         public NhanVien(string id, string name, string phone, string startdate, decimal salary,string position,string cmnd,List<NhanVien> listAll,string mail,Account acc,string birthday)
         {
             this.id = id;
@@ -68,6 +73,25 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.position = null;
             this.cmnd = null;
             this.birthday = null;
+            ClickedItemCtrlCmd = new RelayCommand<System.Windows.Controls.Button>((p) => { return true; }, (p) => { SelectedEmployee(); });
+
+        }
+        public NhanVien SelectedEmployee()
+        {
+            NhanVien nv = new NhanVien();
+            nv.id = this.id;
+            nv.name = this.name;
+            nv.phone = this.phone;
+            nv.startdate = this.startdate;
+            nv.salary = this.salary;
+            nv.listAll = this.listAll;
+            nv.mail = this.mail;
+            nv.acc = this.acc;
+            nv.position = this.position;
+            nv.cmnd = this.cmnd;
+            nv.birthday = this.birthday;
+            MessageBox.Show("1234567980");
+                return nv;
         }
         public void getSpecificEmployeeFromDatabase(string id)
         {

@@ -13,8 +13,13 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
+
+
     public class BillViewModel:BaseViewModel
     {
+        public SanPham sp = new SanPham();
+
+
 
     }
 }

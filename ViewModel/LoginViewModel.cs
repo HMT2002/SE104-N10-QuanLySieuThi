@@ -83,6 +83,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public LoginViewModel()
         {
+            Console.OutputEncoding = Encoding.Unicode;
+            Console.InputEncoding = Encoding.Unicode;
             Acc = new Account();
             IsLogin = false;
             Password = "";

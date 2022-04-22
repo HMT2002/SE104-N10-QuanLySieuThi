@@ -10,7 +10,8 @@
       Background="#A561A8"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            DataContext="{StaticResource ManageVM }"
+      xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
+      DataContext="{StaticResource ManageVM }"
 
 
       x:Name="ManagePage"
@@ -184,6 +185,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBox
@@ -192,34 +195,54 @@
                             VerticalAlignment="Center" />
                     </Grid>
                     <Grid Grid.Row="1">
-                        <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                            VerticalAlignment="Top"
-                            Content="_TÌM KIẾM"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                        <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="Resource name: MaterialDesignRaisedLightButton" VerticalAlignment="Top" Content="_TÌM KIẾM" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                     </Grid>
+
                 </Grid>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="250" x:Name="cardItems">
-            <ScrollViewer  HorizontalAlignment="Left" Height="250" VerticalAlignment="Bottom" Width="1080" VerticalScrollBarVisibility="Auto">
-                <ItemsControl>
-                    <ItemsControl.ItemsPanel >
-                        <ItemsPanelTemplate >
-                            <UniformGrid Columns="5" 
-                                         x:Name="stackpnItem"
-                                         >
-                <!--<i:Interaction.Triggers>
-                    <i:EventTrigger EventName="Loaded">
-                        <i:InvokeCommandAction Command="{Binding LoadedGridItemCmd}" CommandParameter="{Binding ElementName=stackpnItem}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>-->
+
+        <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="300" x:Name="cardItems">
+            
+            <ScrollViewer  HorizontalAlignment="Left" Height="290" VerticalAlignment="Bottom" Width="1080" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="itemctrlMain" 
+                              >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="4" IsItemsHost="True">
+
                             </UniformGrid>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Width="200" Height="200"
+                                    Command="{Binding Path=ClickedItemCtrlCmd}"
 
-            </ItemsControl>
+                                    Background="Transparent" BorderBrush="Transparent"
+                                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                                    Tag="{Binding Id}"
+                                    >
+                                <WrapPanel Height="200" Width="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                    <materialDesign:Card Background="NavajoWhite" UniformCornerRadius="10" Tag="{Binding Id}" Height="180" Width="170" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <StackPanel Background="#00F5F50C" Height="180" Width="170" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                            <Image Source="{Binding Bitimg}" Width="100" Height="100" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                                            <TextBlock Text="{Binding Id}" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock Text="{Binding Name}" Margin="3 3 3 3 " HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                        </StackPanel>
+                                    </materialDesign:Card>
+                                </WrapPanel>
+                            </Button>
+
+                            <!--<uc:ucEmpoyee></uc:ucEmpoyee>-->
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}" CommandParameter="{Binding ElementName=itemctrlMain}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ItemsControl>
             </ScrollViewer>
 
         </materialDesign:Card>

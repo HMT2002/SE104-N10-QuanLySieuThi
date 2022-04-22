@@ -3,12 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      
+      
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
+      xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paStatic"
       Background="#00008B"
-      
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -19,6 +22,17 @@
       >
 
     <Grid>
-        
+        <WrapPanel Background="AliceBlue" MaxHeight="300" MaxWidth="300">
+            <materialDesign:Card Padding="8" materialDesign:ShadowAssist.ShadowDepth="Depth3" Foreground="{x:Null}" UniformCornerRadius="10">
+                <WrapPanel>
+                    <Wpf:PieChart DataTooltip="{x:Null}" Hoverable="True" InnerRadius="10" LegendLocation="Bottom" Series="{Binding SeriesCollection}"
+                                  />
+                </WrapPanel>
+            </materialDesign:Card>
+
+
+
+        </WrapPanel>
+
     </Grid>
 </Page>

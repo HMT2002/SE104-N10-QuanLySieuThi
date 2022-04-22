@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.classes
 {
-    class SanPham
+    public class SanPham
     {
         private string id;
 
@@ -53,6 +53,9 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.price = 0;
             this.supplier = null;
             this.listAll = null;
+            this.data = new byte[99];
+            this.img = new Image();
+            this.img.Source = bitimg;
         }
         void getSpecificProductFromDatabase(string id)
         {
@@ -210,6 +213,71 @@ namespace SE104_N10_QuanLySieuThi.classes
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         internal List<SanPham> ListAll { get => listAll; set => listAll = value; }
 
+        public bool RegistProduct()
+        {
 
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL,PICBI)values('"+this.id+"','"+this.name+"','"+this.dvt+"','"+this.Supplier.Id+"',"+this.price+","+this.amount+")", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                this.addBinaryArrIntoSQL();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool DeleteProduct()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"delete from SANPHAM where MASP = '" + this.id + "'", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+
+                }
+                this.ketnoi.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
+
+        public bool ModifyProduct()
+        {
+
+            try
+            {
+                this.ketnoi.Open();
+                using (SqlCommand cmd = new SqlCommand(@"update into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('" + this.id + "','" + this.name + "','" + this.dvt + "','" + this.Supplier.Id + "'," + this.price + "," + this.amount + ")", this.ketnoi))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+                this.ketnoi.Close();
+                this.addBinaryArrIntoSQL();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.ketnoi.Close();
+                return false;
+            }
+        }
     }
 }
