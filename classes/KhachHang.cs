@@ -24,9 +24,9 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private string phone;
 
-        private DateTime startdate;
+        private string startdate;
 
-        private DateTime birth;
+        private string birth;
 
         private decimal revenue;
 
@@ -36,11 +36,9 @@ namespace SE104_N10_QuanLySieuThi.classes
         private DataTable datatable = new DataTable();
         private SqlDataAdapter adapter = new SqlDataAdapter();
 
-        private List<KhachHang> listAll;
-
         private Account acc;
 
-        public KhachHang(string id, string name, string phone, DateTime startdate, DateTime birth, decimal revenue, List<KhachHang> listAll,string mail,string gender,Account acc)
+        public KhachHang(string id, string name, string phone, string startdate, string birth, decimal revenue,string mail,string gender,Account acc)
         {
             this.id = id;
             this.name = name;
@@ -48,7 +46,6 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.startdate = startdate;
             this.birth = birth;
             this.revenue = revenue;
-            this.listAll = listAll;
             this.mail = mail;
             this.gender = gender;
             this.acc = acc;
@@ -69,8 +66,8 @@ namespace SE104_N10_QuanLySieuThi.classes
                     this.id = (string)d["MAKH"];
                     this.name = (string)d["HOTEN"];
                     this.phone = (string)d["SODT"];
-                    this.birth = (DateTime)d["NGSINH"];
-                    this.startdate = (DateTime)d["NGDK"];
+                    this.birth = (string)d["NGSINH"];
+                    this.startdate = (string)d["NGDK"];
                     this.revenue = (decimal)d["DOANHSO"];
                     this.data = (byte[])d["PICBI"];
                     this.bitimg = this.convertImgFromByte();
@@ -86,9 +83,9 @@ namespace SE104_N10_QuanLySieuThi.classes
             }
             this.ketnoi.Close();
         }
-        public void getAllCustomerFromDatabase()
+        public List<KhachHang> getAllCustomerFromDatabase()
         {
-            listAll = new List<KhachHang>();
+            List<KhachHang> listAll = new List<KhachHang>();
             ketnoi.Open();
             SqlCommand cmd = new SqlCommand(@"select * from KHACHHANG", this.ketnoi);
 
@@ -99,25 +96,33 @@ namespace SE104_N10_QuanLySieuThi.classes
             Adapter.Fill(Datatable);
             ketnoi.Close();
 
+
             for (int i = 0; i < Datatable.Rows.Count; i++)
             {
-                KhachHang item = new KhachHang();
-                item.id = Datatable.Rows[i]["MAKH"].ToString();
-                item.name = Datatable.Rows[i]["HOTEN"].ToString();
-                item.phone = Datatable.Rows[i]["SODT"].ToString();
-                item.startdate = (DateTime)Datatable.Rows[i]["NGDK"];
-                item.birth = (DateTime)Datatable.Rows[i]["NGSINH"];
-                item.revenue=(decimal)Datatable.Rows[i]["DOANHSO"];
-                item.data = (byte[])Datatable.Rows[i]["PICBI"];
-                item.bitimg = item.convertImgFromByte();
-                item.img = new Image();
-                item.img.Source = item.bitimg;
-                item.mail = Datatable.Rows[i]["MAIL"].ToString();
-                listAll.Add(item);
+                try
+                {
+                    KhachHang item = new KhachHang();
+                    item.id = Datatable.Rows[i]["MAKH"].ToString();
+                    item.name = Datatable.Rows[i]["HOTEN"].ToString();
+                    item.phone = Datatable.Rows[i]["SODT"].ToString();
+                    item.startdate = Datatable.Rows[i]["NGDK"].ToString();
+                    item.birth = Datatable.Rows[i]["NGSINH"].ToString();
+                    item.revenue = (decimal)Datatable.Rows[i]["DOANHSO"];
+                    item.data = (byte[])Datatable.Rows[i]["PICBI"];
+                    item.bitimg = item.convertImgFromByte();
+                    item.img = new Image();
+                    item.img.Source = item.bitimg;
+                    item.mail = Datatable.Rows[i]["MAIL"].ToString();
+                    listAll.Add(item);
 
+                }
+                catch
+                {
+
+                }
                 //all of suppliers
             }
-
+            return listAll;
         }
 
         private byte[] data = new byte[99];
@@ -212,15 +217,27 @@ namespace SE104_N10_QuanLySieuThi.classes
         public string Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public string Phone { get => phone; set => phone = value; }
-        public DateTime Startdate { get => startdate; set => startdate = value; }
-        public DateTime Birth { get => birth; set => birth = value; }
+        public string Startdate { get => startdate; set => startdate = value; }
+        public string Birth { get => birth; set => birth = value; }
         public decimal Revenue { get => revenue; set => revenue = value; }
-        public List<KhachHang> ListAll { get => listAll; set => listAll = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         public DataTable Datatable { get => datatable; set => datatable = value; }
         public string Mail { get => mail; set => mail = value; }
         public string Gender { get => gender; set => gender = value; }
         public Account Acc { get => acc; set => acc = value; }
+
+        public bool randomSamedetected(string randomid)
+        {
+            List<KhachHang> list = this.getAllCustomerFromDatabase();
+            for(int i = 0; i < list.Count; i++)
+            {
+                if(randomid.CompareTo(list[i].id) == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public bool RegistCustomer()
         {
@@ -229,7 +246,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             {
                 this.ketnoi.Open();
                 using (SqlCommand cmd = new SqlCommand(@"insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,GENDER,MAIL,ACC)values
-('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth.ToString("dd/MM/yyyy") + "','" + this.startdate.ToString("dd/MM/yyyy") + "',0,'" + this.gender + "','"+this.mail+"','"+this.acc.Acc+"')"
+('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth + "','" + this.startdate + "',0,'" + this.gender + "','"+this.mail+"','"+this.acc.Acc+"')"
 , this.ketnoi))
                 {
                     cmd.ExecuteNonQuery();
@@ -276,7 +293,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             {
                 this.ketnoi.Open();
                 using (SqlCommand cmd = new SqlCommand(@"update into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO,GENDER)values
-('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth.ToString("dd/MM/yyyy") + "','" + this.startdate.ToString("dd/MM/yyyy") + "',0,'" + this.gender + "')"
+('" + this.id + "','" + this.name + "','" + this.phone + "','" + this.birth+ "','" + this.startdate + "',0,'" + this.gender + "')"
 , this.ketnoi))
                 {
                     cmd.ExecuteNonQuery();

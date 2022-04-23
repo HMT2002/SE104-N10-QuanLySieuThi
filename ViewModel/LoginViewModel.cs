@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -259,9 +260,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            if (Password.CompareTo(RePassword) == 0)
+            if (MD5Encrypt(Base64Encode (Password)).CompareTo(MD5Encrypt(Base64Encode( RePassword))) == 0)
             {
-                Acc = new Account(UserName, Password);
+                Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
 
                 if (Acc.RegistCustomer() == true)
                 {
@@ -269,11 +270,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     kh.Name = Name;
                     kh.Phone = Phone;
                     kh.Mail = MailAdress;
-                    kh.Birth = Birthday;
-                    kh.Startdate = DateTime.Now;
+                    kh.Birth = Birthday.ToString("dd/MM/yyyy");
+                    kh.Startdate = DateTime.Now.ToString("dd/MM/yyyy");
                     kh.Bitimg = null;
                     kh.Img = null;
                     kh.Id = RandomString(5);
+                    while (kh.randomSamedetected(kh.Id))
+                    {
+                        kh.Id = RandomString(5);
+                    }
                     if (IsMale)
                     {
                         kh.Gender = "Nam";
@@ -308,7 +313,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            Acc = new Account(UserName, Password);
+            Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
 
             if (Acc.CheckUser()==true)
             {
@@ -324,25 +329,59 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public static string Base64Encode(string plainText)
         {
+            string res = "";
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            return System.Convert.ToBase64String(plainTextBytes);
+            res= System.Convert.ToBase64String(plainTextBytes);
+            return res;
         }
-        public static string CreateMD5(string input)
+        public static string Base64Decode(string base64Text)
         {
-            // Use input string to calculate MD5 hash
-            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
-            {
-                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
+            string res = "";
+            var data = Convert.FromBase64String(base64Text);
+            res = Encoding.UTF8.GetString(data);
+            return res;
+        }
+        static string key { get; set; } = "xXxTueDepTraiVjpProxXx"+ @"eFh4VHVlRGVwVHJhaVZqcFByb3hYeA==";
 
-                // Convert the byte array to hexadecimal string
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
+        public static string MD5Encrypt(string text)
+        {
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                using (var tdes = new TripleDESCryptoServiceProvider())
                 {
-                    sb.Append(hashBytes[i].ToString("X2"));
+                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                    tdes.Mode = CipherMode.ECB;
+                    tdes.Padding = PaddingMode.PKCS7;
+
+                    using (var transform = tdes.CreateEncryptor())
+                    {
+                        byte[] textBytes = UTF8Encoding.UTF8.GetBytes(text);
+                        byte[] bytes = transform.TransformFinalBlock(textBytes, 0, textBytes.Length);
+                        return Convert.ToBase64String(bytes, 0, bytes.Length);
+                    }
                 }
-                return sb.ToString();
+            }
+        }
+
+        public static string MD5Decrypt(string cipher)
+        {
+            using (var md5 = new MD5CryptoServiceProvider())
+            {
+                using (var tdes = new TripleDESCryptoServiceProvider())
+                {
+                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
+                    tdes.Mode = CipherMode.ECB;
+                    tdes.Padding = PaddingMode.PKCS7;
+
+                    using (var transform = tdes.CreateDecryptor())
+                    {
+                        byte[] cipherBytes = Convert.FromBase64String(cipher);
+                        byte[] bytes = transform.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
+                        return UTF8Encoding.UTF8.GetString(bytes);
+                    }
+                }
             }
         }
     }
+
 }

@@ -174,12 +174,31 @@
                         Background="AliceBlue">
                                 <ScrollViewer>
                                     <StackPanel>
-                                        <ListBox Name="listbox">
-                                            <ListBoxItem Content="XAML Tutorials" />
+                                        <ListBox x:Name="listboxSelectedItem"
+                                                 ItemsSource="{Binding listSelecteditems}"
+                                                 
+                                                 SelectedItem="{Binding selecteditems}"
+                                                 >
+
+                                            <ListBox.ItemTemplate>
+                                                <DataTemplate>
+                                                    <DockPanel>
+                                                        <Image Source="{Binding Bitimg}" MaxHeight="40" MaxWidth="40" Margin="3 3 3 3"></Image>
+                                                        <TextBlock Text="{Binding Name}" Margin="3 3 3 3" VerticalAlignment="Center"></TextBlock>
+
+                                                    </DockPanel>
+                                                </DataTemplate>
+                                                
+                                            </ListBox.ItemTemplate>
+                                            <!--<DataTemplate>
+                                                 <TextBlock Text="{Binding Name}" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+
+                                            </DataTemplate>-->
+                                            <!--<ListBoxItem Content="XAML Tutorials" />
                                             <ListBoxItem Content="WPF Tutorials" />
                                             <ListBoxItem Content="Silverlight Tutorials" />
                                             <ListBoxItem Content="Windows 10 Tutorials" />
-                                            <ListBoxItem Content="iOS Tutorials" />
+                                            <ListBoxItem Content="iOS Tutorials" />-->
                                         </ListBox>
                                     </StackPanel>
                                 </ScrollViewer>
@@ -191,30 +210,9 @@
                         Margin="20"
                         Background="AliceBlue">
                                 <StackPanel>
-                                    <ScrollViewer MaxHeight="200">
-                                        <ListBox>
-                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                            </Button>
-                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                            </Button>
-                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                            </Button>
-                                        </ListBox>
-                                    </ScrollViewer>
 
-                                    <Button
-                                        
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                            Content="_Button"
-                            VerticalAlignment="Bottom"
-                            Margin="20"
-                            Command="{Binding BuyProductCmd}"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
-   
+                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="_Button" VerticalAlignment="Bottom" Margin="20" Command="{Binding BuyProductCmd}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
+
                                 </StackPanel>
                             </materialDesign:Card>
                         </Grid>

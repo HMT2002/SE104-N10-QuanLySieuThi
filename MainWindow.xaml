@@ -139,152 +139,80 @@
             </Grid>
         </Grid>-->
         <Grid Grid.Row="1">
-                    <materialDesign:Card>
-            <TabControl x:Name="mainTab"
-    materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-
-    TabStripPlacement="Top">
-                <materialDesign:NavigationRailAssist.FloatingContent>
-                        <Button Command="{Binding ChangeTab}"
-                                CommandParameter="{Binding ElementName=mainTab}"
-        Margin="8"
-        Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
-                        <materialDesign:PackIcon
-          Width="24"
-          Height="24"
-          Kind="Plus" />
-                    </Button>
-                </materialDesign:NavigationRailAssist.FloatingContent>
-                <TabItem>
-                    <TabItem.Header>
-                        <StackPanel
-          Width="auto"
-          Height="auto">
-                            <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="HomeCircleOutline" />
-                            <TextBlock
-            HorizontalAlignment="Center"
-            Text="Home" />
-                        </StackPanel>
-                    </TabItem.Header>
-                        <Frame Content="{Binding pageHome}"
-                               Width="1350"
-                               Height="620"
-                               >
-                            
-                        </Frame>
-                </TabItem>
-                
-                <TabItem>
+            <materialDesign:Card>
+                <TabControl x:Name="mainTab" materialDesign:ColorZoneAssist.Mode="PrimaryMid" TabStripPlacement="Top">
+                    <materialDesign:NavigationRailAssist.FloatingContent>
+                        <Button Command="{Binding ChangeTab}" CommandParameter="{Binding ElementName=mainTab}" Margin="8" Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                            <materialDesign:PackIcon Width="24" Height="24" Kind="Plus" />
+                        </Button>
+                    </materialDesign:NavigationRailAssist.FloatingContent>
+                    <TabItem>
                         <TabItem.Header>
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="AccountBoxOutline" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Customer" />
-                            </StackPanel>
-
-                        </TabItem.Header>
-                        <Frame Content="{Binding pageCustomer}"
-                               Width="1350"
-                               Height="620"
-                               >
-                            
-                        </Frame>
-                    </TabItem>
-                
-                <TabItem>
-                        <TabItem.Header>
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="CartOutline" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Product" />
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="HomeCircleOutline" />
+                                <TextBlock HorizontalAlignment="Center" Text="Home" />
                             </StackPanel>
                         </TabItem.Header>
-                        <Frame Content="{Binding pageProduct}"
-                               Width="1350"
-                               Height="620"
-                               >
+                        <Frame Content="{Binding pageHome}" Width="1350" Height="620">
 
-                        </Frame>
-                    </TabItem>
-
-                <TabItem>
-                        <TabItem.Header>
-
-
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="AccountSupervisorCircle" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Management" />
-                            </StackPanel>
-
-
-                        </TabItem.Header>
-                        <Frame Content="{Binding pageManage}"
-                               Width="1350"
-                               Height="620"
-                               >
                         </Frame>
                     </TabItem>
 
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="AccountCog" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Setting" />
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="AccountBoxOutline" />
+                                <TextBlock HorizontalAlignment="Center" Text="Customer" />
+                            </StackPanel>
+
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageCustomer}" Width="1350" Height="620">
+
+                        </Frame>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="CartOutline" />
+                                <TextBlock HorizontalAlignment="Center" Text="Product" />
                             </StackPanel>
                         </TabItem.Header>
-                        <Frame Content="{Binding pageSetting}"
-                               Width="1350"
-                               Height="620"
-                               >
+                        <Frame Content="{Binding pageProduct}" Width="1350" Height="620">
+
+                        </Frame>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+
+
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="AccountSupervisorCircle" />
+                                <TextBlock HorizontalAlignment="Center" Text="Management" />
+                            </StackPanel>
+
+
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageManage}" Width="1350" Height="620">
+                        </Frame>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="AccountCog" />
+                                <TextBlock HorizontalAlignment="Center" Text="Setting" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageSetting}" Width="1350" Height="620">
                         </Frame>
                     </TabItem>
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="CurrencyUsd" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Selling" />
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="CurrencyUsd" />
+                                <TextBlock HorizontalAlignment="Center" Text="Selling" />
                             </StackPanel>
                         </TabItem.Header>
                         <Frame Content="{Binding pageSell}">
@@ -295,49 +223,35 @@
                         <TabItem.Header>
 
 
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="ChartPie" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Static" />
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="ChartPie" />
+                                <TextBlock HorizontalAlignment="Center" Text="Static" />
                             </StackPanel>
                         </TabItem.Header>
-                        <Frame Content="{Binding pageStatic}"
-                               Width="1350"
-                               Height="620"
-                               >
+                        <Frame Content="{Binding pageStatic}" Width="1350" Height="620">
                         </Frame>
                     </TabItem>
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel
-          Width="auto"
-          Height="auto">
-                                <materialDesign:PackIcon
-            Width="24"
-            Height="24"
-            HorizontalAlignment="Center"
-            Kind="Import" />
-                                <TextBlock
-            HorizontalAlignment="Center"
-            Text="Import" />
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="PackageVariantClosedPlus" />
+                                <TextBlock HorizontalAlignment="Center" Text="Import" />
                             </StackPanel>
                         </TabItem.Header>
-                        <Frame Content="{Binding pageBuy}"
-                               Width="1350"
-                               Height="620"
-                               >
+                        <Frame Content="{Binding pageBuy}" Width="1350" Height="620">
 
                         </Frame>
                     </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto" Height="auto">
+                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Import" />
+                                <TextBlock HorizontalAlignment="Center" Text="Log out" />
+                            </StackPanel>
+                        </TabItem.Header>
+                    </TabItem>
                 </TabControl>
-        </materialDesign:Card>
+            </materialDesign:Card>
         </Grid>
 
 
