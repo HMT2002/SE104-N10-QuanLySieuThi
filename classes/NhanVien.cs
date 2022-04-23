@@ -90,7 +90,7 @@ namespace SE104_N10_QuanLySieuThi.classes
             nv.position = this.position;
             nv.cmnd = this.cmnd;
             nv.birthday = this.birthday;
-            MessageBox.Show("1234567980");
+            MessageBox.Show("1234567980"+nv.id);
                 return nv;
         }
         public void getSpecificEmployeeFromDatabase(string id)

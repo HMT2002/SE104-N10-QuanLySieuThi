@@ -168,7 +168,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void LoadedItem()
         {
             nv.getAllEmployeeFromDatabase();
-            itemsControl.ItemsSource = nv.ListAll;
+            itemsControl.ItemsSource = lstEmployye;
             //try {
             //NhanVien supplier = new NhanVien();
             //supplier.getAllEmployeeFromDatabase();

@@ -18,6 +18,209 @@
       >
 
     <Grid>
-        
+                <materialDesign:Card>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <ListView>
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+
+
+                                </ListView>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <StackPanel Margin="3 3 3 3 ">
+                                    
+                                    <materialDesign:Card>
+                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
+                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                        </Button>
+                                    </materialDesign:Card>
+
+                                    <materialDesign:Card>
+                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
+                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                        </Button>
+                                    </materialDesign:Card>
+                                    <materialDesign:Card>
+                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
+                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                        </Button>
+                                    </materialDesign:Card>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue">
+                        <ScrollViewer>
+                            <UniformGrid Columns="3">
+                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                </Button>
+                            </UniformGrid>
+                        </ScrollViewer>
+
+                    </materialDesign:Card>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue">
+                                <ScrollViewer>
+                                    <StackPanel>
+                                        <ListBox Name="listbox">
+                                            <ListBoxItem Content="XAML Tutorials" />
+                                            <ListBoxItem Content="WPF Tutorials" />
+                                            <ListBoxItem Content="Silverlight Tutorials" />
+                                            <ListBoxItem Content="Windows 10 Tutorials" />
+                                            <ListBoxItem Content="iOS Tutorials" />
+                                        </ListBox>
+                                    </StackPanel>
+                                </ScrollViewer>
+
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:Card 
+                        Margin="20"
+                        Background="AliceBlue">
+                                <StackPanel>
+                                    <ScrollViewer MaxHeight="200">
+                                        <ListBox>
+                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                            </Button>
+                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                            </Button>
+                                            <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
+                                                <Image Source="52aef02361b592ebcba4.jpg"></Image>
+                                            </Button>
+                                        </ListBox>
+                                    </ScrollViewer>
+
+                                    <Button
+                                        
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                            Content="_Button"
+                            VerticalAlignment="Bottom"
+                            Margin="20"
+                            Command="{Binding BuyProductCmd}"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
+   
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Page>
