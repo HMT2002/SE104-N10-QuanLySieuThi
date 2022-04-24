@@ -78,10 +78,12 @@
                             </Grid>
                         </Grid>
                     </materialDesign:Card>
+
                 </Grid>
                 <Grid Grid.Column="1">
                     <materialDesign:Card 
                         Margin="20"
+
                         Background="AliceBlue">
                         <ScrollViewer>
                             <UniformGrid Columns="3">
@@ -161,6 +163,7 @@
                         </ScrollViewer>
 
                     </materialDesign:Card>
+
                 </Grid>
                 <Grid Grid.Column="2">
                     <Grid>
@@ -171,6 +174,7 @@
                         <Grid Grid.Row="0">
                             <materialDesign:Card 
                         Margin="20"
+
                         Background="AliceBlue">
                                 <ScrollViewer>
                                     <StackPanel>
@@ -204,16 +208,16 @@
                                 </ScrollViewer>
 
                             </materialDesign:Card>
+
                         </Grid>
                         <Grid Grid.Row="1">
                             <materialDesign:Card 
                         Margin="20"
                         Background="AliceBlue">
                                 <StackPanel>
-
                                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="_Button" VerticalAlignment="Bottom" Margin="20" Command="{Binding BuyProductCmd}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
-
                                 </StackPanel>
+
                             </materialDesign:Card>
                         </Grid>
                     </Grid>
