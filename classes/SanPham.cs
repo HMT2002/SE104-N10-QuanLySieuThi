@@ -84,9 +84,9 @@ namespace SE104_N10_QuanLySieuThi.classes
             this.ketnoi.Close();
         }
 
-        public void getAllProductFromDatabase()
+        public List<SanPham> getAllProductFromDatabase()
         {
-            listAll = new List<SanPham>();
+            List<SanPham> list = new List<SanPham>();
             ketnoi.Open();
             SqlCommand cmd = new SqlCommand(@"select MASP,TENSP,DVT,MACC,GIA,SL from SANPHAM", this.ketnoi);
 
@@ -108,11 +108,11 @@ namespace SE104_N10_QuanLySieuThi.classes
                 item.supplier.getSpecificSupplierFromDatabase();
                 item.price =(decimal)datatable.Rows[i]["GIA"];
                 item.amount = (int)datatable.Rows[i]["SL"];
-                listAll.Add(item);
+                list.Add(item);
 
                 //all of suppliers
             }
-
+            return list;
         }
 
         private byte[] data;

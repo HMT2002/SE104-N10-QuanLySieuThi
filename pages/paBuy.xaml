@@ -183,7 +183,7 @@
                 </Grid>
             </Grid>
         </materialDesign:Card>
-        <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="250">
+        <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="350">
 
         </materialDesign:Card>
     </Grid>
