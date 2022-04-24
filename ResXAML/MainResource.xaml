@@ -13,4 +13,6 @@
     <viewmodel:SettingViewModel x:Key="SettingVM"></viewmodel:SettingViewModel>
     <viewmodel:StaticViewModel x:Key="StaticVM"></viewmodel:StaticViewModel>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
+    <viewmodel:CreateEmployeeAccount x:Key="CreateEmployeeAccountVM"></viewmodel:CreateEmployeeAccount>
+    <viewmodel:ImportProductViewModel x:Key="ImportProductVM"></viewmodel:ImportProductViewModel>
 </ResourceDictionary>

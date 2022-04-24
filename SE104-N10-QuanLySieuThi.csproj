@@ -123,9 +123,11 @@
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\BuyViewModel.cs" />
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
+    <Compile Include="ViewModel\CreateEmployeeAccount.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\EmployeeControl.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\ImportProductViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ManageViewModel.cs" />
@@ -138,6 +140,12 @@
     </Compile>
     <Compile Include="windows\winBill.xaml.cs">
       <DependentUpon>winBill.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\winCreateEmployeeAccount.xaml.cs">
+      <DependentUpon>winCreateEmployeeAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\winImportProduct.xaml.cs">
+      <DependentUpon>winImportProduct.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\winLogin.xaml.cs">
       <DependentUpon>winLogin.xaml</DependentUpon>
@@ -222,6 +230,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\winBill.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winCreateEmployeeAccount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winImportProduct.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

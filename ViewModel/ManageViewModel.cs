@@ -93,23 +93,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             PickImage = new RelayCommand<Button>((p) => {btnAvatar=p; return true; }, (p) => { Imagepick(p);});
             nv.getAllEmployeeFromDatabase();
             lstEmployye = nv.ListAll;
-            ClickedItemCtrlCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { ItemSelected(p); });
+            ClickedItemCtrlCmd = new RelayCommand<Button>((p) => { return true; }, (p) => { ItemSelected(p); });
 
         }
-        private void ItemSelected(ItemsControl btn)
+        private void ItemSelected(Button btn)
         {
             nv = new NhanVien();
 
             nv.getAllEmployeeFromDatabase();
-            Id = nv.Id;
-            Name = nv.Name;
-            Mail = nv.Mail;
-            Salary = nv.Salary;
-            Phone = nv.Phone;
-            CMND = nv.Cmnd;
-            Position = nv.Position;
-            btnAvatar.Content = nv.Img;
-            MessageBox.Show("12345"+nv.Name);
+            //Id = nv.Id;
+            //Name = nv.Name;
+            //Mail = nv.Mail;
+            //Salary = nv.Salary;
+            //Phone = nv.Phone;
+            //CMND = nv.Cmnd;
+            //Position = nv.Position;
+            //btnAvatar.Content = nv.Img;
+            MessageBox.Show("12345"+nv.Name+btn.Tag);
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)

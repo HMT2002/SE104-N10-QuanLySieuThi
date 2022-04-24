@@ -125,3 +125,5 @@ insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
 
 select * from ACCOUNT 
 delete from ACCOUNT where ACC='tuee'
+alter table ACCOUNT alter column PASS nvarchar(MAX)
+select * from KHACHHANG

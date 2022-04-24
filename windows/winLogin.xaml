@@ -98,6 +98,7 @@
                 Content="REGIST"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
+
         </Grid>
         
     </Grid>

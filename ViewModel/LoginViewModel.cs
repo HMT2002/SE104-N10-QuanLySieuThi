@@ -341,7 +341,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             res = Encoding.UTF8.GetString(data);
             return res;
         }
-        static string key { get; set; } = "xXxTueDepTraiVjpProxXx"+ @"eFh4VHVlRGVwVHJhaVZqcFByb3hYeA==";
+        static string key { get; set; } = "eFh4VHVlRGVwVHJhxXxTueDepTraiVjpProxXxaVZqcFByb3hYeA==";
 
         public static string MD5Encrypt(string text)
         {
