@@ -34,6 +34,7 @@ CREATE TABLE NHANVIEN(
  ACC varchar(20),
  MAIL nvarchar(50),
  POSITION nvarchar(20),
+ PICBI varbinary(MAX),
  CMND nvarchar(20),
  NGSINH nvarchar(20),
  GENDER nvarchar(20),
@@ -50,9 +51,9 @@ MACC varchar(10),
 TEN nvarchar(40),
 SODT varchar(20),
 XUATXU nvarchar(40),
-PICBI varbinary(MAX),
 primary key(MACC)
 )
+select * from NHACUNGCAP
 
 insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC001','Coca Corp','09999999','Mỹ')
 insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC002','Nestle Corp','09999998','Anh')
@@ -102,12 +103,16 @@ constraint LK_HOADON foreign key(SOHD) references HOADON(SOHD),
 MASP varchar(10),
 constraint LK_SANPHAM foreign key(MASP) references SANPHAM(MASP),
 SL int,
+primary key(SOHD)
 )
+drop table CTHD 
+select * from CTHD where SOHD=''
 
+drop table CTHD
 CREATE TABLE ACCOUNT(
 ACC varchar(20),
 PRI int,
-PASS varchar(20),
+PASS nvarchar(MAX),
 primary key (ACC)
 )
 
