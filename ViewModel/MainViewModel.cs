@@ -72,6 +72,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         void Start(Window p)
         {
             IsLoad = true;
+            if (p == null)
+            {
+                return;
+            }
+
             p.Hide();
             winLogin loginWindow = new winLogin();
             loginWindow.ShowDialog();

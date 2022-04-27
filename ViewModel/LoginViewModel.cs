@@ -1,4 +1,5 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
@@ -315,7 +316,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
 
-            if (Acc.CheckUser()==true||(UserName=="tue"&&Password=="1"))
+            var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).Count();
+
+
+            if (accCount>0)
             {
                 IsLogin = true;
                 p.Close();
