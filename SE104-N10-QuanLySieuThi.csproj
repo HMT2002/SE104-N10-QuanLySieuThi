@@ -196,6 +196,9 @@
     <Compile Include="windows\winStaticReport.xaml.cs">
       <DependentUpon>winStaticReport.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\winStorageReport.xaml.cs">
+      <DependentUpon>winStorageReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\winVerifyMail.xaml.cs">
       <DependentUpon>winVerifyMail.xaml</DependentUpon>
     </Compile>
@@ -294,6 +297,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\winStaticReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winStorageReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
