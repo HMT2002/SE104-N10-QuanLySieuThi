@@ -23,7 +23,7 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        DataContext="{StaticResource StaticVM}"
+        DataContext="{StaticResource ImportProductVM}"
 
                 Name="ImportProductWin"
 

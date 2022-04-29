@@ -205,7 +205,7 @@
         <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="300" x:Name="cardItems">
             
             <ScrollViewer  HorizontalAlignment="Left" Height="290" VerticalAlignment="Bottom" Width="1080" VerticalScrollBarVisibility="Auto">
-                <ItemsControl x:Name="itemctrlMain" 
+                <ListView x:Name="itemctrlMain" 
                               >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -217,14 +217,14 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Button Width="200" Height="200"
-                                    Command="{Binding Path=ClickedItemCtrlCmd}"
-
+                                    Command="{Binding Source={StaticResource ManageVM},Path=ClickedItemCtrlCmd}"
+                                    CommandParameter="{Binding Self}"
                                     Background="Transparent" BorderBrush="Transparent"
                                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
                                     Tag="{Binding Id}"
                                     >
                                 <WrapPanel Height="200" Width="200" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                                    <materialDesign:Card Background="NavajoWhite" UniformCornerRadius="10" Tag="{Binding Id}" Height="180" Width="170" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <materialDesign:Card Background="NavajoWhite" UniformCornerRadius="10" Height="180" Width="170" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                         <StackPanel Background="#00F5F50C" Height="180" Width="170" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                             <Image Source="{Binding Bitimg}" Width="100" Height="100" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
                                             <TextBlock Text="{Binding Id}" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
@@ -239,10 +239,16 @@
                     </ItemsControl.ItemTemplate>
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded">
-                            <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}" CommandParameter="{Binding ElementName=itemctrlMain}" />
+                            <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}"
+                                                   CommandParameter="{Binding ElementName=itemctrlMain}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ClickedItemCtrlCmd}"
+                                                   CommandParameter="{Binding ElementName=itemctrlMain}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </ItemsControl>
+                    
+                </ListView>
             </ScrollViewer>
 
         </materialDesign:Card>
