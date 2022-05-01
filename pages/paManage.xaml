@@ -70,22 +70,20 @@
                                  Text="{Binding Position}" />
                     </Grid>
                     <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="8*" />
-                            <ColumnDefinition Width="31*" />
-                        </Grid.ColumnDefinitions>
+                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 VerticalAlignment="Center"
+                                 Text="{Binding Phone}" />
+                    </Grid>
+                    <Grid Grid.Row="4">
                         <TextBox materialDesign:HintAssist.Hint="Lương"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
                                  Text="{Binding Salary}"
                                  Grid.ColumnSpan="2"
                                  Margin="0,0,-1.2,-0.4" />
-                    </Grid>
-                    <Grid Grid.Row="4">
-                        <DatePicker Width="140"
-                                    materialDesign:HintAssist.Hint="Ngày vào làm"
-                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
-                                    SelectedDate="{Binding Joineddate}" />
+
+
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -94,6 +92,8 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBox materialDesign:HintAssist.Hint="Họ tên"
@@ -102,24 +102,52 @@
                                  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                     </Grid>
                     <Grid Grid.Row="1">
-                        <DatePicker Width="140"
-                                    materialDesign:HintAssist.Hint="Ngày sinh"
-                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
-                                    SelectedDate="{Binding Birthday}" />
-                    </Grid>
-                    <Grid Grid.Row="2">
-                        <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 VerticalAlignment="Center"
-                                 Text="{Binding Phone}" />
-                    </Grid>
-                    <Grid Grid.Row="3">
+                                         
                         <TextBox materialDesign:HintAssist.Hint="CMND"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
                                  Text="{Binding CMND}" />
                     </Grid>
+                    <Grid Grid.Row="2">
+                        <DatePicker Width="140"
+                                    materialDesign:HintAssist.Hint="Ngày sinh"
+                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                    SelectedDate="{Binding Birthday}" />
 
+                    </Grid>
+                    <Grid Grid.Row="3">
+
+                        <DatePicker Width="140"
+                                    materialDesign:HintAssist.Hint="Ngày vào làm"
+                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                    SelectedDate="{Binding Joineddate}" />
+
+                    </Grid>
+                    <Grid Grid.Row="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <RadioButton IsChecked="{Binding IsMale,Mode=OneWay}"
+                                         Command="{Binding CheckedGenderCmd}"
+                                         Content="Male"
+                                         Style="{StaticResource MaterialDesignLightRadioButton}">
+                            </RadioButton>
+
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
+                                         Command="{Binding CheckedGenderCmd}"
+                                         Content="Female"
+                                         Style="{StaticResource MaterialDesignLightRadioButton}">
+                            </RadioButton>
+
+                        </Grid>
+
+
+
+                    </Grid>
                 </Grid>
                 <Grid Grid.Column="2">
                     <Button x:Name="bntPickImage"

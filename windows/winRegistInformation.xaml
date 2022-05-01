@@ -85,14 +85,14 @@
                             SelectedDate="{Binding Birthday}"
                             />
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton IsChecked="{Binding IsMale}" 
-                                     Command="{Binding CheckedIsMaleCmd}"
+                        <RadioButton IsChecked="{Binding IsMale,Mode=OneWay}"
+                                     Command="{Binding CheckedGenderCmd}"
                                      Content="Male" 
                                      Style="{StaticResource MaterialDesignLightRadioButton}"
                                      >
                         </RadioButton>
-                        <RadioButton IsChecked="{Binding IsFeMale}" 
-                                     Command="{Binding CheckedIsFemaleCmd}"
+                        <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
+                                     Command="{Binding CheckedGenderCmd}"
                                      Content="Female"
                                      Style="{StaticResource MaterialDesignLightRadioButton}">
                         </RadioButton>

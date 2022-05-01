@@ -48,6 +48,9 @@ namespace SE104_N10_QuanLySieuThi.classes
         public string Cmnd { get => cmnd; set => cmnd = value; }
         public string Birthday { get => birthday; set => birthday = value; }
 
+        private string gender;
+        public string Gender { get => gender; set => gender = value; }
+
         private byte[] data = new byte[99];
         BitmapImage bitimg = new BitmapImage();
         Image img = new Image();
@@ -55,6 +58,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         public byte[] Data { get => data; set => data = value; }
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
         public Image Img { get => img; set => img = value; }
+
         public byte[] convertImgToByte()
         {
             MemoryStream memStream = new MemoryStream();

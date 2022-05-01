@@ -64,9 +64,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand PasswordChangedCommand { get; set; }
         public ICommand RePasswordChangedCommand { get; set; }
         public ICommand ChangepasswordCommand { get; set; }
-
-        public ICommand CheckedIsMaleCmd { get; set; }
-        public ICommand CheckedIsFemaleCmd { get; set; }
+        public ICommand CheckedGenderCmd { get; set; }
 
         private Account acc;
         public Account Acc { get => acc; set => acc = value; }
@@ -110,8 +108,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BackCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Back(p); });
             SendVerifyCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { SendVerifyMail(p); });
             VerifyCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { VerifyMail(p); });
-            CheckedIsMaleCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
-            CheckedIsFemaleCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
+
+            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
+            IsMale = true;
+            IsFeMale = false;
 
         }
 
@@ -122,11 +122,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 IsMale = true;
                 IsFeMale = false;
             }
-            else if (IsFeMale == false)
+            else if (IsMale == true)
             {
-                IsFeMale = true;
                 IsMale = false;
+                IsFeMale = true;
             }
+
         }
 
         bool IsValidEmail(string email)

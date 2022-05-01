@@ -43,6 +43,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand txtSearch_TextChanged { get; set; }
 
+        public ICommand CheckedGenderCmd { get; set; }
+
         public bool isMainLoaded = false;
 
         public List<NhanVien> lstEmployye;
@@ -65,6 +67,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string Position { get => _Position; set { _Position = value; OnPropertyChanged(); } }
         private string _CMND;
         public string CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
+
+        private string _Gender;
+        public string Gender { get => _Gender; set { _Gender = value; OnPropertyChanged(); } }
         private decimal _Salary;
         public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
         private DateTime _Joineddate;
@@ -85,6 +90,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ObservableCollection<NhanVien> NhanVienList { get => _NhanVienList; set { _NhanVienList = value; OnPropertyChanged(); } }
 
+        private bool _IsMale;
+        public bool IsMale { get => _IsMale; set { _IsMale = value; OnPropertyChanged(); } }
+        private bool _IsFeMale;
+        public bool IsFeMale { get => _IsFeMale; set { _IsFeMale = value; OnPropertyChanged(); } }
 
         private string _Search;
         public string Search { get => _Search; set 
@@ -119,9 +128,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Salary = 0;
             Joineddate = DateTime.Now;
             Birthday = DateTime.Now;
-
+            IsMale = true;
+            IsFeMale = false;
+            Gender = "Male";
 
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
+
+            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
+
+
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             NewEmployeeCmd = new RelayCommand<object>((p) => {
 
@@ -163,7 +178,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
         }
+        private void CheckGender(object p)
+        {
+            if (IsMale == false)
+            {
+                IsMale = true;
+                IsFeMale = false;
+            }
+            else if (IsMale == true)
+            {
+                IsMale = false;
+                IsFeMale = true;
+            }
 
+        }
         public bool UserFilter(object obj)
         {
             if (string.IsNullOrEmpty(Search))
@@ -203,6 +231,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Birthday = DateTime.Now;
             Bitimg = null;
             btnAvatar.Content = null;
+            IsMale = true;
+            IsFeMale = false;
+            Gender = "Male";
         }
 
         private void CreateAvatar(Button p)
@@ -230,6 +261,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     Bitimg = SelectedItem.Bitimg;
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
+
+                    Gender = SelectedItem.Gender;
+                    if (SelectedItem.Gender == null)
+                    {
+                        Gender = "unknow";
+                    }
+                    if (Gender.CompareTo("Male")==0)
+                    {
+                        IsMale = true;
+                        IsFeMale = false;
+
+                    }
+                    else
+                    {
+                        IsMale = false;
+                        IsFeMale = true;
+                    }
                 }
             }
 
@@ -269,6 +317,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 nhanvien.Cmnd = item.CMND;
                 nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
                 nhanvien.Img.Source = nhanvien.Bitimg;
+                nhanvien.Gender = item.GENDER;
+                
                 NhanVienList.Add(nhanvien);
                 i++;
             }
@@ -288,6 +338,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             nv.MANV = Id;
             nv.SODT = Phone;
             nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
+            if (IsMale)
+            {
+                nv.GENDER = "Male";
+
+            }
+            else
+            {
+                nv.GENDER = "Female";
+            }
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
         }
@@ -299,8 +358,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void CreateEmployee(object p)
         {
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg) }; 
-            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg };
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg),GENDER=Gender }; 
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender };
             NhanVienList.Add(nv2);
             DataProvider.Ins.DB.NHANVIEN.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
