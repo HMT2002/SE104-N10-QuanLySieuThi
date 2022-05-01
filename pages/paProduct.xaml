@@ -76,7 +76,7 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto" >
 
-                <ItemsControl x:Name="itemctrlMain">
+                <ItemsControl x:Name="itemctrlMain" ItemsSource="{Binding TonKhoList}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="4" IsItemsHost="True">
@@ -86,12 +86,13 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Background="NavajoWhite" UniformCornerRadius="10" Margin="20 20 20 20">
-                                <WrapPanel Background="#F5F50C" Opacity="1" Height="200" Width="200" HorizontalAlignment="Stretch">
-                                    <Image Source="{Binding Img}" Width="100" Height="100"></Image>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                    <ToggleButton Margin="0 0 10 0" ToolTip="MaterialDesignActionLightToggleButton" Content="{materialDesign:PackIcon Kind=Heart  }" materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=Star}"></ToggleButton>
-                                </WrapPanel>
+                            <materialDesign:Card Background="NavajoWhite" Height="120" Width="120" UniformCornerRadius="10" Margin="20 20 20 20">
+                                <StackPanel Background="#F5F50C" Opacity="1" Height="100" Width="100" HorizontalAlignment="Stretch">
+                                    <TextBlock Text="{Binding sanpham.GIA}"></TextBlock>
+                                    <TextBlock Text="{Binding sanpham.MACC}"></TextBlock>
+                                    <TextBlock Text="{Binding sanpham.TENSP}"></TextBlock>
+
+                                </StackPanel>
                             </materialDesign:Card>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

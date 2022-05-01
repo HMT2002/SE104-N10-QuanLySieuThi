@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
+        private ObservableCollection<TonKho> _TonKhoList;
+
+        public ObservableCollection<TonKho> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
+
         public ProducViewModel()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -50,15 +55,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
             IncrementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Increase(p); });
             DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
-            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
+            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
             sp.getAllProductFromDatabase();
         }
 
+        private void LoadTonKhoData()
+        {
+            TonKhoList = new ObservableCollection<TonKho>();
+
+            var objectList = DataProvider.Ins.DB.SANPHAM;
+            int i = 1;
+            foreach(var item in objectList)
+            {
+                TonKho tonKho = new TonKho();
+                tonKho.sanpham = item;
+                tonKho.sanpham.MACC = item.MACC;
+                tonKho.sanpham.TENSP = item.TENSP;
+                TonKhoList.Add(tonKho);
+                i++;
+            }
+        }
 
         private void AddItemIntoItemCtrol(ItemsControl p)
         {
-            p.ItemsSource = sp.ListAll;
             //for (int i = 0; i < sp.ListAll.Count; i++)
             //{
                 
@@ -101,10 +121,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ClickId(object sender, EventArgs e)
         {
-            Button btn = sender as Button;
-            NhanVien kh = new NhanVien();
-            kh.getSpecificEmployeeFromDatabase(btn.Tag.ToString());
-            btn.Content = kh.Img;
+
         }
 
         void Bill(object p)

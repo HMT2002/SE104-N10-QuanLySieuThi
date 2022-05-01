@@ -99,8 +99,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             });
             ClickedItemCtrlCmduc = new RelayCommand<Button>((p) => { return true; }, (p) => { ClickItem(p); });
 
-            nv.getAllEmployeeFromDatabase();
-
         }
         private void ClickItem(Button sender)
         {

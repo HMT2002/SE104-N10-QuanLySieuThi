@@ -1,21 +1,24 @@
 ﻿using MaterialDesignThemes.Wpf;
 using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    public class ManageViewModel:BaseViewModel
+    public class ManageViewModel : BaseViewModel
     {
         public NhanVien nv = new NhanVien();
 
@@ -23,21 +26,28 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand LoadedPageCmd { get; set; }
 
+
         public ICommand PasswordChangedCommand { get; set; }
 
         public ICommand CreateEmployeeCmd { get; set; }
+
+        public ICommand NewEmployeeCmd { get; set; }
+
         public ICommand DeleteEmployeeCmd { get; set; }
         public ICommand ModifyEmployeeCmd { get; set; }
         public ICommand PickImage { get; set; }
 
         public ICommand LoadedItemCtrlCmd { get; set; }
         public ICommand ClickedItemCtrlCmd { get; set; }
-        public ICommand ClickedItemCtrlCmd2 { get; set; }
+        public ICommand LoadAvaterCmd { get; set; }
+
+        public ICommand txtSearch_TextChanged { get; set; }
 
         public bool isMainLoaded = false;
 
         public List<NhanVien> lstEmployye;
 
+        public Image imgAvatar = new Image();
 
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
@@ -54,7 +64,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _Position;
         public string Position { get => _Position; set { _Position = value; OnPropertyChanged(); } }
         private string _CMND;
-        public string  CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
+        public string CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
         private decimal _Salary;
         public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
         private DateTime _Joineddate;
@@ -71,6 +81,29 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ItemsControl itemsControl = new ItemsControl();
 
+        private ObservableCollection<NhanVien> _NhanVienList;
+
+        public ObservableCollection<NhanVien> NhanVienList { get => _NhanVienList; set { _NhanVienList = value; OnPropertyChanged(); } }
+
+
+        private string _Search;
+        public string Search { get => _Search; set 
+            {
+                _Search = value;
+                view.Filter = UserFilter;
+                FilterItem(); 
+                OnPropertyChanged(); 
+            } 
+        }
+
+        private List<string> _SearchType=new List<string>() { "ID","Name"};
+
+        public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+
+        public CollectionView view;
+
+
         public ManageViewModel()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -81,186 +114,218 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Id = "";
             Position = "";
             Phone = "";
+            Name = "";
+            imgAvatar = new Image();
             Salary = 0;
             Joineddate = DateTime.Now;
             Birthday = DateTime.Now;
+
+
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
-            CreateEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { CreateEmployee(p); });
-            DeleteEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { DeleteEmployee(p); });
-            ModifyEmployeeCmd = new RelayCommand<UniformGrid>((p) => { return true; }, (p) => { ModifyEmployee(p); });
-            LoadedItemCtrlCmd = new RelayCommand<ItemsControl>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoItemCtrol(p); isMainLoaded = true; }; });
+            LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
+            NewEmployeeCmd = new RelayCommand<object>((p) => {
 
-            PickImage = new RelayCommand<Button>((p) => {btnAvatar=p; return true; }, (p) => { Imagepick(p);});
-            nv.getAllEmployeeFromDatabase();
-            lstEmployye = nv.ListAll;
-            ClickedItemCtrlCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ItemSelected(p); });
+                return true;
+            }, (p) => { NewEmployee(p); });
 
-        }
-        private void ItemSelected(object btn)
-        {
-            nv = new NhanVien();
-            nv.getAllEmployeeFromDatabase();
-            //Id = nv.Id;
-            //Name = nv.Name;
-            //Mail = nv.Mail;
-            //Salary = nv.Salary;
-            //Phone = nv.Phone;
-            //CMND = nv.Cmnd;
-            //Position = nv.Position;
-            //btnAvatar.Content = nv.Img;
-            //MessageBox.Show("12345"+nv.Name+btn.Tag);
-        }
-
-        private void AddItemIntoItemCtrol(ItemsControl p)
-        {
-            p.ItemsSource = lstEmployye;
-        }
-
-        private void ModifyEmployee(UniformGrid p)
-        {
-            try
-            {
-                if (nv.DeleteEmployee())
+            CreateEmployeeCmd = new RelayCommand<object>((p) => {
+                if (string.IsNullOrEmpty(Id))
                 {
-                    p.Children.Clear();
-                    CreateEmployee(p);
-                    LoadedItem();
+                    return false;
                 }
-                else
+                var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
+
+                if (display == null || display.Count() != 0)
                 {
-                    MessageBox.Show("fail sửa");
-                    return;
+                    return false;
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
-        }
+                return true;
+            }, (p) => { CreateEmployee(p); });
 
-        private void DeleteEmployee(UniformGrid p)
-        {
-            if (nv.DeleteEmployee())
-            {
-                p.Children.Clear();
-                Password = "";
-                UserName = "";
-                Mail = "";
-                Id = "";
-                Position = "";
-                Phone = "";
-                Salary = 0;
-                Joineddate = DateTime.Now;
-                Birthday = DateTime.Now;
-                btnAvatar.Content = null;
-
-                LoadedItem();
-            }
-            else
-            {
-                MessageBox.Show("fail xoá");
-                return;
-            }
-        }
-
-        private void LoadedItem()
-        {
-            nv.getAllEmployeeFromDatabase();
-            itemsControl.ItemsSource = lstEmployye;
-            //try {
-            //NhanVien supplier = new NhanVien();
-            //supplier.getAllEmployeeFromDatabase();
-            //for (int i = 0; i < supplier.ListAll.Count; i++)
-            //{
-            //    Button btn = new Button();
-            //    btn.Height = 50;
-            //    btn.Width = 120;
-            //    btn.Click += ClickId;
-            //    btn.Tag = supplier.ListAll[i].Id;
-            //    btn.Content = supplier.ListAll[i].Img;
-            //    p.Children.Add(btn);
-
-            //}
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
-
-        }
-
-        private void ClickItem(object sender, EventArgs e)
-        {
-            //NhanVien n = new NhanVien();
-            //nv.getAllEmployeeFromDatabase();
-            //nv.getSpecificEmployeeFromDatabase(sender.Tag.ToString());
-            //Id = nv.Id;
-            //Name = nv.Name;
-            //Mail = nv.Mail;
-            //Salary = nv.Salary;
-            //Phone = nv.Phone;
-            //CMND = nv.Cmnd;
-            //Position = nv.Position;
-            //Joineddate = DateTime.Parse(nv.Startdate);
-            //Birthday = DateTime.Parse(nv.Birthday);
-            //btnAvatar.Content = nv.Img;
-            MessageBox.Show("Picked");
-        }
-
-        private void CreateEmployee(UniformGrid p)
-        {
-            try
-            {
-                nv.Id = Id;
-                nv.Name = Name;
-                nv.Acc = new Account();
-                nv.Acc.Acc = UserName;
-                nv.Acc.Password = Password;
-                nv.Mail = Mail;
-                nv.Phone = Phone;
-                nv.Salary = Salary;
-                nv.Startdate = Joineddate.ToString("dd/MM/yyyy");
-                nv.Position = Position;
-                nv.Cmnd = CMND;
-                nv.Birthday = Birthday.ToString("dd/MM/yyyy");
-
-                if (nv.RegistEmployee())
+            ModifyEmployeeCmd = new RelayCommand<object>((p) => {
+                if (SelectedItem==null)
                 {
-                    nv.openImgFromDatabase();
+                    return false;
                 }
-                else
+                var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
+
+                if (display == null || display.Count() == 0)
                 {
-                    MessageBox.Show("fail tạo");
-                    return;
+                    return false;
+                }
+
+                return true;
+            }, (p) => { ModifyEmployee(p); });
+
+            DeleteEmployeeCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteEmployee(p); });
+            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) {LoadNhanVienData(); isMainLoaded = true; }; });
+            PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
+
+        }
+
+        public bool UserFilter(object obj)
+        {
+            if (string.IsNullOrEmpty(Search))
+            {
+                return true;
+            }
+            switch (SearchTypeItem)
+            {
+                case "1":
+                    return (obj as NhanVien).Name.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                case "0":
+                    return (obj as NhanVien).ID.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                default:
+                    break;
+            }
+
+            return true; ;
+        }
+
+        private void FilterItem()
+        {
+            CollectionViewSource.GetDefaultView(NhanVienList).Refresh();
+        }
+
+        private void NewEmployee(object p)
+        {
+            Password = "";
+            UserName = "";
+            Mail = "";
+            Id = "";
+            Position = "";
+            Phone = "";
+            imgAvatar = new Image();
+            Salary = 0;
+            Name = "";
+            Joineddate = DateTime.Now;
+            Birthday = DateTime.Now;
+            Bitimg = null;
+            btnAvatar.Content = null;
+        }
+
+        private void CreateAvatar(Button p)
+        {
+            p.Content = imgAvatar;
+        }
+
+        private NhanVien _SelectedItem;
+        public NhanVien SelectedItem
+        {
+            get => _SelectedItem; set
+            {
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    Name = SelectedItem.Name;
+                    Id = SelectedItem.ID;
+                    Phone = SelectedItem.Phone;
+                    CMND = SelectedItem.Cmnd;
+                    Salary = SelectedItem.Salary;
+
+                    Position = SelectedItem.Position;
+                    Mail = SelectedItem.Mail;
+                    Bitimg = SelectedItem.Bitimg;
+                    imgAvatar.Source = Bitimg;
+                    btnAvatar.Content = imgAvatar;
                 }
             }
-            catch (Exception ex)
+
+        }
+
+        public enum SelectSearchType { ID,Name}
+
+        private string _SearchTypeItem;
+        public string SearchTypeItem { get => _SearchTypeItem; set
             {
-                MessageBox.Show(ex.Message);
-                return;
+                _SearchTypeItem = value;
+                view.Filter = UserFilter;
+                OnPropertyChanged();
+            } 
+        }
+
+        private void LoadNhanVienData()
+        {
+            NhanVienList = new ObservableCollection<NhanVien>();
+            
+            var objectList = DataProvider.Ins.DB.NHANVIEN;
+            int i = 1;
+            foreach (var item in objectList)
+            {
+                NhanVien nhanvien = new NhanVien();
+
+                nhanvien.nhanvien = item;
+                nhanvien.Name = item.HOTEN;
+
+                nhanvien.ID = item.MANV;
+                nhanvien.Mail = item.MAIL;
+                nhanvien.Phone = item.SODT;
+                nhanvien.Position = item.POSITION;
+                nhanvien.Birthday = item.NGSINH;
+                nhanvien.Startdate = item.NGVL;
+                nhanvien.Salary = (decimal)item.LUONG;
+                nhanvien.Cmnd = item.CMND;
+                nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
+                nhanvien.Img.Source = nhanvien.Bitimg;
+                NhanVienList.Add(nhanvien);
+                i++;
             }
-            LoadedItem();
 
+            view = (CollectionView)CollectionViewSource.GetDefaultView(NhanVienList);
+            view.Filter = UserFilter;
+        }
 
+        private void ModifyEmployee(object p)
+        {
+            var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.ID).SingleOrDefault();
+            nv.HOTEN = Name;
+            nv.LUONG = Salary;
+            nv.POSITION = Position;
+            nv.CMND = CMND;
+            nv.MAIL = Mail;
+            nv.MANV = Id;
+            nv.SODT = Phone;
+            nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
+            DataProvider.Ins.DB.SaveChanges();
+            LoadNhanVienData();
+        }
+
+        private void DeleteEmployee(object p)
+        {
+
+        }
+
+        private void CreateEmployee(object p)
+        {
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg) }; 
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg };
+            NhanVienList.Add(nv2);
+            DataProvider.Ins.DB.NHANVIEN.Add(nv);
+            DataProvider.Ins.DB.SaveChanges();
+            LoadNhanVienData();
         }
 
         private void Imagepick(Button p)
         {
             nv.chooseImg();
-            btnAvatar.Content = nv.Img;
+            Bitimg = nv.Bitimg;
+            imgAvatar.Source = nv.Bitimg;
+            p.Content = imgAvatar;
         }
 
         void LoadPage(Page p)
         {
-            LoadManageFromDatabase(p);
-        }
 
-        void LoadManageFromDatabase(Page p)
+        }
+        public byte[] convertImgToByte(BitmapImage bitimg)
         {
-
+            MemoryStream memStream = new MemoryStream();
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bitimg));
+            encoder.Save(memStream);
+            return memStream.ToArray();
         }
-
-
     }
 }

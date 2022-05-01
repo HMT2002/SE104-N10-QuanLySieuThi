@@ -1,8 +1,10 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.pages;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +69,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
             LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
+
+            
         }
 
         void Start(Window p)

@@ -20,12 +20,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public DataProvider()
         {
             DB = new QUANLYSIEUTHIEntities();
-            string temp = "";
-            for(int i =0; i < DB.SANPHAM.ToList().Count; i++)
-            {
-                temp += DB.SANPHAM.ToList()[i].MASP.ToString() + "\n";
-            }
-            MessageBox.Show(temp);
+
         }
     }
 }

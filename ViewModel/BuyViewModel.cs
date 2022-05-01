@@ -79,8 +79,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             Button btn = sender as Button;
             NhanVien kh = new NhanVien();
-            kh.getSpecificEmployeeFromDatabase(btn.Tag.ToString());
-            Id = kh.Id;
+
         }
 
         private void Imagepick(Button p)
