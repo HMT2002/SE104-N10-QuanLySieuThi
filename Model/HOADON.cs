@@ -15,7 +15,7 @@ namespace SE104_N10_QuanLySieuThi.Model
     public partial class HOADON
     {
         public string SOHD { get; set; }
-        public string NGHD { get; set; }
+        public Nullable<System.DateTime> NGHD { get; set; }
         public string MAKH { get; set; }
         public string MANV { get; set; }
         public Nullable<decimal> TRIGIA { get; set; }

@@ -256,6 +256,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     CMND = SelectedItem.Cmnd;
                     Salary = SelectedItem.Salary;
 
+                    Birthday = SelectedItem.Birthday;
+                    Joineddate = SelectedItem.Startdate;
+
                     Position = SelectedItem.Position;
                     Mail = SelectedItem.Mail;
                     Bitimg = SelectedItem.Bitimg;
@@ -311,8 +314,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 nhanvien.Mail = item.MAIL;
                 nhanvien.Phone = item.SODT;
                 nhanvien.Position = item.POSITION;
-                nhanvien.Birthday = item.NGSINH;
-                nhanvien.Startdate = item.NGVL;
+                nhanvien.Birthday = (DateTime)item.NGSINH;
+                nhanvien.Startdate = (DateTime)item.NGVL;
                 nhanvien.Salary = (decimal)item.LUONG;
                 nhanvien.Cmnd = item.CMND;
                 nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
@@ -337,6 +340,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             nv.MAIL = Mail;
             nv.MANV = Id;
             nv.SODT = Phone;
+            nv.NGSINH = Birthday;
+            nv.NGVL = Joineddate;
             nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
             if (IsMale)
             {
@@ -358,8 +363,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void CreateEmployee(object p)
         {
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg),GENDER=Gender }; 
-            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender };
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate }; 
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate };
             NhanVienList.Add(nv2);
             DataProvider.Ins.DB.NHANVIEN.Add(nv);
             DataProvider.Ins.DB.SaveChanges();

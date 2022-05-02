@@ -26,7 +26,7 @@
             <PropertyRef Name="SOHD" />
           </Key>
           <Property Name="SOHD" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="NGHD" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGHD" Type="smalldatetime" />
           <Property Name="MAKH" Type="varchar" MaxLength="10" />
           <Property Name="MANV" Type="varchar" MaxLength="10" />
           <Property Name="TRIGIA" Type="money" />
@@ -38,13 +38,13 @@
           <Property Name="MAKH" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="HOTEN" Type="nvarchar" MaxLength="40" />
           <Property Name="SODT" Type="varchar" MaxLength="20" />
-          <Property Name="NGSINH" Type="nvarchar" MaxLength="20" />
-          <Property Name="NGDK" Type="nvarchar" MaxLength="20" />
           <Property Name="DOANHSO" Type="money" />
           <Property Name="ACC" Type="varchar" MaxLength="20" />
           <Property Name="PICBI" Type="varbinary(max)" />
           <Property Name="MAIL" Type="nvarchar" MaxLength="50" />
           <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGSINH" Type="smalldatetime" />
+          <Property Name="NGDK" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
           <Key>
@@ -62,15 +62,15 @@
           <Property Name="MANV" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="HOTEN" Type="nvarchar" MaxLength="40" />
           <Property Name="SODT" Type="varchar" MaxLength="20" />
-          <Property Name="NGVL" Type="nvarchar" MaxLength="20" />
           <Property Name="LUONG" Type="money" />
           <Property Name="ACC" Type="varchar" MaxLength="20" />
           <Property Name="PICBI" Type="varbinary(max)" />
           <Property Name="MAIL" Type="nvarchar" MaxLength="50" />
           <Property Name="POSITION" Type="nvarchar" MaxLength="20" />
           <Property Name="CMND" Type="nvarchar" MaxLength="20" />
-          <Property Name="NGSINH" Type="nvarchar" MaxLength="20" />
           <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGVL" Type="smalldatetime" />
+          <Property Name="NGSINH" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -201,7 +201,7 @@
             <PropertyRef Name="SOHD" />
           </Key>
           <Property Name="SOHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NGHD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGHD" Type="DateTime" Precision="0" />
           <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
@@ -216,13 +216,13 @@
           <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HOTEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NGSINH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NGDK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DOANHSO" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="ACC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGSINH" Type="DateTime" Precision="0" />
+          <Property Name="NGDK" Type="DateTime" Precision="0" />
           <NavigationProperty Name="HOADON" Relationship="Self.LK_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
@@ -242,15 +242,15 @@
           <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="HOTEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NGVL" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="LUONG" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="ACC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="POSITION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="NGSINH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGVL" Type="DateTime" Precision="0" />
+          <Property Name="NGSINH" Type="DateTime" Precision="0" />
           <NavigationProperty Name="HOADON" Relationship="Self.LK_NHANVIEN" FromRole="NHANVIEN" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="SANPHAM">
@@ -327,7 +327,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QUANLYSIEUTHIEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QUANLYSIEUTHIEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" />
           <EntitySet Name="CTHD" EntityType="Self.CTHD" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" />
@@ -361,7 +361,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities">
+        <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities1">
           <EntitySetMapping Name="ACCOUNT">
             <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
@@ -397,13 +397,13 @@
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
                 <ScalarProperty Name="SODT" ColumnName="SODT" />
-                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
-                <ScalarProperty Name="NGDK" ColumnName="NGDK" />
                 <ScalarProperty Name="DOANHSO" ColumnName="DOANHSO" />
                 <ScalarProperty Name="ACC" ColumnName="ACC" />
                 <ScalarProperty Name="PICBI" ColumnName="PICBI" />
                 <ScalarProperty Name="MAIL" ColumnName="MAIL" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
+                <ScalarProperty Name="NGDK" ColumnName="NGDK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -423,15 +423,15 @@
                 <ScalarProperty Name="MANV" ColumnName="MANV" />
                 <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
                 <ScalarProperty Name="SODT" ColumnName="SODT" />
-                <ScalarProperty Name="NGVL" ColumnName="NGVL" />
                 <ScalarProperty Name="LUONG" ColumnName="LUONG" />
                 <ScalarProperty Name="ACC" ColumnName="ACC" />
                 <ScalarProperty Name="PICBI" ColumnName="PICBI" />
                 <ScalarProperty Name="MAIL" ColumnName="MAIL" />
                 <ScalarProperty Name="POSITION" ColumnName="POSITION" />
                 <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="NGVL" ColumnName="NGVL" />
+                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

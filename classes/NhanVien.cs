@@ -29,7 +29,7 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private string phone;
 
-        private string startdate;
+        private DateTime startdate;
 
         private decimal salary;
 
@@ -37,16 +37,16 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private string cmnd;
 
-        private string birthday;
+        private DateTime birthday;
         public string Phone { get => phone; set => phone = value; }
-        public string Startdate { get => startdate; set => startdate = value; }
+        public DateTime Startdate { get => startdate; set => startdate = value; }
         public decimal Salary { get => salary; set => salary = value; }
 
         public string Mail { get => mail; set => mail = value; }
         public Account Acc { get => acc; set => acc = value; }
         public string Position { get => position; set => position = value; }
         public string Cmnd { get => cmnd; set => cmnd = value; }
-        public string Birthday { get => birthday; set => birthday = value; }
+        public DateTime Birthday { get => birthday; set => birthday = value; }
 
         private string gender;
         public string Gender { get => gender; set => gender = value; }

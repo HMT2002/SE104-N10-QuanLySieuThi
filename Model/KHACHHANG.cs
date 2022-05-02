@@ -23,13 +23,13 @@ namespace SE104_N10_QuanLySieuThi.Model
         public string MAKH { get; set; }
         public string HOTEN { get; set; }
         public string SODT { get; set; }
-        public string NGSINH { get; set; }
-        public string NGDK { get; set; }
         public Nullable<decimal> DOANHSO { get; set; }
         public string ACC { get; set; }
         public byte[] PICBI { get; set; }
         public string MAIL { get; set; }
         public string GENDER { get; set; }
+        public Nullable<System.DateTime> NGSINH { get; set; }
+        public Nullable<System.DateTime> NGDK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADON { get; set; }
