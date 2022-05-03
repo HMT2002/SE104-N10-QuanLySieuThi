@@ -99,5 +99,7 @@ namespace SE104_N10_QuanLySieuThi.classes
                 //this.addBinaryArrIntoSQL();
             }
         }
+
+
     }
 }
