@@ -20,7 +20,7 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Width="800"
+        Width="890"
         Height="550"
         DataContext="{StaticResource BuyVM}"
                 Name="StorageReportWin"
@@ -28,13 +28,50 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-
+            <ListView
+ItemsSource="{Binding listSelecteditems}">
+  <ListView.View>
+    <GridView>
+      <GridViewColumn
+        DisplayMemberBinding="{Binding Stt}"
+        Header="Stt" />
+      <GridViewColumn
+        DisplayMemberBinding="{Binding MaSP}"
+        Header="Mã sản phẩm"
+      />
+      <GridViewColumn
+        DisplayMemberBinding="{Binding TenSP}"
+        Header="Tên hàng"
+      />
+      <GridViewColumn
+        DisplayMemberBinding="{Binding SoLuongSP}"
+        Header="Tồn đầu kỳ"
+      />
+      <GridViewColumn
+        DisplayMemberBinding="{Binding DonGia}"
+        Header="Nhập"
+      />
+      <GridViewColumn
+        DisplayMemberBinding="{Binding ThanhTien}"
+        Header="Xuất"
+       />
+        <GridViewColumn
+        DisplayMemberBinding="{Binding ThanhTien}"
+        Header="Tồn cuối kỳ"
+        />
+        <GridViewColumn
+        DisplayMemberBinding="{Binding ThanhTien}"
+        Header="Ghi chú"
+        />
+    </GridView>
+  </ListView.View>
+</ListView>
         </Grid>
     </Grid>
 </Window>

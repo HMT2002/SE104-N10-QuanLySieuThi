@@ -21,6 +21,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedItemCtrlCmd { get; set; }
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
+        private int _Stt;
+        public int Stt { get => _Stt; set { _Stt = value; OnPropertyChanged(); } }
+        private string _MaSP;
+        public string MaSP { get => _MaSP; set { _MaSP = value; OnPropertyChanged(); } }
+        private string _TenSP;
+        public string TenSP { get => _TenSP; set { _TenSP = value; OnPropertyChanged(); } }
+        private long _SoLuongSP;
+        public long SoLuongSP { get => _SoLuongSP; set { _SoLuongSP = value; OnPropertyChanged(); } }
+        private long _DonGia;
+        public long DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+        private long _ThanhTien;
+        public long ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+        
 
         ObservableCollection<SanPham> _listSelecteditems;
         public ObservableCollection<SanPham> listSelecteditems { get => _listSelecteditems; set { _listSelecteditems = value; OnPropertyChanged(); } }
@@ -35,7 +48,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             sp.getAllProductFromDatabase();
             listSelecteditems = new ObservableCollection<SanPham>(sp.getAllProductFromDatabase());
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoListBox(p); isMainLoaded = true; }; });
-
+            ThanhTien = SoLuongSP * DonGia;
         }
         private void AddItemIntoListBox(ListBox p)
         {
