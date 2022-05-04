@@ -19,7 +19,7 @@ namespace SE104_N10_QuanLySieuThi.windows
     /// </summary>
     public partial class winBill : Window
     {
-        public winBill(int count)
+        public winBill()
         {
             InitializeComponent();
         }

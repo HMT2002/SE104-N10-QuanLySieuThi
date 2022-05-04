@@ -59,11 +59,11 @@
                             Width="auto" Height="50"
                             ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                             Content="Add" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Command="{Binding BillCommand}" CommandParameter="{Binding ElementName=ProductPage}" />
-                       <Button Margin="10 10 10 10" 
+                       <!--<Button Margin="10 10 10 10" 
                             Style="{StaticResource MaterialDesignRaisedDarkButton}" 
                             Width="auto" Height="50"
                             ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                            Content="Bill" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Command="{Binding BillCommand}" CommandParameter="{Binding ElementName=ProductPage}" />
+                            Content="Bill" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Command="{Binding BillCommand}" CommandParameter="{Binding ElementName=ProductPage}" />-->
                     </StackPanel>    
                 </Grid>
             </Grid>
@@ -76,21 +76,38 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto" >
 
-                <ItemsControl x:Name="itemctrlMain" ItemsSource="{Binding TonKhoList}">
+                <ListBox ItemsSource="{Binding TonKhoList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                         SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="4" IsItemsHost="True">
-                                
+                            <UniformGrid Columns="4"
+                                         IsItemsHost="True">
+
                             </UniformGrid>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Background="NavajoWhite" Height="120" Width="120" UniformCornerRadius="10" Margin="20 20 20 20">
-                                <StackPanel Background="#F5F50C" Opacity="1" Height="100" Width="100" HorizontalAlignment="Stretch">
+                            <materialDesign:Card Background="NavajoWhite"
+                                                 Height="120"
+                                                 Width="120"
+                                                 UniformCornerRadius="10"
+                                                 Margin="20 20 20 20">
+                                <StackPanel Background="#F5F50C"
+                                            Opacity="1"
+                                            Height="100"
+                                            Width="100"
+                                            HorizontalAlignment="Stretch">
+                                    <!--<Image Source="{Binding Bitimg}"
+                                           Width="100"
+                                           Height="100"
+                                           Margin="3 3 3 3"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"></Image>-->
                                     <TextBlock Text="{Binding sanpham.GIA}"></TextBlock>
                                     <TextBlock Text="{Binding sanpham.MACC}"></TextBlock>
                                     <TextBlock Text="{Binding sanpham.TENSP}"></TextBlock>
+                                    <TextBlock Text="{Binding sanpham.SL}"></TextBlock>
 
                                 </StackPanel>
                             </materialDesign:Card>
@@ -99,41 +116,11 @@
 
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Loaded">
-                            <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}" CommandParameter="{Binding ElementName=itemctrlMain}" />
+                            <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}"
+                                                   CommandParameter="{Binding ElementName=itemctrlMain}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </ItemsControl>
-                <!--<ListView x:Name="toDoList" ItemsSource="{Binding TasksList.Tasks}">
-                    <ListView.ItemTemplate x:Uid="a123">
-
-                        <DataTemplate>
-
-                            <materialDesign:Card Background="NavajoWhite" UniformCornerRadius="10">
-
-                                <DockPanel Background="Transparent" Opacity="1" Height="45" Width="1150" HorizontalAlignment="Stretch" LastChildFill="True">
-
-                                    <TextBlock x:Name="taskIdd" Text="{Binding TaskId}" Width="0"></TextBlock>
-                                    <CheckBox Style="{StaticResource MaterialDesignCheckBox}" x:Name="myFkingLitleCheckbox" materialDesign:CheckBoxAssist.CheckBoxSize="30" Margin="5" Background="Tomato" IsChecked="{Binding IsDone}" Checked="myFkingLitleCheckbox_Checked">
-
-                                    </CheckBox>
-
-                                    <ToggleButton Style="{StaticResource MyToggleButton}" DockPanel.Dock="Right" Margin="0 0 10 0" ToolTip="MaterialDesignActionLightToggleButton" Content="{materialDesign:PackIcon Kind=Heart  }" materialDesign:ToggleButtonAssist.OnContent="{materialDesign:PackIcon Kind=Star}">
-
-
-                                    </ToggleButton>
-
-                                    <TextBlock HorizontalAlignment="Left" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="10 7 0 5" Text="{Binding Content}" FontSize="20" Foreground="Black">
-
-                                    </TextBlock>
-
-                                </DockPanel>
-                            </materialDesign:Card>
-
-                        </DataTemplate>
-
-                    </ListView.ItemTemplate>
-
-                </ListView>-->
+                </ListBox>
             </ScrollViewer>
         </Grid>
     </Grid>

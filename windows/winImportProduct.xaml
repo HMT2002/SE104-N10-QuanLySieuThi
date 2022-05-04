@@ -23,9 +23,8 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        DataContext="{StaticResource ImportProductVM}"
-
-                Name="ImportProductWin"
+        DataContext="{StaticResource ProductVM }"
+        Name="ImportProductWin"
 
         >
     <Grid>
@@ -58,7 +57,11 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <TextBox materialDesign:HintAssist.Hint="Mã nhân viên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding EmployeeId}" />
+                            <TextBox materialDesign:HintAssist.Hint="Mã nhân viên"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                                     VerticalAlignment="Center" Text="{Binding EmployeeId}"
+                                     
+                                     />
                         </Grid>
                         <Grid Grid.Row="1">
                             <TextBox materialDesign:HintAssist.Hint="Mã phiếu nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center" Text="{Binding ImportId}" />

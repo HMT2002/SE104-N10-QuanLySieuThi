@@ -82,8 +82,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private BitmapImage bitimg = new BitmapImage();
 
-        public ItemsControl itemsControl = new ItemsControl();
-
         private ObservableCollection<NhanVien> _NhanVienList;
 
         public ObservableCollection<NhanVien> NhanVienList { get => _NhanVienList; set { _NhanVienList = value; OnPropertyChanged(); } }
@@ -172,10 +170,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }, (p) => { ModifyEmployee(); });
 
             DeleteEmployeeCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteEmployee(); });
-            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) {LoadNhanVienData(); isMainLoaded = true; }; });
+            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadNhanVienData(); isMainLoaded = true; }; });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
         }
+
         private void CheckGender()
         {
             if (IsMale == false)
@@ -232,6 +231,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             IsMale = true;
             IsFeMale = false;
             Gender = "Male";
+            CMND = "";
         }
 
         private void CreateAvatar(Button p)
@@ -248,23 +248,24 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.Name;
-                    Id = SelectedItem.ID;
-                    Phone = SelectedItem.Phone;
-                    CMND = SelectedItem.Cmnd;
-                    Salary = SelectedItem.Salary;
+                    Name = SelectedItem.nhanvien.HOTEN;
+                    Id = SelectedItem.nhanvien.MANV;
+                    Phone = SelectedItem.nhanvien.SODT;
+                    CMND = SelectedItem.nhanvien.CMND;
+                    Salary =(decimal) SelectedItem.nhanvien.LUONG;
 
-                    Birthday = SelectedItem.Birthday;
-                    Joineddate = SelectedItem.Startdate;
+                    Birthday =(DateTime) SelectedItem.nhanvien.NGSINH;
+                    Joineddate =(DateTime) SelectedItem.nhanvien.NGVL;
 
-                    Position = SelectedItem.Position;
-                    Mail = SelectedItem.Mail;
-                    Bitimg = SelectedItem.Bitimg;
+                    Position = SelectedItem.nhanvien.POSITION;
+                    Mail = SelectedItem.nhanvien.MAIL;
+
+                    Bitimg = Converter.Instance.ConvertByteToBitmapImage(SelectedItem.nhanvien.PICBI);
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
 
-                    Gender = SelectedItem.Gender;
-                    if (SelectedItem.Gender == null)
+                    Gender = SelectedItem.nhanvien.GENDER;
+                    if (SelectedItem.nhanvien.GENDER == null)
                     {
                         Gender = "unknow";
                     }
@@ -281,7 +282,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     }
                 }
             }
-
         }
 
         public enum SelectSearchType { ID,Name}
@@ -306,19 +306,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 NhanVien nhanvien = new NhanVien();
 
                 nhanvien.nhanvien = item;
-                nhanvien.Name = item.HOTEN;
 
-                nhanvien.ID = item.MANV;
-                nhanvien.Mail = item.MAIL;
-                nhanvien.Phone = item.SODT;
-                nhanvien.Position = item.POSITION;
-                nhanvien.Birthday = (DateTime)item.NGSINH;
-                nhanvien.Startdate = (DateTime)item.NGVL;
-                nhanvien.Salary = (decimal)item.LUONG;
-                nhanvien.Cmnd = item.CMND;
                 nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
                 nhanvien.Img.Source = nhanvien.Bitimg;
-                nhanvien.Gender = item.GENDER;
                 
                 NhanVienList.Add(nhanvien);
                 i++;

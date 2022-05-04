@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE104_N10_QuanLySieuThi.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -25,6 +26,8 @@ namespace SE104_N10_QuanLySieuThi.classes
         private decimal price;
 
         NhaCungCap supplier;
+
+        private SANPHAM _sanpham;
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
         private DataTable datatable=new DataTable();
@@ -212,6 +215,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         public DataTable Datatable { get => datatable; set => datatable = value; }
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         internal List<SanPham> ListAll { get => listAll; set => listAll = value; }
+        public SANPHAM sanpham { get => _sanpham; set => _sanpham = value; }
 
         public bool RegistProduct()
         {
