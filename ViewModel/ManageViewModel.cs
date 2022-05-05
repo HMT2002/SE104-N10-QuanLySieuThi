@@ -25,18 +25,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public Button btnAvatar = new Button();
 
         public ICommand LoadedPageCmd { get; set; }
-
-
         public ICommand PasswordChangedCommand { get; set; }
 
         public ICommand CreateEmployeeCmd { get; set; }
-
         public ICommand NewEmployeeCmd { get; set; }
-
         public ICommand DeleteEmployeeCmd { get; set; }
         public ICommand ModifyEmployeeCmd { get; set; }
         public ICommand PickImage { get; set; }
-
         public ICommand LoadedItemCtrlCmd { get; set; }
         public ICommand ClickedItemCtrlCmd { get; set; }
         public ICommand LoadAvaterCmd { get; set; }
@@ -77,10 +72,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public DateTime Birthday { get => _Birthday; set { _Birthday = value; OnPropertyChanged(); } }
 
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
+        private BitmapImage bitimg = new BitmapImage();
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
-        private BitmapImage bitimg = new BitmapImage();
 
         private ObservableCollection<NhanVien> _NhanVienList;
 
@@ -198,9 +193,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             switch (SearchTypeItem)
             {
                 case "1":
-                    return (obj as NhanVien).Name.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return (obj as NhanVien).nhanvien.HOTEN.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
                 case "0":
-                    return (obj as NhanVien).ID.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return (obj as NhanVien).nhanvien.MANV.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
                 default:
                     break;
             }
@@ -212,7 +207,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             CollectionViewSource.GetDefaultView(NhanVienList).Refresh();
         }
-
+        private string _SearchTypeItem;
+        public string SearchTypeItem { get => _SearchTypeItem; set
+            {
+                _SearchTypeItem = value;
+                view.Filter = UserFilter;
+                OnPropertyChanged();
+            }
+        }
         private void NewEmployee()
         {
             Password = "";
@@ -286,14 +288,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public enum SelectSearchType { ID,Name}
 
-        private string _SearchTypeItem;
-        public string SearchTypeItem { get => _SearchTypeItem; set
-            {
-                _SearchTypeItem = value;
-                view.Filter = UserFilter;
-                OnPropertyChanged();
-            } 
-        }
+
 
         private void LoadNhanVienData()
         {
