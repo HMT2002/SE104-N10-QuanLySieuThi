@@ -111,6 +111,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => {; });
 
 
+
             sp.getAllProductFromDatabase();
         }
 
