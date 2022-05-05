@@ -13,12 +13,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     class ProducViewModel : BaseViewModel
     {
+        public NhanVien nv = new NhanVien();
+
+        public ICommand PickImage { get; set; }
+        public ICommand LoadAvaterCmd { get; set; }
+        public Button btnAvatar = new Button();
+        public Image imgAvatar = new Image();
+        public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
+        private BitmapImage bitimg = new BitmapImage();
 
         private string _EmployeeId;
         public string EmployeeId { get => _EmployeeId; set { _EmployeeId = value; OnPropertyChanged(); } }
@@ -46,6 +54,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand LoadedGridCmd { get; set; }
 
+        public ICommand AddProductCmd { get; set; }
+        public ICommand DeleteProductCmd { get; set; }
+        public ICommand CompleteCmd { get; set; }
+
+
         public int countclick = 0;
         public TextBlock OrClickMeCount=new TextBlock();
 
@@ -60,6 +73,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private ObservableCollection<SanPham> _TonKhoList;
 
         public ObservableCollection<SanPham> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<SanPham> _NhapHangList;
+
+        public ObservableCollection<SanPham> NhapHangList { get => _NhapHangList; set { _NhapHangList = value; OnPropertyChanged(); } }
 
         public ProducViewModel()
         {
@@ -77,6 +94,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
             sp = new SanPham();
+
+            LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
+            PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
+
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(p); });
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
@@ -84,7 +105,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
+
+            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
+            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
+            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
+
+
             sp.getAllProductFromDatabase();
+        }
+
+        private void Imagepick(Button p)
+        {
+            nv.chooseImg();
+            Bitimg = nv.Bitimg;
+            imgAvatar.Source = nv.Bitimg;
+            p.Content = imgAvatar;
+        }
+        private void CreateAvatar(Button p)
+        {
+            p.Content = imgAvatar;
         }
 
         private void LoadTonKhoData()
@@ -100,6 +139,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 TonKhoList.Add(sanpham);
                 i++;
             }
+        }
+
+        private void NewProduct()
+        {
+
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)
