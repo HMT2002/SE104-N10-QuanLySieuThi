@@ -106,9 +106,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
 
-            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
-            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
-            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { LoadGrid(p); });
+            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ; });
+            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ; });
+            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => {; });
 
 
             sp.getAllProductFromDatabase();
