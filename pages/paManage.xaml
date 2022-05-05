@@ -247,11 +247,14 @@
                              Height="300"
                              x:Name="cardItems">
 
-            <ScrollViewer  HorizontalAlignment="Left"
-                           Height="290"
-                           VerticalAlignment="Bottom"
-                           Width="1080"
-                           VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="Scrollviewer"
+                          HorizontalAlignment="Left"
+                          Height="290"
+                          VerticalAlignment="Bottom"
+                          Width="1080"
+                          VerticalScrollBarVisibility="Auto"
+                          CanContentScroll="True"
+                          Background="Transparent">
                 <ListBox ItemsSource="{Binding NhanVienList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>

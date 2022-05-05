@@ -1,4 +1,5 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +20,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         ListBox lstbxSelected = new ListBox();
         public ICommand LoadedItemCtrlCmd { get; set; }
+
+        public ICommand BuyProductCmd { get; set; }
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
         private int _Stt;
@@ -49,7 +52,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             listSelecteditems = new ObservableCollection<SanPham>(sp.getAllProductFromDatabase());
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoListBox(p); isMainLoaded = true; }; });
             ThanhTien = SoLuongSP * DonGia;
+            BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
         }
+
+        private void openBill()
+        {
+            winBill win = new winBill();
+            win.ShowDialog();
+        }
+
         private void AddItemIntoListBox(ListBox p)
         {
 

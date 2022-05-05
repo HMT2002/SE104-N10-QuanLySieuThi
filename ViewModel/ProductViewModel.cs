@@ -19,10 +19,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     class ProducViewModel : BaseViewModel
     {
+
+        private string _EmployeeId;
+        public string EmployeeId { get => _EmployeeId; set { _EmployeeId = value; OnPropertyChanged(); } }
+
         public SanPham sp=new SanPham();
         public ObservableCollection<SanPham> SP { get; set; }
-        ItemsControl itemsControl = new ItemsControl();
 
+        private SanPham _SelectedItem;
+        public SanPham SelectedItem
+        {
+            get => _SelectedItem; set
+            {
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    SelectedItem.sanpham.GIA = 0;
+                }
+            }
+        }
         public ICommand BillCommand { get; set; }
 
         public ICommand LoadedPageCmd { get; set; }
@@ -41,53 +57,54 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
-        private ObservableCollection<TonKho> _TonKhoList;
+        private ObservableCollection<SanPham> _TonKhoList;
 
-        public ObservableCollection<TonKho> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
+        public ObservableCollection<SanPham> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
 
         public ProducViewModel()
         {
+            EmployeeId = "NV005";
+            var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId);
+            if (display != null && display.Count() == 1)
+            {
+                foreach (var item in display)
+                {
+                    NhanVien nhanvien = new NhanVien();
+                    nhanvien.nhanvien = item;
+                    EmployeeId = nhanvien.nhanvien.HOTEN;
+                }
+            }
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
             sp = new SanPham();
-            BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Bill(p); });
+            BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(p); });
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
             IncrementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Increase(p); });
             DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
-            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
+            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
             sp.getAllProductFromDatabase();
         }
 
         private void LoadTonKhoData()
         {
-            TonKhoList = new ObservableCollection<TonKho>();
+            TonKhoList = new ObservableCollection<SanPham>();
 
             var objectList = DataProvider.Ins.DB.SANPHAM;
             int i = 1;
             foreach(var item in objectList)
             {
-                TonKho tonKho = new TonKho();
-                tonKho.sanpham = item;
-                tonKho.sanpham.MACC = item.MACC;
-                tonKho.sanpham.TENSP = item.TENSP;
-                TonKhoList.Add(tonKho);
+                SanPham sanpham = new SanPham();
+                sanpham.sanpham = item;
+                TonKhoList.Add(sanpham);
                 i++;
             }
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)
         {
-            //for (int i = 0; i < sp.ListAll.Count; i++)
-            //{
-                
-            //    Button btn = new Button();
-            //    btn.Width = 100;
-            //    btn.Height = 100;
-            //    btn.Content = new Image(){Source = sp.ListAll[i].Bitimg };
-            //    p.Items.Add(btn);
-            //}
+
         }
 
         private void Decrease(Button p)
@@ -124,11 +141,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        void Bill(object p)
+        void openWinAddNewProduct(object p)
         {
-            winBill win = new winBill(countclick);
-            
-            win.Show();
+            winImportProduct win = new winImportProduct();
+            win.ShowDialog();
         }
+
+
     }
 }

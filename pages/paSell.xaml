@@ -215,9 +215,16 @@
                         Margin="20"
                         Background="AliceBlue">
                                 <StackPanel>
-                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}" ToolTip="Resource name: MaterialDesignRaisedLightButton" Content="_Button" VerticalAlignment="Bottom" Margin="20" Command="{Binding BuyProductCmd}" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" />
+                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                            Content="_Button"
+                                            VerticalAlignment="Bottom"
+                                            Margin="20"
+                                            Command="{Binding BuyProductCmd}"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                            HorizontalAlignment="Right" 
+                                            />
                                 </StackPanel>
-
                             </materialDesign:Card>
                         </Grid>
                     </Grid>

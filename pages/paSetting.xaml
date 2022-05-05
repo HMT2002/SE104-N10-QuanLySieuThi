@@ -9,6 +9,7 @@
       Title="paSetting"
       Background="#FB6558"
       
+      
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{StaticResource SettingVM}"
@@ -16,7 +17,15 @@
       x:Name="SettingPage"
 
       >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
+                                   CommandParameter="{Binding ElementName=SettingPage}" />
+            <i:InvokeCommandAction Command="{Binding LoadAvaterCmd}"
+                                   CommandParameter="{Binding ElementName=bntPickImage}" />
 
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <materialDesign:Card Margin="10">
             <Grid>
@@ -40,16 +49,37 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <Image></Image>
+                                    <Button x:Name="bntPickImage"
+                                            Command="{Binding PickImage}"
+                                            CommandParameter="{Binding ElementName=bntPickImage}"
+                                            Height="auto"
+                                            Width="auto"
+                                            Content="{Binding imgAvatar}"
+                                            Background="AliceBlue">
+                                    </Button>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <ComboBox 
-                                        materialDesign:HintAssist.Hint="Giới tính"
-                                        HorizontalAlignment="Center" Margin="0,30,0,90">
-                                        <ComboBoxItem Content="Nam" />
-                                        <ComboBoxItem Content="Nữ" />
-                                        <ComboBoxItem Content="Khác" />
-                                    </ComboBox>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <RadioButton IsChecked="{Binding IsMale,Mode=OneWay}"
+                                                     Command="{Binding CheckedGenderCmd}"
+                                                     Content="Male"
+                                                     Style="{StaticResource MaterialDesignLightRadioButton}">
+                                        </RadioButton>
+
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
+                                                     Command="{Binding CheckedGenderCmd}"
+                                                     Content="Female"
+                                                     Style="{StaticResource MaterialDesignLightRadioButton}">
+                                        </RadioButton>
+
+                                    </Grid>
+
                                 </Grid>
                             </Grid>
                             <Grid Grid.Column="1">

@@ -9,8 +9,8 @@ CREATE TABLE KHACHHANG(
 MAKH varchar(10),
 HOTEN nvarchar(40),
 SODT varchar(20),
-NGSINH nvarchar(20),
-NGDK nvarchar(20),
+NGSINH smalldatetime,
+NGDK smalldatetime,
 DOANHSO money,
 ACC varchar(20),
 PICID int,
@@ -29,19 +29,17 @@ CREATE TABLE NHANVIEN(
  MANV varchar(10),
  HOTEN nvarchar(40),
  SODT varchar(20),
- NGVL nvarchar(20),
+ NGVL smalldatetime,
  LUONG money,
  ACC varchar(20),
  MAIL nvarchar(50),
  POSITION nvarchar(20),
  PICBI varbinary(MAX),
  CMND nvarchar(20),
- NGSINH nvarchar(20),
+ NGSINH smalldatetime,
  GENDER nvarchar(20),
  primary key(MANV)
 )
-alter table NHANVIEN add NGSINH nvarchar(20)
-
 select * from NHANVIEN
 delete from NHANVIEN where MANV='45'
 update NHANVIEN where MANV='NV001' 
@@ -88,7 +86,7 @@ select * from SANPHAM
 
 CREATE TABLE HOADON(
 SOHD varchar(10),
-NGHD nvarchar(20),
+NGHD smalldatetime,
 MAKH varchar(10),
 constraint LK_KHACHHANG foreign key(MAKH) references KHACHHANG(MAKH),
 MANV varchar(10),

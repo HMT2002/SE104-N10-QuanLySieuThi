@@ -41,8 +41,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand ClickedItemCtrlCmd { get; set; }
         public ICommand LoadAvaterCmd { get; set; }
 
-        public ICommand txtSearch_TextChanged { get; set; }
-
         public ICommand CheckedGenderCmd { get; set; }
 
         public bool isMainLoaded = false;
@@ -83,8 +81,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
         private BitmapImage bitimg = new BitmapImage();
-
-        public ItemsControl itemsControl = new ItemsControl();
 
         private ObservableCollection<NhanVien> _NhanVienList;
 
@@ -134,14 +130,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
 
-            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
+            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(); });
 
 
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             NewEmployeeCmd = new RelayCommand<object>((p) => {
 
                 return true;
-            }, (p) => { NewEmployee(p); });
+            }, (p) => { NewEmployee(); });
 
             CreateEmployeeCmd = new RelayCommand<object>((p) => {
                 if (string.IsNullOrEmpty(Id))
@@ -156,7 +152,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
 
                 return true;
-            }, (p) => { CreateEmployee(p); });
+            }, (p) => { CreateEmployee(); });
 
             ModifyEmployeeCmd = new RelayCommand<object>((p) => {
                 if (SelectedItem==null)
@@ -171,14 +167,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
 
                 return true;
-            }, (p) => { ModifyEmployee(p); });
+            }, (p) => { ModifyEmployee(); });
 
-            DeleteEmployeeCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteEmployee(p); });
-            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { itemsControl = p; return true; }, (p) => { if (!isMainLoaded) {LoadNhanVienData(); isMainLoaded = true; }; });
+            DeleteEmployeeCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteEmployee(); });
+            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadNhanVienData(); isMainLoaded = true; }; });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
         }
-        private void CheckGender(object p)
+
+        private void CheckGender()
         {
             if (IsMale == false)
             {
@@ -216,7 +213,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CollectionViewSource.GetDefaultView(NhanVienList).Refresh();
         }
 
-        private void NewEmployee(object p)
+        private void NewEmployee()
         {
             Password = "";
             UserName = "";
@@ -234,6 +231,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             IsMale = true;
             IsFeMale = false;
             Gender = "Male";
+            CMND = "";
         }
 
         private void CreateAvatar(Button p)
@@ -250,23 +248,24 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    Name = SelectedItem.Name;
-                    Id = SelectedItem.ID;
-                    Phone = SelectedItem.Phone;
-                    CMND = SelectedItem.Cmnd;
-                    Salary = SelectedItem.Salary;
+                    Name = SelectedItem.nhanvien.HOTEN;
+                    Id = SelectedItem.nhanvien.MANV;
+                    Phone = SelectedItem.nhanvien.SODT;
+                    CMND = SelectedItem.nhanvien.CMND;
+                    Salary =(decimal) SelectedItem.nhanvien.LUONG;
 
-                    Birthday = SelectedItem.Birthday;
-                    Joineddate = SelectedItem.Startdate;
+                    Birthday =(DateTime) SelectedItem.nhanvien.NGSINH;
+                    Joineddate =(DateTime) SelectedItem.nhanvien.NGVL;
 
-                    Position = SelectedItem.Position;
-                    Mail = SelectedItem.Mail;
-                    Bitimg = SelectedItem.Bitimg;
+                    Position = SelectedItem.nhanvien.POSITION;
+                    Mail = SelectedItem.nhanvien.MAIL;
+
+                    Bitimg = Converter.Instance.ConvertByteToBitmapImage(SelectedItem.nhanvien.PICBI);
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
 
-                    Gender = SelectedItem.Gender;
-                    if (SelectedItem.Gender == null)
+                    Gender = SelectedItem.nhanvien.GENDER;
+                    if (SelectedItem.nhanvien.GENDER == null)
                     {
                         Gender = "unknow";
                     }
@@ -283,7 +282,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     }
                 }
             }
-
         }
 
         public enum SelectSearchType { ID,Name}
@@ -308,19 +306,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 NhanVien nhanvien = new NhanVien();
 
                 nhanvien.nhanvien = item;
-                nhanvien.Name = item.HOTEN;
 
-                nhanvien.ID = item.MANV;
-                nhanvien.Mail = item.MAIL;
-                nhanvien.Phone = item.SODT;
-                nhanvien.Position = item.POSITION;
-                nhanvien.Birthday = (DateTime)item.NGSINH;
-                nhanvien.Startdate = (DateTime)item.NGVL;
-                nhanvien.Salary = (decimal)item.LUONG;
-                nhanvien.Cmnd = item.CMND;
                 nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
                 nhanvien.Img.Source = nhanvien.Bitimg;
-                nhanvien.Gender = item.GENDER;
                 
                 NhanVienList.Add(nhanvien);
                 i++;
@@ -330,7 +318,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             view.Filter = UserFilter;
         }
 
-        private void ModifyEmployee(object p)
+        private void ModifyEmployee()
         {
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.ID).SingleOrDefault();
             nv.HOTEN = Name;
@@ -356,19 +344,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadNhanVienData();
         }
 
-        private void DeleteEmployee(object p)
+        private void DeleteEmployee()
         {
 
         }
 
-        private void CreateEmployee(object p)
+        private void CreateEmployee()
         {
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= convertImgToByte(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate }; 
+            if (DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).Count() > 0)
+            {
+                MessageBox.Show("Employee ID existed.");
+                return;
+            }
+
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate }; 
             var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate };
             NhanVienList.Add(nv2);
             DataProvider.Ins.DB.NHANVIEN.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
+            NewEmployee();
         }
 
         private void Imagepick(Button p)
