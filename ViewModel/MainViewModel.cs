@@ -44,6 +44,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand ChangeTab { get; set; }
 
+
+        public static string _currentUser;
+        public string currentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(); } }
+
         public MainViewModel()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -91,8 +95,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (loginVM.IsLogin)
             {
                 loginAcc = loginVM.Acc;
+                var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
+                currentUser = nv.MANV;
                 p.Show();
-                //MessageBox.Show("welcome " + loginAcc.Acc + " " + loginAcc.Password+" "+loginAcc.Pri.ToString());
             }
             else
             {

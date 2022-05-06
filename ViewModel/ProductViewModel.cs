@@ -21,6 +21,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         public NhanVien nv = new NhanVien();
 
+        public static string _currentUser;
+
         public ICommand PickImage { get; set; }
         public ICommand LoadAvaterCmd { get; set; }
         public Button btnAvatar = new Button();
@@ -28,8 +30,42 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
         private BitmapImage bitimg = new BitmapImage();
 
-        private string _EmployeeId;
-        public string EmployeeId { get => _EmployeeId; set { _EmployeeId = value; OnPropertyChanged(); } }
+        private string _ProductId;
+        public string ProductId { get => _ProductId; set { _ProductId = value; OnPropertyChanged(); } }
+
+        private string _ImportId;
+        public string ImportId { get => _ImportId; set { _ImportId = value; OnPropertyChanged(); } }
+
+        private string _SuppliertId;
+        public string SuppliertId { get => _SuppliertId; set { _SuppliertId = value; OnPropertyChanged(); } }
+
+        private string _ProductName;
+        public string ProductName { get => _ProductName; set { _ProductName = value; OnPropertyChanged(); } }
+        private string _Note;
+        public string Note { get => _Note; set { _Note = value; OnPropertyChanged(); } }
+        private int _Ammount;
+        public int Ammount { get => _Ammount; set
+            { 
+                _Ammount = value;
+                Summary = value * Price;
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _Price;
+        public decimal Price { get => _Price; set 
+            {
+                _Price = value;
+                Summary = Ammount * value;
+                OnPropertyChanged();
+            } 
+        }
+
+        private decimal _Summary;
+        public decimal Summary { get => _Summary; set { _Summary = value; OnPropertyChanged(); } }
+
+        private DateTime _ImportDate;
+        public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
 
         public SanPham sp=new SanPham();
         public ObservableCollection<SanPham> SP { get; set; }
@@ -47,6 +83,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
             }
         }
+
+
+
+
         public ICommand BillCommand { get; set; }
 
         public ICommand LoadedPageCmd { get; set; }
@@ -78,23 +118,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ObservableCollection<SanPham> NhapHangList { get => _NhapHangList; set { _NhapHangList = value; OnPropertyChanged(); } }
 
+        private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" };
+
+        public List<string> ProductType { get => _ProductType; set { _ProductType = value; OnPropertyChanged(); } }
+
+        private List<string> _SupplierType = new List<string>();
+
+        public List<string> SupplierType { get => _SupplierType; set { _SupplierType = value; OnPropertyChanged(); } }
+        private string _ProductTypeItem;
+        public string ProductTypeItem { get => _ProductTypeItem; set { _ProductTypeItem = value; OnPropertyChanged(); } }
+        private string _SupplierTypeItem;
+        public string SupplierTypeItem { get => _SupplierTypeItem; set { _SupplierTypeItem = value; OnPropertyChanged(); } }
         public ProducViewModel()
         {
-            EmployeeId = "NV005";
-            var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId);
-            if (display != null && display.Count() == 1)
-            {
-                foreach (var item in display)
-                {
-                    NhanVien nhanvien = new NhanVien();
-                    nhanvien.nhanvien = item;
-                    EmployeeId = nhanvien.nhanvien.HOTEN;
-                }
-            }
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
+            Ammount = 0;
+            Price = 0;
+            ImportDate = DateTime.Now;
+            
             sp = new SanPham();
-
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
@@ -106,13 +149,46 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
 
-            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ; });
-            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ; });
-            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => {; });
+            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
+            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });
+            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CompleteAdding(); });
 
+            NhapHangList = new ObservableCollection<SanPham>();
 
 
             sp.getAllProductFromDatabase();
+        }
+
+        private void CompleteAdding()
+        {
+            NhapHangList.Clear();
+        }
+
+        private void DeleteProduct()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddProduct()
+        {
+            if (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0)
+            {
+                MessageBox.Show("Product ID existed.");
+                return;
+            }
+            do
+            {
+                SuppliertId = Converter.Instance.RandomString(5);
+            }
+            while (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).Count() > 0);
+            var ncc = new NHACUNGCAP() {MACC=Converter.Instance.RandomString(5) };
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),NHACUNGCAP=ncc};
+            var nv2 = new SanPham() { Name = ProductName, Id = ProductId, Price = Price,Amount=Ammount,Dvt= ProductTypeItem, Bitimg = Bitimg };
+            NhapHangList.Add(nv2);
+            //DataProvider.Ins.DB.NHANVIEN.Add(nv);
+            //DataProvider.Ins.DB.SaveChanges();
+            LoadTonKhoData();
+            NewProduct();
         }
 
         private void Imagepick(Button p)
@@ -129,22 +205,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void LoadTonKhoData()
         {
-            TonKhoList = new ObservableCollection<SanPham>();
-
-            var objectList = DataProvider.Ins.DB.SANPHAM;
-            int i = 1;
-            foreach(var item in objectList)
-            {
-                SanPham sanpham = new SanPham();
-                sanpham.sanpham = item;
-                TonKhoList.Add(sanpham);
-                i++;
-            }
+            
         }
 
         private void NewProduct()
         {
-
+            ProductId = "";
+            ProductName = "";
+            Price = 0;
+            Ammount = 0;
+            Bitimg = null;
+            btnAvatar.Content = null;
+            Note = "";
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)
@@ -188,8 +260,28 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void openWinAddNewProduct(object p)
         {
+            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
+            int i = 1;
+            foreach (var item in supplierList)
+            {
+                SupplierType.Add(item.TEN);
+            }
+
+            NhapHangList = new ObservableCollection<SanPham>();
+            do
+            {
+                ProductId = Converter.Instance.RandomString(5);
+
+            } while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
+            do
+            {
+                ImportId = Converter.Instance.RandomString(5);
+
+            } while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == ImportId).Count() > 0);
+
             winImportProduct win = new winImportProduct();
             win.ShowDialog();
+
         }
 
 

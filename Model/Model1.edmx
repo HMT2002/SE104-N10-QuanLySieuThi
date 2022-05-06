@@ -45,6 +45,7 @@
           <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
           <Property Name="NGSINH" Type="smalldatetime" />
           <Property Name="NGDK" Type="smalldatetime" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
           <Key>
@@ -54,6 +55,7 @@
           <Property Name="TEN" Type="nvarchar" MaxLength="40" />
           <Property Name="SODT" Type="varchar" MaxLength="20" />
           <Property Name="XUATXU" Type="nvarchar" MaxLength="40" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -71,6 +73,7 @@
           <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
           <Property Name="NGVL" Type="smalldatetime" />
           <Property Name="NGSINH" Type="smalldatetime" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -83,6 +86,7 @@
           <Property Name="GIA" Type="money" />
           <Property Name="SL" Type="int" />
           <Property Name="PICBI" Type="varbinary(max)" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <Association Name="LK_CUNGCAP">
           <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
@@ -223,6 +227,7 @@
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NGSINH" Type="DateTime" Precision="0" />
           <Property Name="NGDK" Type="DateTime" Precision="0" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HOADON" Relationship="Self.LK_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="NHACUNGCAP">
@@ -233,6 +238,7 @@
           <Property Name="TEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="XUATXU" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.LK_CUNGCAP" FromRole="NHACUNGCAP" ToRole="SANPHAM" />
         </EntityType>
         <EntityType Name="NHANVIEN">
@@ -251,6 +257,7 @@
           <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NGVL" Type="DateTime" Precision="0" />
           <Property Name="NGSINH" Type="DateTime" Precision="0" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HOADON" Relationship="Self.LK_NHANVIEN" FromRole="NHANVIEN" ToRole="HOADON" />
         </EntityType>
         <EntityType Name="SANPHAM">
@@ -264,6 +271,7 @@
           <Property Name="GIA" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SL" Type="Int32" />
           <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CTHD" Relationship="Self.LK_SANPHAM" FromRole="SANPHAM" ToRole="CTHD" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.LK_CUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
         </EntityType>
@@ -327,7 +335,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QUANLYSIEUTHIEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QUANLYSIEUTHIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" />
           <EntitySet Name="CTHD" EntityType="Self.CTHD" />
           <EntitySet Name="HOADON" EntityType="Self.HOADON" />
@@ -361,7 +369,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities1">
+        <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities">
           <EntitySetMapping Name="ACCOUNT">
             <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.ACCOUNT">
               <MappingFragment StoreEntitySet="ACCOUNT">
@@ -404,6 +412,7 @@
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
                 <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
                 <ScalarProperty Name="NGDK" ColumnName="NGDK" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -414,6 +423,7 @@
                 <ScalarProperty Name="TEN" ColumnName="TEN" />
                 <ScalarProperty Name="SODT" ColumnName="SODT" />
                 <ScalarProperty Name="XUATXU" ColumnName="XUATXU" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -432,6 +442,7 @@
                 <ScalarProperty Name="GENDER" ColumnName="GENDER" />
                 <ScalarProperty Name="NGVL" ColumnName="NGVL" />
                 <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -445,6 +456,7 @@
                 <ScalarProperty Name="GIA" ColumnName="GIA" />
                 <ScalarProperty Name="SL" ColumnName="SL" />
                 <ScalarProperty Name="PICBI" ColumnName="PICBI" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

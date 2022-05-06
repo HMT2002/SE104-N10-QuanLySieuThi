@@ -20,6 +20,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     public class ManageViewModel : BaseViewModel
     {
+        public static string _currentUser;
+
         public NhanVien nv = new NhanVien();
 
         public Button btnAvatar = new Button();
@@ -60,9 +62,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string Position { get => _Position; set { _Position = value; OnPropertyChanged(); } }
         private string _CMND;
         public string CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
-
+        private string _Note;
+        public string Note { get => _Note; set { _Note = value; OnPropertyChanged(); } }
         private string _Gender;
         public string Gender { get => _Gender; set { _Gender = value; OnPropertyChanged(); } }
+
+        private string _Acc;
+        public string Acc { get => _Acc; set { _Acc = value; OnPropertyChanged(); } }
         private decimal _Salary;
         public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
         private DateTime _Joineddate;
@@ -111,10 +117,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Password = "";
             UserName = "";
             Mail = "";
-            Id = "";
             Position = "";
             Phone = "";
             Name = "";
+            Note = "";
+            Acc = "";
             imgAvatar = new Image();
             Salary = 0;
             Joineddate = DateTime.Now;
@@ -261,7 +268,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
                     Position = SelectedItem.nhanvien.POSITION;
                     Mail = SelectedItem.nhanvien.MAIL;
-
+                    Note = SelectedItem.nhanvien.GHICHU;
+                    Acc = SelectedItem.nhanvien.ACC;
                     Bitimg = Converter.Instance.ConvertByteToBitmapImage(SelectedItem.nhanvien.PICBI);
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
@@ -286,9 +294,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
         }
 
-        public enum SelectSearchType { ID,Name}
-
-
 
         private void LoadNhanVienData()
         {
@@ -311,11 +316,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             view = (CollectionView)CollectionViewSource.GetDefaultView(NhanVienList);
             view.Filter = UserFilter;
+
         }
 
         private void ModifyEmployee()
         {
-            var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.ID).SingleOrDefault();
+            var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
             nv.HOTEN = Name;
             nv.LUONG = Salary;
             nv.POSITION = Position;
@@ -325,6 +331,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             nv.SODT = Phone;
             nv.NGSINH = Birthday;
             nv.NGVL = Joineddate;
+            nv.GHICHU = Note;
+            nv.ACC = Acc;
             nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
             if (IsMale)
             {
@@ -352,8 +360,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
 
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate }; 
-            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate };
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc}; 
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv };
             NhanVienList.Add(nv2);
             DataProvider.Ins.DB.NHANVIEN.Add(nv);
             DataProvider.Ins.DB.SaveChanges();

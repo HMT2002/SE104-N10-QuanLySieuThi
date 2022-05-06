@@ -24,6 +24,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public string TEN { get; set; }
         public string SODT { get; set; }
         public string XUATXU { get; set; }
+        public string GHICHU { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SANPHAM> SANPHAM { get; set; }

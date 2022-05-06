@@ -11,7 +11,16 @@ namespace SE104_N10_QuanLySieuThi.classes
 {
     class Converter
     {
+        public Random random ;
+        public string RandomString(int length)
+        {
+            string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
         private static Converter instance;
+
 
         public static Converter Instance
         {

@@ -13,13 +13,13 @@ namespace SE104_N10_QuanLySieuThi.Model
 
         public static DataProvider Ins { get { if (_ins == null) _ins = new DataProvider();return _ins; } set => _ins = value; }
 
-        public QUANLYSIEUTHIEntities1 DB { get => db; set => db = value; }
+        public QUANLYSIEUTHIEntities DB { get => db; set => db = value; }
 
-        private QUANLYSIEUTHIEntities1 db;
+        private QUANLYSIEUTHIEntities db;
 
         public DataProvider()
         {
-            DB = new QUANLYSIEUTHIEntities1();
+            DB = new QUANLYSIEUTHIEntities();
 
         }
     }

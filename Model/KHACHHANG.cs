@@ -30,6 +30,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public string GENDER { get; set; }
         public Nullable<System.DateTime> NGSINH { get; set; }
         public Nullable<System.DateTime> NGDK { get; set; }
+        public string GHICHU { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADON { get; set; }

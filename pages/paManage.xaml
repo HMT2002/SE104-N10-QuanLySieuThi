@@ -7,7 +7,7 @@
       mc:Ignorable="d"
       d:DesignHeight="620"
       d:DesignWidth="1120"
-      Background="#A561A8"
+      Background="#87CEEB"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
@@ -102,7 +102,7 @@
                                  Text="{Binding Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
                     </Grid>
                     <Grid Grid.Row="1">
-                                         
+
                         <TextBox materialDesign:HintAssist.Hint="CMND"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
@@ -150,14 +150,32 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="2">
-                    <Button x:Name="bntPickImage"
-                            Command="{Binding PickImage}"
-                            CommandParameter="{Binding ElementName=bntPickImage}"
-                            Height="auto"
-                            Width="auto"
-                            Content="{Binding imgAvatar}"
-                            Background="AliceBlue">
-                    </Button>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Button x:Name="bntPickImage"
+                                Command="{Binding PickImage}"
+                                CommandParameter="{Binding ElementName=bntPickImage}"
+                                Height="auto"
+                                Width="auto"
+                                Content="{Binding imgAvatar}"
+                                Background="AliceBlue"
+                                Margin="5"
+                                >
+                        </Button>
+
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Text="{Binding Acc}"
+                                 VerticalAlignment="Center"
+                                 Margin="5"
+                                 materialDesign:HintAssist.Hint="Tài khoản"
+                                 
+                                 />
+                    </Grid>
                 </Grid>
                 <Grid Grid.Column="3">
                     <Grid.RowDefinitions>
@@ -214,7 +232,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60"></RowDefinition>
                         <RowDefinition></RowDefinition>
-
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -227,16 +245,25 @@
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="1">
-
                         <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
                                  Name="txtSearch"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                  VerticalAlignment="Center"
-                                 Margin="10,10,19.8,128">
+                                 Margin="5">
                         </TextBox>
-
-                        
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <TextBox TextWrapping="Wrap"
+                                 VerticalAlignment="Stretch"
+                                 MinWidth="280"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto"
+                                 SpellCheck.IsEnabled="True"
+                                 materialDesign:HintAssist.Hint="Ghi chú"
+                                 Height="80"
+                                 Text="{Binding Note}"
+                                 />
                     </Grid>
                 </Grid>
             </Grid>

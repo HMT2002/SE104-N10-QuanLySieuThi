@@ -25,7 +25,9 @@ insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH003','Lê V�
 insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH004','Lý Văn D','079321456','1999-7-3','2018-7-14',470000)
 
 select * from KHACHHANG
-CREATE TABLE NHANVIEN(
+
+CREATE TABLE NHANVIEN
+(
  MANV varchar(10),
  HOTEN nvarchar(40),
  SODT varchar(20),
@@ -40,6 +42,12 @@ CREATE TABLE NHANVIEN(
  GENDER nvarchar(20),
  primary key(MANV)
 )
+
+alter table NHANVIEN add GHICHU nvarchar(250)
+alter table KHACHHANG add GHICHU nvarchar(250)
+alter table SANPHAM add GHICHU nvarchar(250)
+alter table NHACUNGCAP add GHICHU nvarchar(250)
+
 select * from NHANVIEN
 delete from NHANVIEN where MANV='45'
 update NHANVIEN where MANV='NV001' 

@@ -13,10 +13,10 @@ namespace SE104_N10_QuanLySieuThi.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QUANLYSIEUTHIEntities1 : DbContext
+    public partial class QUANLYSIEUTHIEntities : DbContext
     {
-        public QUANLYSIEUTHIEntities1()
-            : base("name=QUANLYSIEUTHIEntities1")
+        public QUANLYSIEUTHIEntities()
+            : base("name=QUANLYSIEUTHIEntities")
         {
         }
     

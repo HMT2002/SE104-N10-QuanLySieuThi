@@ -19,6 +19,41 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     class SettingViewModel : BaseViewModel
     {
         public NhanVien nv = new NhanVien();
+        private string _Id;
+        public string Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
+
+
+        public Image imgAvatar = new Image();
+
+        private string _UserName;
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
+        private string _Name;
+        public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
+        private string _Password;
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        private string _Phone;
+        public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
+        private string _Mail;
+        public string Mail { get => _Mail; set { _Mail = value; OnPropertyChanged(); } }
+
+        private string _Position;
+        public string Position { get => _Position; set { _Position = value; OnPropertyChanged(); } }
+        private string _CMND;
+        public string CMND { get => _CMND; set { _CMND = value; OnPropertyChanged(); } }
+        private string _Note;
+        public string Note { get => _Note; set { _Note = value; OnPropertyChanged(); } }
+
+        private string _Acc;
+        public string Acc { get => _Acc; set { _Acc = value; OnPropertyChanged(); } }
+        private decimal _Salary;
+        public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
+        private DateTime _Joineddate;
+        public DateTime Joineddate { get => _Joineddate; set { _Joineddate = value; OnPropertyChanged(); } }
+
+        private DateTime _Birthday;
+        public DateTime Birthday { get => _Birthday; set { _Birthday = value; OnPropertyChanged(); } }
+
+
 
         public ICommand CheckedGenderCmd { get; set; }
         public ICommand LoadAvaterCmd { get; set; }
@@ -26,7 +61,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand PickImage { get; set; }
 
         public Button btnAvatar = new Button();
-        public Image imgAvatar = new Image();
 
         private BitmapImage bitimg = new BitmapImage();
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
@@ -40,56 +74,59 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string Gender { get => _Gender; set { _Gender = value; OnPropertyChanged(); } }
         public SettingViewModel()
         {
-            nv.ID = "NV003";
-            loadEmployee();
-
-
-
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
-
             CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(); });
-
-
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
-
         }
-        private void loadEmployee()
+        public void loadEmployee()
         {
-            var objectList = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == nv.ID);
-            foreach (var item in objectList)
+            var obj = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
+            if (obj != null)
             {
-                nv = new NhanVien();
-                nv.nhanvien = item;
-                nv.Name = item.HOTEN;
-                nv.ID = item.MANV;
-                nv.Mail = item.MAIL;
-                nv.Phone = item.SODT;
-                nv.Position = item.POSITION;
-                nv.Birthday = (DateTime)item.NGSINH;
-                nv.Startdate = (DateTime)item.NGVL;
-                nv.Salary = (decimal)item.LUONG;
-                nv.Cmnd = item.CMND;
-                nv.Bitimg = Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
-                nv.Img.Source = nv.Bitimg;
-                nv.Gender = item.GENDER;
-            }
-            Gender = nv.Gender;
+                nv.nhanvien = obj;
+                Name = nv.nhanvien.HOTEN;
+                Id = nv.nhanvien.MANV;
+                Phone = nv.nhanvien.SODT;
+                CMND = nv.nhanvien.CMND;
+                Salary = (decimal)nv.nhanvien.LUONG;
 
-            if (nv.Gender.CompareTo("Male")==0)
-            {
-            IsMale = true;
-            IsFeMale = false;
+                Birthday = (DateTime)nv.nhanvien.NGSINH;
+                Joineddate = (DateTime)nv.nhanvien.NGVL;
+
+                Position = nv.nhanvien.POSITION;
+                Mail = nv.nhanvien.MAIL;
+                Note = nv.nhanvien.GHICHU;
+                Acc = nv.nhanvien.ACC;
+                Bitimg = Converter.Instance.ConvertByteToBitmapImage(nv.nhanvien.PICBI);
+                imgAvatar.Source = Bitimg;
+                btnAvatar.Content = imgAvatar;
+
+                Gender = nv.nhanvien.GENDER;
+                if (nv.nhanvien.GENDER == null)
+                {
+                    Gender = "unknow";
+                }
+                if (Gender.CompareTo("Male") == 0)
+                {
+                    IsMale = true;
+                    IsFeMale = false;
+
+                }
+                else
+                {
+                    IsMale = false;
+                    IsFeMale = true;
+                }
+                var pass = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == nv.nhanvien.ACC).SingleOrDefault();
+                Password = pass.PASS;
             }
-            else
-            {
-                IsMale = false;
-                IsFeMale = true;
-            }
+
         }
 
         void LoadPage(Page p)
         {
+            loadEmployee();
 
         }
 
