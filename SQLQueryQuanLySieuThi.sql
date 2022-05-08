@@ -43,6 +43,8 @@ CREATE TABLE NHANVIEN
  primary key(MANV)
 )
 
+
+
 alter table NHANVIEN add GHICHU nvarchar(250)
 alter table KHACHHANG add GHICHU nvarchar(250)
 alter table SANPHAM add GHICHU nvarchar(250)

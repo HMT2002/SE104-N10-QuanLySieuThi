@@ -67,6 +67,10 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
         public byte[] ConvertBitmapImageToBytes(BitmapImage bitmapImage)
         {
+            if (bitmapImage == null)
+            {
+                return null;
+            }
             byte[] data;
             JpegBitmapEncoder encoder = new JpegBitmapEncoder();
             encoder.Frames.Add(BitmapFrame.Create(bitmapImage));

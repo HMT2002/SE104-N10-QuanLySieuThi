@@ -45,7 +45,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
@@ -268,6 +268,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -276,10 +277,21 @@
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
                                           Height="50"
-                                          SelectedIndex="{Binding SupplierTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                          
+                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <DatePicker Width="160"
+                                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          materialDesign:HintAssist.Hint="Type"
+                                          ItemsSource="{Binding ProductType,Mode=TwoWay}"
+                                          materialDesign:TextFieldAssist.HasClearButton="True"
+                                          Width="auto"
+                                          Height="50"
+                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                </ComboBox>
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                                                <DatePicker Width="auto"
                                             materialDesign:HintAssist.Hint="Ngày nhập hàng"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding ImportDate}"
@@ -293,15 +305,11 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Type"
-                                          ItemsSource="{Binding ProductType,Mode=TwoWay}"
-                                          materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
-                                          Height="50"
-                                          SelectedIndex="{Binding ProductTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                                </ComboBox>
 
+                                <TextBox materialDesign:HintAssist.Hint="Tên sản phẩm"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding ProductName}" />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
@@ -326,7 +334,8 @@
                                      SpellCheck.IsEnabled="True"
                                      materialDesign:HintAssist.Hint="Ghi chú"
                                      Text="{Binding Note}"
-                                     Height="80" 
+                                     Height="100"
+                                     Margin="5" 
                                      />
                         </Grid>
                         <Grid Grid.Row="3">
@@ -336,13 +345,14 @@
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Right"
                                     Margin="10"
-                                    Width="150"
+                                    Width="100"
                                     Command="{Binding AddProductCmd}"
                                     CommandParameter="{Binding ElementName=grdMain}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" /> 
 
                         </Grid>
                     </Grid>
+                    
                 </materialDesign:Card>
 
 

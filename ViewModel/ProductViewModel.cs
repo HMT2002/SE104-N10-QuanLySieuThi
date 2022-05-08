@@ -88,6 +88,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
         public ICommand BillCommand { get; set; }
+        public ICommand openNewSupplierCommand { get; set; }
+
 
         public ICommand LoadedPageCmd { get; set; }
         public ICommand LoadedItemCtrlCmd { get; set; }
@@ -125,10 +127,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private List<string> _SupplierType = new List<string>();
 
         public List<string> SupplierType { get => _SupplierType; set { _SupplierType = value; OnPropertyChanged(); } }
-        private string _ProductTypeItem;
-        public string ProductTypeItem { get => _ProductTypeItem; set { _ProductTypeItem = value; OnPropertyChanged(); } }
-        private string _SupplierTypeItem;
-        public string SupplierTypeItem { get => _SupplierTypeItem; set { _SupplierTypeItem = value; OnPropertyChanged(); } }
+        private string _SeletedProductType;
+        public string SeletedProductType { get => _SeletedProductType; set { _SeletedProductType = value; OnPropertyChanged(); } }
+        private string _SeletedSupplierType;
+        public string SeletedSupplierType { get => _SeletedSupplierType; set { _SeletedSupplierType = value; OnPropertyChanged(); } }
         public ProducViewModel()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -136,18 +138,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Ammount = 0;
             Price = 0;
             ImportDate = DateTime.Now;
-            
+            Bitimg = null;
             sp = new SanPham();
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(p); });
+            openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(p); });
+
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
             IncrementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Increase(p); });
             DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
-
 
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });
@@ -156,7 +159,33 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             NhapHangList = new ObservableCollection<SanPham>();
 
 
-            sp.getAllProductFromDatabase();
+        }
+
+        private void openWinAddSupplier(object p)
+        {
+            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
+            int i = 1;
+            foreach (var item in supplierList)
+            {
+                SupplierType.Add(item.TEN);
+            }
+
+            NhapHangList = new ObservableCollection<SanPham>();
+            do
+            {
+                ProductId = Converter.Instance.RandomString(5);
+
+            } while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
+            do
+            {
+                ImportId = Converter.Instance.RandomString(5);
+
+            } while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == ImportId).Count() > 0);
+
+            winImportProduct win = new winImportProduct();
+            win.ShowDialog();
+
+
         }
 
         private void CompleteAdding()
@@ -181,12 +210,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 SuppliertId = Converter.Instance.RandomString(5);
             }
             while (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).Count() > 0);
-            var ncc = new NHACUNGCAP() {MACC=Converter.Instance.RandomString(5) };
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),NHACUNGCAP=ncc};
-            var nv2 = new SanPham() { Name = ProductName, Id = ProductId, Price = Price,Amount=Ammount,Dvt= ProductTypeItem, Bitimg = Bitimg };
-            NhapHangList.Add(nv2);
-            //DataProvider.Ins.DB.NHANVIEN.Add(nv);
-            //DataProvider.Ins.DB.SaveChanges();
+
+            var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType };
+            DataProvider.Ins.DB.SANPHAM.Add(nv);
+            DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
             NewProduct();
         }

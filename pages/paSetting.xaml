@@ -94,6 +94,7 @@
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              VerticalAlignment="Center"
                                              Text="{Binding Id}"
+                                             IsReadOnly="True"
                                              Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="1">
@@ -118,7 +119,9 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center"
                                              Text="{Binding Position}"
-                                             Margin="20"/>
+                                             Margin="20"
+                                        IsReadOnly="True"
+                                        />
                                 </Grid>
                             </Grid>
 
@@ -144,7 +147,8 @@
                                         materialDesign:TextFieldAssist.HasClearButton="True"
                                                 SelectedDate="{Binding Joineddate}"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                        Margin="20"/>
+                                        IsEnabled="False"
+                                                Margin="20"/>
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <TextBox
@@ -160,6 +164,7 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center"
                                         Text="{Binding Salary}"
+                                        IsReadOnly="True"
                                     Margin="20"/>
                                 </Grid>
                             </Grid>
@@ -200,17 +205,18 @@
                     </Grid>
                     <Grid Grid.Column="1">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="14*"/>
+                            <RowDefinition />
+                            <RowDefinition Height="14*" />
                         </Grid.RowDefinitions>
-                        <Button
-                            Style="{StaticResource MaterialDesignRaisedLightButton}"
-                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                            Content="_Cập nhật thông tin"
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,20,20"
-                            Command="{Binding DeleteProductCmd}"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" HorizontalAlignment="Right" Grid.Row="1" />
+                        <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                Content="_Cập nhật thông tin"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,20,20"
+                                Command="{Binding ModifyEmployeeCmd}"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                HorizontalAlignment="Right"
+                                Grid.Row="1" />
                     </Grid>
                 </Grid>
             </Grid>

@@ -96,6 +96,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string Search { get => _Search; set 
             {
                 _Search = value;
+                NewEmployee();
                 view.Filter = UserFilter;
                 FilterItem(); 
                 OnPropertyChanged(); 
@@ -105,6 +106,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private List<string> _SearchType=new List<string>() { "ID","Name"};
 
         public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+        private List<string> _PositionType = new List<string>() { "Quản lí", "Nhân viên" };
+
+        public List<string> PositionType { get => _PositionType; set { _PositionType = value; OnPropertyChanged(); } }
 
 
         public CollectionView view;
@@ -222,10 +227,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string _PositionTypeItem;
+        public string PositionTypeItem { get => _PositionTypeItem; set { _PositionTypeItem = value; OnPropertyChanged(); } }
         private void NewEmployee()
         {
             Password = "";
             UserName = "";
+            Password = "";
             Mail = "";
             Id = "";
             Position = "";
@@ -265,8 +274,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
                     Birthday =(DateTime) SelectedItem.nhanvien.NGSINH;
                     Joineddate =(DateTime) SelectedItem.nhanvien.NGVL;
-
                     Position = SelectedItem.nhanvien.POSITION;
+                    SelectedPositon= SelectedItem.nhanvien.POSITION;
                     Mail = SelectedItem.nhanvien.MAIL;
                     Note = SelectedItem.nhanvien.GHICHU;
                     Acc = SelectedItem.nhanvien.ACC;
@@ -290,10 +299,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                         IsMale = false;
                         IsFeMale = true;
                     }
+
+                    Acc = SelectedItem.nhanvien.ACC;
+                    var nv = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == SelectedItem.nhanvien.ACC).SingleOrDefault();
+                    if (nv != null)
+                    {
+                        Password = nv.PASS;
+
+                    }
+                    else
+                    {
+                        Password = "";
+                    }
                 }
             }
         }
 
+
+        private string _SelectedPositon;
+        public string SelectedPositon { get => _SelectedPositon; set { _SelectedPositon = value; OnPropertyChanged(); } }
 
         private void LoadNhanVienData()
         {
@@ -324,7 +348,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
             nv.HOTEN = Name;
             nv.LUONG = Salary;
-            nv.POSITION = Position;
+            nv.POSITION = SelectedPositon;
             nv.CMND = CMND;
             nv.MAIL = Mail;
             nv.MANV = Id;
@@ -343,6 +367,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 nv.GENDER = "Female";
             }
+            int pri = 1;
+            if (SelectedPositon.CompareTo("Quản lí") == 0)
+            {
+                pri = 2;
+            }
+
+
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == SelectedItem.nhanvien.ACC).SingleOrDefault();
+            if (account == null)
+            {
+                account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
+                DataProvider.Ins.DB.ACCOUNT.Add(account);
+            }
+            else
+            {
+                account.PASS = Password;
+                account.PRI = pri;
+            }
+
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
         }
@@ -359,11 +402,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 MessageBox.Show("Employee ID existed.");
                 return;
             }
+            int pri = 1;
+            if (SelectedPositon.CompareTo("Quản lí") == 0)
+            {
+                pri = 2;
+            }
 
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc}; 
+
+            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc};
+            var account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
+
             var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv };
             NhanVienList.Add(nv2);
             DataProvider.Ins.DB.NHANVIEN.Add(nv);
+            DataProvider.Ins.DB.ACCOUNT.Add(account);
+
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
             NewEmployee();

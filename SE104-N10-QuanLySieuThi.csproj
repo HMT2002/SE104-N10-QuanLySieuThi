@@ -177,6 +177,9 @@
     <Compile Include="windows\winAddProduct.xaml.cs">
       <DependentUpon>winAddProduct.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\winAddSupplier.xaml.cs">
+      <DependentUpon>winAddSupplier.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\winBill.xaml.cs">
       <DependentUpon>winBill.xaml</DependentUpon>
     </Compile>
@@ -271,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\winAddProduct.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winAddSupplier.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

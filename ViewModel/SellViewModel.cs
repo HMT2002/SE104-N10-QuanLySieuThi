@@ -48,8 +48,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         
         public SellViewModel()
         {
-            sp.getAllProductFromDatabase();
-            listSelecteditems = new ObservableCollection<SanPham>(sp.getAllProductFromDatabase());
+            //sp.getAllProductFromDatabase();
+            //listSelecteditems = new ObservableCollection<SanPham>(sp.getAllProductFromDatabase());
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { AddItemIntoListBox(p); isMainLoaded = true; }; });
             ThanhTien = SoLuongSP * DonGia;
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });

@@ -64,10 +64,18 @@
                                  Text="{Binding Mail}" />
                     </Grid>
                     <Grid Grid.Row="2">
-                        <TextBox materialDesign:HintAssist.Hint="Chức vụ"
+                        <!--<TextBox materialDesign:HintAssist.Hint="Chức vụ"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
-                                 Text="{Binding Position}" />
+                                 Text="{Binding Position}" />-->
+                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  materialDesign:HintAssist.Hint="Chức vụ"
+                                  ItemsSource="{Binding PositionType,Mode=TwoWay}"
+                                  materialDesign:TextFieldAssist.HasClearButton="True"
+                                  Width="auto"
+                                  Height="50"
+                                  SelectedItem="{Binding SelectedPositon,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        </ComboBox>
                     </Grid>
                     <Grid Grid.Row="3">
                         <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
@@ -168,13 +176,26 @@
 
                     </Grid>
                     <Grid Grid.Row="1">
-                        <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                                                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  Text="{Binding Acc}"
                                  VerticalAlignment="Center"
                                  Margin="5"
                                  materialDesign:HintAssist.Hint="Tài khoản"
                                  
                                  />
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <TextBox materialDesign:HintAssist.Hint="Mật khẩu"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Text="{Binding Password,Mode=TwoWay}"
+                                     VerticalAlignment="Center"
+                                     Margin="20" />
+                        </Grid>
                     </Grid>
                 </Grid>
                 <Grid Grid.Column="3">

@@ -60,6 +60,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedPageCmd { get; set; }
         public ICommand PickImage { get; set; }
 
+        public ICommand ModifyEmployeeCmd { get; set; }
+
+
         public Button btnAvatar = new Button();
 
         private BitmapImage bitimg = new BitmapImage();
@@ -78,6 +81,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
+
+            ModifyEmployeeCmd = new RelayCommand<object>((p) => {
+                var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
+
+                if (display == null || display.Count() == 0)
+                {
+                    return false;
+                }
+
+                return true;
+            }, (p) => { ModifyEmployee(); });
         }
         public void loadEmployee()
         {
@@ -123,6 +137,53 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
 
         }
+
+        private void ModifyEmployee()
+        {
+            var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).SingleOrDefault();
+            nv.HOTEN = Name;
+            nv.LUONG = Salary;
+            nv.POSITION = Position;
+            nv.CMND = CMND;
+            nv.MAIL = Mail;
+            nv.MANV = Id;
+            nv.SODT = Phone;
+            nv.NGSINH = Birthday;
+            nv.NGVL = Joineddate;
+            nv.GHICHU = Note;
+            nv.ACC = Acc;
+            nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
+            if (IsMale)
+            {
+                nv.GENDER = "Male";
+
+            }
+            else
+            {
+                nv.GENDER = "Female";
+            }
+            int pri = 1;
+            if (Position.CompareTo("Quản lí") == 0)
+            {
+                pri = 2;
+            }
+
+
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == Acc).SingleOrDefault();
+            if (account == null)
+            {
+                account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
+                DataProvider.Ins.DB.ACCOUNT.Add(account);
+            }
+            else
+            {
+                account.PASS = Password;
+                account.PRI = pri;
+            }
+            DataProvider.Ins.DB.SaveChanges();
+            loadEmployee();
+        }
+
 
         void LoadPage(Page p)
         {

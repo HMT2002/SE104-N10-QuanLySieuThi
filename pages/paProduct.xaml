@@ -54,16 +54,24 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                       <Button Margin="10 10 10 10" 
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                            Width="auto" Height="50"
-                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                            Content="Add" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Command="{Binding BillCommand}" CommandParameter="{Binding ElementName=ProductPage}" />
-                       <!--<Button Margin="10 10 10 10" 
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                            Width="auto" Height="50"
-                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                            Content="Bill" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Command="{Binding BillCommand}" CommandParameter="{Binding ElementName=ProductPage}" />-->
+                        <Button Margin="10 10 10 10"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="auto"
+                                Height="50"
+                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                Content="Add"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Command="{Binding BillCommand}"
+                                CommandParameter="{Binding ElementName=ProductPage}" />
+                        <Button Margin="10 10 10 10"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="auto"
+                                Height="50"
+                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                Content="Bill"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Command="{Binding openNewSupplierCommand}"
+                                CommandParameter="{Binding ElementName=ProductPage}" />
                     </StackPanel>    
                 </Grid>
             </Grid>
