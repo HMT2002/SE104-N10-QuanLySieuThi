@@ -59,7 +59,7 @@
                                 Width="auto"
                                 Height="50"
                                 ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Add"
+                                Content="Add product"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding BillCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
@@ -68,7 +68,7 @@
                                 Width="auto"
                                 Height="50"
                                 ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Bill"
+                                Content="Add supplier"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding openNewSupplierCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />

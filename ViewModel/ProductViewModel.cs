@@ -43,6 +43,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string ProductName { get => _ProductName; set { _ProductName = value; OnPropertyChanged(); } }
         private string _Note;
         public string Note { get => _Note; set { _Note = value; OnPropertyChanged(); } }
+
+        private string _Phone;
+        public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
+        private string _Origin;
+        public string Origin { get => _Origin; set { _Origin = value; OnPropertyChanged(); } }
+
+        private string _SuppliertName;
+        public string SuppliertName { get => _SuppliertName; set { _SuppliertName = value; OnPropertyChanged(); } }
+
         private int _Ammount;
         public int Ammount { get => _Ammount; set
             { 
@@ -97,6 +106,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedGridCmd { get; set; }
 
         public ICommand AddProductCmd { get; set; }
+
+
         public ICommand DeleteProductCmd { get; set; }
         public ICommand CompleteCmd { get; set; }
 
@@ -138,13 +149,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Ammount = 0;
             Price = 0;
             ImportDate = DateTime.Now;
+            Phone = "";
+            Origin = "";
+            SuppliertName = "";
+            
             Bitimg = null;
             sp = new SanPham();
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(p); });
-            openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(p); });
+            openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
@@ -158,31 +173,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             NhapHangList = new ObservableCollection<SanPham>();
 
-
+            NewProduct();
+            NewSupplier();
         }
 
-        private void openWinAddSupplier(object p)
+        private void NewSupplier()
         {
-            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
-            int i = 1;
-            foreach (var item in supplierList)
+            do
             {
-                SupplierType.Add(item.TEN);
+                SuppliertId = Converter.Instance.RandomString(5);
             }
+            while (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).Count() > 0);
+            Phone = "";
+            Origin = "";
+            SuppliertName = "";
+            Note = "";
+        }
 
-            NhapHangList = new ObservableCollection<SanPham>();
-            do
-            {
-                ProductId = Converter.Instance.RandomString(5);
-
-            } while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
-            do
-            {
-                ImportId = Converter.Instance.RandomString(5);
-
-            } while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == ImportId).Count() > 0);
-
-            winImportProduct win = new winImportProduct();
+        private void openWinAddSupplier()
+        {
+            winAddSupplier win = new winAddSupplier();
             win.ShowDialog();
 
 
@@ -205,12 +215,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 MessageBox.Show("Product ID existed.");
                 return;
             }
-            do
-            {
-                SuppliertId = Converter.Instance.RandomString(5);
-            }
-            while (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).Count() > 0);
-
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
             var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType };
             DataProvider.Ins.DB.SANPHAM.Add(nv);
@@ -238,7 +242,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void NewProduct()
         {
-            ProductId = "";
+            do
+            {
+                ProductId = Converter.Instance.RandomString(5);
+            }
+            while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
             ProductName = "";
             Price = 0;
             Ammount = 0;

@@ -158,6 +158,7 @@
     <Compile Include="usercontrols\ucEmpoyee.xaml.cs">
       <DependentUpon>ucEmpoyee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\BuyViewModel.cs" />

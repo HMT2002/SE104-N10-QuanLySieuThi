@@ -1,11 +1,11 @@
-﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winImportProduct"
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winAddSupplier"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        Title="winImportProduct"
+        Title="winAddSupplier"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        DataContext="{StaticResource ProductVM }"
+        DataContext="{StaticResource AddSupplierVM }"
         Name="RegistSupplierWin">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -39,7 +39,198 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=RegistInformationWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            
+            <Grid>
+                <materialDesign:Card Margin="20"
+                                     VerticalAlignment="Stretch"
+                                     Height="auto">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin"
+                                        Value="5 5 5 5"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <!--<Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0" Grid.Column="0">
+                                -->
+                        <!--<TextBox materialDesign:HintAssist.Hint="Mã phiếu nhập"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding ImportId}" />-->
+                        <!--
+
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="1">
+                                <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding ProductId}" />
+
+                            </Grid>
+                            <Grid Grid.Row="0" Grid.Column="2">
+
+                            </Grid>
+                            <Grid Grid.Row="1" Grid.Column="0">
+                                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          materialDesign:HintAssist.Hint="Type"
+                                          ItemsSource="{Binding ProductType,Mode=TwoWay}"
+                                          materialDesign:TextFieldAssist.HasClearButton="True"
+                                          Width="auto"
+                                          Height="50"
+                                          SelectedIndex="{Binding ProductTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                </ComboBox>
+                            </Grid>
+                            
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBox materialDesign:HintAssist.Hint="Tên sản phẩm"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding ProductName}" />
+
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                                                <TextBox materialDesign:HintAssist.Hint="Giá"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Top"
+                                         Margin="0,0,-0.2,-0.4"
+                                         Text="{Binding Price}" />
+
+                            </Grid>
+                            <Grid Grid.Row="2">
+                                -->
+                        <!--<TextBox materialDesign:HintAssist.Hint="Số lượng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding Ammount}" />-->
+                        <!--
+                            </Grid>
+                            <Grid Grid.Row="3">
+                                -->
+                        <!--<TextBox materialDesign:HintAssist.Hint="Tổng cộng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding Summary,Mode=TwoWay}"
+                                         IsReadOnly="True" />-->
+                        <!--
+                            </Grid>
+
+                        </Grid>
+
+                                -->
+                        <!--<Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                        Content="_THÊM"
+                                        Command="{Binding AddProductCmd}"
+                                        CommandParameter="{Binding ElementName=grdMain}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />-->
+
+                        <!--<Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                    Content="_XOÁ"
+                                    Command="{Binding DeleteProductCmd}"
+                                    CommandParameter="{Binding ElementName=grdMain}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />-->
+                        <!--<Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                    Content="_HOÀN TẤT"
+                                    Command="{Binding CompleteCmd}"
+                                    CommandParameter="{Binding ElementName=grdMain}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />-->
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+
+                                <TextBox materialDesign:HintAssist.Hint="Tên Nhà cung cấp"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding SuppliertName}" />
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBox materialDesign:HintAssist.Hint="Mã Nhà cung cấp"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding SuppliertId}" />
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Margin="0,0,-0.2,-0.4"
+                                         Text="{Binding Phone}" />
+                            </Grid>
+                            <Grid Grid.Column="3">
+                                <TextBox materialDesign:HintAssist.Hint="Nước"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Margin="0,0,-0.2,-0.4"
+                                         Text="{Binding Origin}" />
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBox TextWrapping="Wrap"
+                                     VerticalAlignment="Stretch"
+                                     MinWidth="280"
+                                     AcceptsReturn="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     SpellCheck.IsEnabled="True"
+                                     materialDesign:HintAssist.Hint="Ghi chú"
+                                     Text="{Binding Note}"
+                                     Height="100"
+                                     Margin="5" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                    Content="_THÊM"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Right"
+                                    Margin="10"
+                                    Width="100"
+                                    Command="{Binding AddSupplierCmd}"
+                                    CommandParameter="{Binding ElementName=grdMain}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
+                        </Grid>
+                    </Grid>
+
+                </materialDesign:Card>
+
+
+            </Grid>
         </Grid>
     </Grid>
 </Window>
