@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -103,8 +104,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedPageCmd { get; set; }
         public ICommand LoadedItemCtrlCmd { get; set; }
 
-        public ICommand LoadedGridCmd { get; set; }
-
         public ICommand AddProductCmd { get; set; }
 
 
@@ -115,8 +114,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public int countclick = 0;
         public TextBlock OrClickMeCount=new TextBlock();
 
-        public ICommand IncrementOrClickMeCountCommand { get; set; }
-        public ICommand DecreasementOrClickMeCountCommand { get; set; }
 
         public bool isMainLoaded=false;
 
@@ -162,9 +159,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
-            LoadedGridCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { LoadGrid(p); });
-            IncrementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Increase(p); });
-            DecreasementOrClickMeCountCommand = new RelayCommand<Button>((p) => { return true; }, (p) => { Decrease(p); });
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
@@ -172,6 +166,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CompleteAdding(); });
 
             NhapHangList = new ObservableCollection<SanPham>();
+
 
             NewProduct();
             NewSupplier();
@@ -216,7 +211,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType };
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price };
             DataProvider.Ins.DB.SANPHAM.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
@@ -237,7 +232,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void LoadTonKhoData()
         {
-            
+            TonKhoList = new ObservableCollection<SanPham>();
+
+            var objectList = DataProvider.Ins.DB.SANPHAM;
+            foreach (var item in objectList)
+            {
+                SanPham sanpham = new SanPham();
+                sanpham.sanpham = item;
+                sanpham.Bitimg = Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
+                sanpham.Img.Source = sanpham.Bitimg;
+                TonKhoList.Add(sanpham);
+            }
+            view = (CollectionView)CollectionViewSource.GetDefaultView(TonKhoList);
+            view.Filter = UserFilter;
+
         }
 
         private void NewProduct()
@@ -260,36 +268,56 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        private void Decrease(Button p)
-        {
-            countclick--;
-            OrClickMeCount = new TextBlock();
-            if (OrClickMeCount != null)
-                OrClickMeCount.Text = countclick.ToString();
-            p.Content = OrClickMeCount;
-        }
+        public CollectionView view;
+        private List<string> _SearchType = new List<string>() { "ID", "Name" };
 
-        private void Increase(Button p)
+        public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+        private string _Search;
+        public string Search
         {
-            countclick++;
-            OrClickMeCount = new TextBlock();
-            if (OrClickMeCount != null)
-                OrClickMeCount.Text = countclick.ToString();
-            p.Content = OrClickMeCount;
+            get => _Search; set
+            {
+                _Search = value;
+                NewProduct();
+                view.Filter = UserFilter;
+                FilterItem();
+                OnPropertyChanged();
+            }
         }
-
-        public void LoadGrid(Grid p)
+        public bool UserFilter(object obj)
         {
-            //LoadProductFromDatabase(p);
-            //LoadEmployeeFromdatabase(p);
+            if (string.IsNullOrEmpty(Search))
+            {
+                return true;
+            }
+            switch (SearchTypeItem)
+            {
+                case "Name":
+                    return (obj as SanPham).sanpham.TENSP.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                case "ID":
+                    return (obj as SanPham).sanpham.MASP.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+                default:
+                    break;
+            }
+
+            return true; ;
+        }
+        private void FilterItem()
+        {
+            CollectionViewSource.GetDefaultView(NhapHangList).Refresh();
+        }
+        private string _SearchTypeItem;
+        public string SearchTypeItem
+        {
+            get => _SearchTypeItem; set
+            {
+                _SearchTypeItem = value;
+                view.Filter = UserFilter;
+                OnPropertyChanged();
+            }
         }
 
         void LoadPage(Page p)
-        {
-
-        }
-
-        private void ClickId(object sender, EventArgs e)
         {
 
         }

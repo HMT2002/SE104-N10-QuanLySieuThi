@@ -204,9 +204,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             switch (SearchTypeItem)
             {
-                case "1":
+                case "Name":
                     return (obj as NhanVien).nhanvien.HOTEN.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
-                case "0":
+                case "ID":
                     return (obj as NhanVien).nhanvien.MANV.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
                 default:
                     break;
@@ -324,23 +324,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             NhanVienList = new ObservableCollection<NhanVien>();
             
             var objectList = DataProvider.Ins.DB.NHANVIEN;
-            int i = 1;
             foreach (var item in objectList)
             {
                 NhanVien nhanvien = new NhanVien();
-
                 nhanvien.nhanvien = item;
-
                 nhanvien.Bitimg= Converter.Instance.ConvertByteToBitmapImage(item.PICBI);
-                nhanvien.Img.Source = nhanvien.Bitimg;
-                
+                nhanvien.Img.Source = nhanvien.Bitimg;          
                 NhanVienList.Add(nhanvien);
-                i++;
             }
-
             view = (CollectionView)CollectionViewSource.GetDefaultView(NhanVienList);
             view.Filter = UserFilter;
-
         }
 
         private void ModifyEmployee()

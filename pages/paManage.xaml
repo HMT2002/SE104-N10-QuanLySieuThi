@@ -262,7 +262,7 @@
                                   materialDesign:TextFieldAssist.HasClearButton="True"
                                   Width="auto"
                                   Height="50"
-                                  SelectedIndex="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -348,8 +348,6 @@
                                     </StackPanel>
                                 </materialDesign:Card>
                             </WrapPanel>
-
-                            <!--<uc:ucEmpoyee></uc:ucEmpoyee>-->
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                     <i:Interaction.Triggers>

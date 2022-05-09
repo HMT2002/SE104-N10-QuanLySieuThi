@@ -45,11 +45,26 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                        <TextBox x:Name="CommentTextBox" 
-                             VerticalAlignment="Top"
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  materialDesign:HintAssist.Hint="Type"
+                                  ItemsSource="{Binding SearchType,Mode=TwoWay}"
+                                  materialDesign:TextFieldAssist.HasClearButton="True"
+                                  Width="auto"
+                                  Height="50"
+                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                        </ComboBox>
+
+                        <TextBox x:Name="CommentTextBox"
+                                 VerticalAlignment="Center"
                                  Margin="10 10 10 10"
-                             materialDesign:HintAssist.Hint="Find" 
-                             materialDesign:HintAssist.HelperTextFontSize="16" />
+                                 Width="400"
+                                 materialDesign:HintAssist.Hint="Find"
+                                 materialDesign:HintAssist.HelperTextFontSize="20"
+                                 Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                    </StackPanel>
+
 
                 </Grid>
                 <Grid Grid.Column="1">
@@ -82,43 +97,58 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="200"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Auto" >
-
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListBox ItemsSource="{Binding TonKhoList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                          SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <UniformGrid Columns="4"
-                                         IsItemsHost="True">
-
+                            <UniformGrid Columns="6"
+                                         IsItemsHost="True"
+                                         Width="auto"
+                                         Height="auto"
+                                         >
                             </UniformGrid>
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Background="NavajoWhite"
-                                                 Height="120"
-                                                 Width="120"
-                                                 UniformCornerRadius="10"
-                                                 Margin="20 20 20 20">
-                                <StackPanel Background="#F5F50C"
-                                            Opacity="1"
-                                            Height="100"
-                                            Width="100"
-                                            HorizontalAlignment="Stretch">
-                                    <!--<Image Source="{Binding Bitimg}"
-                                           Width="100"
-                                           Height="100"
-                                           Margin="3 3 3 3"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"></Image>-->
-                                    <TextBlock Text="{Binding sanpham.GIA}"></TextBlock>
-                                    <TextBlock Text="{Binding sanpham.MACC}"></TextBlock>
-                                    <TextBlock Text="{Binding sanpham.TENSP}"></TextBlock>
-                                    <TextBlock Text="{Binding sanpham.SL}"></TextBlock>
-
-                                </StackPanel>
-                            </materialDesign:Card>
+                            <WrapPanel HorizontalAlignment="Stretch"
+                                       VerticalAlignment="Stretch"
+                                       >
+                                <materialDesign:Card Background="NavajoWhite"
+                                                     UniformCornerRadius="10"
+                                                     HorizontalAlignment="Stretch"
+                                                     HorizontalContentAlignment="Stretch"
+                                                     VerticalContentAlignment="Stretch"
+                                                     VerticalAlignment="Stretch"
+                                                     
+                                                     >
+                                    <StackPanel Background="#00F5F50C"
+                                                Height="auto"
+                                                Width="auto"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch">
+                                        <Image Source="{Binding Bitimg}"
+                                               Width="100"
+                                               Height="100"
+                                               Margin="3 3 3 3"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"></Image>
+                                        <TextBlock Text="{Binding sanpham.MASP}"
+                                                   Margin="3 3 3 3"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding sanpham.TENSP}"
+                                                   Margin="3 3 3 3 "
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding sanpham.GIA}"
+                                                   Margin="3 3 3 3 "
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"></TextBlock>
+                                    </StackPanel>
+                                </materialDesign:Card>
+                            </WrapPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
 
