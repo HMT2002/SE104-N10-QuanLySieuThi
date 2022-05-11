@@ -158,6 +158,9 @@
     <Compile Include="usercontrols\ucEmpoyee.xaml.cs">
       <DependentUpon>ucEmpoyee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="usercontrols\ucProductAmmountSelection.xaml.cs">
+      <DependentUpon>ucProductAmmountSelection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
@@ -271,6 +274,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="usercontrols\ucEmpoyee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrols\ucProductAmmountSelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

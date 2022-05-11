@@ -92,7 +92,7 @@ insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP006','7up','chai','CC00
 
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP007','Sting','chai','CC004',7000,50)
 
-select * from SANPHAM
+delete from SANPHAM
 
 CREATE TABLE HOADON(
 SOHD varchar(10),

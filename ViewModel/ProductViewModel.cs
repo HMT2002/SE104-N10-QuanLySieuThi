@@ -278,7 +278,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _Search; set
             {
                 _Search = value;
-                NewProduct();
                 view.Filter = UserFilter;
                 FilterItem();
                 OnPropertyChanged();

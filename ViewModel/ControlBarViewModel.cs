@@ -20,6 +20,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         #endregion
 
+        #region vary
+
+        #endregion
+
         public ControlBarViewModel()
         {
             CloseWindowCmd = new RelayCommand<UserControl>((p) => { return p==null?false:true; }, (p) => {
@@ -66,7 +70,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     w.DragMove();
                 }
             });
-
         }
 
         FrameworkElement GetWindowParent(UserControl p)

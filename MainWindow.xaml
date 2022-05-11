@@ -40,7 +40,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <uc:ucControlBar Tag="{Binding Title,ElementName=mainWindow}"></uc:ucControlBar>
+            <uc:ucControlBar ></uc:ucControlBar>
         </Grid>
         <!--<Grid Grid.Row="1">
 

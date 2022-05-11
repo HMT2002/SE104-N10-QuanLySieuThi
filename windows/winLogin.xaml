@@ -54,7 +54,10 @@
                         FontFamily="Champagne &amp; Limousines"
                         FontSize="18"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding UserName}" />
+                        Text="{Binding UserName}" 
+                        Focusable="True"
+                        
+                        />
                     <PasswordBox
                         Name="FloatingPasswordBox"
                         Margin="0,10"

@@ -25,11 +25,6 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid x:Name="grdMain">
-        <i:Interaction.Triggers>
-            <i:EventTrigger EventName="Loaded">
-                <i:InvokeCommandAction Command="{Binding LoadedGridCmd}" CommandParameter="{Binding ElementName=grdMain}" />
-            </i:EventTrigger>
-        </i:Interaction.Triggers>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>

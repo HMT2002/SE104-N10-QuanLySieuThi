@@ -10,11 +10,13 @@
       Background="#92EBEB"
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{StaticResource SellVM}"
       
       x:Name="SellPage"
 
+      
       >
 
     <Grid>
@@ -35,45 +37,27 @@
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                                <ListView>
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
+                                <ScrollViewer HorizontalAlignment="Stretch"
+                                              Height="auto"
+                                              VerticalAlignment="Stretch"
+                                              Width="auto"
+                                              VerticalScrollBarVisibility="Auto"
+                                              CanContentScroll="True"
+                                              Background="Transparent">
+                                    <ListView materialDesign:HintAssist.Hint="Category"
+                                              ItemsSource="{Binding CategoryList,Mode=TwoWay}"
+                                              materialDesign:TextFieldAssist.HasClearButton="True"
+                                              Width="auto"
+                                              Height="auto"
+                                              >
+                                    </ListView>
+                                </ScrollViewer>
 
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
 
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-
-
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-
-                                    <TextBlock Margin="3 3 3 3">1.</TextBlock>
-
-
-                                </ListView>
                             </Grid>
                             <Grid Grid.Row="1">
                                 <StackPanel Margin="3 3 3 3 ">
-                                    
-                                    <materialDesign:Card>
-                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
-                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                        </Button>
-                                    </materialDesign:Card>
 
-                                    <materialDesign:Card>
-                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
-                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                        </Button>
-                                    </materialDesign:Card>
-                                    <materialDesign:Card>
-                                        <Button Width="80" Height="80" MaxWidth="80" MaxHeight="80" Margin="5 5 5 5 ">
-                                            <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                        </Button>
-                                    </materialDesign:Card>
                                 </StackPanel>
                             </Grid>
                         </Grid>
@@ -86,80 +70,63 @@
 
                         Background="AliceBlue">
                         <ScrollViewer>
-                            <UniformGrid Columns="3">
-                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                                                                <Button Width="100" Height="100" MaxWidth="100" MaxHeight="100" Margin="5 5 5 5 ">
-                                    <Image Source="52aef02361b592ebcba4.jpg"></Image>
-                                </Button>
-                            </UniformGrid>
+                            <ListBox ItemsSource="{Binding SanPhamList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="5"
+                                                     IsItemsHost="True"
+                                                     Width="auto"
+                                                     Height="auto">
+                                        </UniformGrid>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <WrapPanel HorizontalAlignment="Stretch"
+                                                   VerticalAlignment="Stretch">
+                                            <materialDesign:Card Background="NavajoWhite"
+                                                                 UniformCornerRadius="10"
+                                                                 HorizontalAlignment="Stretch"
+                                                                 HorizontalContentAlignment="Stretch"
+                                                                 VerticalContentAlignment="Stretch"
+                                                                 VerticalAlignment="Stretch">
+                                                <StackPanel Background="#00F5F50C"
+                                                            Height="auto"
+                                                            Width="auto"
+                                                            HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Stretch">
+                                                    <Image Source="{Binding Bitimg}"
+                                                           Width="100"
+                                                           Height="100"
+                                                           Margin="3 3 3 3"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"></Image>
+                                                    <TextBlock Text="{Binding sanpham.MASP}"
+                                                               Margin="3 3 3 3"
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"></TextBlock>
+                                                    <TextBlock Text="{Binding sanpham.TENSP}"
+                                                               Margin="3 3 3 3 "
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"></TextBlock>
+                                                    <TextBlock Text="{Binding sanpham.GIA}"
+                                                               Margin="3 3 3 3 "
+                                                               HorizontalAlignment="Center"
+                                                               VerticalAlignment="Center"></TextBlock>
+                                                </StackPanel>
+                                            </materialDesign:Card>
+                                        </WrapPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Loaded">
+                                        <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}"
+                                                               CommandParameter="{Binding ElementName=itemctrlMain}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ListBox>
                         </ScrollViewer>
 
                     </materialDesign:Card>
@@ -179,30 +146,32 @@
                                 <ScrollViewer>
                                     <StackPanel>
                                         <ListBox x:Name="listboxSelectedItem"
-                                                 ItemsSource="{Binding listSelecteditems}"
-                                                 
-                                                 SelectedItem="{Binding selecteditems}"
+                                                 ItemsSource="{Binding ListSelecteditems}"
                                                  >
 
-                                            <ListBox.ItemTemplate>
-                                                <DataTemplate>
-                                                    <DockPanel>
-                                                        <Image Source="{Binding Bitimg}" MaxHeight="40" MaxWidth="40" Margin="3 3 3 3"></Image>
-                                                        <TextBlock Text="{Binding Name}" Margin="3 3 3 3" VerticalAlignment="Center"></TextBlock>
+                                            <ListBox.ItemTemplate >
+                                                <DataTemplate >
 
+                                                    <DockPanel VerticalAlignment="Stretch" 
+                                                               HorizontalAlignment="Stretch"
+                                                               >
+                                                        <Image Source="{Binding Bitimg}"
+                                                               MaxHeight="40"
+                                                               MaxWidth="40"
+                                                               Margin="3 3 3 3"
+                                                               ></Image>
+                                                        <TextBlock Text="{Binding Name}"
+                                                                   Margin="3 3 3 3"
+                                                                   VerticalAlignment="Center"
+                                                                   ></TextBlock>
+                                                            <uc:ucProductAmmountSelection DockPanel.Dock="Right"
+                                                                                          Tag="{Binding Amount}">
+                                                                
+                                                            </uc:ucProductAmmountSelection>
                                                     </DockPanel>
                                                 </DataTemplate>
-                                                
-                                            </ListBox.ItemTemplate>
-                                            <!--<DataTemplate>
-                                                 <TextBlock Text="{Binding Name}" Margin="3 3 3 3" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
 
-                                            </DataTemplate>-->
-                                            <!--<ListBoxItem Content="XAML Tutorials" />
-                                            <ListBoxItem Content="WPF Tutorials" />
-                                            <ListBoxItem Content="Silverlight Tutorials" />
-                                            <ListBoxItem Content="Windows 10 Tutorials" />
-                                            <ListBoxItem Content="iOS Tutorials" />-->
+                                            </ListBox.ItemTemplate>
                                         </ListBox>
                                     </StackPanel>
                                 </ScrollViewer>

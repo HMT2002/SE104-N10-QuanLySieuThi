@@ -160,7 +160,7 @@
                 <Grid Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition />
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Button x:Name="bntPickImage"
@@ -170,8 +170,7 @@
                                 Width="auto"
                                 Content="{Binding imgAvatar}"
                                 Background="AliceBlue"
-                                Margin="5"
-                                >
+                                Margin="5">
                         </Button>
 
                     </Grid>
@@ -181,13 +180,11 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                                                    <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Text="{Binding Acc}"
-                                 VerticalAlignment="Center"
-                                 Margin="5"
-                                 materialDesign:HintAssist.Hint="Tài khoản"
-                                 
-                                 />
+                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Text="{Binding Acc}"
+                                     VerticalAlignment="Center"
+                                     Margin="5"
+                                     materialDesign:HintAssist.Hint="Tài khoản" />
                         </Grid>
                         <Grid Grid.Column="1">
                             <TextBox materialDesign:HintAssist.Hint="Mật khẩu"
@@ -283,8 +280,7 @@
                                  SpellCheck.IsEnabled="True"
                                  materialDesign:HintAssist.Hint="Ghi chú"
                                  Height="80"
-                                 Text="{Binding Note}"
-                                 />
+                                 Text="{Binding Note}" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -316,8 +312,7 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel HorizontalAlignment="Stretch"
-                                       VerticalAlignment="Stretch"
-                                       Tag="{Binding MANV}">
+                                       VerticalAlignment="Stretch">
                                 <materialDesign:Card Background="NavajoWhite"
                                                      UniformCornerRadius="10"
                                                      HorizontalAlignment="Stretch"
