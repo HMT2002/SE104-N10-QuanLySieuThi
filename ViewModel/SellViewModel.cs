@@ -67,8 +67,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public SellViewModel()
         {
-            IncreaseSelectAmmount =new RelayCommand<object>((p) => { return true; }, (p) => { Increase(); });
-            DecreaseSelectAmmount = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(); });
+            IncreaseSelectAmmount =new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
+            DecreaseSelectAmmount = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
             ListSelecteditems = new ObservableCollection<SanPham>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
             ThanhTien = SoLuongSP * DonGia;
@@ -164,19 +164,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
+                    SelectedItem.Amount = 5;
                     ListSelecteditems.Add(SelectedItem);
                 }
             }
         }
 
-        private void Increase()
+        private void Increase(object p)
         {
             SelectAmmount++;
         }
 
-        private void Decrease()
+        private void Decrease(object p)
         {
-            SelectAmmount--;
+
+            TextBlock txtblk = p as TextBlock;
+
+            
 
         }
     }

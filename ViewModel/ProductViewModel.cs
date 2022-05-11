@@ -128,7 +128,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ObservableCollection<SanPham> NhapHangList { get => _NhapHangList; set { _NhapHangList = value; OnPropertyChanged(); } }
 
-        private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" };
+        private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" ,"Gói"};
 
         public List<string> ProductType { get => _ProductType; set { _ProductType = value; OnPropertyChanged(); } }
 

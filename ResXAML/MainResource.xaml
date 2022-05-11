@@ -16,4 +16,5 @@
     <viewmodel:CreateEmployeeAccount x:Key="CreateEmployeeAccountVM"></viewmodel:CreateEmployeeAccount>
     <viewmodel:ImportProductViewModel x:Key="ImportProductVM"></viewmodel:ImportProductViewModel>
     <viewmodel:AddSupplierViewModel x:Key="AddSupplierVM"></viewmodel:AddSupplierViewModel>
+    <viewmodel:AmountControlViewModel x:Key="AmountControlVM"></viewmodel:AmountControlViewModel>
 </ResourceDictionary>

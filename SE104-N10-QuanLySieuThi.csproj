@@ -162,6 +162,7 @@
       <DependentUpon>ucProductAmmountSelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\AddSupplierViewModel.cs" />
+    <Compile Include="ViewModel\AmountControlViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BillViewModel.cs" />
     <Compile Include="ViewModel\BuyViewModel.cs" />

@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:viewmodel="clr-namespace:SE104_N10_QuanLySieuThi.ViewModel"
              mc:Ignorable="d"
-             DataContext="{StaticResource SellVM}">
+             DataContext="{StaticResource AmountControlVM}">
 
 
     <i:Interaction.Triggers>
@@ -34,7 +34,6 @@
                                     Background="#F0F8FF">
                                 <materialDesign:PackIcon Kind="Minus" />
                             </Button>
-                            <Separator></Separator>
                             <TextBlock
                                 Text="{Binding Tag,ElementName=ucSelectAmmount}"
                                 Width="30"
@@ -43,7 +42,6 @@
                                 HorizontalAlignment="Center"
                                 
                                 ></TextBlock>
-                            <Separator></Separator>
                             <Button Command="{Binding IncreaseSelectAmmount}"
                                     CommandParameter="{Binding ElementName=ucSelectAmmount}"
                                     ToolTip="Đóng"

@@ -150,24 +150,17 @@
                                                  >
 
                                             <ListBox.ItemTemplate >
-                                                <DataTemplate >
+                                                <DataTemplate>
 
-                                                    <DockPanel VerticalAlignment="Stretch" 
-                                                               HorizontalAlignment="Stretch"
-                                                               >
+                                                    <DockPanel VerticalAlignment="Stretch"
+                                                               HorizontalAlignment="Stretch">
                                                         <Image Source="{Binding Bitimg}"
                                                                MaxHeight="40"
                                                                MaxWidth="40"
-                                                               Margin="3 3 3 3"
-                                                               ></Image>
-                                                        <TextBlock Text="{Binding Name}"
+                                                               Margin="3 3 3 3"></Image>
+                                                        <TextBlock Text="{Binding  sanpham.TENSP }"
                                                                    Margin="3 3 3 3"
-                                                                   VerticalAlignment="Center"
-                                                                   ></TextBlock>
-                                                            <uc:ucProductAmmountSelection DockPanel.Dock="Right"
-                                                                                          Tag="{Binding Amount}">
-                                                                
-                                                            </uc:ucProductAmmountSelection>
+                                                                   VerticalAlignment="Center"></TextBlock>
                                                     </DockPanel>
                                                 </DataTemplate>
 
