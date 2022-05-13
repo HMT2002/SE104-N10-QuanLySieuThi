@@ -9,7 +9,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:viewmodel="clr-namespace:SE104_N10_QuanLySieuThi.ViewModel"
              mc:Ignorable="d"
-             DataContext="{StaticResource AmountControlVM}">
+             DataContext="{StaticResource SellVM}"
+             >
 
 
     <i:Interaction.Triggers>
@@ -35,7 +36,7 @@
                                 <materialDesign:PackIcon Kind="Minus" />
                             </Button>
                             <TextBlock
-                                Text="{Binding Tag,ElementName=ucSelectAmmount}"
+                                Text="{Binding }"
                                 Width="30"
                                 FontSize="13"
                                 VerticalAlignment="Center"

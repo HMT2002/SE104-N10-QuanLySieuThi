@@ -106,6 +106,7 @@
                                                                Margin="3 3 3 3"
                                                                HorizontalAlignment="Center"
                                                                VerticalAlignment="Center"></TextBlock>
+                                                    
                                                     <TextBlock Text="{Binding sanpham.TENSP}"
                                                                Margin="3 3 3 3 "
                                                                HorizontalAlignment="Center"
@@ -113,7 +114,8 @@
                                                     <TextBlock Text="{Binding sanpham.GIA}"
                                                                Margin="3 3 3 3 "
                                                                HorizontalAlignment="Center"
-                                                               VerticalAlignment="Center"></TextBlock>
+                                                               VerticalAlignment="Center"></TextBlock
+                                                               >
                                                 </StackPanel>
                                             </materialDesign:Card>
                                         </WrapPanel>
@@ -145,11 +147,14 @@
                         Background="AliceBlue">
                                 <ScrollViewer>
                                     <StackPanel>
-                                        <ListBox x:Name="listboxSelectedItem"
-                                                 ItemsSource="{Binding ListSelecteditems}"
-                                                 >
+                                        <ItemsControl x:Name="listboxSelectedItem"
+                                                      ItemsSource="{Binding ListSelecteditems}"
+                                                      >
+                                                      <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                      SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
+                                                      
 
-                                            <ListBox.ItemTemplate >
+                                            <ItemsControl.ItemTemplate >
                                                 <DataTemplate>
 
                                                     <DockPanel VerticalAlignment="Stretch"
@@ -161,11 +166,32 @@
                                                         <TextBlock Text="{Binding  sanpham.TENSP }"
                                                                    Margin="3 3 3 3"
                                                                    VerticalAlignment="Center"></TextBlock>
+                                                        <Button Command="{Binding IncreaseSelectAmmountCmd}"
+                                                                ToolTip="Thu nhỏ"
+                                                                ToolBar.OverflowMode="AsNeeded"
+                                                                Background="#F0F8FF">
+                                                            <materialDesign:PackIcon Kind="Minus" />
+                                                        </Button>
+                                                        <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                                   Width="30"
+                                                                   FontSize="13"
+                                                                   VerticalAlignment="Center"
+                                                                   HorizontalAlignment="Center"
+                                                                   
+                                                                   >
+                                                            
+                                                        </TextBlock>
+                                                        <Button Command="{Binding DecreaseSelectAmmountCmd}"
+                                                                ToolTip="Đóng"
+                                                                ToolBar.OverflowMode="AsNeeded"
+                                                                Background="#FF2800">
+                                                            <materialDesign:PackIcon Kind="Plus" />
+                                                        </Button>
                                                     </DockPanel>
                                                 </DataTemplate>
 
-                                            </ListBox.ItemTemplate>
-                                        </ListBox>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
                                     </StackPanel>
                                 </ScrollViewer>
 

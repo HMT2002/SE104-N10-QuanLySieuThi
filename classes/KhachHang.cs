@@ -160,12 +160,13 @@ namespace SE104_N10_QuanLySieuThi.classes
                 //HowKTeam
                 this.bitimg = new BitmapImage(new Uri(dialog.FileName));
                 /*this. name được phép trùng*/
-                this.img=new Image();
+                this.img = new Image();
                 /*this.id Không được phép trùng do là khóa chính, phải là int */
+
                 this.data = this.convertImgToByte();
+
                 this.img.Source = this.bitimg;
                 //this.addBinaryArrIntoSQL();
-
             }
         }
 

@@ -49,10 +49,13 @@
                 Style="{StaticResource MaterialDesignRaisedButton}" />
             <Grid
                 Height="300"
-                Margin="35,80"
+                Margin="50"
                 VerticalAlignment="Bottom">
-
-                <Label
+                <StackPanel Margin="5"
+                            VerticalAlignment="Center"
+                            Height="auto"
+                            >
+                    <Label
                     Margin="0 0 0 0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
@@ -60,17 +63,24 @@
                     FontSize="18"
                     FontWeight="Bold"
                     Foreground="Gray" />
-                <StackPanel Margin="15" VerticalAlignment="Center">
-
+                    <Button x:Name="bntPickImage"
+                            Command="{Binding PickImage}"
+                            CommandParameter="{Binding ElementName=bntPickImage}"
+                            Height="50"
+                            Width="50"
+                            Content="{Binding imgAvatar}"
+                            Background="AliceBlue"
+                            Margin="5">
+                    </Button>
                     <TextBox
-                        Margin="0,10"
+                        Margin="5"
                         materialDesign:HintAssist.Hint="Real name"
                         FontFamily="Champagne &amp; Limousines"
                         FontSize="8"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Name}" />
                     <TextBox
-                        Margin="0,10"
+                        Margin="5"
                         materialDesign:HintAssist.Hint="Phone"
                         FontFamily="Champagne &amp; Limousines"
                         FontSize="8"
@@ -87,16 +97,15 @@
                     <StackPanel Orientation="Horizontal">
                         <RadioButton IsChecked="{Binding IsMale,Mode=OneWay}"
                                      Command="{Binding CheckedGenderCmd}"
-                                     Content="Male" 
-                                     Style="{StaticResource MaterialDesignLightRadioButton}"
-                                     >
-                        </RadioButton>
-                        <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
-                                     Command="{Binding CheckedGenderCmd}"
-                                     Content="Female"
+                                     Content="Male"
                                      Style="{StaticResource MaterialDesignLightRadioButton}">
                         </RadioButton>
-                    </StackPanel>
+                        <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
+                             Command="{Binding CheckedGenderCmd}"
+                             Content="Female"
+                             Style="{StaticResource MaterialDesignLightRadioButton}">
+                </RadioButton>
+                </StackPanel>
   
 
 

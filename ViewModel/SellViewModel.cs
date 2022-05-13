@@ -27,13 +27,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
 
-        public ICommand DecreaseSelectAmmount { get; set; }
-
-
-        public ICommand IncreaseSelectAmmount { get; set; }
-
-
-
         private int _Stt;
         public int Stt { get => _Stt; set { _Stt = value; OnPropertyChanged(); } }
         private string _MaSP;
@@ -50,8 +43,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private List<string> _CategoryList = new List<string>() { "Cái", "Kg", "Trái", "Bao", "Lít", "Chai" };
 
         public List<string> CategoryList { get => _CategoryList; set { _CategoryList = value; OnPropertyChanged(); } }
+
+
         ObservableCollection<SanPham> _ListSelecteditems;
         public ObservableCollection<SanPham> ListSelecteditems { get => _ListSelecteditems; set { _ListSelecteditems = value; OnPropertyChanged(); } }
+
+
 
         public bool isMainLoaded = false;
 
@@ -67,8 +64,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public SellViewModel()
         {
-            IncreaseSelectAmmount =new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
-            DecreaseSelectAmmount = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
             ListSelecteditems = new ObservableCollection<SanPham>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
             ThanhTien = SoLuongSP * DonGia;
@@ -164,24 +159,36 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    SelectedItem.Amount = 5;
-                    ListSelecteditems.Add(SelectedItem);
+                    SanPham sp = new SanPham();
+                    sp = SelectedItem;
+                    ListSelecteditems.Add(sp);
                 }
             }
         }
-
-        private void Increase(object p)
+        private SanPham _SelectedSelectItem;
+        public SanPham SelectedSelectItem
         {
-            SelectAmmount++;
+            get => _SelectedSelectItem; set
+            {
+                _SelectedSelectItem = value;
+                if (SelectedSelectItem != null)
+                {
+
+                }
+
+                OnPropertyChanged();
+            }
+        }
+        private int _SelectedSelectItemIndex;
+        public int SelectedSelectItemIndex
+        {
+            get => _SelectedSelectItemIndex; set
+            {
+                _SelectedSelectItemIndex = value;
+                MessageBox.Show(ListSelecteditems[SelectedSelectItemIndex].Amount.ToString());
+                OnPropertyChanged();
+            }
         }
 
-        private void Decrease(object p)
-        {
-
-            TextBlock txtblk = p as TextBlock;
-
-            
-
-        }
     }
 }

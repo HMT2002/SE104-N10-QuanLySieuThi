@@ -32,8 +32,15 @@
                     <TextBlock Text="Tìm kiếm" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Width="200" Content="Thêm Sản phẩm"></Button>
-
+                    <Button Margin="10 10 10 10"
+                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                            Width="auto"
+                            Height="50"
+                            ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                            Content="Add product"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                            Command="{Binding openImportproductCmd}"
+                            CommandParameter="{Binding ElementName=ProductPage}" />
                 </Grid>
             </Grid>
         </Grid>

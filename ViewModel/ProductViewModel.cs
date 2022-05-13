@@ -61,7 +61,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        private int _AmmountImport;
+        public int AmmountImport
+        {
+            get => _AmmountImport; set
+            {
+                _AmmountImport = value;
+                Summary = value * Price;
+                OnPropertyChanged();
+            }
+        }
         private decimal _Price;
         public decimal Price { get => _Price; set 
             {
@@ -211,7 +220,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price };
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 };
             DataProvider.Ins.DB.SANPHAM.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
@@ -342,7 +351,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             } while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == ImportId).Count() > 0);
 
-            winImportProduct win = new winImportProduct();
+            winAddProduct win = new winAddProduct();
             win.ShowDialog();
 
         }

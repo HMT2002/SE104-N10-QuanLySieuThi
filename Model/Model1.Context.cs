@@ -31,6 +31,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public virtual DbSet<KHACHHANG> KHACHHANG { get; set; }
         public virtual DbSet<NHACUNGCAP> NHACUNGCAP { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIEN { get; set; }
+        public virtual DbSet<NHAPHANG> NHAPHANG { get; set; }
         public virtual DbSet<SANPHAM> SANPHAM { get; set; }
     }
 }

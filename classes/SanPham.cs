@@ -1,4 +1,5 @@
 ﻿using SE104_N10_QuanLySieuThi.Model;
+using SE104_N10_QuanLySieuThi.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,11 +10,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+
+
 
 namespace SE104_N10_QuanLySieuThi.classes
 {
-    public class SanPham
+    public class SanPham:BaseViewModel
     {
         private string id;
 
@@ -35,8 +39,15 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private List<SanPham> listAll;
 
+        public ICommand DecreaseSelectAmmountCmd { get; set; }
+
+
+        public ICommand IncreaseSelectAmmountCmd { get; set; }
+
         public SanPham(string id, string name, string dvt, int amount, decimal price, NhaCungCap supplier,List<SanPham> listAll)
         {
+            IncreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(); });
+            DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(); });
             this.id = id;
             this.name = name;
             this.dvt = dvt;
@@ -207,7 +218,8 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
 
         public string Name { get => name; set => name = value; }
-        public int Amount { get => amount; set => amount = value; }
+        private int _Amount;
+        public int Amount { get => amount; set { amount = value; OnPropertyChanged(); } }
         public decimal Price { get => price; set => price = value; }
         public string Id { get => id; set => id = value; }
         public string Dvt { get => dvt; set => dvt = value; }
@@ -282,6 +294,17 @@ namespace SE104_N10_QuanLySieuThi.classes
                 this.ketnoi.Close();
                 return false;
             }
+        }
+
+        public void Increase()
+        {
+            Amount++;
+        }
+
+        public void Decrease()
+        {
+            Amount--;
+            MessageBox.Show(Amount.ToString());
         }
     }
 }

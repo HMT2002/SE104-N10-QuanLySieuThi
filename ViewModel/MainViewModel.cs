@@ -94,10 +94,29 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             if (loginVM.IsLogin)
             {
+                try
+                {
                 loginAcc = loginVM.Acc;
                 var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
                 currentUser = nv.MANV;
                 p.Show();
+                }
+                catch(Exception ex)
+                {
+
+                }
+                try
+                {
+                    loginAcc = loginVM.Acc;
+                    var nv = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
+                    currentUser = nv.MAKH;
+                    pageSetting = null;
+                    p.Show();
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
             else
             {

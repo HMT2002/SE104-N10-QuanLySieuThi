@@ -18,6 +18,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public NHANVIEN()
         {
             this.HOADON = new HashSet<HOADON>();
+            this.NHAPHANG = new HashSet<NHAPHANG>();
         }
     
         public string MANV { get; set; }
@@ -36,5 +37,7 @@ namespace SE104_N10_QuanLySieuThi.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADON { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NHAPHANG> NHAPHANG { get; set; }
     }
 }

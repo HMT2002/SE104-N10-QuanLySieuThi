@@ -15,11 +15,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class LoginViewModel:BaseViewModel
+    class LoginViewModel : BaseViewModel
     {
+
+        public KhachHang kh = new KhachHang();
+
         public bool IsLogin { get; set; }
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
@@ -65,6 +69,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand RePasswordChangedCommand { get; set; }
         public ICommand ChangepasswordCommand { get; set; }
         public ICommand CheckedGenderCmd { get; set; }
+        public ICommand PickImage { get; set; }
 
         private Account acc;
         public Account Acc { get => acc; set => acc = value; }
@@ -80,7 +85,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             return new string(Enumerable.Repeat(chars, length)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-
+        private void Imagepick(Button p)
+        {
+            kh.chooseImg();
+            Bitimg = kh.Bitimg;
+            imgAvatar.Source = kh.Bitimg;
+            p.Content = imgAvatar;
+        }
+        public Button btnAvatar = new Button();
+        public Image imgAvatar = new Image();
+        public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
+        private BitmapImage bitimg = new BitmapImage();
+        private string _Gender;
+        public string Gender { get => _Gender; set { _Gender = value; OnPropertyChanged(); } }
         public LoginViewModel()
         {
             Console.OutputEncoding = Encoding.Unicode;
@@ -108,28 +125,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BackCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Back(p); });
             SendVerifyCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { SendVerifyMail(p); });
             VerifyCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { VerifyMail(p); });
+            PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
-            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(p); });
+            CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(); });
             IsMale = true;
             IsFeMale = false;
+            Gender = "Male";
 
         }
-
-        private void CheckGender(object p)
-        {
-            if (IsMale == false)
-            {
-                IsMale = true;
-                IsFeMale = false;
-            }
-            else if (IsMale == true)
-            {
-                IsMale = false;
-                IsFeMale = true;
-            }
-
-        }
-
         bool IsValidEmail(string email)
         {
             try
@@ -148,11 +151,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-            Acc = new Account(UserName, Password);
-
-            winRegistInformation win = new winRegistInformation();
-            win.ShowDialog();
-            p.Close();
+            if (MD5Encrypt(Base64Encode(Password)).CompareTo(MD5Encrypt(Base64Encode(RePassword))) == 0)
+            {
+                Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
+            }
+            if (Acc.RegistCustomer() == true)
+            {
+                winRegistInformation win = new winRegistInformation();
+                win.ShowDialog();
+                p.Close();
+            }
+            else
+            {
+                return;
+            }
 
         }
 
@@ -169,7 +181,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             p.Close();
 
         }
+        private void CheckGender()
+        {
+            if (IsMale == false)
+            {
+                IsMale = true;
+                IsFeMale = false;
+                Gender = "Male";
+            }
+            else if (IsMale == true)
+            {
+                IsMale = false;
+                IsFeMale = true;
+                Gender = "Female";
 
+            }
+
+        }
         private void SendVerifyCode(string verifyCode, Attachment file = null)
         {
 
@@ -258,58 +286,63 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             p.Close();
         }
 
+
         void CreateAccount(Window p)
         {
             if (p == null)
                 return;
-            if (MD5Encrypt(Base64Encode (Password)).CompareTo(MD5Encrypt(Base64Encode( RePassword))) == 0)
-            {
-                Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
 
-                if (Acc.RegistCustomer() == true)
-                {
-                    KhachHang kh = new KhachHang();
-                    kh.Name = Name;
-                    kh.Phone = Phone;
-                    kh.Mail = MailAdress;
-                    kh.Birth = Birthday.ToString("dd/MM/yyyy");
-                    kh.Startdate = DateTime.Now.ToString("dd/MM/yyyy");
-                    kh.Bitimg = null;
-                    kh.Img = null;
-                    kh.Id = RandomString(5);
-                    while (kh.randomSamedetected(kh.Id))
-                    {
-                        kh.Id = RandomString(5);
-                    }
-                    if (IsMale)
-                    {
-                        kh.Gender = "Nam";
-                    }
-                    else
-                    {
-                        kh.Gender = "Nữ";
-                    }
-                    kh.Acc = new Account();
-                    kh.Acc.Acc = UserName;
-                    if (!kh.RegistCustomer()){
-                        return;
-                    }
-                    IsLogin = true;
-                    p.Close();
-                }
-                else
-                {
-                    IsLogin = false;
-                    MessageBox.Show("Account already exitst");
-                }
+            KhachHang kh = new KhachHang();
+            kh.Name = Name;
+            kh.Phone = Phone;
+            kh.Mail = MailAdress;
+            kh.Birth = Birthday.ToString("dd/MM/yyyy");
+            kh.Startdate = DateTime.Now.ToString("dd/MM/yyyy");
+            kh.Bitimg = null;
+            kh.Img = null;
+            kh.Id = RandomString(5);
+            while (kh.randomSamedetected(kh.Id))
+            {
+                kh.Id = RandomString(5);
+            }
+            if (IsMale)
+            {
+                kh.Gender = "Male";
             }
             else
             {
-                IsLogin = false;
-                MessageBox.Show("Unmatch password");
+                kh.Gender = "Female";
+            }
+            kh.Acc = new Account();
+            kh.Acc.Acc = UserName;
+            //if (!kh.RegistCustomer()){
+            //    return;
+            //}
+            try
+            {
+                string khid = Converter.Instance.RandomString(5);
+                while (DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == khid).Count() > 0)
+                {
+                    khid = Converter.Instance.RandomString(5);
+                }
+                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0 };
+                DataProvider.Ins.DB.KHACHHANG.Add(nv);
+                DataProvider.Ins.DB.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return;
             }
 
+            IsLogin = true;
+            p.Close();
         }
+
+
+
+
+
 
         void Login(Window p)
         {
@@ -320,7 +353,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).Count();
 
 
-            if (accCount>0)
+            if (accCount > 0)
             {
                 IsLogin = true;
                 p.Close();
@@ -336,7 +369,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             string res = "";
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            res= System.Convert.ToBase64String(plainTextBytes);
+            res = System.Convert.ToBase64String(plainTextBytes);
             return res;
         }
         public static string Base64Decode(string base64Text)

@@ -31,6 +31,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand PickImage { get; set; }
 
         public ICommand LoadedGridItemCmd { get; set; }
+        public ICommand openImportproductCmd { get; set; }
 
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
@@ -66,6 +67,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SupplierId = "";
             SupplierName = "";
             SupplierCountry = "";
+            openImportproductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
             PickImage = new RelayCommand<Button>((p) => { return true; }, (p) => { Imagepick(p); });
             //AddProductCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { Imagepick(p); });
@@ -74,7 +76,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedGridItemCmd = new RelayCommand<Button>((p) => { return true; }, (p) => { Imagepick(p); });
 
         }
+        private void openWinAddSupplier()
+        {
+            winImportProduct win = new winImportProduct();
+            win.ShowDialog();
 
+
+        }
         private void ClickId(object sender, EventArgs e)
         {
             Button btn = sender as Button;

@@ -1,4 +1,5 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,119 @@ using System.Windows.Input;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class ImportProductViewModel
+    class ImportProductViewModel:BaseViewModel
     {
+        SANPHAM curProduct = new SANPHAM();
+
+        private string _ProductName;
+        public string ProductName { get => _ProductName; set { _ProductName = value; OnPropertyChanged(); } }
+        private string _ProductID;
+        public string ProductID { get => _ProductID; set { _ProductID = value; OnPropertyChanged(); } }
+        private string _ImportID;
+        public string ImportID { get => _ImportID; set { _ImportID = value; OnPropertyChanged(); } }
+        private DateTime _ImportDate;
+        public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
+        private List<string> _ListProduct = new List<string>();
+        public List<string> ListProduct { get => _ListProduct; set { _ListProduct = value; OnPropertyChanged(); } }
+        private string _SeletedProduct;
+        public string SeletedProduct { get => _SeletedProduct; set { _SeletedProduct = value;
+                if (SeletedProduct != null)
+                {
+                    var ncc = DataProvider.Ins.DB.SANPHAM.Where(x => x.TENSP == SeletedProduct).SingleOrDefault();
+                    if (ncc != null)
+                    {
+                        curProduct = ncc;
+                        ProductName = curProduct.TENSP;
+                        ProductID = curProduct.MASP;
+                        Ammount = (int)curProduct.SL;
+                        Price = (decimal)curProduct.GIA;
+                        
+                    }
+                }
+                OnPropertyChanged();
+            }
+        }
+        private int _Ammount;
+        public int Ammount
+        {
+            get => _Ammount; set
+            {
+                _Ammount = value;
+                Summary = value * Price;
+                OnPropertyChanged();
+            }
+        }
+        private decimal _Summary;
+        public decimal Summary { get => _Summary; set { _Summary = value; OnPropertyChanged(); } }
+        private decimal _SummaryImport;
+        public decimal SummaryImport { get => _SummaryImport; set { _SummaryImport = value; OnPropertyChanged(); } }
+        private int _AmmountImport;
+        public int AmmountImport
+        {
+            get => _AmmountImport; set
+            {
+                _AmmountImport = value;
+                SummaryImport = value * Price;
+                OnPropertyChanged();
+            }
+        }
+        private decimal _Price;
+        public decimal Price
+        {
+            get => _Price; set
+            {
+                _Price = value;
+                Summary = Ammount * value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ImportProductCmd { get; set; }
+
+
+
+        public ImportProductViewModel()
+        {
+            ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(); });
+            ImportID = Converter.Instance.RandomString(5);
+            ImportDate = DateTime.Now;
+            LoadProductList();
+        }
+
+        private void ImportProduct()
+        {
+            while (DataProvider.Ins.DB.NHAPHANG.Where(x => x.MANH == ImportID).Count() > 0)
+            {
+                ImportID = Converter.Instance.RandomString(5);
+            }
+            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP,MANV = MainViewModel._currentUser,NGNH=ImportDate,SLNHAPHANG=AmmountImport };
+            DataProvider.Ins.DB.NHAPHANG.Add(nv);
+            var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductID).SingleOrDefault();
+            if (sp.SL == null)
+            {
+                sp.SL = 0;
+            }
+            sp.SL = sp.SL + AmmountImport;
+            DataProvider.Ins.DB.SaveChanges();
+            NewImport();
+        }
+
+        private void NewImport()
+        {
+            SeletedProduct = null;
+            AmmountImport = 0;
+            SummaryImport = 0;
+
+        }
+
+        private void LoadProductList()
+        {
+            var supplierList = DataProvider.Ins.DB.SANPHAM;
+            int i = 1;
+            foreach (var item in supplierList)
+            {
+                ListProduct.Add(item.TENSP);
+            }
+        }
     }
 }

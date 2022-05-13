@@ -18,6 +18,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public SANPHAM()
         {
             this.CTHD = new HashSet<CTHD>();
+            this.NHAPHANG = new HashSet<NHAPHANG>();
         }
     
         public string MASP { get; set; }
@@ -32,5 +33,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHD { get; set; }
         public virtual NHACUNGCAP NHACUNGCAP { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NHAPHANG> NHAPHANG { get; set; }
     }
 }

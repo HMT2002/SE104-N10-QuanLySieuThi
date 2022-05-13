@@ -124,6 +124,20 @@ PASS nvarchar(MAX),
 primary key (ACC)
 )
 
+CREATE TABLE NHAPHANG(
+MANH varchar(10),
+MANV varchar(10),
+constraint LK_NHAPHANG_NHANVIEN foreign key(MANV) references NHANVIEN(MANV),
+
+MASP varchar(10),
+constraint LK_NHAPHANG_SANPHAM foreign key(MASP) references SANPHAM(MASP),
+
+SLNHAPHANG int,
+NGNH smalldatetime,
+primary key (MANH)
+)
+select * from NHAPHANG
+
 select MACC,TEN,SODT,XUATXU from NHACUNGCAP
 
 alter table KHACHHANG add ACC varchar(20)

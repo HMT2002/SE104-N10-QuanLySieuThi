@@ -20,22 +20,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     class AmountControlViewModel:BaseViewModel
     {
+
+        private int _Ammount;
+        public int Ammount { get => _Ammount; set { _Ammount = value; OnPropertyChanged(); } }
+
         public ICommand DecreaseSelectAmmount { get; set; }
 
 
         public ICommand IncreaseSelectAmmount { get; set; }
         public AmountControlViewModel()
         {
+            Ammount = 0;
             IncreaseSelectAmmount = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
             DecreaseSelectAmmount = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
         }
 
         private void Increase(object p)
         {
+            Ammount++;
+
         }
 
         private void Decrease(object p)
         {
+            Ammount--;
 
 
         }
