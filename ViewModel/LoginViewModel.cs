@@ -325,7 +325,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     khid = Converter.Instance.RandomString(5);
                 }
-                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0 };
+                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0,NGDK=DateTime.Now };
                 DataProvider.Ins.DB.KHACHHANG.Add(nv);
                 DataProvider.Ins.DB.SaveChanges();
 

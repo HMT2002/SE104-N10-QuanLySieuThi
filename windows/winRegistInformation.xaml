@@ -53,7 +53,7 @@
                 VerticalAlignment="Bottom">
                 <StackPanel Margin="5"
                             VerticalAlignment="Center"
-                            Height="auto"
+                            Height="275"
                             >
                     <Label
                     Margin="0 0 0 0"
@@ -68,9 +68,11 @@
                             CommandParameter="{Binding ElementName=bntPickImage}"
                             Height="50"
                             Width="50"
+                            VerticalContentAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
                             Content="{Binding imgAvatar}"
                             Background="AliceBlue"
-                            Margin="5">
+                            Margin="10">
                     </Button>
                     <TextBox
                         Margin="5"
@@ -113,7 +115,7 @@
             </Grid>
             <Button
                 Width="150"
-                Margin="100,0,100.4,30.8"
+                Margin="10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom"
                 materialDesign:ButtonProgressAssist.IsIndeterminate="True"
