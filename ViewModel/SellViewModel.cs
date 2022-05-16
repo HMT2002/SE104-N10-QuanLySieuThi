@@ -44,10 +44,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public List<string> CategoryList { get => _CategoryList; set { _CategoryList = value; OnPropertyChanged(); } }
 
-
-        ObservableCollection<SanPham> _ListSelecteditems;
+        private ObservableCollection<SanPham> _ListSelecteditems;
         public ObservableCollection<SanPham> ListSelecteditems { get => _ListSelecteditems; set { _ListSelecteditems = value; OnPropertyChanged(); } }
 
+        public static ObservableCollection<SanPham> SelectedBillList { get; set; }
 
 
         public bool isMainLoaded = false;
@@ -136,6 +136,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void openBill()
         {
+            SelectedBillList = ListSelecteditems;
+
             winBill win = new winBill();
             win.ShowDialog();
         }
@@ -161,6 +163,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     SanPham sp = new SanPham();
                     sp = SelectedItem;
+                    sp.Amount = 5;
+                    
                     ListSelecteditems.Add(sp);
                 }
             }

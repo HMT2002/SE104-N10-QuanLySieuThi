@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
@@ -21,8 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        
-        DataContext="{StaticResource ProductVM}"
+        DataContext="{StaticResource SellVM}"
         x:Name="BillWin"
         Title="winBill">
     <Grid>
@@ -34,36 +32,29 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView
-ItemsSource="{Binding listSelecteditems}">
-  <ListView.View>
-    <GridView>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Stt}"
-        Header="Stt" />
-      <GridViewColumn
-        DisplayMemberBinding="{Binding MaSP}"
-        Header="Mã sản phẩm"
-        Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding TenSP}"
-        Header="Tên hàng"
-        Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding SoLuongSP}"
-        Header="Số lượng"
-        Width="120"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding DonGia}"
-        Header="Đơn giá"
-        Width="110"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding ThanhTien}"
-        Header="Thành tiền"
-        Width="150"/>
-    </GridView>
-  </ListView.View>
-</ListView>
+            <ListView ItemsSource="{Binding ListSelecteditems}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
+                                        Header="Stt" />
+                        <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
+                                        Header="Mã sản phẩm"
+                                        Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding sanpham.TENSP}"
+                                        Header="Tên hàng"
+                                        Width="150" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Amount}"
+                                        Header="Số lượng"
+                                        Width="120" />
+                        <GridViewColumn DisplayMemberBinding="{Binding sanpham.GIA}"
+                                        Header="Đơn giá"
+                                        Width="110" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Summary}"
+                                        Header="Thành tiền"
+                                        Width="150" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>

@@ -105,18 +105,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
 
                 }
-                try
-                {
-                    loginAcc = loginVM.Acc;
-                    var nv = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-                    currentUser = nv.MAKH;
-                    pageSetting = null;
-                    p.Show();
-                }
-                catch (Exception ex)
-                {
-
-                }
             }
             else
             {

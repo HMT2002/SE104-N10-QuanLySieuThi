@@ -349,10 +349,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (p == null)
                 return;
             Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
-
             var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).Count();
-
-
             if (accCount > 0)
             {
                 IsLogin = true;

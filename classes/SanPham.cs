@@ -29,6 +29,9 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private decimal price;
 
+        private decimal summary;
+
+
         NhaCungCap supplier;
 
         private SANPHAM _sanpham;
@@ -218,8 +221,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
 
         public string Name { get => name; set => name = value; }
-        private int _Amount;
-        public int Amount { get => amount; set { amount = value; OnPropertyChanged(); } }
+        public int Amount { get => amount; set { amount = value; summary = (decimal)sanpham.GIA * Amount; OnPropertyChanged(); } }
         public decimal Price { get => price; set => price = value; }
         public string Id { get => id; set => id = value; }
         public string Dvt { get => dvt; set => dvt = value; }
@@ -228,6 +230,7 @@ namespace SE104_N10_QuanLySieuThi.classes
         public SqlDataAdapter Adapter { get => adapter; set => adapter = value; }
         internal List<SanPham> ListAll { get => listAll; set => listAll = value; }
         public SANPHAM sanpham { get => _sanpham; set => _sanpham = value; }
+        public decimal Summary { get => summary; set { summary = value; summary=(decimal)sanpham.GIA*Amount; OnPropertyChanged(); } }
 
         public bool RegistProduct()
         {

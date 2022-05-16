@@ -19,7 +19,22 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         public SanPham sp = new SanPham();
 
+        public ObservableCollection<SanPham> list;
 
+        private decimal _ThanhTien;
+
+        public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+
+        public BillViewModel()
+        {
+
+            list = SellViewModel.SelectedBillList;
+            foreach(SanPham sp in SellViewModel.SelectedBillList)
+            {
+                ThanhTien += (decimal)sp.sanpham.GIA;
+            }
+
+        }
 
     }
 }
