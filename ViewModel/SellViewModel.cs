@@ -89,9 +89,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var hd = new HOADON() { SOHD = sohd,NGHD=DateTime.Now,MANV=MainViewModel._currentUser,MAKH=Khachhang.khachhang.MAKH,TRIGIA=ThanhTien };
             foreach (SanPham sp in ListSelecteditems)
             {
-                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount, TENSP=sp.sanpham.TENSP};
+                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount,};
                 DataProvider.Ins.DB.CTHD.Add(cthd);
-
             }
             DataProvider.Ins.DB.HOADON.Add(hd);
             DataProvider.Ins.DB.SaveChanges();

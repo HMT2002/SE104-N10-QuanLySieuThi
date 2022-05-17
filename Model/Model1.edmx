@@ -1,0 +1,589 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QUANLYSIEUTHIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACC" />
+          </Key>
+          <Property Name="ACC" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="PRI" Type="int" />
+          <Property Name="PASS" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CTHD">
+          <Key>
+            <PropertyRef Name="SOHD" />
+            <PropertyRef Name="MASP" />
+          </Key>
+          <Property Name="SOHD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MASP" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SL" Type="int" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="SOHD" />
+          </Key>
+          <Property Name="SOHD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NGHD" Type="smalldatetime" />
+          <Property Name="MAKH" Type="varchar" MaxLength="10" />
+          <Property Name="MANV" Type="varchar" MaxLength="10" />
+          <Property Name="TRIGIA" Type="money" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HOTEN" Type="nvarchar" MaxLength="40" />
+          <Property Name="SODT" Type="varchar" MaxLength="20" />
+          <Property Name="DOANHSO" Type="money" />
+          <Property Name="ACC" Type="varchar" MaxLength="20" />
+          <Property Name="PICBI" Type="varbinary(max)" />
+          <Property Name="MAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGSINH" Type="smalldatetime" />
+          <Property Name="NGDK" Type="smalldatetime" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="NHACUNGCAP">
+          <Key>
+            <PropertyRef Name="MACC" />
+          </Key>
+          <Property Name="MACC" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TEN" Type="nvarchar" MaxLength="40" />
+          <Property Name="SODT" Type="varchar" MaxLength="20" />
+          <Property Name="XUATXU" Type="nvarchar" MaxLength="40" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="HOTEN" Type="nvarchar" MaxLength="40" />
+          <Property Name="SODT" Type="varchar" MaxLength="20" />
+          <Property Name="LUONG" Type="money" />
+          <Property Name="ACC" Type="varchar" MaxLength="20" />
+          <Property Name="PICBI" Type="varbinary(max)" />
+          <Property Name="MAIL" Type="nvarchar" MaxLength="50" />
+          <Property Name="POSITION" Type="nvarchar" MaxLength="20" />
+          <Property Name="CMND" Type="nvarchar" MaxLength="20" />
+          <Property Name="GENDER" Type="nvarchar" MaxLength="20" />
+          <Property Name="NGVL" Type="smalldatetime" />
+          <Property Name="NGSINH" Type="smalldatetime" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="NHAPHANG">
+          <Key>
+            <PropertyRef Name="MANH" />
+          </Key>
+          <Property Name="MANH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MANV" Type="varchar" MaxLength="10" />
+          <Property Name="MASP" Type="varchar" MaxLength="10" />
+          <Property Name="SLNHAPHANG" Type="int" />
+          <Property Name="NGNH" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MASP" />
+          </Key>
+          <Property Name="MASP" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENSP" Type="nvarchar" MaxLength="40" />
+          <Property Name="DVT" Type="nvarchar" MaxLength="40" />
+          <Property Name="MACC" Type="varchar" MaxLength="10" />
+          <Property Name="GIA" Type="money" />
+          <Property Name="SL" Type="int" />
+          <Property Name="PICBI" Type="varbinary(max)" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="LK_CUNGCAP">
+          <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHACUNGCAP">
+              <PropertyRef Name="MACC" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MACC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_HOADON">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="SOHD" />
+            </Principal>
+            <Dependent Role="CTHD">
+              <PropertyRef Name="SOHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_KHACHHANG">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHAPHANG_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="NHAPHANG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHAPHANG_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASP" />
+            </Principal>
+            <Dependent Role="NHAPHANG">
+              <PropertyRef Name="MASP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASP" />
+            </Principal>
+            <Dependent Role="CTHD">
+              <PropertyRef Name="MASP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYSIEUTHIModelStoreContainer">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTHD" EntityType="Self.CTHD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHACUNGCAP" EntityType="Self.NHACUNGCAP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHAPHANG" EntityType="Self.NHAPHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="LK_CUNGCAP" Association="Self.LK_CUNGCAP">
+            <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="LK_HOADON" Association="Self.LK_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CTHD" EntitySet="CTHD" />
+          </AssociationSet>
+          <AssociationSet Name="LK_KHACHHANG" Association="Self.LK_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHANVIEN" Association="Self.LK_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHAPHANG_NHANVIEN" Association="Self.LK_NHAPHANG_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="NHAPHANG" EntitySet="NHAPHANG" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHAPHANG_SANPHAM" Association="Self.LK_NHAPHANG_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="NHAPHANG" EntitySet="NHAPHANG" />
+          </AssociationSet>
+          <AssociationSet Name="LK_SANPHAM" Association="Self.LK_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="CTHD" EntitySet="CTHD" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QUANLYSIEUTHIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ACCOUNT">
+          <Key>
+            <PropertyRef Name="ACC" />
+          </Key>
+          <Property Name="ACC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRI" Type="Int32" />
+          <Property Name="PASS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CTHD">
+          <Key>
+            <PropertyRef Name="SOHD" />
+            <PropertyRef Name="MASP" />
+          </Key>
+          <Property Name="SOHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SL" Type="Int32" />
+          <NavigationProperty Name="HOADON" Relationship="Self.LK_HOADON" FromRole="CTHD" ToRole="HOADON" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.LK_SANPHAM" FromRole="CTHD" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="HOADON">
+          <Key>
+            <PropertyRef Name="SOHD" />
+          </Key>
+          <Property Name="SOHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NGHD" Type="DateTime" Precision="0" />
+          <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="CTHD" Relationship="Self.LK_HOADON" FromRole="HOADON" ToRole="CTHD" />
+          <NavigationProperty Name="KHACHHANG" Relationship="Self.LK_KHACHHANG" FromRole="HOADON" ToRole="KHACHHANG" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHANVIEN" FromRole="HOADON" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HOTEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DOANHSO" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ACC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGSINH" Type="DateTime" Precision="0" />
+          <Property Name="NGDK" Type="DateTime" Precision="0" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HOADON" Relationship="Self.LK_KHACHHANG" FromRole="KHACHHANG" ToRole="HOADON" />
+        </EntityType>
+        <EntityType Name="NHACUNGCAP">
+          <Key>
+            <PropertyRef Name="MACC" />
+          </Key>
+          <Property Name="MACC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="XUATXU" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.LK_CUNGCAP" FromRole="NHACUNGCAP" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HOTEN" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="SODT" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LUONG" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ACC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="POSITION" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="GENDER" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NGVL" Type="DateTime" Precision="0" />
+          <Property Name="NGSINH" Type="DateTime" Precision="0" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HOADON" Relationship="Self.LK_NHANVIEN" FromRole="NHANVIEN" ToRole="HOADON" />
+          <NavigationProperty Name="NHAPHANG" Relationship="Self.LK_NHAPHANG_NHANVIEN" FromRole="NHANVIEN" ToRole="NHAPHANG" />
+        </EntityType>
+        <EntityType Name="NHAPHANG">
+          <Key>
+            <PropertyRef Name="MANH" />
+          </Key>
+          <Property Name="MANH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SLNHAPHANG" Type="Int32" />
+          <Property Name="NGNH" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHAPHANG_NHANVIEN" FromRole="NHAPHANG" ToRole="NHANVIEN" />
+          <NavigationProperty Name="SANPHAM" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="NHAPHANG" ToRole="SANPHAM" />
+        </EntityType>
+        <EntityType Name="SANPHAM">
+          <Key>
+            <PropertyRef Name="MASP" />
+          </Key>
+          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TENSP" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="DVT" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+          <Property Name="MACC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GIA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SL" Type="Int32" />
+          <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CTHD" Relationship="Self.LK_SANPHAM" FromRole="SANPHAM" ToRole="CTHD" />
+          <NavigationProperty Name="NHACUNGCAP" Relationship="Self.LK_CUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
+          <NavigationProperty Name="NHAPHANG" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="SANPHAM" ToRole="NHAPHANG" />
+        </EntityType>
+        <Association Name="LK_HOADON">
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HOADON">
+              <PropertyRef Name="SOHD" />
+            </Principal>
+            <Dependent Role="CTHD">
+              <PropertyRef Name="SOHD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASP" />
+            </Principal>
+            <Dependent Role="CTHD">
+              <PropertyRef Name="MASP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_KHACHHANG">
+          <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KHACHHANG">
+              <PropertyRef Name="MAKH" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MAKH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="HOADON" Type="Self.HOADON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="HOADON">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_CUNGCAP">
+          <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHACUNGCAP">
+              <PropertyRef Name="MACC" />
+            </Principal>
+            <Dependent Role="SANPHAM">
+              <PropertyRef Name="MACC" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHAPHANG_NHANVIEN">
+          <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
+          <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANVIEN">
+              <PropertyRef Name="MANV" />
+            </Principal>
+            <Dependent Role="NHAPHANG">
+              <PropertyRef Name="MANV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="LK_NHAPHANG_SANPHAM">
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="NHAPHANG" Type="Self.NHAPHANG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SANPHAM">
+              <PropertyRef Name="MASP" />
+            </Principal>
+            <Dependent Role="NHAPHANG">
+              <PropertyRef Name="MASP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QUANLYSIEUTHIEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACCOUNT" EntityType="Self.ACCOUNT" />
+          <EntitySet Name="CTHD" EntityType="Self.CTHD" />
+          <EntitySet Name="HOADON" EntityType="Self.HOADON" />
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" />
+          <EntitySet Name="NHACUNGCAP" EntityType="Self.NHACUNGCAP" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" />
+          <EntitySet Name="NHAPHANG" EntityType="Self.NHAPHANG" />
+          <EntitySet Name="SANPHAM" EntityType="Self.SANPHAM" />
+          <AssociationSet Name="LK_HOADON" Association="Self.LK_HOADON">
+            <End Role="HOADON" EntitySet="HOADON" />
+            <End Role="CTHD" EntitySet="CTHD" />
+          </AssociationSet>
+          <AssociationSet Name="LK_SANPHAM" Association="Self.LK_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="CTHD" EntitySet="CTHD" />
+          </AssociationSet>
+          <AssociationSet Name="LK_KHACHHANG" Association="Self.LK_KHACHHANG">
+            <End Role="KHACHHANG" EntitySet="KHACHHANG" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHANVIEN" Association="Self.LK_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="HOADON" EntitySet="HOADON" />
+          </AssociationSet>
+          <AssociationSet Name="LK_CUNGCAP" Association="Self.LK_CUNGCAP">
+            <End Role="NHACUNGCAP" EntitySet="NHACUNGCAP" />
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHAPHANG_NHANVIEN" Association="Self.LK_NHAPHANG_NHANVIEN">
+            <End Role="NHANVIEN" EntitySet="NHANVIEN" />
+            <End Role="NHAPHANG" EntitySet="NHAPHANG" />
+          </AssociationSet>
+          <AssociationSet Name="LK_NHAPHANG_SANPHAM" Association="Self.LK_NHAPHANG_SANPHAM">
+            <End Role="SANPHAM" EntitySet="SANPHAM" />
+            <End Role="NHAPHANG" EntitySet="NHAPHANG" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QUANLYSIEUTHIModelStoreContainer" CdmEntityContainer="QUANLYSIEUTHIEntities">
+          <EntitySetMapping Name="ACCOUNT">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.ACCOUNT">
+              <MappingFragment StoreEntitySet="ACCOUNT">
+                <ScalarProperty Name="ACC" ColumnName="ACC" />
+                <ScalarProperty Name="PRI" ColumnName="PRI" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTHD">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.CTHD">
+              <MappingFragment StoreEntitySet="CTHD">
+                <ScalarProperty Name="SOHD" ColumnName="SOHD" />
+                <ScalarProperty Name="MASP" ColumnName="MASP" />
+                <ScalarProperty Name="SL" ColumnName="SL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOADON">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.HOADON">
+              <MappingFragment StoreEntitySet="HOADON">
+                <ScalarProperty Name="SOHD" ColumnName="SOHD" />
+                <ScalarProperty Name="NGHD" ColumnName="NGHD" />
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANG">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="SODT" ColumnName="SODT" />
+                <ScalarProperty Name="DOANHSO" ColumnName="DOANHSO" />
+                <ScalarProperty Name="ACC" ColumnName="ACC" />
+                <ScalarProperty Name="PICBI" ColumnName="PICBI" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
+                <ScalarProperty Name="NGDK" ColumnName="NGDK" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHACUNGCAP">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.NHACUNGCAP">
+              <MappingFragment StoreEntitySet="NHACUNGCAP">
+                <ScalarProperty Name="MACC" ColumnName="MACC" />
+                <ScalarProperty Name="TEN" ColumnName="TEN" />
+                <ScalarProperty Name="SODT" ColumnName="SODT" />
+                <ScalarProperty Name="XUATXU" ColumnName="XUATXU" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHANVIEN">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="SODT" ColumnName="SODT" />
+                <ScalarProperty Name="LUONG" ColumnName="LUONG" />
+                <ScalarProperty Name="ACC" ColumnName="ACC" />
+                <ScalarProperty Name="PICBI" ColumnName="PICBI" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="GENDER" ColumnName="GENDER" />
+                <ScalarProperty Name="NGVL" ColumnName="NGVL" />
+                <ScalarProperty Name="NGSINH" ColumnName="NGSINH" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHAPHANG">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.NHAPHANG">
+              <MappingFragment StoreEntitySet="NHAPHANG">
+                <ScalarProperty Name="MANH" ColumnName="MANH" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+                <ScalarProperty Name="MASP" ColumnName="MASP" />
+                <ScalarProperty Name="SLNHAPHANG" ColumnName="SLNHAPHANG" />
+                <ScalarProperty Name="NGNH" ColumnName="NGNH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SANPHAM">
+            <EntityTypeMapping TypeName="QUANLYSIEUTHIModel.SANPHAM">
+              <MappingFragment StoreEntitySet="SANPHAM">
+                <ScalarProperty Name="MASP" ColumnName="MASP" />
+                <ScalarProperty Name="TENSP" ColumnName="TENSP" />
+                <ScalarProperty Name="DVT" ColumnName="DVT" />
+                <ScalarProperty Name="MACC" ColumnName="MACC" />
+                <ScalarProperty Name="GIA" ColumnName="GIA" />
+                <ScalarProperty Name="SL" ColumnName="SL" />
+                <ScalarProperty Name="PICBI" ColumnName="PICBI" />
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
