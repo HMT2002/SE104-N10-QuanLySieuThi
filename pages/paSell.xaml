@@ -1,26 +1,24 @@
 ﻿<Page x:Class="SE104_N10_QuanLySieuThi.paSell"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi"
-      mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1120"
+      mc:Ignorable="d"
+      d:DesignHeight="620"
+      d:DesignWidth="1120"
       Title="paSell"
-      Background="#92EBEB"
-      
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+      Background="{DynamicResource MaterialDesignPaper}"
+      FontFamily="{DynamicResource MaterialDesignFont}"
       DataContext="{StaticResource SellVM}"
-      
-      x:Name="SellPage"
-
-      
-      >
+      x:Name="SellPage">
 
     <Grid>
-                <materialDesign:Card>
+        <materialDesign:Card>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -28,9 +26,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <materialDesign:Card 
-                        Margin="20"
-                        Background="AliceBlue">
+                    <materialDesign:Card Margin="20"
+                                         Background="AliceBlue">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -48,8 +45,7 @@
                                               ItemsSource="{Binding CategoryList,Mode=TwoWay}"
                                               materialDesign:TextFieldAssist.HasClearButton="True"
                                               Width="auto"
-                                              Height="auto"
-                                              >
+                                              Height="auto">
                                     </ListView>
                                 </ScrollViewer>
 
@@ -65,10 +61,8 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <materialDesign:Card 
-                        Margin="20"
-
-                        Background="AliceBlue">
+                    <materialDesign:Card Margin="20"
+                                         Background="AliceBlue">
                         <ScrollViewer>
                             <ListBox ItemsSource="{Binding SanPhamList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                      SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
@@ -106,7 +100,7 @@
                                                                Margin="3 3 3 3"
                                                                HorizontalAlignment="Center"
                                                                VerticalAlignment="Center"></TextBlock>
-                                                    
+
                                                     <TextBlock Text="{Binding sanpham.TENSP}"
                                                                Margin="3 3 3 3 "
                                                                HorizontalAlignment="Center"
@@ -141,20 +135,17 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <materialDesign:Card 
-                        Margin="20"
-
-                        Background="AliceBlue">
+                            <materialDesign:Card Margin="20"
+                                                 Background="AliceBlue">
                                 <ScrollViewer>
                                     <StackPanel>
                                         <ItemsControl x:Name="listboxSelectedItem"
-                                                      ItemsSource="{Binding ListSelecteditems}"
-                                                      >
-                                                      <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                      ItemsSource="{Binding ListSelecteditems}">
+                                            <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
-                                                      
 
-                                            <ItemsControl.ItemTemplate >
+
+                                            <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
 
                                                     <DockPanel VerticalAlignment="Stretch"
@@ -176,10 +167,8 @@
                                                                    Width="30"
                                                                    FontSize="13"
                                                                    VerticalAlignment="Center"
-                                                                   HorizontalAlignment="Center"
-                                                                   
-                                                                   >
-                                                            
+                                                                   HorizontalAlignment="Center">
+
                                                         </TextBlock>
                                                         <Button Command="{Binding DecreaseSelectAmmountCmd}"
                                                                 ToolTip="Đóng"
@@ -199,9 +188,8 @@
 
                         </Grid>
                         <Grid Grid.Row="1">
-                            <materialDesign:Card 
-                        Margin="20"
-                        Background="AliceBlue">
+                            <materialDesign:Card Margin="20"
+                                                 Background="AliceBlue">
                                 <StackPanel>
                                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
@@ -210,8 +198,7 @@
                                             Margin="20"
                                             Command="{Binding BuyProductCmd}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                            HorizontalAlignment="Right" 
-                                            />
+                                            HorizontalAlignment="Right" />
                                 </StackPanel>
                             </materialDesign:Card>
                         </Grid>

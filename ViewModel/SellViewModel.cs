@@ -24,6 +24,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedItemCtrlCmd { get; set; }
 
         public ICommand BuyProductCmd { get; set; }
+        public ICommand ConfirmPaymentCmd { get; set; }
+
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
 
@@ -37,8 +39,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public long SoLuongSP { get => _SoLuongSP; set { _SoLuongSP = value; OnPropertyChanged(); } }
         private long _DonGia;
         public long DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
-        private long _ThanhTien;
-        public long ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+        private decimal _ThanhTien;
+        public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
 
         private List<string> _CategoryList = new List<string>() { "Cái", "Kg", "Trái", "Bao", "Lít", "Chai" };
 
@@ -62,14 +64,37 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private int _SelectAmmount = 1;
         public int SelectAmmount { get => _SelectAmmount; set { _SelectAmmount = value; OnPropertyChanged(); } }
 
+        public KhachHang _Khachhang = new KhachHang();
+        public KhachHang Khachhang { get => _Khachhang; set { _Khachhang = value; OnPropertyChanged(); } }
+
         public SellViewModel()
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
-            ThanhTien = SoLuongSP * DonGia;
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
+            ConfirmPaymentCmd = new RelayCommand<object>((p) => { return true; }, (p) => { confirmPayment(); });
+            string ma = "I37HS";
+            Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == ma).SingleOrDefault();
             SelectAmmount = 1;
 
+        }
+
+        private void confirmPayment()
+        {
+            string sohd = Converter.Instance.RandomString(5);
+            while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == sohd).Count() > 0)
+            {
+                sohd = Converter.Instance.RandomString(5);
+            }
+            var hd = new HOADON() { SOHD = sohd,NGHD=DateTime.Now,MANV=MainViewModel._currentUser,MAKH=Khachhang.khachhang.MAKH,TRIGIA=ThanhTien };
+            foreach (SanPham sp in ListSelecteditems)
+            {
+                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount, TENSP=sp.sanpham.TENSP};
+                DataProvider.Ins.DB.CTHD.Add(cthd);
+
+            }
+            DataProvider.Ins.DB.HOADON.Add(hd);
+            DataProvider.Ins.DB.SaveChanges();
         }
 
         private void LoadSanPhamData()
@@ -137,7 +162,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void openBill()
         {
             SelectedBillList = ListSelecteditems;
-
+            foreach (SanPham sp in ListSelecteditems)
+            {
+                ThanhTien += (decimal)sp.sanpham.GIA * sp.Amount;
+            }
             winBill win = new winBill();
             win.ShowDialog();
         }

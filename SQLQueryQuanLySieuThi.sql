@@ -104,17 +104,24 @@ constraint LK_NHANVIEN foreign key(MANV) references NHANVIEN(MANV),
 TRIGIA money,
 primary key(SOHD)
 )
+select * from HOADON
+
+delete from HOADON
+
 
 CREATE TABLE CTHD(
 SOHD varchar(10),
-constraint LK_HOADON foreign key(SOHD) references HOADON(SOHD),
 MASP varchar(10),
-constraint LK_SANPHAM foreign key(MASP) references SANPHAM(MASP),
+TENSP nvarchar(40),
 SL int,
-primary key(SOHD)
 )
-drop table CTHD 
-select * from CTHD where SOHD=''
+
+select * from CTHD 
+
+
+delete from CTHD
+
+
 
 drop table CTHD
 CREATE TABLE ACCOUNT(

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SE104_N10_QuanLySieuThi.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -38,6 +39,7 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private Account acc;
 
+        public KHACHHANG khachhang { get; set; }
         public KhachHang(string id, string name, string phone, string startdate, string birth, decimal revenue,string mail,string gender,Account acc)
         {
             this.id = id;
