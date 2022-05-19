@@ -111,9 +111,11 @@ delete from HOADON
 
 CREATE TABLE CTHD(
 SOHD varchar(10),
+constraint LK_HOADON foreign key(SOHD) references HOADON(SOHD),
 MASP varchar(10),
-TENSP nvarchar(40),
+constraint LK_SANPHAM foreign key(MASP) references SANPHAM(MASP),
 SL int,
+primary key(SOHD,MASP)
 )
 
 select * from CTHD 

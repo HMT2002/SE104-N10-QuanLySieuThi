@@ -168,7 +168,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
-            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { if (!isMainLoaded) {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
+            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });

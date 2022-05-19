@@ -137,6 +137,10 @@
                                                    Margin="3 3 3 3 "
                                                    HorizontalAlignment="Center"
                                                    VerticalAlignment="Center"></TextBlock>
+                                        <TextBlock Text="{Binding sanpham.SL}"
+                                                   Margin="3 3 3 3 "
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"></TextBlock>
                                         <TextBlock Text="{Binding sanpham.GIA}"
                                                    Margin="3 3 3 3 "
                                                    HorizontalAlignment="Center"

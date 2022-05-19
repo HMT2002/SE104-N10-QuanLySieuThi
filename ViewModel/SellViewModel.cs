@@ -91,6 +91,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount,};
                 DataProvider.Ins.DB.CTHD.Add(cthd);
+
+                var sanpham = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == sp.sanpham.MASP).SingleOrDefault();
+                sanpham.SL -= sp.Amount;
             }
             DataProvider.Ins.DB.HOADON.Add(hd);
             DataProvider.Ins.DB.SaveChanges();

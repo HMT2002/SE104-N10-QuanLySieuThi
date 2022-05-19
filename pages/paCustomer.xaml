@@ -16,8 +16,64 @@
       x:Name="CustomerPage"
       
       >
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        
+        <ListBox ItemsSource="{Binding KhachHangList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="4"
+                                 IsItemsHost="True">
+
+                    </UniformGrid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch">
+                        <materialDesign:Card Background="NavajoWhite"
+                                             UniformCornerRadius="10"
+                                             HorizontalAlignment="Stretch"
+                                             HorizontalContentAlignment="Stretch"
+                                             VerticalContentAlignment="Stretch"
+                                             VerticalAlignment="Stretch"
+                                             Width="250"
+                                             Height="250">
+                            <StackPanel Background="#00F5F50C"
+                                        Height="auto"
+                                        Width="auto"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch">
+                                <!--<Image Source="{Binding Bitimg}"
+                                       Width="100"
+                                       Height="100"
+                                       Margin="3 3 3 3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"></Image>-->
+                                <TextBlock Text="{Binding khachhang.MAKH}"
+                                           Margin="3 3 3 3"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{Binding khachhang.HOTEN}"
+                                           Margin="3 3 3 3 "
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </materialDesign:Card>
+                    </WrapPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Loaded">
+                    <i:InvokeCommandAction Command="{Binding LoadedItemCtrlCmd}"
+                                           CommandParameter="{Binding ElementName=itemctrlMain}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>
+
     </Grid>
 </Page>
