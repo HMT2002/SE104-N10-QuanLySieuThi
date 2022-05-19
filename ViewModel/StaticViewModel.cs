@@ -22,21 +22,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     class StaticViewModel:BaseViewModel
     {
 
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
-        {
-            if (!Equals(field, newValue))
-            {
-                field = newValue;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-                return true;
-            }
+        //protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string propertyName = null)
+        //{
+        //    if (!Equals(field, newValue))
+        //    {
+        //        field = newValue;
+        //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        private System.Collections.IEnumerable selectedItem;
+        //private System.Collections.IEnumerable selectedItem;
 
-        public System.Collections.IEnumerable SelectedItem { get => selectedItem; set => SetProperty(ref selectedItem, value); }
+        //public System.Collections.IEnumerable SelectedItem { get => selectedItem; set => SetProperty(ref selectedItem, value); }
 
     }
 }

@@ -36,28 +36,27 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListView
-ItemsSource="{Binding Source={StaticResource SelectedItem}}">
-<ListView.View>
-    
-    <GridView>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Path=Stt}"
+ItemsSource="{Binding listSelecteditems}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn
+        DisplayMemberBinding="{Binding Stt}"
         Header="Stt" />
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Path=SelectedItem.MASP}"
+                        <GridViewColumn
+        DisplayMemberBinding="{Binding MaSP}"
         Header="Mã sản phẩm"
         Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Path=SelectedItem.TENSP}"
+                        <GridViewColumn
+        DisplayMemberBinding="{Binding TenSP}"
         Header="Tên hàng"
         Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Path=SelectedItem.GIA}"
+                        <GridViewColumn
+        DisplayMemberBinding="{Binding ThanhTien}"
         Header="Thành tiền"
         Width="150"/>
-    </GridView>
-  </ListView.View>
-</ListView>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </Grid>
 </Window>
