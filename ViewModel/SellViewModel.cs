@@ -72,14 +72,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             ListSelecteditems = new ObservableCollection<SanPham>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
-            ConfirmPaymentCmd = new RelayCommand<object>((p) => { return true; }, (p) => { confirmPayment(); });
+            ConfirmPaymentCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { confirmPayment(p); });
             string ma = "I37HS";
             Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == ma).SingleOrDefault();
             SelectAmmount = 1;
 
         }
 
-        private void confirmPayment()
+        private void confirmPayment(Window p)
         {
             string sohd = Converter.Instance.RandomString(5);
             while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == sohd).Count() > 0)
@@ -97,6 +97,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             DataProvider.Ins.DB.HOADON.Add(hd);
             DataProvider.Ins.DB.SaveChanges();
+            winBill win = p as winBill;
+            win.Close();
         }
 
         private void LoadSanPhamData()

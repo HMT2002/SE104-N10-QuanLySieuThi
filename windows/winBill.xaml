@@ -66,6 +66,7 @@
                     VerticalAlignment="Bottom"
                     Margin="20"
                     Command="{Binding ConfirmPaymentCmd}"
+                        CommandParameter="{Binding ElementName=BillWin}"
                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                     HorizontalAlignment="Right" />
 
