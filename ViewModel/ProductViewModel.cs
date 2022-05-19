@@ -259,17 +259,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void NewProduct()
         {
-            do
-            {
-                ProductId = Converter.Instance.RandomString(5);
-            }
-            while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
-            ProductName = "";
-            Price = 0;
-            Ammount = 0;
-            Bitimg = null;
-            btnAvatar.Content = null;
-            Note = "";
+            //do
+            //{
+            //    ProductId = Converter.Instance.RandomString(5);
+            //}
+            //while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
+            //ProductName = "";
+            //Price = 0;
+            //Ammount = 0;
+            //Bitimg = null;
+            //btnAvatar.Content = null;
+            //Note = "";
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)

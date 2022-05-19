@@ -20,7 +20,7 @@
       >
 
     <Grid>
-                <materialDesign:Card>
+        <materialDesign:Card>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -106,7 +106,7 @@
                                                                Margin="3 3 3 3"
                                                                HorizontalAlignment="Center"
                                                                VerticalAlignment="Center"></TextBlock>
-                                                    
+
                                                     <TextBlock Text="{Binding sanpham.TENSP}"
                                                                Margin="3 3 3 3 "
                                                                HorizontalAlignment="Center"
@@ -150,9 +150,9 @@
                                         <ItemsControl x:Name="listboxSelectedItem"
                                                       ItemsSource="{Binding ListSelecteditems}"
                                                       >
-                                                      <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                       SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
-                                                      
+
 
                                             <ItemsControl.ItemTemplate >
                                                 <DataTemplate>
@@ -179,7 +179,7 @@
                                                                    HorizontalAlignment="Center"
                                                                    
                                                                    >
-                                                            
+
                                                         </TextBlock>
                                                         <Button Command="{Binding DecreaseSelectAmmountCmd}"
                                                                 ToolTip="Đóng"
@@ -205,12 +205,12 @@
                                 <StackPanel>
                                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                            Content="_Button"
+                                            Content="Thành tiền"
                                             VerticalAlignment="Bottom"
-                                            Margin="20"
+                                            Margin="220,20,0,20"
                                             Command="{Binding BuyProductCmd}"
-                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                            HorizontalAlignment="Right" 
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                            HorizontalAlignment="Left" 
                                             />
                                 </StackPanel>
                             </materialDesign:Card>
