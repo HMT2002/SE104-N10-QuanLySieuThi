@@ -193,6 +193,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
+                    if (SelectedItem.sanpham.SL == null)
+                    {
+                        return;
+                    }
+                    if (SelectedItem.sanpham.SL <= 0)
+                    {
+                        return;
+                    }
                     SanPham sp = new SanPham();
                     sp = SelectedItem;
                     sp.Amount = 5;

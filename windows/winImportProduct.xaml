@@ -62,7 +62,6 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
-                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBox materialDesign:HintAssist.Hint="Mã nhập hàng"
@@ -80,12 +79,6 @@
                                           SelectedItem="{Binding SeletedProduct,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Tên sản phẩm"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Text="{Binding ProductName}" />
-                            </Grid>
-                            <Grid Grid.Column="3">
                                 <DatePicker Width="auto"
                                             materialDesign:HintAssist.Hint="Ngày nhập hàng"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
@@ -106,28 +99,38 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding Price}" />
+                                         Text="{Binding Price}"
+                                         IsReadOnly="True"
+                                         IsEnabled="False"
+                                         />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <TextBox materialDesign:HintAssist.Hint="Số  lượng tồn kho"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding Ammount}" />
+                                         Text="{Binding Ammount}"
+                                         IsReadOnly="True"
+                                         IsEnabled="False" 
+                                         />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <TextBox materialDesign:HintAssist.Hint="Số  lượng nhập vào"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding AmmountImport}" />
+                                         Text="{Binding AmmountImport}"
+                                         />
                             </Grid>
                             <Grid Grid.Column="3">
                                 <TextBox materialDesign:HintAssist.Hint="Tổng giá trị"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding SummaryImport}" />
+                                         Text="{Binding SummaryImport}"
+                                         IsReadOnly="True"
+                                         IsEnabled="False" 
+                                         />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
