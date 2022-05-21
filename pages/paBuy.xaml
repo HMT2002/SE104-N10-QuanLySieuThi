@@ -47,7 +47,27 @@
         <Grid Grid.Row="1">
             <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="500">
                 <ScrollViewer>
-
+                    <ListView materialDesign:HintAssist.Hint="Category"
+                              ItemsSource="{Binding DealingHistoryList,Mode=TwoWay}"
+                              materialDesign:TextFieldAssist.HasClearButton="True"
+                              Width="auto"
+                              Height="auto"
+                              SelectedItem="{Binding SelectedImport}"
+                              >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding nhaphang.MANH}"
+                                                Header="Mã nhập hàng"
+                                                Width="150" />
+                                <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NHANVIEN.HOTEN}"
+                                                Header="Nhân viên"
+                                                Width="150" />
+                                <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NGNH}"
+                                                Header="Ngày"
+                                                Width="150" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </ScrollViewer>
 
             </materialDesign:Card>

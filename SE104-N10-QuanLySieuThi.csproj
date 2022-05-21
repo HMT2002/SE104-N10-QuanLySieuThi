@@ -114,6 +114,7 @@
     </ApplicationDefinition>
     <Compile Include="classes\Account.cs" />
     <Compile Include="classes\Converter.cs" />
+    <Compile Include="classes\NhapHang.cs" />
     <Compile Include="crystalreport\CrystalReport1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

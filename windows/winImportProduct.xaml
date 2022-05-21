@@ -22,7 +22,7 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        DataContext="{StaticResource ImportProductVM }"
+        DataContext="{StaticResource BuyVM }"
         Name="ImportProductWin">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -142,6 +142,7 @@
                                     Margin="10"
                                     Width="100"
                                     Command="{Binding ImportProductCmd}"
+                                    CommandParameter="{Binding ElementName=ImportProductWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                         </Grid>

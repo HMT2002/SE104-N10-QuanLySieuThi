@@ -25,8 +25,25 @@
         <WrapPanel Background="AliceBlue" MaxHeight="300" MaxWidth="300">
             <materialDesign:Card Padding="8" materialDesign:ShadowAssist.ShadowDepth="Depth3" Foreground="{x:Null}" UniformCornerRadius="10">
                 <WrapPanel>
-                    <Wpf:PieChart DataTooltip="{x:Null}" Hoverable="True" InnerRadius="10" LegendLocation="Bottom" Series="{Binding SeriesCollection}"
-                                  />
+                    <Wpf:PieChart Hoverable="True"
+                                  InnerRadius="0"
+                                  LegendLocation="Bottom"
+                                  Margin="40"
+                                  Series="{Binding SeriesMostProduct}"
+                                  Height="150"
+                                  Width="150">
+                        <Wpf:PieChart.ChartLegend>
+                            <Wpf:DefaultLegend BulletSize="15"
+                                               TextBlock.Foreground="#0B87F4"
+                                               TextBlock.FontSize="10"></Wpf:DefaultLegend>
+                        </Wpf:PieChart.ChartLegend>
+                        <Wpf:PieChart.DataTooltip>
+                            <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
+                        </Wpf:PieChart.DataTooltip>
+                        
+                        
+                    </Wpf:PieChart>
+
                 </WrapPanel>
             </materialDesign:Card>
 

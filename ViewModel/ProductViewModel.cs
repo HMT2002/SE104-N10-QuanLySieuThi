@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class ProducViewModel : BaseViewModel
+    public class ProducViewModel : BaseViewModel
     {
         public NhanVien nv = new NhanVien();
 
@@ -83,8 +83,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private DateTime _ImportDate;
         public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
 
-        public SanPham sp=new SanPham();
-        public ObservableCollection<SanPham> SP { get; set; }
+
 
         private SanPham _SelectedItem;
         public SanPham SelectedItem
@@ -171,9 +170,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Phone = "";
             Origin = "";
             SuppliertName = "";
-            
             Bitimg = null;
-            sp = new SanPham();
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
@@ -286,12 +283,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void NewProduct()
         {
-            SupplierType = new List<string>();
-            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
-            foreach (var item in supplierList)
-            {
-                SupplierType.Add(item.TEN);
-            }
+            LoadSupplierList();
             do
             {
                 ProductId = Converter.Instance.RandomString(5);
@@ -303,6 +295,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Bitimg = null;
             btnAvatar.Content = null;
             Note = "";
+        }
+
+        public void LoadSupplierList()
+        {
+            SupplierType = new List<string>();
+            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
+            foreach (var item in supplierList)
+            {
+                SupplierType.Add(item.TEN);
+            }
         }
 
         private void AddItemIntoItemCtrol(ItemsControl p)

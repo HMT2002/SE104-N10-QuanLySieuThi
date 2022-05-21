@@ -110,6 +110,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             sp.SL +=AmmountImport;
             DataProvider.Ins.DB.SaveChanges();
             NewImport();
+            LoadProductList();
         }
 
         private void NewImport()
@@ -122,8 +123,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void LoadProductList()
         {
+            ListProduct = new List<string>();
             var supplierList = DataProvider.Ins.DB.SANPHAM;
-            int i = 1;
             foreach (var item in supplierList)
             {
                 ListProduct.Add(item.TENSP);

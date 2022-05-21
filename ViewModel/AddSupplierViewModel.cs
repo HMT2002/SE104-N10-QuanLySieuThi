@@ -46,7 +46,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var nv = new NHACUNGCAP() { GHICHU = Note, MACC = SuppliertId, TEN = SuppliertName, SODT = Phone, XUATXU = Origin };
             DataProvider.Ins.DB.NHACUNGCAP.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
-            LoadTonKhoData();
             NewSupplier();
         }
 
@@ -61,10 +60,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Origin = "";
             SuppliertName = "";
             Note = "";
-        }
-        private void LoadTonKhoData()
-        {
-
         }
     }
 }

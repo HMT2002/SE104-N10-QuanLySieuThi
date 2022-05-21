@@ -1,7 +1,9 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -15,87 +17,154 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 {
     public class BuyViewModel:BaseViewModel
     {
-
-        SanPham prod = new SanPham();
-
-        public ICommand LoadedPageCmd { get; set; }
-
-        public ICommand PasswordChangedCommand { get; set; }
-
-        public ICommand AddProductCmd { get; set; }
-
-        public ICommand DeleteProductCmd { get; set; }
-
-        public ICommand FixProductCmd { get; set; }
-
-        public ICommand PickImage { get; set; }
-
+        private static BuyViewModel ins = new BuyViewModel();
         public ICommand LoadedGridItemCmd { get; set; }
         public ICommand openImportproductCmd { get; set; }
 
-        private string _UserName;
-        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
-        private string _Name;
-        public string Name { get => _Name; set { _Name = value; OnPropertyChanged(); } }
-        private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        private ObservableCollection<NhapHang> _DealingHistoryList;
 
-        private string _Id;
-        public string Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
-        private string _Mensurement;
-        public string Mensurement { get => _Mensurement; set { _Mensurement = value; OnPropertyChanged(); } }
-        private decimal _Price;
-        public decimal Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
-        private string _Quantiy;
-        public string Quantiy { get => _Quantiy; set { _Quantiy = value; OnPropertyChanged(); } }
+        public ObservableCollection<NhapHang> DealingHistoryList { get => _DealingHistoryList; set { _DealingHistoryList = value; OnPropertyChanged(); } }
+
+
+        SANPHAM curProduct = new SANPHAM();
+
         private string _ProductName;
         public string ProductName { get => _ProductName; set { _ProductName = value; OnPropertyChanged(); } }
-        private string _SupplierId;
-        public string SupplierId { get => _SupplierId; set { _SupplierId = value; OnPropertyChanged(); } }
-        private string _SupplierName;
-        public string SupplierName { get => _SupplierName; set { _SupplierName = value; OnPropertyChanged(); } }
-        private string _SupplierCountry;
-        public string SupplierCountry { get => _SupplierCountry; set { _SupplierCountry = value; OnPropertyChanged(); } }
+        private string _ProductID;
+        public string ProductID { get => _ProductID; set { _ProductID = value; OnPropertyChanged(); } }
+        private string _ImportID;
+        public string ImportID { get => _ImportID; set { _ImportID = value; OnPropertyChanged(); } }
+        private DateTime _ImportDate;
+        public DateTime ImportDate { get => _ImportDate; set { _ImportDate = value; OnPropertyChanged(); } }
+        private List<string> _ListProduct = new List<string>();
+        public List<string> ListProduct { get => _ListProduct; set { _ListProduct = value; OnPropertyChanged(); } }
+        private string _SeletedProduct;
+        public string SeletedProduct
+        {
+            get => _SeletedProduct; set
+            {
+                _SeletedProduct = value;
+                if (SeletedProduct != null)
+                {
+                    var ncc = DataProvider.Ins.DB.SANPHAM.Where(x => x.TENSP == SeletedProduct).SingleOrDefault();
+                    if (ncc != null)
+                    {
+                        curProduct = ncc;
+                        ProductID = curProduct.MASP;
+                        ProductName = curProduct.TENSP;
+                        Ammount = (int)curProduct.SL;
+                        Price = (decimal)curProduct.GIA;
+
+                    }
+                }
+                OnPropertyChanged();
+            }
+        }
+        private int _Ammount;
+        public int Ammount
+        {
+            get => _Ammount; set
+            {
+                _Ammount = value;
+                OnPropertyChanged();
+            }
+        }
+        private decimal _SummaryImport;
+        public decimal SummaryImport { get => _SummaryImport; set { _SummaryImport = value; OnPropertyChanged(); } }
+        private int _AmmountImport;
+        public int AmmountImport
+        {
+            get => _AmmountImport; set
+            {
+                _AmmountImport = value;
+                SummaryImport = value * Price;
+                OnPropertyChanged();
+            }
+        }
+        private decimal _Price;
+        public decimal Price
+        {
+            get => _Price; set
+            {
+                _Price = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand ImportProductCmd { get; set; }
+
+
 
         public BuyViewModel()
         {
-            Id = "";
-            Mensurement = "";
-            Price = 0;
-            Quantiy = "";
-            ProductName = "";
-            SupplierId = "";
-            SupplierName = "";
-            SupplierCountry = "";
             openImportproductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
-
-            PickImage = new RelayCommand<Button>((p) => { return true; }, (p) => { Imagepick(p); });
-            //AddProductCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { Imagepick(p); });
-            //DeleteProductCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { Imagepick(p); });
-            //FixProductCmd = new RelayCommand<Grid>((p) => { return true; }, (p) => { Imagepick(p); });
-            LoadedGridItemCmd = new RelayCommand<Button>((p) => { return true; }, (p) => { Imagepick(p); });
-
+            ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(p); });
+            ImportID = Converter.Instance.RandomString(5);
+            ImportDate = DateTime.Now;
+            Price = 0;
+            AmmountImport = 0;
+            LoadProductList();
+            loadHistory();
         }
         private void openWinAddSupplier()
         {
             winImportProduct win = new winImportProduct();
             win.ShowDialog();
 
-
         }
-        private void ClickId(object sender, EventArgs e)
+
+        private void LoadProductList()
         {
-            Button btn = sender as Button;
-            NhanVien kh = new NhanVien();
-
+            ListProduct = new List<string>();
+            var supplierList = DataProvider.Ins.DB.SANPHAM;
+            foreach (var item in supplierList)
+            {
+                ListProduct.Add(item.TENSP);
+            }
         }
-
-        private void Imagepick(Button p)
+        private void ImportProduct(object p)
         {
-            prod.chooseImg();
-            p.Content = new Image() { Source = prod.Bitimg };
+            while (DataProvider.Ins.DB.NHAPHANG.Where(x => x.MANH == ImportID).Count() > 0)
+            {
+                ImportID = Converter.Instance.RandomString(5);
+            }
+            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP, MANV = MainViewModel._currentUser, NGNH = ImportDate, SLNHAPHANG = AmmountImport };
+            DataProvider.Ins.DB.NHAPHANG.Add(nv);
+
+            var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductID).SingleOrDefault();
+            if (sp.SL == null)
+            {
+                sp.SL = 0;
+            }
+            sp.SL += AmmountImport;
+            DataProvider.Ins.DB.SaveChanges();
+            NewImport();
+            LoadProductList();
+            loadHistory();
+            winImportProduct win = p as winImportProduct;
+            win.Close();
         }
 
+        private void NewImport()
+        {
+            SeletedProduct = null;
+            AmmountImport = 0;
+            SummaryImport = 0;
+
+        }
+
+        public void loadHistory()
+        {
+            DealingHistoryList = new ObservableCollection<NhapHang>();
+            var dealing = DataProvider.Ins.DB.NHAPHANG;
+            foreach (var item in dealing)
+            {
+                NhapHang nhaphang = new NhapHang();
+                nhaphang.nhaphang = item;
+                DealingHistoryList.Add(nhaphang);
+            }
+
+        }
 
     }
 }
