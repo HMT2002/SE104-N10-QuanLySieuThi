@@ -63,11 +63,6 @@ primary key(MACC)
 )
 select * from NHACUNGCAP
 
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC001','Coca Corp','09999999','Mỹ')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC002','Nestle Corp','09999998','Anh')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC003','Amazon Corp','09999997','Canada')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC004','Tribeco Corp','09999996','Thái')
-
 CREATE TABLE SANPHAM(
 MASP varchar(10),
 TENSP nvarchar(40),
@@ -91,6 +86,10 @@ insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP005','0 độ','chai','
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP006','7up','chai','CC004',7000,50)
 
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP007','Sting','chai','CC004',7000,50)
+
+
+select* from SANPHAM
+
 
 delete from SANPHAM
 
