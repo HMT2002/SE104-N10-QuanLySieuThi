@@ -1,12 +1,5 @@
-﻿using Microsoft.Win32;
-using SE104_N10_QuanLySieuThi.Model;
-using SE104_N10_QuanLySieuThi.pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,18 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SE104_N10_QuanLySieuThi
+namespace SE104_N10_QuanLySieuThi.windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for winProductDetail.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class winProductDetail : Window
     {
-
-        public MainWindow()
+        public winProductDetail()
         {
             InitializeComponent();
         }

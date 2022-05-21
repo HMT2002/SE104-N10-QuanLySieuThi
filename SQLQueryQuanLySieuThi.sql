@@ -73,9 +73,15 @@ constraint LK_CUNGCAP foreign key(MACC) references NHACUNGCAP(MACC),
 GIA money,
 SL int,
 PICBI varbinary(MAX),
+NGDK smalldatetime,
+
 primary key(MASP)
 )
 select * from SANPHAM
+
+alter table SANPHAM add NGDK smalldatetime
+
+update SANPHAM set NGDK= 2022-05-21 
 
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP001','Coca cola','chai','CC001',10000,100)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP002','Lays','chai','CC002',15000,40)

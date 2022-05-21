@@ -94,7 +94,8 @@
             </Grid.ColumnDefinitions>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListBox ItemsSource="{Binding TonKhoList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                         SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                         SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
+                         >
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="6"

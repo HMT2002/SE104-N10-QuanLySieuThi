@@ -98,6 +98,7 @@
           <Property Name="SL" Type="int" />
           <Property Name="PICBI" Type="varbinary(max)" />
           <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+          <Property Name="NGDK" Type="smalldatetime" />
         </EntityType>
         <Association Name="LK_CUNGCAP">
           <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
@@ -330,6 +331,7 @@
           <Property Name="SL" Type="Int32" />
           <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NGDK" Type="DateTime" Precision="0" />
           <NavigationProperty Name="CTHD" Relationship="Self.LK_SANPHAM" FromRole="SANPHAM" ToRole="CTHD" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.LK_CUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
           <NavigationProperty Name="NHAPHANG" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="SANPHAM" ToRole="NHAPHANG" />
@@ -560,6 +562,7 @@
                 <ScalarProperty Name="SL" ColumnName="SL" />
                 <ScalarProperty Name="PICBI" ColumnName="PICBI" />
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="NGDK" ColumnName="NGDK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,9 +34,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _ProductId;
         public string ProductId { get => _ProductId; set { _ProductId = value; OnPropertyChanged(); } }
 
-        private string _ImportId;
-        public string ImportId { get => _ImportId; set { _ImportId = value; OnPropertyChanged(); } }
-
         private string _SuppliertId;
         public string SuppliertId { get => _SuppliertId; set { _SuppliertId = value; OnPropertyChanged(); } }
 
@@ -98,7 +95,24 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    SelectedItem.sanpham.GIA = 0;
+                    NewProduct();
+
+                    Bitimg = SelectedItem.Bitimg;
+                    imgAvatar.Source = SelectedItem.Bitimg;
+                    btnAvatar.Content = imgAvatar;
+                    SeletedProductType = SelectedItem.sanpham.DVT;
+                    SuppliertId = SelectedItem.sanpham.MACC;
+                    var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).SingleOrDefault();
+                    SeletedSupplierType = ncc.TEN;
+                    ProductName = SelectedItem.sanpham.TENSP;
+                    ProductId = SelectedItem.sanpham.MASP;
+                    Price = (decimal)SelectedItem.sanpham.GIA;
+                    Ammount =(int) SelectedItem.sanpham.SL;
+                    Note = SelectedItem.sanpham.GHICHU;
+                    ImportDate = (DateTime)SelectedItem.sanpham.NGDK;
+                    winProductDetail win = new winProductDetail();
+                    win.ShowDialog();
+
                 }
             }
         }
@@ -109,12 +123,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand BillCommand { get; set; }
         public ICommand openNewSupplierCommand { get; set; }
 
-
         public ICommand LoadedPageCmd { get; set; }
         public ICommand LoadedItemCtrlCmd { get; set; }
 
         public ICommand AddProductCmd { get; set; }
-
+        public ICommand ModifyProductCmd { get; set; }
 
         public ICommand DeleteProductCmd { get; set; }
         public ICommand CompleteCmd { get; set; }
@@ -173,12 +186,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });
             CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CompleteAdding(); });
-
+            ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(); });
             NhapHangList = new ObservableCollection<SanPham>();
 
 
             NewProduct();
             NewSupplier();
+        }
+
+        private void ModifyProduct()
+        {
+            var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).SingleOrDefault();
+            sp.DVT = SeletedProductType;
+            sp.GIA = Price;
+            sp.NGDK = ImportDate;
+            sp.GHICHU = Note;
+            sp.DVT = SeletedProductType;
+            var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
+            sp.MACC = ncc.MACC;
+            DataProvider.Ins.DB.SaveChanges();
+
         }
 
         private void NewSupplier()
@@ -259,6 +286,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void NewProduct()
         {
+            SupplierType = new List<string>();
+            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
+            foreach (var item in supplierList)
+            {
+                SupplierType.Add(item.TEN);
+            }
             do
             {
                 ProductId = Converter.Instance.RandomString(5);
@@ -332,24 +365,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void openWinAddNewProduct(object p)
         {
-            var supplierList = DataProvider.Ins.DB.NHACUNGCAP;
-            int i = 1;
-            foreach (var item in supplierList)
-            {
-                SupplierType.Add(item.TEN);
-            }
-
+            NewProduct();
             NhapHangList = new ObservableCollection<SanPham>();
             do
             {
                 ProductId = Converter.Instance.RandomString(5);
-
             } while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
-            do
-            {
-                ImportId = Converter.Instance.RandomString(5);
-
-            } while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == ImportId).Count() > 0);
 
             winAddProduct win = new winAddProduct();
             win.ShowDialog();
