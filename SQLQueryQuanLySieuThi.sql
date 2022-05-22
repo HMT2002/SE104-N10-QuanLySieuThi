@@ -74,9 +74,13 @@ GIA money,
 SL int,
 PICBI varbinary(MAX),
 NGDK smalldatetime,
+LOAI nvarchar(20),
 
 primary key(MASP)
 )
+
+alter table SANPHAM add LOAI nvarchar(20)
+update SANPHAM set LOAI='Khác'
 select * from SANPHAM
 
 alter table SANPHAM add NGDK smalldatetime
