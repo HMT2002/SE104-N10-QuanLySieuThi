@@ -100,6 +100,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     imgAvatar.Source = SelectedItem.Bitimg;
                     btnAvatar.Content = imgAvatar;
                     SeletedProductType = SelectedItem.sanpham.DVT;
+                    SeletedProductKind = SelectedItem.sanpham.LOAI;
                     SuppliertId = SelectedItem.sanpham.MACC;
                     var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.MACC == SuppliertId).SingleOrDefault();
                     SeletedSupplierType = ncc.TEN;
@@ -152,12 +153,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" ,"Gói"};
 
         public List<string> ProductType { get => _ProductType; set { _ProductType = value; OnPropertyChanged(); } }
+        private List<string> _ProductKind = new List<string>() { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
 
+        public List<string> ProductKind { get => _ProductKind; set { _ProductKind = value; OnPropertyChanged(); } }
         private List<string> _SupplierType = new List<string>();
 
         public List<string> SupplierType { get => _SupplierType; set { _SupplierType = value; OnPropertyChanged(); } }
         private string _SeletedProductType;
         public string SeletedProductType { get => _SeletedProductType; set { _SeletedProductType = value; OnPropertyChanged(); } }
+        private string _SeletedProductKind;
+        public string SeletedProductKind { get => _SeletedProductKind; set { _SeletedProductKind = value; OnPropertyChanged(); } }
         private string _SeletedSupplierType;
         public string SeletedSupplierType { get => _SeletedSupplierType; set { _SeletedSupplierType = value; OnPropertyChanged(); } }
         public ProducViewModel()
@@ -194,11 +199,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void ModifyProduct()
         {
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).SingleOrDefault();
-            sp.DVT = SeletedProductType;
             sp.GIA = Price;
             sp.NGDK = ImportDate;
             sp.GHICHU = Note;
             sp.DVT = SeletedProductType;
+            sp.LOAI = SeletedProductKind;
             var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
             sp.MACC = ncc.MACC;
             DataProvider.Ins.DB.SaveChanges();
@@ -244,7 +249,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 };
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 ,LOAI=SeletedProductKind};
             DataProvider.Ins.DB.SANPHAM.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
