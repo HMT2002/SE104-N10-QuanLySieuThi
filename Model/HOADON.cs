@@ -25,6 +25,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public string MAKH { get; set; }
         public string MANV { get; set; }
         public Nullable<decimal> TRIGIA { get; set; }
+        public Nullable<double> GIAMGIA { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHD { get; set; }

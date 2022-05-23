@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class SellViewModel : BaseViewModel
+    public class SellViewModel : BaseViewModel
     {
         ListBox lstbxSelected = new ListBox();
         public ICommand LoadedItemCtrlCmd { get; set; }
@@ -41,6 +41,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public long DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
         private decimal _ThanhTien;
         public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
+
+        private decimal _ThanhTienCoGiamGia;
+        public decimal ThanhTienCoGiamGia { get => _ThanhTienCoGiamGia; set { _ThanhTienCoGiamGia = value; OnPropertyChanged(); } }
+
+        private float _GiamGia;
+        public float GiamGia { get => _GiamGia; set { _GiamGia = value; OnPropertyChanged(); } }
 
         private List<string> _CategoryList = new List<string>() { "Cái", "Kg", "Trái", "Bao", "Lít", "Chai" };
 
@@ -67,16 +73,76 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public KhachHang _Khachhang = new KhachHang();
         public KhachHang Khachhang { get => _Khachhang; set { _Khachhang = value; OnPropertyChanged(); } }
 
+        public NhanVien _Nhanvien = new NhanVien();
+        public NhanVien Nhanvien { get => _Nhanvien; set { _Nhanvien = value; OnPropertyChanged(); } }
+
+        private string _EmployeeId;
+        public string EmployeeId { get => _EmployeeId; set { _EmployeeId = value; OnPropertyChanged(); } }
+
+        private string _CustomerId;
+        public string CustomerId { get => _CustomerId; set { _CustomerId = value; OnPropertyChanged(); } }
+
+
+        private List<KhachHang> _ListCustomer = new List<KhachHang>();
+        public List<KhachHang> ListCustomer { get => _ListCustomer; set { _ListCustomer = value; OnPropertyChanged(); } }
+
+        private List<NhanVien> _ListEmployee = new List<NhanVien>();
+        public List<NhanVien> ListEmployee { get => _ListEmployee; set { _ListEmployee = value; OnPropertyChanged(); } }
+        private KhachHang _SeletedCustomer;
+        public KhachHang SeletedCustomer { get => _SeletedCustomer; set { 
+                _SeletedCustomer = value;
+                if (SeletedCustomer != null)
+                {
+                    CustomerId = SeletedCustomer.khachhang.MAKH;
+
+                }
+                OnPropertyChanged();
+            } 
+        }
+        private NhanVien _SeletedEmployee;
+        public NhanVien SeletedEmployee { get => _SeletedEmployee; set { 
+                _SeletedEmployee = value;
+                if (SeletedEmployee != null)
+                {
+                    EmployeeId = SeletedEmployee.nhanvien.MANV;
+
+                }
+                OnPropertyChanged(); 
+            } 
+        }
+
         public SellViewModel()
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
             ConfirmPaymentCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { confirmPayment(p); });
-            string ma = "I37HS";
-            Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == ma).SingleOrDefault();
             SelectAmmount = 1;
+            GiamGia = 0;
+            loadListCustomer();
+            loadListEmployee();
+        }
 
+        private void loadListCustomer()
+        {
+            var list = DataProvider.Ins.DB.KHACHHANG;
+            foreach(var item in list)
+            {
+                KhachHang kh = new KhachHang();
+                kh.khachhang = item;
+                ListCustomer.Add(kh);
+            }
+        }
+
+        private void loadListEmployee()
+        {
+            var list = DataProvider.Ins.DB.NHANVIEN;
+            foreach (var item in list)
+            {
+                NhanVien nv = new NhanVien();
+                nv.nhanvien = item;
+                ListEmployee.Add(nv);
+            }
         }
 
         private void confirmPayment(Window p)
@@ -86,7 +152,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 sohd = Converter.Instance.RandomString(5);
             }
-            var hd = new HOADON() { SOHD = sohd,NGHD=DateTime.Now,MANV=MainViewModel._currentUser,MAKH=Khachhang.khachhang.MAKH,TRIGIA=ThanhTien };
+            var hd = new HOADON() { SOHD = sohd,NGHD=DateTime.Now,MANV=MainViewModel._currentUser,MAKH=Khachhang.khachhang.MAKH,TRIGIA=ThanhTienCoGiamGia ,GIAMGIA=GiamGia};
             foreach (SanPham sp in ListSelecteditems)
             {
                 var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount,};
@@ -170,8 +236,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 ThanhTien += (decimal)sp.sanpham.GIA * sp.Amount;
             }
+            Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
+            Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId).SingleOrDefault();
+            applyDisccount();
+            ThanhTienCoGiamGia = ThanhTien - (ThanhTien / 100 * (decimal)GiamGia);
             winBill win = new winBill();
             win.ShowDialog();
+        }
+
+        public void applyDisccount()
+        {
+            if (Khachhang.khachhang.DOANHSO >= 200000)
+            {
+                GiamGia = 10;
+            }
+            if(Khachhang.khachhang.DOANHSO >= 300000)
+            {
+                GiamGia = 20;
+
+            }
+            if(Khachhang.khachhang.DOANHSO>= 500000)
+            {
+                GiamGia = 30;
+
+            }
         }
 
         private void AddItemIntoListBox(ListBox p)

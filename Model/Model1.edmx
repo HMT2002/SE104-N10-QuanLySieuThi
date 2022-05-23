@@ -31,6 +31,7 @@
           <Property Name="MAKH" Type="varchar" MaxLength="10" />
           <Property Name="MANV" Type="varchar" MaxLength="10" />
           <Property Name="TRIGIA" Type="money" />
+          <Property Name="GIAMGIA" Type="float" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -256,6 +257,7 @@
           <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GIAMGIA" Type="Double" />
           <NavigationProperty Name="CTHD" Relationship="Self.LK_HOADON" FromRole="HOADON" ToRole="CTHD" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.LK_KHACHHANG" FromRole="HOADON" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHANVIEN" FromRole="HOADON" ToRole="NHANVIEN" />
@@ -492,6 +494,7 @@
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="MANV" ColumnName="MANV" />
                 <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
+                <ScalarProperty Name="GIAMGIA" ColumnName="GIAMGIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

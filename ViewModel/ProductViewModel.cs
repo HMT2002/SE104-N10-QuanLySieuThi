@@ -151,10 +151,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ObservableCollection<SanPham> NhapHangList { get => _NhapHangList; set { _NhapHangList = value; OnPropertyChanged(); } }
 
         private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" ,"Gói"};
-
         public List<string> ProductType { get => _ProductType; set { _ProductType = value; OnPropertyChanged(); } }
-        private List<string> _ProductKind = new List<string>() { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
 
+        private List<string> _ProductKind = new List<string>() { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
         public List<string> ProductKind { get => _ProductKind; set { _ProductKind = value; OnPropertyChanged(); } }
         private List<string> _SupplierType = new List<string>();
 
