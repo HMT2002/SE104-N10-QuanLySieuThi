@@ -179,7 +179,7 @@
                                     Margin="10"
                                     Width="100"
                                     Command="{Binding AddProductCmd}"
-                                    CommandParameter="{Binding ElementName=grdMain}"
+                                    CommandParameter="{Binding ElementName=AddProductWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                         </Grid>

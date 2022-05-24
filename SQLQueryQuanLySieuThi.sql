@@ -111,10 +111,11 @@ constraint LK_KHACHHANG foreign key(MAKH) references KHACHHANG(MAKH),
 MANV varchar(10),
 constraint LK_NHANVIEN foreign key(MANV) references NHANVIEN(MANV),
 TRIGIA money,
+GIAMGIA float,
 primary key(SOHD)
 )
-select * from HOADON
 
+select * from HOADON
 delete from HOADON
 
 

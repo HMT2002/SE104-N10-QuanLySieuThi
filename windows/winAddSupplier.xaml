@@ -174,16 +174,19 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
+
+                                <TextBox materialDesign:HintAssist.Hint="Mã Nhà cung cấp"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding SuppliertId}"
+                                         IsReadOnly="True" />
+                            </Grid>
+                            <Grid Grid.Column="1">
                                 <TextBox materialDesign:HintAssist.Hint="Tên Nhà cung cấp"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertName}" />
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Mã Nhà cung cấp"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Text="{Binding SuppliertId}" />
+
                             </Grid>
                             <Grid Grid.Column="2">
                                 <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
@@ -221,7 +224,7 @@
                                     Margin="10"
                                     Width="100"
                                     Command="{Binding AddSupplierCmd}"
-                                    CommandParameter="{Binding ElementName=grdMain}"
+                                    CommandParameter="{Binding ElementName=RegistSupplierWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                         </Grid>

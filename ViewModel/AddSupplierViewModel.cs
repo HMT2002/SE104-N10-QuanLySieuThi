@@ -33,10 +33,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public AddSupplierViewModel()
         {
-            AddSupplierCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddSupplier(); });
+            AddSupplierCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddSupplier(p); });
             NewSupplier();
         }
-        private void AddSupplier()
+        private void AddSupplier(object p)
         {
             if (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SuppliertName).Count() > 0)
             {
@@ -47,6 +47,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DataProvider.Ins.DB.NHACUNGCAP.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             NewSupplier();
+            Complete(p);
+
         }
 
         private void NewSupplier()
@@ -60,6 +62,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Origin = "";
             SuppliertName = "";
             Note = "";
+        }
+        private void Complete(object p)
+        {
+            Window win = p as Window;
+            win.Close();
         }
     }
 }

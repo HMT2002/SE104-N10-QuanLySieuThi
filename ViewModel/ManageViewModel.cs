@@ -135,8 +135,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             IsFeMale = false;
             Gender = "Male";
 
-            LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
-
             CheckedGenderCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CheckGender(); });
 
 
@@ -381,11 +379,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
+
         }
 
         private void DeleteEmployee()
         {
+            NHANVIEN nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
+            DataProvider.Ins.DB.NHANVIEN.Remove(nv);
+            DataProvider.Ins.DB.SaveChanges();
+            SelectedItem = null;
 
+            LoadNhanVienData();
+            NewEmployee();
         }
 
         private void CreateEmployee()
@@ -423,10 +428,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             p.Content = imgAvatar;
         }
 
-        void LoadPage(Page p)
-        {
-
-        }
         public byte[] convertImgToByte(BitmapImage bitimg)
         {
             MemoryStream memStream = new MemoryStream();

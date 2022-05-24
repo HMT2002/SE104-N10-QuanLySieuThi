@@ -146,9 +146,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ObservableCollection<SanPham> TonKhoList { get => _TonKhoList; set { _TonKhoList = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<SanPham> _NhapHangList;
 
-        public ObservableCollection<SanPham> NhapHangList { get => _NhapHangList; set { _NhapHangList = value; OnPropertyChanged(); } }
 
         private List<string> _ProductType = new List<string>() { "Cái", "Kg","Trái","Bao","Lít","Chai" ,"Gói"};
         public List<string> ProductType { get => _ProductType; set { _ProductType = value; OnPropertyChanged(); } }
@@ -178,24 +176,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
-            BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(p); });
+            BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(); });
             openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
-            LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
 
-            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(); });
+            AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(p); });
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });
-            CompleteCmd = new RelayCommand<object>((p) => { return true; }, (p) => { CompleteAdding(); });
-            ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(); });
-            NhapHangList = new ObservableCollection<SanPham>();
+            ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(p); });
 
 
             NewProduct();
             NewSupplier();
         }
 
-        private void ModifyProduct()
+        private void ModifyProduct(object p)
         {
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).SingleOrDefault();
             sp.GIA = Price;
@@ -206,11 +201,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
             sp.MACC = ncc.MACC;
             DataProvider.Ins.DB.SaveChanges();
-
+            Complete(p);
         }
 
         private void NewSupplier()
         {
+            LoadSupplierList();
             do
             {
                 SuppliertId = Converter.Instance.RandomString(5);
@@ -224,23 +220,29 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void openWinAddSupplier()
         {
+            NewSupplier();
             winAddSupplier win = new winAddSupplier();
             win.ShowDialog();
 
 
         }
 
-        private void CompleteAdding()
+        private void Complete(object p)
         {
-            NhapHangList.Clear();
+            Window win = p as Window;
+            win.Close();
         }
 
         private void DeleteProduct()
         {
-            throw new NotImplementedException();
+            SANPHAM sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MACC == SelectedItem.sanpham.MACC).SingleOrDefault();
+            DataProvider.Ins.DB.SANPHAM.Remove(sp);
+            DataProvider.Ins.DB.SaveChanges();
+            LoadTonKhoData();
+            NewProduct();
         }
 
-        private void AddProduct()
+        private void AddProduct(object p)
         {
             if (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0)
             {
@@ -248,11 +250,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 ,LOAI=SeletedProductKind};
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 ,LOAI=SeletedProductKind,NGDK=ImportDate};
             DataProvider.Ins.DB.SANPHAM.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
             NewProduct();
+            Complete(p);
         }
 
         private void Imagepick(Button p)
@@ -294,13 +297,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
             ProductName = "";
+            ImportDate = DateTime.Now;
             Price = 0;
             Ammount = 0;
             Bitimg = null;
             btnAvatar.Content = null;
             Note = "";
         }
-
         public void LoadSupplierList()
         {
             SupplierType = new List<string>();
@@ -351,7 +354,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void FilterItem()
         {
-            CollectionViewSource.GetDefaultView(NhapHangList).Refresh();
+            CollectionViewSource.GetDefaultView(TonKhoList).Refresh();
         }
         private string _SearchTypeItem;
         public string SearchTypeItem
@@ -364,20 +367,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
         }
 
-        void LoadPage(Page p)
-        {
-
-        }
-
-        void openWinAddNewProduct(object p)
+        void openWinAddNewProduct()
         {
             NewProduct();
-            NhapHangList = new ObservableCollection<SanPham>();
-            do
-            {
-                ProductId = Converter.Instance.RandomString(5);
-            } while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
-
             winAddProduct win = new winAddProduct();
             win.ShowDialog();
 
