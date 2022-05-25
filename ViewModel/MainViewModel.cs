@@ -79,37 +79,37 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void Start(Window p)
         {
-            IsLoad = true;
-            if (p == null)
-            {
-                return;
-            }
+            //IsLoad = true;
+            //if (p == null)
+            //{
+            //    return;
+            //}
 
-            p.Hide();
-            winLogin loginWindow = new winLogin();
-            loginWindow.ShowDialog();
-            if (loginWindow.DataContext == null)
-                return;
-            var loginVM = loginWindow.DataContext as LoginViewModel;
+            //p.Hide();
+            //winLogin loginWindow = new winLogin();
+            //loginWindow.ShowDialog();
+            //if (loginWindow.DataContext == null)
+            //    return;
+            //var loginVM = loginWindow.DataContext as LoginViewModel;
 
-            if (loginVM.IsLogin)
-            {
-                try
-                {
-                loginAcc = loginVM.Acc;
-                var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-                currentUser = nv.MANV;
-                p.Show();
-                }
-                catch(Exception ex)
-                {
+            //if (loginVM.IsLogin)
+            //{
+            //    try
+            //    {
+            //    loginAcc = loginVM.Acc;
+            //    var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
+            //    currentUser = nv.MANV;
+            //    p.Show();
+            //    }
+            //    catch(Exception ex)
+            //    {
 
-                }
-            }
-            else
-            {
-                p.Close();
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    p.Close();
+            //}
         }
     }
 }

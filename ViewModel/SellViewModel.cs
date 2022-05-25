@@ -29,6 +29,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
 
+        public ICommand IncreaseSelectAmmountCmd { get; set; }
+        public ICommand DecreaseSelectAmmountCmd { get; set; }
+
+
         private int _Stt;
         public int Stt { get => _Stt; set { _Stt = value; OnPropertyChanged(); } }
         private string _MaSP;
@@ -117,11 +121,50 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
             ConfirmPaymentCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { confirmPayment(p); });
+
+            IncreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
+            DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
+
             SelectAmmount = 1;
             GiamGia = 0;
             loadListCustomer();
             loadListEmployee();
         }
+
+        private void Decrease(object p)
+        {
+            if (p is ListViewItem)
+            {
+                ListViewItem item = (ListViewItem)p;
+                SelectedSelectItem = item.Content as SanPham;
+            }
+            SelectedSelectItem.Amount--;
+
+            if (SelectedSelectItem.Amount <= 0)
+            {
+                
+                ListSelecteditems.Remove(SelectedSelectItem);
+                SelectedItem = null;
+            }
+        }
+
+        public void Increase(object p)
+        {
+
+            if (p is ListViewItem)
+            {
+                ListViewItem item = (ListViewItem)p;
+                SelectedSelectItem = item.Content as SanPham;
+            }
+            var sanpham = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == SelectedSelectItem.sanpham.MASP).SingleOrDefault();
+            if (sanpham.SL < SelectedSelectItem.Amount)
+            {
+                MessageBox.Show("đã hết hàng");
+            }
+            SelectedSelectItem.Amount++;
+
+        }
+
 
         private void loadListCustomer()
         {
@@ -231,13 +274,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void openBill()
         {
+            Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
+            Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId).SingleOrDefault();
+            if (Khachhang.khachhang == null || Nhanvien.nhanvien == null)
+            {
+                return;
+            }
+
             SelectedBillList = ListSelecteditems;
             foreach (SanPham sp in ListSelecteditems)
             {
                 ThanhTien += (decimal)sp.sanpham.GIA * sp.Amount;
             }
-            Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
-            Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId).SingleOrDefault();
+
             applyDisccount();
             ThanhTienCoGiamGia = ThanhTien - (ThanhTien / 100 * (decimal)GiamGia);
             winBill win = new winBill();
@@ -267,11 +316,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        public void listboxSelectedItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListBox listBox = sender as ListBox;
-            MessageBox.Show(listBox.SelectedItem.ToString());
-        }
         private SanPham _SelectedItem;
         public SanPham SelectedItem
         {
@@ -289,11 +333,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     {
                         return;
                     }
+                    if (SelectedItem.Amount>0)
+                    {
+                        return;
+                    }
+                    
                     SanPham sp = new SanPham();
                     sp = SelectedItem;
-                    sp.Amount = 5;
-                    
-                    ListSelecteditems.Add(sp);
+                    SelectedItem.Amount = 1;
+                    ListSelecteditems.Add(SelectedItem);
                 }
             }
         }
@@ -317,7 +365,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _SelectedSelectItemIndex; set
             {
                 _SelectedSelectItemIndex = value;
-                MessageBox.Show(ListSelecteditems[SelectedSelectItemIndex].Amount.ToString());
                 OnPropertyChanged();
             }
         }

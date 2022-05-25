@@ -349,11 +349,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (p == null)
                 return;
             Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
-            var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).Count();
-            if (accCount > 0)
+            var accCountKhach = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).FirstOrDefault();
+            var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).FirstOrDefault();
+
+            if (accCountKhach!=null)
             {
-                IsLogin = true;
+                MainWindow win = new MainWindow();
+                win.ShowDialog();
                 p.Close();
+            }
+            else if (accCountNhanVien!=null)
+            {
+                if (accCountNhanVien.PRI == 1)
+                {
+                    MainWindow win = new MainWindow();
+                    win.ShowDialog();
+                    p.Close();
+                }
+                else
+                {
+                    MainWindow win = new MainWindow();
+                    win.ShowDialog();
+                    p.Close();
+                }
+
             }
             else
             {

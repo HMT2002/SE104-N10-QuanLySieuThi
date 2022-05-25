@@ -171,17 +171,20 @@
                                                  Background="AliceBlue">
                                 <ScrollViewer>
                                     <StackPanel>
-                                        <ItemsControl x:Name="listboxSelectedItem"
-                                                      ItemsSource="{Binding ListSelecteditems}">
-                                            <!--SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                      SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"-->
+                                        <ListView x:Name="listboxSelectedItem"
+                                                  ItemsSource="{Binding ListSelecteditems}"
+                                                  SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                  SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+
+
 
 
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-
                                                     <DockPanel VerticalAlignment="Stretch"
-                                                               HorizontalAlignment="Stretch">
+                                                               HorizontalAlignment="Stretch"
+                                                               x:Name="pnlItem"
+                                                               >
                                                         <Image Source="{Binding Bitimg}"
                                                                MaxHeight="40"
                                                                MaxWidth="40"
@@ -189,7 +192,8 @@
                                                         <TextBlock Text="{Binding  sanpham.TENSP }"
                                                                    Margin="3 3 3 3"
                                                                    VerticalAlignment="Center"></TextBlock>
-                                                        <Button Command="{Binding IncreaseSelectAmmountCmd}"
+                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=DecreaseSelectAmmountCmd}"
+                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
                                                                 ToolTip="Thu nhỏ"
                                                                 ToolBar.OverflowMode="AsNeeded"
                                                                 Background="#F0F8FF">
@@ -199,10 +203,13 @@
                                                                    Width="30"
                                                                    FontSize="13"
                                                                    VerticalAlignment="Center"
-                                                                   HorizontalAlignment="Center">
+                                                                   HorizontalAlignment="Center"
+                                                                   
+                                                                   >
 
                                                         </TextBlock>
-                                                        <Button Command="{Binding DecreaseSelectAmmountCmd}"
+                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=IncreaseSelectAmmountCmd}"
+                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
                                                                 ToolTip="Đóng"
                                                                 ToolBar.OverflowMode="AsNeeded"
                                                                 Background="#FF2800">
@@ -212,7 +219,7 @@
                                                 </DataTemplate>
 
                                             </ItemsControl.ItemTemplate>
-                                        </ItemsControl>
+                                        </ListView>
                                     </StackPanel>
                                 </ScrollViewer>
 

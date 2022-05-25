@@ -31,6 +31,8 @@ namespace SE104_N10_QuanLySieuThi.classes
 
         private decimal summary;
 
+        private bool _IsSelected = false;
+
 
         NhaCungCap supplier;
 
@@ -45,11 +47,9 @@ namespace SE104_N10_QuanLySieuThi.classes
         public ICommand DecreaseSelectAmmountCmd { get; set; }
 
 
-        public ICommand IncreaseSelectAmmountCmd { get; set; }
 
         public SanPham(string id, string name, string dvt, int amount, decimal price, NhaCungCap supplier,List<SanPham> listAll)
         {
-            IncreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(); });
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(); });
             this.id = id;
             this.name = name;
@@ -232,6 +232,8 @@ namespace SE104_N10_QuanLySieuThi.classes
         public SANPHAM sanpham { get => _sanpham; set => _sanpham = value; }
         public decimal Summary { get => summary; set { summary = value; summary=(decimal)sanpham.GIA*Amount; OnPropertyChanged(); } }
 
+        public bool IsSelected { get => _IsSelected; set => _IsSelected = value; }
+
         public bool RegistProduct()
         {
 
@@ -298,12 +300,6 @@ namespace SE104_N10_QuanLySieuThi.classes
                 return false;
             }
         }
-
-        public void Increase()
-        {
-            Amount++;
-        }
-
         public void Decrease()
         {
             Amount--;

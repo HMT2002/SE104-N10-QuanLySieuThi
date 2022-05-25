@@ -86,7 +86,6 @@ select * from SANPHAM
 alter table SANPHAM add NGDK smalldatetime
 
 
-
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP001','Coca cola','chai','CC001',10000,100)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP002','Lays','chai','CC002',15000,40)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP003','Singum','chai','CC003',8000,130)
