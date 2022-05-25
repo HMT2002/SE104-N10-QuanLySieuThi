@@ -14,6 +14,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
@@ -265,6 +266,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void Imagepick(Button p)
         {
+            btnAvatar.Background = new SolidColorBrush(Colors.AliceBlue);
             nv.chooseImg();
             Bitimg = nv.Bitimg;
             imgAvatar.Source = nv.Bitimg;

@@ -8,8 +8,6 @@
         Title="winProductDetail"
         Name="AddProductWin"
         DataContext="{StaticResource ProductVM }"
-        
-        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -24,10 +22,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Width="800"
-        Height="550"
-        
-        
-        >
+        Height="550">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
 
@@ -59,8 +54,8 @@
                             CommandParameter="{Binding ElementName=bntPickImage}"
                             Height="auto"
                             Width="auto"
-                            Content="                 "
-                            Background="AliceBlue">
+                            Background="AliceBlue"
+                            >
                     </Button>
                 </materialDesign:Card>
             </Grid>
@@ -132,9 +127,8 @@
                                 <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Text="{Binding ProductId}" 
-                                         IsReadOnly="True"
-                                         />
+                                         Text="{Binding ProductId}"
+                                         IsReadOnly="True" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <TextBox materialDesign:HintAssist.Hint="Giá"
@@ -185,16 +179,16 @@
                                         Command="{Binding DeleteProductCmd}"
                                         CommandParameter="{Binding ElementName=AddProductWin}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_SỬA"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Right"
-                                    Margin="10"
-                                    Width="100"
-                                    Command="{Binding ModifyProductCmd}"
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                        Content="_SỬA"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Margin="10"
+                                        Width="100"
+                                        Command="{Binding ModifyProductCmd}"
                                         CommandParameter="{Binding ElementName=AddProductWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                             </StackPanel>
 

@@ -20,9 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        
-        
-        DataContext="{StaticResource ProductVM }"      
+        DataContext="{StaticResource ProductVM }"
         Name="AddProductWin"
         Title="winAddProduct">
     <i:Interaction.Triggers>
@@ -56,8 +54,11 @@
                             CommandParameter="{Binding ElementName=bntPickImage}"
                             Height="auto"
                             Width="auto"
-                            Content="                 "
-                            Background="AliceBlue">
+                            Content="                 ">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/SE104-N10-QuanLySieuThi;component/ImageResource/photo_photography_image_picture_add-128.png"
+                                        Stretch="Uniform" />
+                        </Button.Background>
                     </Button>
                 </materialDesign:Card>
             </Grid>
@@ -129,9 +130,8 @@
                                 <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Text="{Binding ProductId}" 
-                                         IsReadOnly="True"
-                                         />
+                                         Text="{Binding ProductId}"
+                                         IsReadOnly="True" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <TextBox materialDesign:HintAssist.Hint="Giá"

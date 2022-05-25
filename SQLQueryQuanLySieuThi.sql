@@ -52,7 +52,6 @@ alter table NHACUNGCAP add GHICHU nvarchar(250)
 
 select * from NHANVIEN
 delete from NHANVIEN where MANV='45'
-update NHANVIEN where MANV='NV001' 
 
 CREATE TABLE NHACUNGCAP(
 MACC varchar(10),
@@ -167,6 +166,7 @@ alter table CTHD add constraint LK_HOADON foreign key(SOHD) references HOADON(SO
 insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
+
 
 select * from ACCOUNT 
 delete from ACCOUNT where ACC='tuee'

@@ -151,9 +151,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-            if (MD5Encrypt(Base64Encode(Password)).CompareTo(MD5Encrypt(Base64Encode(RePassword))) == 0)
+            if (Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)).CompareTo(Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(RePassword))) == 0)
             {
-                Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
+                Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
             }
             if (Acc.RegistCustomer() == true)
             {
@@ -348,18 +348,24 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
-            var accCountKhach = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).FirstOrDefault();
-            var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).FirstOrDefault();
-
+            Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
+            string pass = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
+            var accCountKhach = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
+            var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
             if (accCountKhach!=null)
             {
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+
+                MainViewModel._currentUser = user.MANV;
                 MainWindow win = new MainWindow();
+
                 win.Show();
                 p.Close();
             }
             else if (accCountNhanVien!=null)
             {
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+                MainViewModel._currentUser = user.MANV;
                 if (accCountNhanVien.PRI == 1)
                 {
                     MainWindow win = new MainWindow();
@@ -381,61 +387,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
         }
 
-        public static string Base64Encode(string plainText)
-        {
-            string res = "";
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            res = System.Convert.ToBase64String(plainTextBytes);
-            return res;
-        }
-        public static string Base64Decode(string base64Text)
-        {
-            string res = "";
-            var data = Convert.FromBase64String(base64Text);
-            res = Encoding.UTF8.GetString(data);
-            return res;
-        }
-        static string key { get; set; } = "eFh4VHVlRGVwVHJhxXxTueDepTraiVjpProxXxaVZqcFByb3hYeA==";
-
-        public static string MD5Encrypt(string text)
-        {
-            using (var md5 = new MD5CryptoServiceProvider())
-            {
-                using (var tdes = new TripleDESCryptoServiceProvider())
-                {
-                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-                    tdes.Mode = CipherMode.ECB;
-                    tdes.Padding = PaddingMode.PKCS7;
-
-                    using (var transform = tdes.CreateEncryptor())
-                    {
-                        byte[] textBytes = UTF8Encoding.UTF8.GetBytes(text);
-                        byte[] bytes = transform.TransformFinalBlock(textBytes, 0, textBytes.Length);
-                        return Convert.ToBase64String(bytes, 0, bytes.Length);
-                    }
-                }
-            }
-        }
-
-        public static string MD5Decrypt(string cipher)
-        {
-            using (var md5 = new MD5CryptoServiceProvider())
-            {
-                using (var tdes = new TripleDESCryptoServiceProvider())
-                {
-                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-                    tdes.Mode = CipherMode.ECB;
-                    tdes.Padding = PaddingMode.PKCS7;
-
-                    using (var transform = tdes.CreateDecryptor())
-                    {
-                        byte[] cipherBytes = Convert.FromBase64String(cipher);
-                        byte[] bytes = transform.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
-                        return UTF8Encoding.UTF8.GetString(bytes);
-                    }
-                }
-            }
-        }
     }
 
 }

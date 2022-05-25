@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
@@ -21,8 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Width="350"
         Height="450"
-        
-        Title="winRegistInformation" 
+        Title="winRegistInformation"
         DataContext="{StaticResource LoginVM}"
         Name="RegistInformationWin">
     <Grid>
@@ -34,35 +32,31 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=RegistInformationWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <Button
-                Width="75"
-                Margin="7,8,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="top"
-                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding BackCmd}"
-                CommandParameter="{Binding ElementName=RegistWin}"
-                Content="BACK"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
-            <Grid
-                Height="300"
-                Margin="50"
-                VerticalAlignment="Bottom">
+            <Button Width="75"
+                    Margin="7,8,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="top"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding BackCmd}"
+                    CommandParameter="{Binding ElementName=RegistWin}"
+                    Content="BACK"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
+            <Grid Height="300"
+                  Margin="50"
+                  VerticalAlignment="Bottom">
                 <StackPanel Margin="5"
                             VerticalAlignment="Center"
-                            Height="275"
-                            >
-                    <Label
-                    Margin="0 0 0 0"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Content="REGIST CUSTOMER"
-                    FontSize="18"
-                    FontWeight="Bold"
-                    Foreground="Gray" />
+                            Height="275">
+                    <Label Margin="0 0 0 0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Top"
+                           Content="REGIST CUSTOMER"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           Foreground="Gray" />
                     <Button x:Name="bntPickImage"
                             Command="{Binding PickImage}"
                             CommandParameter="{Binding ElementName=bntPickImage}"
@@ -71,31 +65,30 @@
                             VerticalContentAlignment="Stretch"
                             HorizontalContentAlignment="Stretch"
                             Content="{Binding imgAvatar}"
-                            Background="AliceBlue"
                             Margin="10">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/SE104-N10-QuanLySieuThi;component/ImageResource/photo_photography_image_picture_add-128.png"
+                                        Stretch="Uniform" />
+                        </Button.Background>
                     </Button>
-                    <TextBox
-                        Margin="5"
-                        materialDesign:HintAssist.Hint="Real name"
-                        FontFamily="Champagne &amp; Limousines"
-                        FontSize="8"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Name}" />
-                    <TextBox
-                        Margin="5"
-                        materialDesign:HintAssist.Hint="Phone"
-                        FontFamily="Champagne &amp; Limousines"
-                        FontSize="8"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Phone}" />
-                    <DatePicker
-                        Width="250"
-                        Height="40"
-                        FontSize="8"
-                        materialDesign:HintAssist.Hint="Ngày sinh"
-                        Style="{StaticResource MaterialDesignFilledDatePicker}"
-                            SelectedDate="{Binding Birthday}"
-                            />
+                    <TextBox Margin="5"
+                             materialDesign:HintAssist.Hint="Real name"
+                             FontFamily="Champagne &amp; Limousines"
+                             FontSize="8"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Text="{Binding Name}" />
+                    <TextBox Margin="5"
+                             materialDesign:HintAssist.Hint="Phone"
+                             FontFamily="Champagne &amp; Limousines"
+                             FontSize="8"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             Text="{Binding Phone}" />
+                    <DatePicker Width="250"
+                                Height="40"
+                                FontSize="8"
+                                materialDesign:HintAssist.Hint="Ngày sinh"
+                                Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                SelectedDate="{Binding Birthday}" />
                     <StackPanel Orientation="Horizontal">
                         <RadioButton IsChecked="{Binding IsMale,Mode=OneWay}"
                                      Command="{Binding CheckedGenderCmd}"
@@ -103,29 +96,28 @@
                                      Style="{StaticResource MaterialDesignLightRadioButton}">
                         </RadioButton>
                         <RadioButton IsChecked="{Binding IsFeMale,Mode=OneWay}"
-                             Command="{Binding CheckedGenderCmd}"
-                             Content="Female"
-                             Style="{StaticResource MaterialDesignLightRadioButton}">
-                </RadioButton>
-                </StackPanel>
-  
+                                     Command="{Binding CheckedGenderCmd}"
+                                     Content="Female"
+                                     Style="{StaticResource MaterialDesignLightRadioButton}">
+                        </RadioButton>
+                    </StackPanel>
+
 
 
                 </StackPanel>
             </Grid>
-            <Button
-                Width="150"
-                Margin="10"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Bottom"
-                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding CreateAccountCmd}"
-                CommandParameter="{Binding ElementName=RegistInformationWin}"
-                Content="CREATE ACCOUNT"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
+            <Button Width="150"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    Command="{Binding CreateAccountCmd}"
+                    CommandParameter="{Binding ElementName=RegistInformationWin}"
+                    Content="CREATE ACCOUNT"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignRaisedButton}" />
         </Grid>
     </Grid>
 </Window>
