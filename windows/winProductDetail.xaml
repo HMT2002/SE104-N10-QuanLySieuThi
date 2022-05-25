@@ -183,7 +183,7 @@
                                         Margin="10"
                                         Width="100"
                                         Command="{Binding DeleteProductCmd}"
-                                        CommandParameter="{Binding ElementName=grdMain}"
+                                        CommandParameter="{Binding ElementName=AddProductWin}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
@@ -193,7 +193,7 @@
                                     Margin="10"
                                     Width="100"
                                     Command="{Binding ModifyProductCmd}"
-                                    CommandParameter="{Binding ElementName=grdMain}"
+                                        CommandParameter="{Binding ElementName=AddProductWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
                             </StackPanel>

@@ -137,8 +137,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public TextBlock OrClickMeCount=new TextBlock();
 
 
-        public bool isMainLoaded=false;
-
 
         public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
@@ -179,10 +177,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddNewProduct(); });
             openNewSupplierCommand = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
 
-            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { {LoadTonKhoData(); AddItemIntoItemCtrol(p);isMainLoaded = true; }; });
+            LoadedItemCtrlCmd= new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { {LoadTonKhoData(); }; });
 
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(p); });
-            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(); });
+            DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(p); });
             ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(p); });
 
 
@@ -201,7 +199,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
             sp.MACC = ncc.MACC;
             DataProvider.Ins.DB.SaveChanges();
-            Complete(p);
+            LoadTonKhoData();
+
+            winProductDetail win=p as winProductDetail;
+            win.Close();
+
         }
 
         private void NewSupplier()
@@ -229,17 +231,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void Complete(object p)
         {
-            Window win = p as Window;
+            winProductDetail win = p as winProductDetail;
             win.Close();
         }
 
-        private void DeleteProduct()
+        private void DeleteProduct(object p)
         {
             SANPHAM sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MACC == SelectedItem.sanpham.MACC).SingleOrDefault();
             DataProvider.Ins.DB.SANPHAM.Remove(sp);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
             NewProduct();
+            winProductDetail win = p as winProductDetail;
+            win.Close();
         }
 
         private void AddProduct(object p)
@@ -255,7 +259,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
             NewProduct();
-            Complete(p);
+            winAddProduct win = p as winAddProduct;
+            win.Close();
         }
 
         private void Imagepick(Button p)
@@ -312,11 +317,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 SupplierType.Add(item.TEN);
             }
-        }
-
-        private void AddItemIntoItemCtrol(ItemsControl p)
-        {
-
         }
 
         public CollectionView view;
