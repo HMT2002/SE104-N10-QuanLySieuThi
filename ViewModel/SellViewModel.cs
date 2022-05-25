@@ -52,7 +52,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private float _GiamGia;
         public float GiamGia { get => _GiamGia; set { _GiamGia = value; OnPropertyChanged(); } }
 
-        private List<string> _CategoryList = new List<string>() { "Cái", "Kg", "Trái", "Bao", "Lít", "Chai" };
+        private List<string> _CategoryList = new List<string>() { "Tất cả", "Gia dụng", "Hoá mỹ phẩm", "Thực phẩm", "Khác" };
 
         public List<string> CategoryList { get => _CategoryList; set { _CategoryList = value; OnPropertyChanged(); } }
 
@@ -87,13 +87,32 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public string CustomerId { get => _CustomerId; set { _CustomerId = value; OnPropertyChanged(); } }
 
 
+        private string _SearchCategory;
+        public string SearchCategory { get => _SearchCategory; set
+            { 
+                _SearchCategory = value;
+                view.Filter = ProductFilter0;
+                FilterItem();
+                OnPropertyChanged(); 
+            } 
+        }
+
+
+        private List<string> _SearchType = new List<string>() { "ID", "Name" };
+
+        public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+
         private List<KhachHang> _ListCustomer = new List<KhachHang>();
         public List<KhachHang> ListCustomer { get => _ListCustomer; set { _ListCustomer = value; OnPropertyChanged(); } }
 
         private List<NhanVien> _ListEmployee = new List<NhanVien>();
         public List<NhanVien> ListEmployee { get => _ListEmployee; set { _ListEmployee = value; OnPropertyChanged(); } }
         private KhachHang _SeletedCustomer;
-        public KhachHang SeletedCustomer { get => _SeletedCustomer; set { 
+        public KhachHang SeletedCustomer
+        {
+            get => _SeletedCustomer; set
+            {
                 _SeletedCustomer = value;
                 if (SeletedCustomer != null)
                 {
@@ -101,18 +120,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
                 }
                 OnPropertyChanged();
-            } 
+            }
         }
         private NhanVien _SeletedEmployee;
-        public NhanVien SeletedEmployee { get => _SeletedEmployee; set { 
+        public NhanVien SeletedEmployee
+        {
+            get => _SeletedEmployee; set
+            {
                 _SeletedEmployee = value;
                 if (SeletedEmployee != null)
                 {
                     EmployeeId = SeletedEmployee.nhanvien.MANV;
 
                 }
-                OnPropertyChanged(); 
-            } 
+                OnPropertyChanged();
+            }
         }
 
         public SellViewModel()
@@ -142,7 +164,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             if (SelectedSelectItem.Amount <= 0)
             {
-                
+
                 ListSelecteditems.Remove(SelectedSelectItem);
                 SelectedItem = null;
             }
@@ -169,7 +191,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void loadListCustomer()
         {
             var list = DataProvider.Ins.DB.KHACHHANG;
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 KhachHang kh = new KhachHang();
                 kh.khachhang = item;
@@ -195,10 +217,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 sohd = Converter.Instance.RandomString(5);
             }
-            var hd = new HOADON() { SOHD = sohd,NGHD=DateTime.Now,MANV=MainViewModel._currentUser,MAKH=Khachhang.khachhang.MAKH,TRIGIA=ThanhTienCoGiamGia ,GIAMGIA=GiamGia};
+            var hd = new HOADON() { SOHD = sohd, NGHD = DateTime.Now, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
             foreach (SanPham sp in ListSelecteditems)
             {
-                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount,};
+                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount, };
                 DataProvider.Ins.DB.CTHD.Add(cthd);
 
                 var sanpham = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == sp.sanpham.MASP).SingleOrDefault();
@@ -225,10 +247,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 SanPhamList.Add(sanpham);
             }
             view = (CollectionView)CollectionViewSource.GetDefaultView(SanPhamList);
-            view.Filter = UserFilter;
+            view.Filter = ProductFilter1;
 
         }
-        public bool UserFilter(object obj)
+        public bool ProductFilter0(object obj)
+        {
+            if (string.IsNullOrEmpty(SearchCategory))
+            {
+                return true;
+            }
+            if(SearchCategory=="Tất cả")
+            {
+                return true;
+
+            }
+
+            return (obj as SanPham).sanpham.LOAI.IndexOf(SearchCategory, StringComparison.OrdinalIgnoreCase) >= 0;
+
+        }
+
+        public bool ProductFilter1(object obj)
         {
             if (string.IsNullOrEmpty(Search))
             {
@@ -253,7 +291,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _Search; set
             {
                 _Search = value;
-                view.Filter = UserFilter;
+                view.Filter = ProductFilter1;
                 FilterItem();
                 OnPropertyChanged();
             }
@@ -268,7 +306,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _SearchTypeItem; set
             {
                 _SearchTypeItem = value;
-                view.Filter = UserFilter;
+                view.Filter = ProductFilter0;
+                FilterItem();
                 OnPropertyChanged();
             }
         }
@@ -280,40 +319,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-
             SelectedBillList = ListSelecteditems;
             foreach (SanPham sp in ListSelecteditems)
             {
                 ThanhTien += (decimal)sp.sanpham.GIA * sp.Amount;
             }
-
             applyDisccount();
             ThanhTienCoGiamGia = ThanhTien - (ThanhTien / 100 * (decimal)GiamGia);
             winBill win = new winBill();
             win.ShowDialog();
         }
-
         public void applyDisccount()
         {
             if (Khachhang.khachhang.DOANHSO >= 200000)
             {
                 GiamGia = 10;
             }
-            if(Khachhang.khachhang.DOANHSO >= 300000)
+            if (Khachhang.khachhang.DOANHSO >= 300000)
             {
                 GiamGia = 20;
-
             }
-            if(Khachhang.khachhang.DOANHSO>= 500000)
+            if (Khachhang.khachhang.DOANHSO >= 500000)
             {
                 GiamGia = 30;
-
             }
-        }
-
-        private void AddItemIntoListBox(ListBox p)
-        {
-
         }
 
         private SanPham _SelectedItem;
@@ -333,13 +362,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     {
                         return;
                     }
-                    if (SelectedItem.Amount>0)
+                    if (SelectedItem.Amount > 0)
                     {
                         return;
                     }
-                    
-                    SanPham sp = new SanPham();
-                    sp = SelectedItem;
                     SelectedItem.Amount = 1;
                     ListSelecteditems.Add(SelectedItem);
                 }
@@ -355,16 +381,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
 
                 }
-
-                OnPropertyChanged();
-            }
-        }
-        private int _SelectedSelectItemIndex;
-        public int SelectedSelectItemIndex
-        {
-            get => _SelectedSelectItemIndex; set
-            {
-                _SelectedSelectItemIndex = value;
                 OnPropertyChanged();
             }
         }

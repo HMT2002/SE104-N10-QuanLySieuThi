@@ -32,6 +32,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
+                                <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <ScrollViewer HorizontalAlignment="Stretch"
@@ -43,14 +44,39 @@
                                               Background="Transparent">
                                     <ListView materialDesign:HintAssist.Hint="Category"
                                               ItemsSource="{Binding CategoryList,Mode=TwoWay}"
+                                              SelectedItem="{Binding SearchCategory,Mode=TwoWay}"
                                               materialDesign:TextFieldAssist.HasClearButton="True"
                                               Width="auto"
                                               Height="auto">
                                     </ListView>
                                 </ScrollViewer>
-                                
                             </Grid>
                             <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"></RowDefinition>
+                                    <RowDefinition></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                              materialDesign:HintAssist.Hint="Type"
+                                              ItemsSource="{Binding SearchType,Mode=TwoWay}"
+                                              materialDesign:TextFieldAssist.HasClearButton="True"
+                                              Width="auto"
+                                              Height="50"
+                                              SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                    </ComboBox>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                                             Name="txtSearch"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                             VerticalAlignment="Center"
+                                             Margin="5">
+                                    </TextBox>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
@@ -173,11 +199,7 @@
                                     <StackPanel>
                                         <ListView x:Name="listboxSelectedItem"
                                                   ItemsSource="{Binding ListSelecteditems}"
-                                                  SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                  SelectedIndex="{Binding SelectedSelectItemIndex,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-
-
-
+                                                  SelectedItem="{Binding SelectedSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
 
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
