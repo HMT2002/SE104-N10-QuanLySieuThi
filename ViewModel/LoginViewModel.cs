@@ -355,7 +355,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (accCountKhach!=null)
             {
                 MainWindow win = new MainWindow();
-                win.ShowDialog();
+                win.Show();
                 p.Close();
             }
             else if (accCountNhanVien!=null)
@@ -363,13 +363,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 if (accCountNhanVien.PRI == 1)
                 {
                     MainWindow win = new MainWindow();
-                    win.ShowDialog();
+                    win.Show();
                     p.Close();
                 }
                 else
                 {
                     MainWindow win = new MainWindow();
-                    win.ShowDialog();
+                    win.Show();
                     p.Close();
                 }
 

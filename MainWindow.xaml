@@ -140,11 +140,11 @@
         <Grid Grid.Row="1">
             <materialDesign:Card>
                 <TabControl x:Name="mainTab" materialDesign:ColorZoneAssist.Mode="PrimaryMid" TabStripPlacement="Top">
-                    <materialDesign:NavigationRailAssist.FloatingContent>
+                    <!--<materialDesign:NavigationRailAssist.FloatingContent>
                         <Button Command="{Binding ChangeTab}" CommandParameter="{Binding ElementName=mainTab}" Margin="8" Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
                             <materialDesign:PackIcon Width="24" Height="24" Kind="Plus" />
                         </Button>
-                    </materialDesign:NavigationRailAssist.FloatingContent>
+                    </materialDesign:NavigationRailAssist.FloatingContent>-->
                     <TabItem>
                         <TabItem.Header>
                             <StackPanel Width="auto" Height="auto">
@@ -243,11 +243,21 @@
                     </TabItem>
                     <TabItem>
                         <TabItem.Header>
-                            <StackPanel Width="auto" Height="auto">
-                                <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="Import" />
-                                <TextBlock HorizontalAlignment="Center" Text="Log out" />
+                            <StackPanel Width="auto"
+                                        Height="auto">
+                                <materialDesign:PackIcon Width="24"
+                                                         Height="24"
+                                                         HorizontalAlignment="Center"
+                                                         Kind="Import" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="Log out" />
                             </StackPanel>
                         </TabItem.Header>
+                        <Frame Content="{Binding pageLogout}"
+                               Width="1350"
+                               Height="620">
+
+                        </Frame>
                     </TabItem>
                 </TabControl>
             </materialDesign:Card>

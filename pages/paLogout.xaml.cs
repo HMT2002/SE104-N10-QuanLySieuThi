@@ -1,13 +1,5 @@
-﻿using Microsoft.Win32;
-using SE104_N10_QuanLySieuThi.Model;
-using SE104_N10_QuanLySieuThi.pages;
-using SE104_N10_QuanLySieuThi.windows;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SE104_N10_QuanLySieuThi
+namespace SE104_N10_QuanLySieuThi.pages
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for paLogout.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class paLogout : Page
     {
-
-        public MainWindow()
+        public paLogout()
         {
             InitializeComponent();
         }
-
     }
 }

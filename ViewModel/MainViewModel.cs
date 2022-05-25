@@ -18,6 +18,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
+        public ICommand LogoutWindowCmd { get; set; }
+
         public Account LoginAcc { get => loginAcc; set => loginAcc = value; }
 
         public Account loginAcc;
@@ -41,6 +43,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
         public Page pageHome { get; set; }
+
+        public Page pageLogout { get; set; }
 
         public ICommand ChangeTab { get; set; }
 
@@ -71,10 +75,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             pageStatic = new paStatic();
 
+            pageLogout = new paLogout();
+
 
             LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
 
-            
+            LogoutWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Logout(p); });
+
+        }
+
+        private void Logout(Window p)
+        {
+            winLogin win = new winLogin();
+            win.ShowDialog();
+            p.Close();
         }
 
         void Start(Window p)
