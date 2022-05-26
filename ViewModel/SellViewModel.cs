@@ -314,7 +314,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void openBill()
         {
             Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
-            Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == EmployeeId).SingleOrDefault();
+            Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
             if (Khachhang.khachhang == null || Nhanvien.nhanvien == null)
             {
                 return;

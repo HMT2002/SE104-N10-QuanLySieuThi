@@ -177,16 +177,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }, (p) => { CreateEmployee(); });
 
             ModifyEmployeeCmd = new RelayCommand<object>((p) => {
-                if (SelectedItem==null)
-                {
-                    return false;
-                }
-                var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
+                //if (SelectedItem==null)
+                //{
+                //    return false;
+                //}
+                //var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
 
-                if (display == null || display.Count() == 0)
-                {
-                    return false;
-                }
+                //if (display == null || display.Count() == 0)
+                //{
+                //    return false;
+                //}
 
                 return true;
             }, (p) => { ModifyEmployee(); });
@@ -407,6 +407,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
             var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == SelectedItem.nhanvien.ACC).SingleOrDefault();
+            account.ACC = Acc;
             account.PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
             account.PRI = pri;
 

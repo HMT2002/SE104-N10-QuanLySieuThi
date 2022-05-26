@@ -151,20 +151,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-            if (Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)).CompareTo(Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(RePassword))) == 0)
-            {
-                Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
-            }
-            if (Acc.RegistCustomer() == true)
-            {
-                winRegistInformation win = new winRegistInformation();
-                win.ShowDialog();
-                p.Close();
-            }
-            else
-            {
-                return;
-            }
+            winRegistInformation win = new winRegistInformation();
+            win.ShowDialog();
+            p.Close();
 
         }
 
@@ -327,6 +316,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
                 var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0,NGDK=DateTime.Now };
                 DataProvider.Ins.DB.KHACHHANG.Add(nv);
+                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)),ACC=UserName };
+                DataProvider.Ins.DB.ACCOUNT.Add(acc);
+
                 DataProvider.Ins.DB.SaveChanges();
 
             }

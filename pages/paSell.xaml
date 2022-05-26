@@ -77,42 +77,21 @@
                                 </Grid>
                             </Grid>
                             <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0">
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                              materialDesign:HintAssist.Hint="Khách hàng"
-                                              ItemsSource="{Binding ListCustomer,Mode=TwoWay}"
-                                              materialDesign:TextFieldAssist.HasClearButton="True"
-                                              Width="auto"
-                                              Height="50"
-                                              SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+
+                                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                          materialDesign:HintAssist.Hint="Khách hàng"
+                                          ItemsSource="{Binding ListCustomer,Mode=TwoWay}"
+                                          materialDesign:TextFieldAssist.HasClearButton="True"
+                                          Width="auto"
+                                          Height="50"
+                                          SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding khachhang.HOTEN}" />
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
-                                    </ComboBox>
+                                </ComboBox>
 
-                                </Grid>
-                                <Grid Grid.Column="1">
-                                    <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                              materialDesign:HintAssist.Hint="Nhân viên"
-                                              ItemsSource="{Binding ListEmployee,Mode=TwoWay}"
-                                              materialDesign:TextFieldAssist.HasClearButton="True"
-                                              Width="auto"
-                                              Height="50"
-                                              SelectedItem="{Binding SeletedEmployee,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Text="{Binding nhanvien.HOTEN}" />
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-
-                                </Grid>
                             </Grid>
                         </Grid>
                     </materialDesign:Card>

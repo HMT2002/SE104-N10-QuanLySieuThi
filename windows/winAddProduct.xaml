@@ -171,17 +171,38 @@
 
                         </Grid>
                         <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
                                     Content="_THÊM"
                                     VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Right"
+                                    HorizontalAlignment="Center"
                                     Margin="10"
                                     Width="100"
                                     Command="{Binding AddProductCmd}"
                                     CommandParameter="{Binding ElementName=AddProductWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
+                                
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                        Content="_MỚI"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Center"
+                                        Margin="10"
+                                        Width="100"
+                                        Command="{Binding NewProductCmd}"
+                                        CommandParameter="{Binding ElementName=stackpnItem}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
+
+                            </Grid>
                         </Grid>
                     </Grid>
 

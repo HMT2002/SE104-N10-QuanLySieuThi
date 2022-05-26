@@ -128,6 +128,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedItemCtrlCmd { get; set; }
 
         public ICommand AddProductCmd { get; set; }
+        public ICommand NewProductCmd { get; set; }
+
         public ICommand ModifyProductCmd { get; set; }
 
         public ICommand DeleteProductCmd { get; set; }
@@ -183,6 +185,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             AddProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddProduct(p); });
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(p); });
             ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(p); });
+            NewProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { NewProduct(); });
 
 
             NewProduct();

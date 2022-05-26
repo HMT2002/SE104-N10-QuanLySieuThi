@@ -218,7 +218,7 @@
                             <Grid Grid.Column="0">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_Mới"
+                                        Content="_MỚI"
                                         Command="{Binding NewEmployeeCmd}"
                                         CommandParameter="{Binding ElementName=stackpnItem}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
