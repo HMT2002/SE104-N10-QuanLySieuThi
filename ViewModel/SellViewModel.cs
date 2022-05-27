@@ -227,9 +227,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 sanpham.SL -= sp.Amount;
             }
             DataProvider.Ins.DB.HOADON.Add(hd);
+
+            Khachhang.khachhang.DOANHSO += ThanhTienCoGiamGia;
             DataProvider.Ins.DB.SaveChanges();
+            clearField();
             winBill win = p as winBill;
             win.Close();
+        }
+
+        private void clearField()
+        {
+            ListSelecteditems = new ObservableCollection<SanPham>();
         }
 
         private void LoadSanPhamData()
@@ -331,15 +339,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         public void applyDisccount()
         {
-            if (Khachhang.khachhang.DOANHSO >= 200000)
+            if (Khachhang.khachhang.DOANHSO >= 1000000)
             {
                 GiamGia = 10;
             }
-            if (Khachhang.khachhang.DOANHSO >= 300000)
+            if (Khachhang.khachhang.DOANHSO >= 3000000)
             {
                 GiamGia = 20;
             }
-            if (Khachhang.khachhang.DOANHSO >= 500000)
+            if (Khachhang.khachhang.DOANHSO >= 5000000)
             {
                 GiamGia = 30;
             }

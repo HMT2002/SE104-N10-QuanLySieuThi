@@ -26,6 +26,9 @@ insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH004','LÃ½ VÄ
 
 select * from KHACHHANG
 
+
+update KHACHHANG set NGDK='2022-05-13 00:00:00'
+
 CREATE TABLE NHANVIEN
 (
  MANV varchar(10),
@@ -114,7 +117,6 @@ primary key(SOHD)
 )
 
 select * from HOADON
-delete from HOADON
 
 
 CREATE TABLE CTHD(

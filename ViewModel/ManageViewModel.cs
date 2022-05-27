@@ -177,16 +177,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }, (p) => { CreateEmployee(); });
 
             ModifyEmployeeCmd = new RelayCommand<object>((p) => {
-                //if (SelectedItem==null)
-                //{
-                //    return false;
-                //}
-                //var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
-
-                //if (display == null || display.Count() == 0)
-                //{
-                //    return false;
-                //}
 
                 return true;
             }, (p) => { ModifyEmployee(); });

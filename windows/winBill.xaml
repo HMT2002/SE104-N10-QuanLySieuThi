@@ -28,6 +28,7 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
@@ -58,17 +59,56 @@
             </ListView>
         </Grid>
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding ThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}"
+                                     Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                     Width="200"
+                                     Padding="8"
+                                     Height="50">
+                    <TextBlock FontSize="16"
+                               Text="{Binding Nhanvien.nhanvien.HOTEN}" />
+                </materialDesign:Card>
+            </Grid>
+            <Grid Grid.Column="1">
+                <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}"
+                                     Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                     Width="200"
+                                     Height="50"
+                                     Padding="8">
+                    <TextBlock FontSize="16"
+                               Text="{Binding Khachhang.khachhang.HOTEN}" />
+                </materialDesign:Card>
+            </Grid>
+            <Grid Grid.Column="2">
+                <TextBox materialDesign:HintAssist.Hint="Giảm giá (%)"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                         VerticalAlignment="Center"
+                         Text="{Binding GiamGia}" 
+                         IsReadOnly="True"
+                         />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="3">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="{Binding ThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 
+                           VerticalAlignment="Center"
+                           />
                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                    Content="Confirm"
-                    VerticalAlignment="Bottom"
-                    Margin="20"
-                    Command="{Binding ConfirmPaymentCmd}"
+                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                        Content="Confirm"
+                        VerticalAlignment="Center"
+                        Margin="20"
+                        Command="{Binding ConfirmPaymentCmd}"
                         CommandParameter="{Binding ElementName=BillWin}"
-                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                    HorizontalAlignment="Right" />
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        />
 
             </StackPanel>
 
