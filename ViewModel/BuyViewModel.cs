@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 
@@ -91,6 +92,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
         }
 
+        private List<string> _SearchType = new List<string>() { "ID", "Name" };
+
+        public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+        public CollectionView view;
+
+
         public ICommand ImportProductCmd { get; set; }
 
 
@@ -103,6 +111,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             ImportDate = DateTime.Now;
             Price = 0;
             AmmountImport = 0;
+
             LoadProductList();
             loadHistory();
         }
@@ -115,12 +124,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void LoadProductList()
         {
+            DealingHistoryList = new ObservableCollection<NhapHang>();
             ListProduct = new List<string>();
             var supplierList = DataProvider.Ins.DB.SANPHAM;
             foreach (var item in supplierList)
             {
                 ListProduct.Add(item.TENSP);
             }
+
+
         }
         private void ImportProduct(object p)
         {
@@ -128,7 +140,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 ImportID = Converter.Instance.RandomString(5);
             }
-            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP, MANV = MainViewModel._currentUser, NGNH = ImportDate, SLNHAPHANG = AmmountImport };
+            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP, MANV = MainViewModel._currentUser, NGNH = ImportDate, SLNHAPHANG = AmmountImport ,TRIGIA=SummaryImport};
             DataProvider.Ins.DB.NHAPHANG.Add(nv);
 
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductID).SingleOrDefault();
@@ -163,7 +175,56 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 nhaphang.nhaphang = item;
                 DealingHistoryList.Add(nhaphang);
             }
+            view = (CollectionView)CollectionViewSource.GetDefaultView(DealingHistoryList);
+            view.Filter = UserFilter;
+        }
 
+        private void FilterItem()
+        {
+            CollectionViewSource.GetDefaultView(DealingHistoryList).Refresh();
+        }
+
+        private string _SearchTypeItem;
+        public string SearchTypeItem
+        {
+            get => _SearchTypeItem; set
+            {
+                _SearchTypeItem = value;
+                view.Filter = UserFilter;
+                OnPropertyChanged();
+            }
+        }
+        private string _Search;
+        public string Search
+        {
+            get => _Search; set
+            {
+                _Search = value;
+                NewImport();
+                view.Filter = UserFilter;
+                FilterItem();
+                OnPropertyChanged();
+            }
+        }
+        public bool UserFilter(object obj)
+        {
+            if (string.IsNullOrEmpty(Search))
+            {
+                return true;
+            }
+            switch (SearchTypeItem)
+            {
+                case "Name":
+                    return (obj as NhapHang).nhaphang.NHANVIEN.HOTEN.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+
+                case "ID":
+                    return (obj as NhapHang).nhaphang.MANH.IndexOf(Search, StringComparison.OrdinalIgnoreCase) >= 0;
+
+                default:
+                    break;
+            }
+
+            return true; ;
         }
 
     }

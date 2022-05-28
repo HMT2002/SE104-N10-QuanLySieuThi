@@ -449,6 +449,8 @@
     <Resource Include="windows\photo_photography_image_picture_add-128.png" />
     <Resource Include="ImageResource\211677_image_icon.png" />
     <Resource Include="ImageResource\photo_photography_image_picture_add-128.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>

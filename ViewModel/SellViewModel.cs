@@ -86,6 +86,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _CustomerId;
         public string CustomerId { get => _CustomerId; set { _CustomerId = value; OnPropertyChanged(); } }
 
+        private DateTime _BillDate;
+        public DateTime BillDate { get => _BillDate; set { _BillDate = value; OnPropertyChanged(); } }
 
         private string _SearchCategory;
         public string SearchCategory { get => _SearchCategory; set
@@ -146,7 +148,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             IncreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
-
+            BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
             loadListCustomer();
@@ -217,7 +219,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 sohd = Converter.Instance.RandomString(5);
             }
-            var hd = new HOADON() { SOHD = sohd, NGHD = DateTime.Now, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
+            var hd = new HOADON() { SOHD = sohd, NGHD = BillDate, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
             foreach (SanPham sp in ListSelecteditems)
             {
                 var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount, };

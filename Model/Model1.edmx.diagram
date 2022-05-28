@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c251b2a1517e4430b064287c79267d26" Name="Diagram1">
+      <Diagram DiagramId="1c04bb7efced447e8bf83b500c113bd7" Name="Diagram1">
         <EntityTypeShape EntityType="QUANLYSIEUTHIModel.ACCOUNT" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="QUANLYSIEUTHIModel.CTHD" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.HOADON" Width="1.5" PointX="3" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.HOADON" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.KHACHHANG" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.NHACUNGCAP" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="QUANLYSIEUTHIModel.NHANVIEN" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QUANLYSIEUTHIModel.NHAPHANG" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.SANPHAM" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QUANLYSIEUTHIModel.SANPHAM" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="QUANLYSIEUTHIModel.LK_HOADON" ManuallyRouted="false" />
         <AssociationConnector Association="QUANLYSIEUTHIModel.LK_SANPHAM" ManuallyRouted="false" />
         <AssociationConnector Association="QUANLYSIEUTHIModel.LK_KHACHHANG" ManuallyRouted="false" />

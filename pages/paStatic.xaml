@@ -11,7 +11,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paStatic"
-      Background="#00008B"
+      Background="White"
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -20,36 +20,115 @@
       x:Name="StaticPage"
 
       >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
+                                   CommandParameter="{Binding ElementName=StaticPage}" />
+            <i:InvokeCommandAction Command="{Binding LoadedPieChartCmd}"
+                                   CommandParameter="{Binding ElementName=pieChart}" />
+            <i:InvokeCommandAction Command="{Binding LoadedLineChartCmd}"
+                                   CommandParameter="{Binding ElementName=lineChart}" />
+            <i:InvokeCommandAction Command="{Binding LoadedBarChartCmd}"
+                                   CommandParameter="{Binding ElementName=barChart}" />
 
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
-        <WrapPanel Background="AliceBlue" MaxHeight="300" MaxWidth="300">
-            <materialDesign:Card Padding="8" materialDesign:ShadowAssist.ShadowDepth="Depth3" Foreground="{x:Null}" UniformCornerRadius="10">
-                <WrapPanel>
-                    <Wpf:PieChart Hoverable="True"
-                                  InnerRadius="0"
-                                  LegendLocation="Bottom"
-                                  Margin="40"
-                                  Series="{Binding SeriesMostProduct}"
-                                  Height="150"
-                                  Width="150">
-                        <Wpf:PieChart.ChartLegend>
-                            <Wpf:DefaultLegend BulletSize="15"
-                                               TextBlock.Foreground="#0B87F4"
-                                               TextBlock.FontSize="10"></Wpf:DefaultLegend>
-                        </Wpf:PieChart.ChartLegend>
-                        <Wpf:PieChart.DataTooltip>
-                            <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
-                        </Wpf:PieChart.DataTooltip>
-                        
-                        
-                    </Wpf:PieChart>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <DatePicker Width="140"
+                        materialDesign:HintAssist.Hint="Thời điểm"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                        SelectedDate="{Binding SelectedDate}" />
 
-                </WrapPanel>
-            </materialDesign:Card>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+            <WrapPanel Background="AliceBlue"
+                       MaxHeight="300"
+                       MaxWidth="300">
+                <materialDesign:Card Padding="8"
+                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                     Foreground="{x:Null}"
+                                     UniformCornerRadius="10">
+                    <WrapPanel>
+                        <Wpf:PieChart Hoverable="True"
+                                      InnerRadius="0"
+                                      LegendLocation="Bottom"
+                                      Margin="40"
+                                      Series="{Binding SeriesMostProduct}"
+                                      Name="pieChart"
+                                      Height="150"
+                                      Width="150"
+                                      
+                                      >
+                            <Wpf:PieChart.ChartLegend>
+                                <Wpf:DefaultLegend BulletSize="15"
+                                                   TextBlock.Foreground="#0B87F4"
+                                                   TextBlock.FontSize="10"></Wpf:DefaultLegend>
+                            </Wpf:PieChart.ChartLegend>
+                            <Wpf:PieChart.DataTooltip>
+                                <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
+                            </Wpf:PieChart.DataTooltip>
+
+
+                        </Wpf:PieChart>
+
+                    </WrapPanel>
+                </materialDesign:Card>
 
 
 
-        </WrapPanel>
+            </WrapPanel>
+        </Grid>
+            <Grid Grid.Column="1">
+
+
+                <Wpf:CartesianChart LegendLocation="Right"
+                                    Series="{Binding SeriesMoney}"
+                                    MaxHeight="300"
+                                    x:Name="lineChart">
+                    <Wpf:CartesianChart.AxisY>
+                        <Wpf:Axis Title="Money"
+                                  LabelFormatter="{Binding yFormatter}" />
+
+                    </Wpf:CartesianChart.AxisY>
+                    <Wpf:CartesianChart.AxisX>
+                        <Wpf:Axis Title="Month"
+                                  Labels="{Binding Lables}" />
+
+                    </Wpf:CartesianChart.AxisX>
+                </Wpf:CartesianChart>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <!--<Wpf:CartesianChart LegendLocation="Right"
+                                    Series="{Binding SeriesMoney}"
+                                    MaxHeight="300"
+                                    Name="barChart"
+                                    >
+                    <Wpf:CartesianChart.AxisY>
+                        <Wpf:Axis Title="Money"
+                                  LabelFormatter="{Binding yFormatter}" />
+
+                    </Wpf:CartesianChart.AxisY>
+                    <Wpf:CartesianChart.AxisX>
+                        <Wpf:Axis Title="Month"
+                                  Labels="{Binding Lables}" />
+
+                    </Wpf:CartesianChart.AxisX>
+                </Wpf:CartesianChart>-->
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </Page>

@@ -29,7 +29,30 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBlock Text="Tìm kiếm" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                  materialDesign:HintAssist.Hint="Type"
+                                  ItemsSource="{Binding SearchType,Mode=TwoWay}"
+                                  materialDesign:TextFieldAssist.HasClearButton="True"
+                                  Width="120"
+                                  Height="50"
+                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                                 Name="txtSearch"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                 VerticalAlignment="Center"
+                                 Margin="5" />
+                    </Grid>
+
+
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button Margin="10 10 10 10"

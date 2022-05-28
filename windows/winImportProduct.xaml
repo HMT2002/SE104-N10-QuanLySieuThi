@@ -128,8 +128,6 @@
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
                                          Text="{Binding SummaryImport}"
-                                         IsReadOnly="True"
-                                         IsEnabled="False" 
                                          />
                             </Grid>
                         </Grid>

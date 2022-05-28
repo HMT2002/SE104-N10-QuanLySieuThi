@@ -29,11 +29,19 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
+            <DatePicker Width="auto"
+                        materialDesign:HintAssist.Hint="Ngày nhập hàng"
+                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                        SelectedDate="{Binding BillDate}"
+                        IsEnabled="False" />
+        </Grid>
+        <Grid Grid.Row="2">
             <ListView ItemsSource="{Binding ListSelecteditems}">
                 <ListView.View>
                     <GridView>
@@ -58,7 +66,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -94,7 +102,7 @@
                          />
             </Grid>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBlock Text="{Binding ThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" 

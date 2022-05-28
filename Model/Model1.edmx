@@ -86,6 +86,7 @@
           <Property Name="MASP" Type="varchar" MaxLength="10" />
           <Property Name="SLNHAPHANG" Type="int" />
           <Property Name="NGNH" Type="smalldatetime" />
+          <Property Name="TRIGIA" Type="money" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -319,6 +320,7 @@
           <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="SLNHAPHANG" Type="Int32" />
           <Property Name="NGNH" Type="DateTime" Precision="0" />
+          <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHAPHANG_NHANVIEN" FromRole="NHAPHANG" ToRole="NHANVIEN" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="NHAPHANG" ToRole="SANPHAM" />
         </EntityType>
@@ -553,6 +555,7 @@
                 <ScalarProperty Name="MASP" ColumnName="MASP" />
                 <ScalarProperty Name="SLNHAPHANG" ColumnName="SLNHAPHANG" />
                 <ScalarProperty Name="NGNH" ColumnName="NGNH" />
+                <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
