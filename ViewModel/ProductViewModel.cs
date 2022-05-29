@@ -96,7 +96,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 if (SelectedItem != null)
                 {
                     NewProduct();
-
+                    imgAvatar = new Image();
                     Bitimg = SelectedItem.Bitimg;
                     imgAvatar.Source = SelectedItem.Bitimg;
                     btnAvatar.Content = imgAvatar;
@@ -186,7 +186,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DeleteProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { DeleteProduct(p); });
             ModifyProductCmd= new RelayCommand<object>((p) => { return true; }, (p) => { ModifyProduct(p); });
             NewProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { NewProduct(); });
-
+            imgAvatar = new Image();
 
             NewProduct();
             NewSupplier();
@@ -272,6 +272,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             btnAvatar.Background = new SolidColorBrush(Colors.AliceBlue);
             nv.chooseImg();
             Bitimg = nv.Bitimg;
+            imgAvatar = new Image();
+
             imgAvatar.Source = nv.Bitimg;
             p.Content = imgAvatar;
         }
@@ -311,8 +313,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Price = 0;
             Ammount = 0;
             Bitimg = null;
+            imgAvatar = null;
             btnAvatar.Content = null;
             Note = "";
+
         }
         public void LoadSupplierList()
         {
