@@ -21,6 +21,8 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Net.Mail;
+using System.Net;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -159,6 +161,52 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Save(stream);
             bmp = new Bitmap(stream);
             bmp.Save(@"reports/testcolumn" + dat + ".png", ImageFormat.Png);
+
+            SendReport(@"reports/testcolumn" + dat + ".png", @"reports/testline" + dat + ".png", @"reports/testpie" + dat + ".png");
+        }
+        private void SendReport(string repo1,string repo2,string repo3)
+        {
+
+            Thread thread = new Thread(() =>
+            {
+                Attachment att1 = new Attachment(repo1);
+                Attachment att2 = new Attachment(repo2);
+                Attachment att3 = new Attachment(repo3);
+
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
+                string email = user.MAIL;
+                string message = "Report of "+SelectedDate.ToString("d-MM-yyyy")+" : ";
+                GuiMail("20520850@gm.uit.edu.vn", email, "Report", message, att1,att2,att3);
+
+            });
+            thread.Start();
+            System.Windows.MessageBox.Show("Sent reports!, Please check your email");
+
+        }
+
+        void GuiMail(string from, string to, string sub, string message, Attachment file1 = null, Attachment file2 = null, Attachment file3= null)
+        {
+            MailMessage mailmess = new MailMessage(from, to, sub, message);
+
+            if (file1 != null&&file2!=null&&file3!=null)
+            {
+                mailmess.Attachments.Add(file1);
+                mailmess.Attachments.Add(file2);
+                mailmess.Attachments.Add(file3);
+
+            }
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("20520850@gm.uit.edu.vn", "tue6tri123");
+            client.Send(mailmess);
+        }
+
+
+        private void loadPage()
+        {
+            loadPieChartMostProduct();
+            loadLineChartProfit();
+            loadBarChart();
         }
 
         private void loadBarChart()
@@ -262,12 +310,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        private void loadPage()
-        {
-            loadPieChartMostProduct();
-            loadLineChartProfit();
-            loadBarChart();
-        }
 
         private void loadLineChartProfit()
         {
