@@ -5,14 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 
@@ -25,6 +32,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand BuyProductCmd { get; set; }
         public ICommand ConfirmPaymentCmd { get; set; }
+        public ICommand CancelPrintBillCmd { get; set; }
+        public ICommand ConfirmPrintBillCmd { get; set; }
+
+
+        public ICommand LoadedBillCmd { get; set; }
+        private WrapPanel _pnlBill = new WrapPanel();
 
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
@@ -32,6 +45,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand IncreaseSelectAmmountCmd { get; set; }
         public ICommand DecreaseSelectAmmountCmd { get; set; }
 
+        private string _IdBill;
+        public string IdBill { get => _IdBill; set { _IdBill = value; OnPropertyChanged(); } }
 
         private int _Stt;
         public int Stt { get => _Stt; set { _Stt = value; OnPropertyChanged(); } }
@@ -146,13 +161,90 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
             ConfirmPaymentCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { confirmPayment(p); });
 
+            CancelPrintBillCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { CancelPrintBill(p); });
+            ConfirmPrintBillCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { PrintBill(p); });
+
+            IdBill = "";
             IncreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Increase(p); });
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
+
+            LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
+
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
             loadListCustomer();
             loadListEmployee();
+        }
+
+        private void PrintBill(Window p)
+        {
+            if (_pnlBill == null )
+            {
+                return;
+            }
+            List<string> finame = new List<string>();
+            finame.Add(@"bills/" + IdBill + ".png");
+
+
+            SendBill(finame);
+
+            winPrintBillConfirmation win = p as winPrintBillConfirmation;
+            win.Close();
+        }
+
+        private void CancelPrintBill(Window p)
+        {
+            winPrintBillConfirmation win = p as winPrintBillConfirmation;
+            win.Close();
+        }
+
+        private void SendBill(List<string> repos = null)
+        {
+            if (repos == null)
+            {
+                return;
+            }
+            Thread thread = new Thread(() =>
+            {
+                List<Attachment> atts = new List<Attachment>();
+                foreach (string item in repos)
+                {
+                    Attachment att = new Attachment(item);
+                    atts.Add(att);
+                }
+
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
+                string emailnv = user.MAIL;
+                string message = "Bill " + IdBill + " : ";
+                GuiMail("20520850@gm.uit.edu.vn", emailnv, "Bill " + IdBill, message, atts);
+
+                var khach = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Khachhang.khachhang.MAKH).SingleOrDefault();
+                string emailkh = khach.MAIL;
+                //GuiMail("20520850@gm.uit.edu.vn", emailkh, "Bill " + IdBill, message, atts);
+
+            });
+            thread.Start();
+            System.Windows.MessageBox.Show("Sent bill!, Please check your email");
+
+        }
+
+        void GuiMail(string from, string to, string sub, string message, List<Attachment> atts = null)
+        {
+            MailMessage mailmess = new MailMessage(from, to, sub, message);
+            int i = 0;
+            foreach (Attachment att in atts)
+            {
+                if (att != null)
+                {
+                    mailmess.Attachments.Add(att);
+                }
+            }
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("20520850@gm.uit.edu.vn", "tue6tri123");
+            client.Send(mailmess);
         }
 
         private void Decrease(object p)
@@ -214,15 +306,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void confirmPayment(Window p)
         {
-            string sohd = Converter.Instance.RandomString(5);
-            while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == sohd).Count() > 0)
-            {
-                sohd = Converter.Instance.RandomString(5);
-            }
-            var hd = new HOADON() { SOHD = sohd, NGHD = BillDate, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
+            var hd = new HOADON() { SOHD = IdBill, NGHD = BillDate, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
             foreach (SanPham sp in ListSelecteditems)
             {
-                var cthd = new CTHD() { SOHD = sohd, MASP = sp.sanpham.MASP, SL = sp.Amount, };
+                var cthd = new CTHD() { SOHD = IdBill, MASP = sp.sanpham.MASP, SL = sp.Amount, };
                 DataProvider.Ins.DB.CTHD.Add(cthd);
 
                 var sanpham = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == sp.sanpham.MASP).SingleOrDefault();
@@ -232,10 +319,44 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             Khachhang.khachhang.DOANHSO += ThanhTienCoGiamGia;
             DataProvider.Ins.DB.SaveChanges();
+
+
+            RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlBill.ActualWidth, (int)_pnlBill.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp0.Render(_pnlBill);
+            MemoryStream stream = new MemoryStream();
+            BitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp0));
+            encoder.Save(stream);
+            Bitmap bmp = new Bitmap(stream);
+            bmp.Save(@"bills/" + IdBill + ".png", ImageFormat.Png);
+
+
             clearField();
             LoadSanPhamData();
+
+            //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
+            //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
+            //using (Bitmap bitmap = new Bitmap((int)panel.Width, (int)panel.Height))
+            //{
+            //    panel.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
+            //    bitmap.Save("test.png", ImageFormat.Png);
+            //}
+
+            //RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)_pnlBill.ActualWidth, (int)_pnlBill.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            //renderTargetBitmap.Render(_pnlBill);
+            //PngBitmapEncoder pngImage = new PngBitmapEncoder();
+            //pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
+            //using (Stream fileStream = File.Create(@"test.png"))
+            //{
+            //    pngImage.Save(fileStream);
+            //}
+
+
+
             winBill win = p as winBill;
             win.Close();
+            winPrintBillConfirmation newwin = new winPrintBillConfirmation();
+            newwin.Show();
         }
 
         private void clearField()
@@ -337,6 +458,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             applyDisccount();
             ThanhTienCoGiamGia = ThanhTien - (ThanhTien / 100 * (decimal)GiamGia);
+            string sohd = Converter.Instance.RandomString(5);
+            while (DataProvider.Ins.DB.HOADON.Where(x => x.SOHD == sohd).Count() > 0)
+            {
+                sohd = Converter.Instance.RandomString(5);
+            }
+            IdBill = sohd;
             winBill win = new winBill();
             win.ShowDialog();
         }

@@ -74,6 +74,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     selectedYear = SelectedDate.Year;
                     loadLineChartProfit();
                     loadBarChart();
+                    loadPieChartMostProduct();
                 }
                 OnPropertyChanged();
             } 
@@ -123,6 +124,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
+
             //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
             //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
             //using (Bitmap bitmap = new Bitmap((int)panel.Width, (int)panel.Height))
@@ -130,6 +132,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //    panel.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
             //    bitmap.Save("test.png", ImageFormat.Png);
             //}
+            List<string> finame = new List<string>();
+
             RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlPieChart.ActualWidth, (int)_pnlPieChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             bmp0.Render(_pnlPieChart);
             MemoryStream stream = new MemoryStream();
@@ -139,7 +143,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Bitmap bmp = new Bitmap(stream);
             string dat = SelectedDate.ToString("d_M_yyyy");
             bmp.Save(@"reports/testpie" + dat + ".png", ImageFormat.Png);
-
+            finame.Add(@"reports/testpie" + dat + ".png");
             Thread.Sleep(500);
 
             bmp0 = new RenderTargetBitmap((int)_pnlLineChart.ActualWidth, (int)_pnlLineChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
@@ -150,6 +154,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Save(stream);
             bmp = new Bitmap(stream);
             bmp.Save(@"reports/testline" + dat + ".png", ImageFormat.Png);
+            finame.Add(@"reports/testline" + dat + ".png");
 
             Thread.Sleep(500);
 
@@ -161,22 +166,31 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Save(stream);
             bmp = new Bitmap(stream);
             bmp.Save(@"reports/testcolumn" + dat + ".png", ImageFormat.Png);
+            finame.Add(@"reports/testcolumn" + dat + ".png");
 
-            SendReport(@"reports/testcolumn" + dat + ".png", @"reports/testline" + dat + ".png", @"reports/testpie" + dat + ".png");
+
+
+            SendReport(finame);
         }
-        private void SendReport(string repo1,string repo2,string repo3)
+        private void SendReport(List<string> repos=null)
         {
-
+            if (repos == null)
+            {
+                return;
+            }
             Thread thread = new Thread(() =>
             {
-                Attachment att1 = new Attachment(repo1);
-                Attachment att2 = new Attachment(repo2);
-                Attachment att3 = new Attachment(repo3);
+                List<Attachment> atts = new List<Attachment>();
+                foreach(string item in repos)
+                {
+                    Attachment att = new Attachment(item);
+                    atts.Add(att);
+                }
 
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string email = user.MAIL;
                 string message = "Report of "+SelectedDate.ToString("d-MM-yyyy")+" : ";
-                GuiMail("20520850@gm.uit.edu.vn", email, "Report", message, att1,att2,att3);
+                GuiMail("20520850@gm.uit.edu.vn", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
 
             });
             thread.Start();
@@ -184,17 +198,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         }
 
-        void GuiMail(string from, string to, string sub, string message, Attachment file1 = null, Attachment file2 = null, Attachment file3= null)
+        void GuiMail(string from, string to, string sub, string message,List<Attachment> atts=null)
         {
             MailMessage mailmess = new MailMessage(from, to, sub, message);
-
-            if (file1 != null&&file2!=null&&file3!=null)
+            int i = 0;
+            foreach (Attachment att in atts)
             {
-                mailmess.Attachments.Add(file1);
-                mailmess.Attachments.Add(file2);
-                mailmess.Attachments.Add(file3);
-
+                if (att != null)
+                {
+                    mailmess.Attachments.Add(att);
+                }
             }
+
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
             client.Credentials = new NetworkCredential("20520850@gm.uit.edu.vn", "tue6tri123");
@@ -474,6 +489,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var Selling = DataProvider.Ins.DB.HOADON;
             foreach(var his in Selling)
             {
+                DateTime time = (DateTime)his.NGHD;
+                int year = time.Year;
+                if (year != SelectedDate.Year)
+                {
+                    break;
+                }
+                int day = time.Day;
+                int month = time.Month;
+
                 var historysell = DataProvider.Ins.DB.CTHD.Where(x => x.SOHD == his.SOHD);
                 foreach(var item in historysell)
                 {
@@ -500,38 +524,42 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
             }
 
-            SeriesMostProduct = new SeriesCollection()
+            SeriesMostProduct = new SeriesCollection();
+            PieSeries giadungseries = new PieSeries
             {
+                Title = "Gia dụng",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(countGiaDung) },
+                DataLabels = true
+            };
+            SeriesMostProduct.Add(giadungseries);
 
-                new PieSeries
-                {
-                    Title = "Gia dụng",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(countGiaDung) },
-                    DataLabels = true
-                },
+            PieSeries thucphamseries = new PieSeries()
+            {
+                Title = "Thực phẩm",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(countThucPham) },
+                DataLabels = true
+            };
+            SeriesMostProduct.Add(thucphamseries);
 
-                new PieSeries
-                {
-                    Title = "Thực phẩm",
-                    Values = new ChartValues<ObservableValue> { new ObservableValue(countThucPham) },
-                    DataLabels = true
-                },
 
-                 new PieSeries
-                 {
-                 Title = "Hoá mỹ phẩm",
-                 Values = new ChartValues<ObservableValue> { new ObservableValue(countHoaMyPham) },
-                 DataLabels = true
-
-                 },
-                 new PieSeries
-                 {
-                 Title = "Khác",
-                 Values = new ChartValues<ObservableValue> { new ObservableValue(countKhac) },
-                 DataLabels = true
-                 }
+            PieSeries hoathucphamseries = new PieSeries
+            {
+                Title = "Hoá mỹ phẩm",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(countHoaMyPham) },
+                DataLabels = true
 
             };
+            SeriesMostProduct.Add(hoathucphamseries);
+
+            PieSeries hoaseries = new PieSeries
+            {
+                Title = "Khác",
+                Values = new ChartValues<ObservableValue> { new ObservableValue(countKhac) },
+                DataLabels = true
+            };
+            SeriesMostProduct.Add(hoaseries);
+
+
         }
     }
 }

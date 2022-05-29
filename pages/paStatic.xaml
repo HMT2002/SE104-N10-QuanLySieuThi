@@ -50,10 +50,17 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <DatePicker Width="140"
+                <!--<DatePicker Width="140"
                             materialDesign:HintAssist.Hint="Thời điểm"
                             Style="{StaticResource MaterialDesignFilledDatePicker}"
-                            SelectedDate="{Binding SelectedDate}" />
+                            SelectedDate="{Binding SelectedDate}" 
+                            
+                            />-->
+                <Calendar materialDesign:CalendarAssist.Orientation="Horizontal"
+                          Width="auto"
+                          materialDesign:HintAssist.Hint="Thời điểm"
+                          SelectedDate="{Binding SelectedDate}"
+                          />
             </Grid>
             <Grid Grid.Column="1">
                 <Button Margin="5"
@@ -63,7 +70,9 @@
                         ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                         Content="Print statistic"
                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Command="{Binding PrintStatisticCmd}" />
+                        Command="{Binding PrintStatisticCmd}" 
+                        DataContext="{StaticResource StaticVM}"
+                        />
             </Grid>
 
         </Grid>
@@ -121,10 +130,10 @@
                                          UniformCornerRadius="10">
                         <WrapPanel Name="pnlLineChart"
                            Background="AliceBlue">
-                    <Wpf:CartesianChart LegendLocation="Right"
+                    <Wpf:CartesianChart LegendLocation="Bottom"
                                         Series="{Binding SeriesMoney}"
                                         Height="300"
-                                        Width="430"
+                                        Width="400"
                                         x:Name="lineChart"
                                         >
                         <Wpf:CartesianChart.AxisY>
@@ -154,10 +163,10 @@
                                          UniformCornerRadius="10">
                         <WrapPanel Name="pnlColumnChart"
                            Background="AliceBlue">
-                    <Wpf:CartesianChart LegendLocation="Right"
+                    <Wpf:CartesianChart LegendLocation="Bottom"
                                         Series="{Binding SeriesProduct}"
                                         Height="300"
-                                        Width="400"
+                                        Width="370"
                                         Name="barChart"
                                         >
                         <Wpf:CartesianChart.AxisY>
