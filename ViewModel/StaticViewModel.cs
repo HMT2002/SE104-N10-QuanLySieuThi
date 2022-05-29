@@ -16,6 +16,11 @@ using LiveCharts.Wpf;
 using LiveCharts.Defaults;
 using SE104_N10_QuanLySieuThi.Model;
 using System.Windows.Media;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Windows.Forms;
+using System.IO;
+using System.Threading;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -24,6 +29,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private SeriesCollection _SeriesMostProduct;
         public SeriesCollection SeriesMostProduct { get => _SeriesMostProduct; set { _SeriesMostProduct = value; OnPropertyChanged(); } }
+
+        private SeriesCollection _SeriesProduct;
+        public SeriesCollection SeriesProduct { get => _SeriesProduct; set { _SeriesProduct = value; OnPropertyChanged(); } }
 
         private SeriesCollection _SeriesMoney;
         public SeriesCollection SeriesMoney { get => _SeriesMoney; set { _SeriesMoney = value; OnPropertyChanged(); } }
@@ -39,8 +47,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ICommand LoadedBarChartCmd { get; set; }
 
+        public ICommand LoadedPieChartPnlCmd { get; set; }
+        public ICommand LoadedLineChartPnlCmd { get; set; }
+
+        public ICommand LoadedBarChartPnlCmd { get; set; }
 
         public ICommand LoadedPageCmd { get; set; }
+
+        public ICommand PrintStatisticCmd { get; set; }
+
 
         PieChart pieChart = new PieChart();
 
@@ -56,18 +71,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     SeriesMoney = new SeriesCollection();
                     selectedYear = SelectedDate.Year;
                     loadLineChartProfit();
-
+                    loadBarChart();
                 }
                 OnPropertyChanged();
             } 
         }
+
+        private WrapPanel _pnlPieChart = new WrapPanel();
+
+        private WrapPanel _pnlLineChart = new WrapPanel();
+
+        private WrapPanel _pnlColumnChart = new WrapPanel();
 
         public int selectedYear = DateTime.Now.Year;
 
         private string[] _Lables;
         public string[] Lables { get => _Lables; set { _Lables = value; OnPropertyChanged(); } }
 
-
+        private string[] _Kinds;
+        public string[] Kinds { get => _Kinds; set { _Kinds = value; OnPropertyChanged(); } }
         public StaticViewModel()
         {
             LoadedPageCmd = new RelayCommand<object>((p) => { return true; }, (p) => { loadPage(); });
@@ -75,8 +97,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedBarChartCmd = new RelayCommand<CartesianChart>((p) => { return true; }, (p) => { barChart = p; });
             LoadedPieChartCmd = new RelayCommand<PieChart>((p) => { return true; }, (p) => { pieChart = p; });
 
+            LoadedLineChartPnlCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => {_pnlLineChart= p; });
+            LoadedBarChartPnlCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlColumnChart=p; });
+            LoadedPieChartPnlCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlPieChart=p; });
+
+
+            PrintStatisticCmd = new RelayCommand<object>((p) => { return true; }, (p) => { PrintStatistic(); });
+
+
             SeriesMostProduct = new SeriesCollection();
             SeriesMoney = new SeriesCollection();
+            SeriesProduct = new SeriesCollection();
             SelectedDate = DateTime.Now;
 
             loadPieChartMostProduct();
@@ -84,12 +115,72 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             loadBarChart();
         }
 
+        private void PrintStatistic()
+        {
+            if (_pnlPieChart == null || _pnlColumnChart == null || _pnlLineChart == null)
+            {
+                return;
+            }
+            //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
+            //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
+            //using (Bitmap bitmap = new Bitmap((int)panel.Width, (int)panel.Height))
+            //{
+            //    panel.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
+            //    bitmap.Save("test.png", ImageFormat.Png);
+            //}
+            RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlPieChart.ActualWidth, (int)_pnlPieChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp0.Render(_pnlPieChart);
+            MemoryStream stream = new MemoryStream();
+            BitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp0));
+            encoder.Save(stream);
+            Bitmap bmp = new Bitmap(stream);
+            string dat = SelectedDate.ToString("d_M_yyyy");
+            bmp.Save(@"reports/testpie" + dat + ".png", ImageFormat.Png);
+
+            Thread.Sleep(500);
+
+            bmp0 = new RenderTargetBitmap((int)_pnlLineChart.ActualWidth, (int)_pnlLineChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp0.Render(_pnlLineChart);
+            stream = new MemoryStream();
+            encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp0));
+            encoder.Save(stream);
+            bmp = new Bitmap(stream);
+            bmp.Save(@"reports/testline" + dat + ".png", ImageFormat.Png);
+
+            Thread.Sleep(500);
+
+            bmp0 = new RenderTargetBitmap((int)_pnlColumnChart.ActualWidth, (int)_pnlColumnChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp0.Render(_pnlColumnChart);
+            stream = new MemoryStream();
+            encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp0));
+            encoder.Save(stream);
+            bmp = new Bitmap(stream);
+            bmp.Save(@"reports/testcolumn" + dat + ".png", ImageFormat.Png);
+        }
+
         private void loadBarChart()
         {
-            decimal jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sep = 0, oct = 0, nov = 0, dec = 0;
-            decimal jan1 = 0, feb1 = 0, mar1 = 0, apr1 = 0, may1 = 0, jun1 = 0, jul1 = 0, aug1 = 0, sep1 = 0, oct1 = 0, nov1 = 0, dec1 = 0;
+            int countGiaDung = 0;
+            int countThucPham = 0;
+            int countHoaMyPham = 0;
+            int countKhac = 0;
 
-            var Selling = DataProvider.Ins.DB.HOADON;
+
+            int countGiaDung1 = 0;
+            int countThucPham1 = 0;
+            int countHoaMyPham1 = 0;
+            int countKhac1 = 0;
+
+            DateTime time = SelectedDate;
+
+            int day = time.Day;
+            int month = time.Month;
+            int year = time.Year;
+
+            var Selling = DataProvider.Ins.DB.HOADON.Where(x=>x.NGHD==SelectedDate);
             foreach (var his in Selling)
             {
                 var historysell = DataProvider.Ins.DB.CTHD.Where(x => x.SOHD == his.SOHD);
@@ -100,40 +191,82 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     {
                         if (loai.LOAI == "Gia dụng")
                         {
-                            //countGiaDung += (int)item.SL;
+                            countGiaDung += (int)item.SL;
                         }
-                        if (loai.LOAI == "Thực phẩm")
+                        if (loai.LOAI == "Thực phẩm ")
                         {
-                            //countThucPham += (int)item.SL;
+                            countThucPham += (int)item.SL;
                         }
                         if (loai.LOAI == "Hoá mỹ phẩm")
                         {
-                            //countHoaMyPham += (int)item.SL;
+                            countHoaMyPham += (int)item.SL;
                         }
                         if (loai.LOAI == "Khác")
                         {
-                            //countKhac += (int)item.SL;
+                            countKhac += (int)item.SL;
                         }
                     }
                 }
             }
+
+            var nhap= DataProvider.Ins.DB.NHAPHANG.Where(x =>(DateTime) x.NGNH == SelectedDate);
+            foreach(var item in nhap)
+            {
+                var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == item.MASP);
+                foreach (var child in sp)
+                {
+                    switch (child.LOAI)
+                    {
+                        case "Gia dụng":
+                            countGiaDung1 += (int)item.SLNHAPHANG;
+                            break;
+                        case "Thực phẩm":
+                            countThucPham1 += (int)item.SLNHAPHANG;
+                            break;
+                        case "Hoá mỹ phẩm":
+                            countHoaMyPham1 += (int)item.SLNHAPHANG;
+                            break;
+
+                        case "Khác":
+                            countKhac1 += (int)item.SLNHAPHANG;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                    
+
+            }
+
+            SeriesProduct = new SeriesCollection();
+            ColumnSeries lns0 = new ColumnSeries
+            {
+                Title = "Nhập",
+                Values = new ChartValues<int> { countGiaDung1, countThucPham1,countHoaMyPham1, countKhac1 },
+
+            };
+
+            SeriesProduct.Add(lns0);
+            ColumnSeries lns1 = new ColumnSeries
+            {
+                Title = "Bán",
+                Values = new ChartValues<int> { countGiaDung, countThucPham, countHoaMyPham, countKhac },
+            };
+
+            SeriesProduct.Add(lns1);
+            Kinds = new[] { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
+
+
             zFormatter = value => value.ToString("N");
 
-            //SeriesMoney.Add(new LineSeries
-            //{
-            //    Title = "8",
-            //    Values = new ChartValues<double> { 5, 3, 2 },
-            //    LineSmoothness = 0,
-            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-            //    PointGeometrySize = 50,
-            //    PointForeground=Brushes.Green
-            //});
-            //SeriesMoney[2].Values.Add(2D);
 
         }
 
         private void loadPage()
         {
+            loadPieChartMostProduct();
+            loadLineChartProfit();
+            loadBarChart();
         }
 
         private void loadLineChartProfit()
@@ -271,7 +404,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesMoney.Add(lns1);
 
 
-            Lables = new[] { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác", };
+            Lables = new[] { "January", "Ferbuary", "March", "April","May","June","July","August","September","October","November","December" };
 
             yFormatter = value => value.ToString("C");
 

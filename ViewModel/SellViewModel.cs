@@ -233,6 +233,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Khachhang.khachhang.DOANHSO += ThanhTienCoGiamGia;
             DataProvider.Ins.DB.SaveChanges();
             clearField();
+            LoadSanPhamData();
             winBill win = p as winBill;
             win.Close();
         }

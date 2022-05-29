@@ -30,6 +30,12 @@
                                    CommandParameter="{Binding ElementName=lineChart}" />
             <i:InvokeCommandAction Command="{Binding LoadedBarChartCmd}"
                                    CommandParameter="{Binding ElementName=barChart}" />
+            <i:InvokeCommandAction Command="{Binding LoadedBarChartPnlCmd}"
+                                   CommandParameter="{Binding ElementName=pnlColumnChart}" />
+            <i:InvokeCommandAction Command="{Binding LoadedLineChartPnlCmd}"
+                                   CommandParameter="{Binding ElementName=pnlLineChart}" />
+            <i:InvokeCommandAction Command="{Binding LoadedPieChartPnlCmd}"
+                                   CommandParameter="{Binding ElementName=pnlpieChart}" />
 
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -39,93 +45,136 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <DatePicker Width="140"
-                        materialDesign:HintAssist.Hint="Thời điểm"
-                        Style="{StaticResource MaterialDesignFilledDatePicker}"
-                        SelectedDate="{Binding SelectedDate}" />
-
-        </Grid>
-        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-            <WrapPanel Background="AliceBlue"
-                       MaxHeight="300"
-                       MaxWidth="300">
-                <materialDesign:Card Padding="8"
-                                     materialDesign:ShadowAssist.ShadowDepth="Depth3"
-                                     Foreground="{x:Null}"
-                                     UniformCornerRadius="10">
-                    <WrapPanel>
-                        <Wpf:PieChart Hoverable="True"
-                                      InnerRadius="0"
-                                      LegendLocation="Bottom"
-                                      Margin="40"
-                                      Series="{Binding SeriesMostProduct}"
-                                      Name="pieChart"
-                                      Height="150"
-                                      Width="150"
-                                      
-                                      >
-                            <Wpf:PieChart.ChartLegend>
-                                <Wpf:DefaultLegend BulletSize="15"
-                                                   TextBlock.Foreground="#0B87F4"
-                                                   TextBlock.FontSize="10"></Wpf:DefaultLegend>
-                            </Wpf:PieChart.ChartLegend>
-                            <Wpf:PieChart.DataTooltip>
-                                <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
-                            </Wpf:PieChart.DataTooltip>
-
-
-                        </Wpf:PieChart>
-
-                    </WrapPanel>
-                </materialDesign:Card>
-
-
-
-            </WrapPanel>
-        </Grid>
+                <DatePicker Width="140"
+                            materialDesign:HintAssist.Hint="Thời điểm"
+                            Style="{StaticResource MaterialDesignFilledDatePicker}"
+                            SelectedDate="{Binding SelectedDate}" />
+            </Grid>
             <Grid Grid.Column="1">
+                <Button Margin="5"
+                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                        Width="180"
+                        Height="50"
+                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                        Content="Print statistic"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Command="{Binding PrintStatisticCmd}" />
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <WrapPanel Background="AliceBlue"
+                           MaxHeight="300"
+                           MaxWidth="300">
+                    <materialDesign:Card Padding="8"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                         Foreground="{x:Null}"
+                                         UniformCornerRadius="10"
+                                         >
+                        <WrapPanel Name="pnlpieChart"
+                                   Background="AliceBlue">
+                            <Wpf:PieChart Hoverable="True"
+                                          InnerRadius="0"
+                                          LegendLocation="Right"
+                                          Margin="40"
+                                          Series="{Binding SeriesMostProduct}"
+                                          Name="pieChart"
+                                          Height="200"
+                                          Width="200">
+                                <Wpf:PieChart.ChartLegend>
+                                    <Wpf:DefaultLegend BulletSize="15"
+                                                       TextBlock.Foreground="#0B87F4"
+                                                       TextBlock.FontSize="10"></Wpf:DefaultLegend>
+                                </Wpf:PieChart.ChartLegend>
+                                <Wpf:PieChart.DataTooltip>
+                                    <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
+                                </Wpf:PieChart.DataTooltip>
 
 
-                <Wpf:CartesianChart LegendLocation="Right"
-                                    Series="{Binding SeriesMoney}"
-                                    MaxHeight="300"
-                                    x:Name="lineChart">
-                    <Wpf:CartesianChart.AxisY>
-                        <Wpf:Axis Title="Money"
-                                  LabelFormatter="{Binding yFormatter}" />
+                            </Wpf:PieChart>
 
-                    </Wpf:CartesianChart.AxisY>
-                    <Wpf:CartesianChart.AxisX>
-                        <Wpf:Axis Title="Month"
-                                  Labels="{Binding Lables}" />
+                        </WrapPanel>
+                    </materialDesign:Card>
 
-                    </Wpf:CartesianChart.AxisX>
-                </Wpf:CartesianChart>
+
+
+                </WrapPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <WrapPanel Background="AliceBlue"
+                           MaxHeight="310"
+                           MaxWidth="430">
+                    <materialDesign:Card Padding="5"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                         Foreground="{x:Null}"
+                                         UniformCornerRadius="10">
+                        <WrapPanel Name="pnlLineChart"
+                           Background="AliceBlue">
+                    <Wpf:CartesianChart LegendLocation="Right"
+                                        Series="{Binding SeriesMoney}"
+                                        Height="300"
+                                        Width="430"
+                                        x:Name="lineChart"
+                                        >
+                        <Wpf:CartesianChart.AxisY>
+                            <Wpf:Axis Title="Money"
+                                      LabelFormatter="{Binding yFormatter}" />
+
+                        </Wpf:CartesianChart.AxisY>
+                        <Wpf:CartesianChart.AxisX>
+                            <Wpf:Axis Title="Month"
+                                      Labels="{Binding Lables}" />
+
+                        </Wpf:CartesianChart.AxisX>
+                    </Wpf:CartesianChart>
+                </WrapPanel>
+                    </materialDesign:Card>
+                </WrapPanel>
+
             </Grid>
 
             <Grid Grid.Column="2">
-                <!--<Wpf:CartesianChart LegendLocation="Right"
-                                    Series="{Binding SeriesMoney}"
-                                    MaxHeight="300"
-                                    Name="barChart"
-                                    >
-                    <Wpf:CartesianChart.AxisY>
-                        <Wpf:Axis Title="Money"
-                                  LabelFormatter="{Binding yFormatter}" />
+                <WrapPanel Background="AliceBlue"
+                           MaxHeight="310"
+                           MaxWidth="410">
+                    <materialDesign:Card Padding="5"
+                                         materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                         Foreground="{x:Null}"
+                                         UniformCornerRadius="10">
+                        <WrapPanel Name="pnlColumnChart"
+                           Background="AliceBlue">
+                    <Wpf:CartesianChart LegendLocation="Right"
+                                        Series="{Binding SeriesProduct}"
+                                        Height="300"
+                                        Width="400"
+                                        Name="barChart"
+                                        >
+                        <Wpf:CartesianChart.AxisY>
+                            <Wpf:Axis Title="Product"
+                                      LabelFormatter="{Binding zFormatter}" />
 
-                    </Wpf:CartesianChart.AxisY>
-                    <Wpf:CartesianChart.AxisX>
-                        <Wpf:Axis Title="Month"
-                                  Labels="{Binding Lables}" />
+                        </Wpf:CartesianChart.AxisY>
+                        <Wpf:CartesianChart.AxisX>
+                            <Wpf:Axis Title="Kind"
+                                      Labels="{Binding Kinds}" />
 
-                    </Wpf:CartesianChart.AxisX>
-                </Wpf:CartesianChart>-->
+                        </Wpf:CartesianChart.AxisX>
+                    </Wpf:CartesianChart>
+                </WrapPanel>
+                    </materialDesign:Card>
+                </WrapPanel>
+
             </Grid>
         </Grid>
 

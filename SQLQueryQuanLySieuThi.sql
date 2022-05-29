@@ -153,6 +153,7 @@ constraint LK_NHAPHANG_SANPHAM foreign key(MASP) references SANPHAM(MASP),
 
 SLNHAPHANG int,
 NGNH smalldatetime,
+TRIGIA money,
 primary key (MANH)
 )
 select * from NHAPHANG
