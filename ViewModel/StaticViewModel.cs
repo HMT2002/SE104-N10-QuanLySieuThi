@@ -306,6 +306,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 Title = "Nhập",
                 Values = new ChartValues<int> { countGiaDung1, countThucPham1,countHoaMyPham1, countKhac1 },
+                DataLabels = true,
+
 
             };
 
@@ -314,6 +316,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 Title = "Bán",
                 Values = new ChartValues<int> { countGiaDung, countThucPham, countHoaMyPham, countKhac },
+                DataLabels = true,
+
+
             };
 
             SeriesProduct.Add(lns1);
@@ -444,6 +449,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
 
             SeriesMoney = new SeriesCollection();
+
             LineSeries lns0 = new LineSeries
             {
                 Title = "Nhập",
@@ -460,10 +466,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             };
             SeriesMoney.Add(lns1);
 
+            //LineSeries lns2 = new LineSeries
+            //{
+            //    Title = "Bán",
+            //    Values = new ChartValues<double> { 10, 10, 10, 12, 10, 15, 5,15, 20, 20, 15, 10 },
+            //    PointGeometry = DefaultGeometries.Square,
+
+            //};
+            //SeriesMoney.Add(lns2);
 
             Lables = new[] { "January", "Ferbuary", "March", "April","May","June","July","August","September","October","November","December" };
-
-            yFormatter = value => value.ToString("C");
+            yFormatter = value => value.ToString("N");
 
             //SeriesMoney.Add(new LineSeries
             //{

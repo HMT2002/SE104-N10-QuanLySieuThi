@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       
-      
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
 
@@ -91,6 +91,7 @@
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10"
                                          >
+                        <!--Đừng sửa cái Name-->
                         <WrapPanel Name="pnlpieChart"
                                    Background="AliceBlue">
                             <Wpf:PieChart Hoverable="True"
@@ -101,11 +102,13 @@
                                           Name="pieChart"
                                           Height="200"
                                           Width="200">
+
                                 <Wpf:PieChart.ChartLegend>
                                     <Wpf:DefaultLegend BulletSize="15"
                                                        TextBlock.Foreground="#0B87F4"
-                                                       TextBlock.FontSize="10"></Wpf:DefaultLegend>
+                                                       TextBlock.FontSize="10" />
                                 </Wpf:PieChart.ChartLegend>
+
                                 <Wpf:PieChart.DataTooltip>
                                     <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
                                 </Wpf:PieChart.DataTooltip>
@@ -121,32 +124,41 @@
                 </WrapPanel>
             </Grid>
             <Grid Grid.Column="1">
-                <WrapPanel Background="AliceBlue"
+                <WrapPanel 
                            MaxHeight="310"
-                           MaxWidth="430">
+                           MaxWidth="410">
                     <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10">
-                        <WrapPanel Name="pnlLineChart"
-                           Background="AliceBlue">
+                <!--Đừng sửa cái Name-->      <WrapPanel Name="pnlLineChart"
+                           Background="AliceBlue"
+                                   >
+                            
                     <Wpf:CartesianChart LegendLocation="Bottom"
                                         Series="{Binding SeriesMoney}"
                                         Height="300"
                                         Width="400"
                                         x:Name="lineChart"
+                                        Hoverable="True"
                                         >
-                        <Wpf:CartesianChart.AxisY>
+                                <Wpf:CartesianChart.ChartLegend>
+                                    <Wpf:DefaultLegend BulletSize="5"
+                                                       TextBlock.Foreground="#0B87F4"
+                                                       TextBlock.FontSize="10">
+                                    </Wpf:DefaultLegend>
+                                </Wpf:CartesianChart.ChartLegend>
+                                <Wpf:CartesianChart.AxisY>
                             <Wpf:Axis Title="Money"
                                       LabelFormatter="{Binding yFormatter}" />
 
                         </Wpf:CartesianChart.AxisY>
                         <Wpf:CartesianChart.AxisX>
-                            <Wpf:Axis Title="Month"
-                                      Labels="{Binding Lables}" />
-
-                        </Wpf:CartesianChart.AxisX>
+                                    <Wpf:Axis Title="Month"
+                                              Labels="{Binding Lables}" />
+                                </Wpf:CartesianChart.AxisX>
                     </Wpf:CartesianChart>
+                            
                 </WrapPanel>
                     </materialDesign:Card>
                 </WrapPanel>
@@ -154,22 +166,32 @@
             </Grid>
 
             <Grid Grid.Column="2">
-                <WrapPanel Background="AliceBlue"
+                <WrapPanel 
                            MaxHeight="310"
                            MaxWidth="410">
                     <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10">
+                        <!--Đừng sửa cái Name-->
                         <WrapPanel Name="pnlColumnChart"
-                           Background="AliceBlue">
+                            Background="AliceBlue">
                     <Wpf:CartesianChart LegendLocation="Bottom"
                                         Series="{Binding SeriesProduct}"
                                         Height="300"
                                         Width="370"
                                         Name="barChart"
+                                        Hoverable="True"
                                         >
-                        <Wpf:CartesianChart.AxisY>
+
+                                <Wpf:CartesianChart.ChartLegend>
+                                    <Wpf:DefaultLegend BulletSize="5"
+                                                       TextBlock.Foreground="#0B87F4"
+                                                       TextBlock.FontSize="10">
+                                    </Wpf:DefaultLegend>
+                                </Wpf:CartesianChart.ChartLegend>
+
+                                <Wpf:CartesianChart.AxisY>
                             <Wpf:Axis Title="Product"
                                       LabelFormatter="{Binding zFormatter}" />
 
