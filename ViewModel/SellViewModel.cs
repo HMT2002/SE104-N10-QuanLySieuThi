@@ -243,7 +243,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("20520850@gm.uit.edu.vn", "tue6tri123");
+            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
             client.Send(mailmess);
         }
 
