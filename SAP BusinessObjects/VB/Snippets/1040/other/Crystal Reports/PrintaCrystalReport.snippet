@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Stampare un report Crystal </Title>
+            <Author>Business Objects</Author>
+            <Description>Stampa un report Crystal sulla stampante specificata in PrintOptions.</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crPrintRpt</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL/>
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL/>
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Sostituire questa stringa con il nome del file di report che si desidera stampare.</ToolTip>
+                    <Default>&quot;C:\My Crystal Reports\Report Name.rpt&quot;</Default>
+                </Literal>
+                <Literal>
+                    <ID>copies</ID>
+                    <Type>String</Type>
+                    <ToolTip>Sostituire questo numero con il numero di copie di report Crystal che si desidera stampare.</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>collated</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>Sostituire questo valore booleano con False se non si desidera stampare una copia fascicolata del report Crystal.</ToolTip>
+                    <Default>true</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Per stampare, sostituire questo numero con il primo numero di pagina; inserire 0 per specificare l&apos;intero report.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Per stampare, sostituire questo numero con l&apos;ultimo numero di pagina; inserire 0 per specificare l&apos;intero report.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+            </Declarations>
+            <Code Kind="method body" Language="VB"><![CDATA[' È possibile cambiare diverse opzioni di stampa mediante la proprietà PrintOptions di ReportDocument
+                Dim report As New ReportDocument()
+                report.Load($FileName$)
+                report.PrintToPrinter($copies$, $collated$, $startPage$, $endPage$)
+                report.Close()
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

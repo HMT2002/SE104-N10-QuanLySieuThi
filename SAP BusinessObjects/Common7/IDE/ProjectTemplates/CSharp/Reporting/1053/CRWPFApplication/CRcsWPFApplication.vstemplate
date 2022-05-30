@@ -1,0 +1,32 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="553" />
+    <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="554"/>
+    <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5006"/>
+    <TemplateID>CrystalReports.Win.CSharp.WPFApplication</TemplateID>
+    <SortOrder>1000</SortOrder>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>CrystalReportWpfApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="CrystalReportWPFApplication.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Properties\Settings.settings">Settings.settings</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">Window1.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true" SubType="Code">Window1.xaml.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">App.xaml</ProjectItem>
+      <ProjectItem ReplaceParameters="true" SubType="Code">App.xaml.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>CrystalDecisions.VSDesigner, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, Custom=null</Assembly>
+    <FullClassName>CrystalDecisions.VSDesigner.Wizard.ReportProjectItemWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

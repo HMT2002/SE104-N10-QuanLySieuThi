@@ -1,0 +1,318 @@
+; ------------------------------------------------------------------------------
+; Dependency file for setup wizards.
+
+
+[Version]
+Version=11.5.6.510
+
+; ------------------------------------------------------------------------------
+; Dependencies for craxddrt.DLL
+
+
+[craxddrt.DLL]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(DLLSelfRegister)
+Version=11.5.6.510
+
+Uses1=cslibu-2-0-0.dll
+Uses2=MSVCR71.dll
+Uses3=MFC71U.dll
+Uses4=\Program Files\Common Files\Business Objects\3.0\bin\crtowords_en.dll
+Uses5=\Program Files\Common Files\Business Objects\3.0\bin\ufmanager.dll
+Uses6=\Program Files\Common Files\Business Objects\3.0\bin\Implode.dll
+Uses7=\Program Files\Common Files\Business Objects\3.0\bin\crqe.dll
+Uses8=\Program files\common files\Business Objects\3.0\bin\querybuilder.dll
+Uses9=\Program Files\Common Files\Business Objects\3.0\bin\sscsdk80.dll
+;need files in floder C:\Program Files\Common Files\Business Objects\3.0\ChartSupport 
+;and register \\HKLM\Software\Business Objects\Suite 11.0\Crystal Reports\ChartSupportPath to make chart work
+Uses11=C:\Program Files\Common Files\Business Objects\3.0\bin\chartui.dll
+Uses12=C:\Program Files\Common Files\Business Objects\3.0\bin\cranalyzer.dll
+Uses13=C:\Program Files\Common Files\Business Objects\3.0\bin\p2ixbse.dll
+Uses14=C:\Program Files\Common Files\Business Objects\3.0\bin\crdb_dictionary.dll
+Uses15=C:\Program Files\Common Files\Business Objects\3.0\bin\filedialog.dll
+Uses16=C:\Program Files\Common Files\Business Objects\3.0\bin\sacommoncontrols.dll
+
+; Export dlls
+Uses17=\Program files\common files\Business Objects\3.0\bin\crxf_pdf.dll
+Uses18=\Program files\common files\Business Objects\3.0\bin\crxf_rtf.dll
+Uses19=\Program files\common files\Business Objects\3.0\bin\crxf_wordw.dll
+Uses20=\Program files\common files\Business Objects\3.0\bin\crxf_xls.dll
+Uses21=\Program files\common files\Business Objects\3.0\bin\u2fcr.dll
+Uses22=\Program files\common files\Business Objects\3.0\bin\u2fsepv.dll
+Uses23=\Program files\common files\Business Objects\3.0\bin\u2ftext.dll
+Uses24=\Program files\common files\Business Objects\3.0\bin\u2fxml.dll
+Uses25=\Program files\common files\Business Objects\3.0\bin\u2ddisk.dll
+Uses26=\Program files\common files\Business Objects\3.0\bin\u2dpost.dll
+Uses27=\Program files\common files\Business Objects\3.0\bin\u2dapp.dll
+
+; Keycode dll
+Uses30=\Program files\common files\Business Objects\3.0\bin\keycode.dll
+
+; Deploy registry file
+Uses31=\Program files\common files\Business Objects\3.0\bin\crdeploy.reg
+
+; v11 additions
+Uses40=\Program files\common files\Business Objects\3.0\bin\saxserialize.dll
+Uses41=\Program files\common files\Business Objects\3.0\bin\saxmlserialize.dll
+Uses42=\Program files\common files\Business Objects\3.0\bin\sacommlayer.dll
+Uses43=\Program files\common files\Business Objects\3.0\bin\prompt.dll
+Uses44=\Program files\common files\Business Objects\3.0\bin\ParameterDesigner.dll
+Uses45=\Program files\common files\Business Objects\3.0\bin\crlov.dll
+Uses46=\Program files\common files\Business Objects\3.0\bin\xerces-c_3_1.dll
+Uses47=atl71.dll
+Uses48=etc-1-0-12-3.dll
+Uses49=MSVCP71.dll
+Uses50=ebus-3-3-2-4.dll
+Uses51=libOCAHelperw-2-13.dll
+Uses52=fssl-1-2-1-1.dll
+
+[libOCAHelperw-2-13.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[fssl-1-2-1-1.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[MSVCP71.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[etc-1-0-12-3.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[atl71.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[ebus-3-3-2-4.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[xerces-c_3_1.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[saxserialize.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[saxmlserialize.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[sacommlayer.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[prompt.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[ParameterDesigner.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[crlov.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[keycode.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[ufmanager.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=\Program Files\Common Files\Business Objects\3.0\bin\u2l2000.dll
+Uses2=\Program Files\Common Files\Business Objects\3.0\bin\u2lcom.dll
+Uses3=\Program Files\Common Files\Business Objects\3.0\bin\u2ldts.dll
+Uses4=\Program Files\Common Files\Business Objects\3.0\bin\u2lexch.dll
+Uses5=\Program Files\Common Files\Business Objects\3.0\bin\u2lfinra.dll
+Uses6=\Program Files\Common Files\Business Objects\3.0\bin\u252000.dll
+Uses7=\Program Files\Common Files\Business Objects\3.0\bin\u25dts.dll
+Uses8=\Program Files\Common Files\Business Objects\3.0\bin\u25samp1.dll
+
+[u2l2000.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2lcom.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2ldts.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2lexch.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2lfinra.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u252000.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u25dts.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u25samp1.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[IMPLODE.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[cslibu-2-0-0.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[MSVCR71.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[MFC71U.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[SSCSDK80.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[chartui.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[cranalyzer.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(DLLSelfRegister)
+Uses1=
+
+[p2ixbse.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[crdb_dictionary.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[filedialog.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(DLLSelfRegister)
+Uses1=
+
+[sacommoncontrols.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(DLLSelfRegister)
+Uses1=
+
+[crtowords_en.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[crxf_xls.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=\Program Files\Common Files\Business Objects\3.0\bin\ExportModeller.dll
+Uses2=\Program Files\Common Files\Business Objects\3.0\bin\crtslv.dll
+
+[crxf_pdf.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=\Program Files\Common Files\Business Objects\3.0\bin\ExportModeller.dll
+Uses2=\Program Files\Common Files\Business Objects\3.0\bin\crtslv.dll
+
+[crxf_rtf.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=\Program Files\Common Files\Business Objects\3.0\bin\ExportModeller.dll
+Uses2=\Program Files\Common Files\Business Objects\3.0\bin\crtslv.dll
+
+[crxf_wordw.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=\Program Files\Common Files\Business Objects\3.0\bin\ExportModeller.dll
+Uses2=\Program Files\Common Files\Business Objects\3.0\bin\crtslv.dll
+
+[u2fcr.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2fsepv.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2ftext.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2fxml.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2dapp.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2ddisk.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[u2dpost.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[ExportModeller.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[crtslv.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=
+
+[crqe.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Register=$(dllSelfRegister)
+Uses1=\Program files\common files\Business Objects\3.0\bin\crdb_ado.dll
+Uses2=\Program files\common files\Business Objects\3.0\bin\crdb_dao.dll
+Uses3=\Program files\common files\Business Objects\3.0\bin\crdb_odbc.dll
+Uses4=$(WinSysPath)\cxlibw-2-6.dll
+Uses5=$(WinSysPath)\libOCASecurityw-1-6.dll
+
+[libOCASecurityw-1-6.dll]
+Dest=$(WinSysPath)
+Uses1=$(WinSysPath)\cxlibw-2-6.dll
+Uses2=$(WinSysPath)\ebus-3-3-2-4.dll
+Uses3=$(WinSysPath)\libOCAHelperw-2-13.dll
+
+[querybuilder.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[crdb_ado.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[crdb_dao.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[crdb_odbc.dll]
+Dest=$(CommonFiles)\Business Objects\3.0\bin
+Uses1=
+
+[cxlibw-2-6.dll]
+Dest=$(WinSysPath)
+Uses1=
+

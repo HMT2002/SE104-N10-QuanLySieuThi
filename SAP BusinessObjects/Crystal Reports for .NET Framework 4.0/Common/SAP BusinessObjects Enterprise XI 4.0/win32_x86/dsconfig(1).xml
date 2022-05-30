@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+<!--
+	<DatabaseDriverItems defaultStatus="Enable">
+		<Item>
+			<DllName>crdb_xml.dll</DllName>
+			<Description>XML driver</Description>
+			<Status>Disable</Status>
+		</Item>
+	</DatabaseDriverItems>
+	<ExportFormatItems defaultStatus="Enable">
+		<Item>
+			<DllName>crxf_pdf.dll</DllName>
+			<Description>pdf format</Description>
+			<Status>Enable</Status>
+		</Item>
+		<Item>
+			<DllName>u2fcr.dll</DllName>
+			<Description>CR</Description>
+			<Status>Disable</Status>
+		</Item>
+		<Item>
+			<DllName index="1">crxf_xls.dll</DllName>
+			<Description>rtf format</Description>
+			<Status>Disable</Status>
+		</Item>
+	</ExportFormatItems>
+	<ExportDestinationItems defaultStatus="Enable">
+		<Item>
+			<DllName>u2dmapi.dll</DllName>
+			<Description>MAPI</Description>
+			<Status>Disable</Status>
+		</Item>
+	</ExportDestinationItems>
+-->
+</Configuration>
