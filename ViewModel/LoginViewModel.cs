@@ -315,7 +315,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
                 var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0,NGDK=DateTime.Now };
                 DataProvider.Ins.DB.KHACHHANG.Add(nv);
-                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)),ACC=UserName };
+                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)),ACC=UserName,PRI=0 };
                 DataProvider.Ins.DB.ACCOUNT.Add(acc);
 
                 DataProvider.Ins.DB.SaveChanges();
@@ -345,10 +345,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
             if (accCountKhach!=null)
             {
-                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+                var user = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == UserName).SingleOrDefault();
+                MainViewModelForCustomer._currentUser = user.MAKH;
 
-                MainViewModel._currentUser = user.MANV;
-                MainWindow win = new MainWindow();
+                CustomerWindow win = new CustomerWindow();
 
                 win.Show();
                 p.Close();

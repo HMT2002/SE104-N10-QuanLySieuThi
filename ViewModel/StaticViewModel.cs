@@ -65,19 +65,257 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         CartesianChart barChart = new CartesianChart();
 
+        private string _TextNamThongKe;
+        public string TextNamThongKe { get => _TextNamThongKe; set { _TextNamThongKe = value; OnPropertyChanged(); } }
+
+        private string _TextThangThongKe;
+        public string TextThangThongKe { get => _TextThangThongKe; set { _TextThangThongKe = value; OnPropertyChanged(); } }
+
+        private string _TextNgayThongKe;
+        public string TextNgayThongKe { get => _TextNgayThongKe; set { _TextNgayThongKe = value; OnPropertyChanged(); } }
+
+        private string _TextLineThongKe;
+        public string TextLineThongKe { get => _TextLineThongKe; set { _TextLineThongKe = value; OnPropertyChanged(); } }
+
+
+        private decimal _TongDoanhThuThang;
+        public decimal TongDoanhThuThang { get => _TongDoanhThuThang; set { _TongDoanhThuThang = value; OnPropertyChanged(); } }
+
+
+        private decimal _TongDoanhThuThangTruoc;
+        public decimal TongDoanhThuThangTruoc { get => _TongDoanhThuThangTruoc; set { _TongDoanhThuThangTruoc = value; OnPropertyChanged(); } }
+
+        private double _TiLeSoSanhThangTruoc;
+        public double TiLeSoSanhThangTruoc { get => _TiLeSoSanhThangTruoc; set { _TiLeSoSanhThangTruoc = value; OnPropertyChanged(); } }
+
+        private string _TextTiLeSoSanhThangTruoc;
+        public string TextTiLeSoSanhThangTruoc { get => _TextTiLeSoSanhThangTruoc; set { _TextTiLeSoSanhThangTruoc = value; OnPropertyChanged(); } }
+
+        private List<string> _SearchType = new List<string>() { "Năm", "Tháng","Ngày" };
+
+        public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+        private string _SearchTypeItem;
+        public string SearchTypeItem
+        {
+            get => _SearchTypeItem; set
+            {
+                _SearchTypeItem = value;
+                switch (SearchTypeItem)
+                {
+                    case "Ngày":
+                        TextLineThongKe = TextNgayThongKe;
+                        loadLineChartProfitDay();
+                        break;
+                    case "Tháng":
+                        TextLineThongKe = TextThangThongKe;
+                        loadLineChartProfitMonth();
+                        break;
+                    case "Năm":
+                        TextLineThongKe = TextNamThongKe;
+                        loadLineChartProfitYear();
+                        break;
+                    default:
+                        break;
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private void loadLineChartProfitDay()
+        {
+            yFormatter = value => value.ToString("N");
+
+        }
+
+        private void loadLineChartProfitYear()
+        {
+            decimal jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sep = 0, oct = 0, nov = 0, dec = 0;
+            decimal jan1 = 0, feb1 = 0, mar1 = 0, apr1 = 0, may1 = 0, jun1 = 0, jul1 = 0, aug1 = 0, sep1 = 0, oct1 = 0, nov1 = 0, dec1 = 0;
+
+            var hd = DataProvider.Ins.DB.HOADON;
+            foreach (var item in hd)
+            {
+                DateTime time = (DateTime)item.NGHD;
+
+                int day = time.Day;
+                int month = time.Month;
+                int year = time.Year;
+                if (year != SelectedDate.Year)
+                {
+                    break;
+                }
+                switch (month)
+                {
+                    case 1:
+                        jan += (decimal)item.TRIGIA;
+                        break;
+                    case 2:
+                        feb += (decimal)item.TRIGIA;
+                        break;
+                    case 3:
+                        mar += (decimal)item.TRIGIA;
+                        break;
+                    case 4:
+                        apr += (decimal)item.TRIGIA;
+                        break;
+                    case 5:
+                        may += (decimal)item.TRIGIA;
+                        break;
+                    case 6:
+                        jun += (decimal)item.TRIGIA;
+                        break;
+                    case 7:
+                        jul += (decimal)item.TRIGIA;
+                        break;
+                    case 8:
+                        aug += (decimal)item.TRIGIA;
+                        break;
+                    case 9:
+                        sep += (decimal)item.TRIGIA;
+                        break;
+                    case 10:
+                        oct += (decimal)item.TRIGIA;
+                        break;
+                    case 11:
+                        nov += (decimal)item.TRIGIA;
+                        break;
+                    case 12:
+                        dec += (decimal)item.TRIGIA;
+                        break;
+
+                    default:
+                        break;
+                }
+
+            }
+
+            var Selling = DataProvider.Ins.DB.NHAPHANG;
+            foreach (var his in Selling)
+            {
+                DateTime time = (DateTime)his.NGNH;
+                int day = time.Day;
+                int month = time.Month;
+                int year = time.Year;
+                if (year != SelectedDate.Year)
+                {
+                    break;
+                }
+                switch (month)
+                {
+                    case 1:
+                        jan1 += (decimal)his.TRIGIA;
+                        break;
+                    case 2:
+                        feb1 += (decimal)his.TRIGIA;
+                        break;
+                    case 3:
+                        mar1 += (decimal)his.TRIGIA;
+                        break;
+                    case 4:
+                        apr1 += (decimal)his.TRIGIA;
+                        break;
+                    case 5:
+                        may1 += (decimal)his.TRIGIA;
+                        break;
+                    case 6:
+                        jun1 += (decimal)his.TRIGIA;
+                        break;
+                    case 7:
+                        jul1 += (decimal)his.TRIGIA;
+                        break;
+                    case 8:
+                        aug1 += (decimal)his.TRIGIA;
+                        break;
+                    case 9:
+                        sep1 += (decimal)his.TRIGIA;
+                        break;
+                    case 10:
+                        oct1 += (decimal)his.TRIGIA;
+                        break;
+                    case 11:
+                        nov1 += (decimal)his.TRIGIA;
+                        break;
+                    case 12:
+                        dec1 += (decimal)his.TRIGIA;
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+
+            SeriesMoney = new SeriesCollection();
+
+            LineSeries lns0 = new LineSeries
+            {
+                Title = "Nhập",
+                Values = new ChartValues<double> { decimal.ToDouble(jan1), decimal.ToDouble(feb1), decimal.ToDouble(mar1), decimal.ToDouble(apr1), decimal.ToDouble(may1), decimal.ToDouble(jun1), decimal.ToDouble(jul1), decimal.ToDouble(aug1), decimal.ToDouble(sep1), decimal.ToDouble(oct1), decimal.ToDouble(nov1), decimal.ToDouble(dec1) },
+                DataLabels = true,
+
+            };
+            SeriesMoney.Add(lns0);
+            LineSeries lns1 = new LineSeries
+            {
+                Title = "Bán",
+                Values = new ChartValues<double> { decimal.ToDouble(jan), decimal.ToDouble(feb), decimal.ToDouble(mar), decimal.ToDouble(apr), decimal.ToDouble(may), decimal.ToDouble(jun), decimal.ToDouble(jul), decimal.ToDouble(aug), decimal.ToDouble(sep), decimal.ToDouble(oct), decimal.ToDouble(nov), decimal.ToDouble(dec) },
+                PointGeometry = DefaultGeometries.Square,
+                DataLabels = true,
+
+            };
+            SeriesMoney.Add(lns1);
+            
+            Lables = new[] { "January", "Ferbuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
+            yFormatter = value => value.ToString("N");
+
+            //SeriesMoney.Add(new LineSeries
+            //{
+            //    Title = "8",
+            //    Values = new ChartValues<double> { 5, 3, 2 },
+            //    LineSmoothness = 0,
+            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+            //    PointGeometrySize = 50,
+            //    PointForeground=Brushes.Green
+            //});
+            //SeriesMoney[2].Values.Add(2D);
+
+
+        }
+
         private DateTime _SelectedDate;
-        public DateTime SelectedDate { get => _SelectedDate; set {
+        public DateTime SelectedDate
+        {
+            get => _SelectedDate; set
+            {
                 _SelectedDate = value;
                 if (SelectedDate != null)
                 {
-                    SeriesMoney = new SeriesCollection();
                     selectedYear = SelectedDate.Year;
-                    loadLineChartProfit();
+
+                    TextNamThongKe = "Tổng sán phẩm bán ra năm : " + SelectedDate.Year.ToString();
+                    TextThangThongKe = SelectedDate.Month + @"/" + SelectedDate.Year;
+                    TextNgayThongKe = SelectedDate.Day + @"/" + SelectedDate.Month + @"/" + SelectedDate.Year;
+
+
+                    //if (SearchTypeItem == "Ngày")
+                    //{
+                    //    loadLineChartProfitDay();
+                    //}
+                    //else if (SearchTypeItem == "Tháng")
+                    //{
+                    //    loadLineChartProfitMonth();
+
+                    //}
+                    //else if (SearchTypeItem == "Năm")
+                    //{
+                    //    loadLineChartProfitYear();
+                    //}
+                    loadLineChartProfitMonth();
                     loadBarChart();
                     loadPieChartMostProduct();
                 }
                 OnPropertyChanged();
-            } 
+            }
         }
 
         private WrapPanel _pnlPieChart = new WrapPanel();
@@ -113,12 +351,77 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesProduct = new SeriesCollection();
             SelectedDate = DateTime.Now;
 
+            TongDoanhThuThang = 0;
+            TongDoanhThuThangTruoc = 0;
+            TiLeSoSanhThangTruoc = 1;
+
+            TextNamThongKe ="Tổng sán phẩm bán ra năm : " +SelectedDate.Year.ToString();
+            TextThangThongKe = SelectedDate.Month + @"/" + SelectedDate.Year;
+            TextNgayThongKe = SelectedDate.Day + @"/" + SelectedDate.Month + @"/" + SelectedDate.Year;
+
             loadPieChartMostProduct();
-            loadLineChartProfit();
+            loadLineChartProfitMonth();
             loadBarChart();
+            loadBoard();
         }
 
-        private void PrintStatistic()
+        private void loadBoard()
+        {
+            loadTongDoanhThuThang();
+            loadTiLeSoSanh();
+        }
+
+        private void loadTiLeSoSanh()
+        {
+            var hd = DataProvider.Ins.DB.HOADON;
+            foreach (var item in hd)
+            {
+                DateTime time = (DateTime)item.NGHD;
+
+                int day = time.Day;
+                int month = time.Month;
+                int year = time.Year;
+                if (year != DateTime.Now.Year || month != DateTime.Now.Month-1)
+                {
+                    break;
+                }
+                TongDoanhThuThangTruoc += (decimal)item.TRIGIA;
+            }
+
+            if (TongDoanhThuThangTruoc < TongDoanhThuThang)
+            {
+                TiLeSoSanhThangTruoc = (double)(TongDoanhThuThang / (TongDoanhThuThangTruoc + (decimal)0.1));
+                TextTiLeSoSanhThangTruoc = "Tăng " + TiLeSoSanhThangTruoc + @"% so với tháng trước";
+            }
+            else if (TongDoanhThuThangTruoc > TongDoanhThuThang)
+            {
+                TiLeSoSanhThangTruoc = (double)(TongDoanhThuThangTruoc / (TongDoanhThuThang + (decimal)0.1));
+                TextTiLeSoSanhThangTruoc = "Giảm " + TiLeSoSanhThangTruoc + @"% so với tháng trước";
+            }
+            else
+            {
+                TextTiLeSoSanhThangTruoc = "Doanh thu không thay đổi";
+            }
+        }
+
+        private void loadTongDoanhThuThang()
+        {
+            var hd = DataProvider.Ins.DB.HOADON;
+            foreach (var item in hd)
+            {
+                DateTime time = (DateTime)item.NGHD;
+
+                int day = time.Day;
+                int month = time.Month;
+                int year = time.Year;
+                if (year != DateTime.Now.Year || month != DateTime.Now.Month)
+                {
+                    break;
+                }
+                TongDoanhThuThang += (decimal)item.TRIGIA;
+            }
+        }
+            private void PrintStatistic()
         {
             if (_pnlPieChart == null || _pnlColumnChart == null || _pnlLineChart == null)
             {
@@ -141,10 +444,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Frames.Add(BitmapFrame.Create(bmp0));
             encoder.Save(stream);
             Bitmap bmp = new Bitmap(stream);
+
             string dat = SelectedDate.ToString("d_M_yyyy");
-            bmp.Save(@"reports/testpie" + dat + ".png", ImageFormat.Png);
-            finame.Add(@"reports/testpie" + dat + ".png");
-            Thread.Sleep(500);
+
+            string folderName = @"reports/" + SelectedDate.ToString("yyyy");
+            // If directory does not exist, create it
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+
+            bmp.Save(folderName + @"/piechart_" + SelectedDate.ToString("yyyy") + ".png", ImageFormat.Png);
+            finame.Add(folderName + @"/piechart_" + SelectedDate.ToString("yyyy") + ".png");
+
+            //Thread.Sleep(500);
 
             bmp0 = new RenderTargetBitmap((int)_pnlLineChart.ActualWidth, (int)_pnlLineChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             bmp0.Render(_pnlLineChart);
@@ -153,10 +466,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Frames.Add(BitmapFrame.Create(bmp0));
             encoder.Save(stream);
             bmp = new Bitmap(stream);
-            bmp.Save(@"reports/testline" + dat + ".png", ImageFormat.Png);
-            finame.Add(@"reports/testline" + dat + ".png");
 
-            Thread.Sleep(500);
+            folderName = @"reports/" + SelectedDate.ToString("MM_yyyy");
+            // If directory does not exist, create it
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+
+            bmp.Save(folderName + @"/linechart_" + SelectedDate.ToString("yyyy") + ".png", ImageFormat.Png);
+            finame.Add(folderName + @"/linechart_" + SelectedDate.ToString("yyyy") + ".png");
+
+            //Thread.Sleep(500);
 
             bmp0 = new RenderTargetBitmap((int)_pnlColumnChart.ActualWidth, (int)_pnlColumnChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
             bmp0.Render(_pnlColumnChart);
@@ -165,12 +486,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Frames.Add(BitmapFrame.Create(bmp0));
             encoder.Save(stream);
             bmp = new Bitmap(stream);
-            bmp.Save(@"reports/testcolumn" + dat + ".png", ImageFormat.Png);
-            finame.Add(@"reports/testcolumn" + dat + ".png");
+
+
+            folderName = @"reports/" + dat;
+            // If directory does not exist, create it
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+
+            bmp.Save(folderName + @"/columnchart_" + dat + ".png", ImageFormat.Png);
+            finame.Add(folderName + @"/columnchart_" + dat + ".png");
 
 
 
-            SendReport(finame);
+            //SendReport(finame);
         }
         private void SendReport(List<string> repos=null)
         {
@@ -220,7 +550,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void loadPage()
         {
             loadPieChartMostProduct();
-            loadLineChartProfit();
+            loadLineChartProfitMonth();
             loadBarChart();
         }
 
@@ -331,7 +661,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
 
 
-        private void loadLineChartProfit()
+        private void loadLineChartProfitMonth()
         {
             decimal jan = 0, feb = 0, mar = 0, apr = 0, may = 0, jun = 0, jul = 0, aug = 0, sep = 0, oct = 0, nov = 0, dec = 0;
             decimal jan1 = 0, feb1 = 0, mar1 = 0, apr1 = 0, may1 = 0, jun1 = 0, jul1 = 0, aug1 = 0, sep1 = 0, oct1 = 0, nov1 = 0, dec1 = 0;
@@ -454,6 +784,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 Title = "Nhập",
                 Values = new ChartValues<double> { decimal.ToDouble(jan1), decimal.ToDouble(feb1), decimal.ToDouble(mar1), decimal.ToDouble(apr1), decimal.ToDouble(may1), decimal.ToDouble(jun1), decimal.ToDouble(jul1), decimal.ToDouble(aug1), decimal.ToDouble(sep1), decimal.ToDouble(oct1), decimal.ToDouble(nov1), decimal.ToDouble(dec1) },
+                DataLabels = true,
 
             };
             SeriesMoney.Add(lns0);
@@ -462,6 +793,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 Title = "Bán",
                 Values = new ChartValues<double> { decimal.ToDouble(jan), decimal.ToDouble(feb), decimal.ToDouble(mar), decimal.ToDouble(apr), decimal.ToDouble(may), decimal.ToDouble(jun), decimal.ToDouble(jul), decimal.ToDouble(aug), decimal.ToDouble(sep), decimal.ToDouble(oct), decimal.ToDouble(nov), decimal.ToDouble(dec) },
                 PointGeometry = DefaultGeometries.Square,
+                DataLabels = true,
 
             };
             SeriesMoney.Add(lns1);
@@ -475,7 +807,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //};
             //SeriesMoney.Add(lns2);
 
-            Lables = new[] { "January", "Ferbuary", "March", "April","May","June","July","August","September","October","November","December" };
+            Lables = new[] { "Jan", "Ferb", "Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec" };
             yFormatter = value => value.ToString("N");
 
             //SeriesMoney.Add(new LineSeries

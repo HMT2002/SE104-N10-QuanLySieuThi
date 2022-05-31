@@ -141,6 +141,9 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomerWindow.xaml.cs">
+      <DependentUpon>CustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\ACCOUNT.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -182,6 +185,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\TonKho.cs" />
+    <Compile Include="pages\paCustomerForCustomer.xaml.cs">
+      <DependentUpon>paCustomerForCustomer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\paLogout.xaml.cs">
       <DependentUpon>paLogout.xaml</DependentUpon>
     </Compile>
@@ -205,12 +211,14 @@
     <Compile Include="ViewModel\ControlBarViewModel.cs" />
     <Compile Include="ViewModel\CreateEmployeeAccount.cs" />
     <Compile Include="ViewModel\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModelForCustomer.cs" />
     <Compile Include="ViewModel\EmployeeControl.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\ImportProductViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\LogoutViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModelForCustomer.cs" />
     <Compile Include="ViewModel\ManageViewModel.cs" />
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\SellViewModel.cs" />
@@ -261,6 +269,10 @@
     <Compile Include="windows\winVerifyMail.xaml.cs">
       <DependentUpon>winVerifyMail.xaml</DependentUpon>
     </Compile>
+    <Page Include="CustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -284,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\paCustomer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\paCustomerForCustomer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -473,6 +489,9 @@
   <ItemGroup>
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
+    </PackageReference>
+    <PackageReference Include="PdfSharp">
+      <Version>1.50.5147</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

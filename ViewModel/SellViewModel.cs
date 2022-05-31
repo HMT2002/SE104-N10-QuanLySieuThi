@@ -1,22 +1,20 @@
-﻿using SE104_N10_QuanLySieuThi.classes;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using SE104_N10_QuanLySieuThi.classes;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -48,6 +46,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _IdBill;
         public string IdBill { get => _IdBill; set { _IdBill = value; OnPropertyChanged(); } }
 
+        private string _TextIdBill;
+        public string TextIdBill { get => _TextIdBill; set { _TextIdBill = value; OnPropertyChanged(); } }
+
         private int _Stt;
         public int Stt { get => _Stt; set { _Stt = value; OnPropertyChanged(); } }
         private string _MaSP;
@@ -58,11 +59,43 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public long SoLuongSP { get => _SoLuongSP; set { _SoLuongSP = value; OnPropertyChanged(); } }
         private long _DonGia;
         public long DonGia { get => _DonGia; set { _DonGia = value; OnPropertyChanged(); } }
+
         private decimal _ThanhTien;
         public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
 
+        private decimal _TienTra;
+        public decimal TienTra { get => _TienTra; set { _TienTra = value;
+                if (TienTra < ThanhTienCoGiamGia)
+                {
+                    TienThoi = 0;
+                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+
+                }
+                else
+                {
+                    TienThoi = TienTra - ThanhTienCoGiamGia;
+                    TextTienTra = "Khách trả: ";
+                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+                }
+                OnPropertyChanged(); } }
+
+        private decimal _TienThoi;
+        public decimal TienThoi { get => _TienThoi; set { _TienThoi = value; OnPropertyChanged(); } }
+
+        private string _TextThanhTien;
+        public string TextThanhTien { get => _TextThanhTien; set { _TextThanhTien = value; OnPropertyChanged(); } }
+
+        private string _TextTienTra;
+        public string TextTienTra { get => _TextTienTra; set { _TextTienTra = value; OnPropertyChanged(); } }
+
+        private string _TextTienThoi;
+        public string TextTienThoi { get => _TextTienThoi; set { _TextTienThoi = value; OnPropertyChanged(); } }
+
         private decimal _ThanhTienCoGiamGia;
         public decimal ThanhTienCoGiamGia { get => _ThanhTienCoGiamGia; set { _ThanhTienCoGiamGia = value; OnPropertyChanged(); } }
+
+        private string _TextThanhTienCoGiamGia;
+        public string TextThanhTienCoGiamGia { get => _TextThanhTienCoGiamGia; set { _TextThanhTienCoGiamGia = value; OnPropertyChanged(); } }
 
         private float _GiamGia;
         public float GiamGia { get => _GiamGia; set { _GiamGia = value; OnPropertyChanged(); } }
@@ -169,7 +202,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
 
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
-
+            ThanhTien = 0;
+            TienTra = 0;
+            TienThoi = 0;
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
@@ -184,13 +219,22 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             List<string> finame = new List<string>();
-            finame.Add(@"bills/" + IdBill + ".png");
 
+            finame.Add(@"bills/" + IdBill + ".png");
+            finame.Add(@"bills/" + IdBill + ".pdf");
 
             SendBill(finame);
 
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
+        }
+
+        private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
+        {
+            XImage image = XImage.FromFile(finame);
+            gfx.DrawImage(image, x, y, width, height);
+            
+
         }
 
         private void CancelPrintBill(Window p)
@@ -306,6 +350,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void confirmPayment(Window p)
         {
+            if (TienTra < ThanhTienCoGiamGia)
+            {
+                return;
+            }
             var hd = new HOADON() { SOHD = IdBill, NGHD = BillDate, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
             foreach (SanPham sp in ListSelecteditems)
             {
@@ -330,6 +378,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Bitmap bmp = new Bitmap(stream);
             bmp.Save(@"bills/" + IdBill + ".png", ImageFormat.Png);
 
+            string pdffiname = @"bills/" + IdBill + ".png";
+            PrintPDF(pdffiname);
 
             clearField();
             LoadSanPhamData();
@@ -352,16 +402,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //}
 
 
-
-            winBill win = p as winBill;
-            win.Close();
             winPrintBillConfirmation newwin = new winPrintBillConfirmation();
             newwin.Show();
-        }
+            winBill win = p as winBill;
+            win.Close();
 
+        }
+        private void PrintPDF(string finame)
+        {
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "PDF Bill " + IdBill;
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            DrawPDFImage(gfx, finame, 0, 0, (int)page.Width, (int)page.Height);
+            document.Save("bills/" + IdBill + ".pdf");
+        }
         private void clearField()
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
+            ThanhTien = 0;
+            ThanhTienCoGiamGia = 0;
+            GiamGia = 0;
+            TienTra = 0;
+            TienThoi = 0;
+            BillDate = DateTime.Now;
         }
 
         private void LoadSanPhamData()
@@ -464,6 +528,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 sohd = Converter.Instance.RandomString(5);
             }
             IdBill = sohd;
+
+            TextThanhTien = "Tổng cộng: " + ThanhTien.ToString();
+            TextThanhTienCoGiamGia = "Sau khi áp dụng giảm giá: " + ThanhTienCoGiamGia.ToString();
+            TextIdBill = "Mã hoá đơn là: " + IdBill;
+            TextTienTra = "Khách trả: ";
+            TextTienThoi = "Trả lại: " + TienThoi.ToString();
             winBill win = new winBill();
             win.ShowDialog();
         }
