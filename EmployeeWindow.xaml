@@ -1,15 +1,15 @@
-﻿<Window x:Class="SE104_N10_QuanLySieuThi.CustomerWindow"
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.EmployeeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi"
         mc:Ignorable="d"
-        Title="MainWindow"
-        Name="mainWindow"
+        
+        Title="EmployeeWindow"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
@@ -22,11 +22,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        DataContext="{StaticResource MainVMForCustomer}"
-        
-        >
-
-
+        Name="mainWindow"
+        DataContext="{StaticResource MainVM}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCmd}"
@@ -56,20 +53,70 @@
                                 <materialDesign:PackIcon Width="24"
                                                          Height="24"
                                                          HorizontalAlignment="Center"
-                                                         Kind="AccountBoxOutline" />
+                                                         Kind="CartOutline" />
                                 <TextBlock HorizontalAlignment="Center"
-                                           Text="Customer" />
+                                           Text="Product" />
                             </StackPanel>
-
                         </TabItem.Header>
-                        <Frame Content="{Binding pageCustomer}"
+                        <Frame Content="{Binding pageProduct}"
                                Width="1350"
-                               Height="620"
-                               >
+                               Height="620">
 
                         </Frame>
                     </TabItem>
 
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto"
+                                        Height="auto">
+                                <materialDesign:PackIcon Width="24"
+                                                         Height="24"
+                                                         HorizontalAlignment="Center"
+                                                         Kind="AccountCog" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="Setting" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageSetting}"
+                               Width="1350"
+                               Height="620">
+                        </Frame>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto"
+                                        Height="auto">
+                                <materialDesign:PackIcon Width="24"
+                                                         Height="24"
+                                                         HorizontalAlignment="Center"
+                                                         Kind="CurrencyUsd" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="Selling" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageSell}">
+
+                        </Frame>
+                    </TabItem>
+                    <TabItem>
+                        <TabItem.Header>
+                            <StackPanel Width="auto"
+                                        Height="auto">
+                                <materialDesign:PackIcon Width="24"
+                                                         Height="24"
+                                                         HorizontalAlignment="Center"
+                                                         Kind="PackageVariantClosedPlus" />
+                                <TextBlock HorizontalAlignment="Center"
+                                           Text="Import" />
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Frame Content="{Binding pageBuy}"
+                               Width="1350"
+                               Height="620">
+
+                        </Frame>
+                    </TabItem>
                     <TabItem>
                         <TabItem.Header>
                             <StackPanel Width="auto"

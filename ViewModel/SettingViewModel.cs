@@ -133,7 +133,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     IsFeMale = true;
                 }
                 var pass = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == nv.nhanvien.ACC).SingleOrDefault();
-                Password = pass.PASS;
+                Password = Converter.Instance.Base64Decode(Converter.Instance.MD5Decrypt(pass.PASS));
+
             }
 
         }

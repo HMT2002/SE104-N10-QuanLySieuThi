@@ -320,6 +320,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (sanpham.SL < SelectedSelectItem.Amount)
             {
                 MessageBox.Show("đã hết hàng");
+                return;
             }
             SelectedSelectItem.Amount++;
 
@@ -376,9 +377,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Frames.Add(BitmapFrame.Create(bmp0));
             encoder.Save(stream);
             Bitmap bmp = new Bitmap(stream);
-            bmp.Save(@"bills/" + IdBill + ".png", ImageFormat.Png);
 
-            string pdffiname = @"bills/" + IdBill + ".png";
+            string folderName = @"bills/" + IdBill;
+            // If directory does not exist, create it
+            if (!Directory.Exists(folderName))
+            {
+                Directory.CreateDirectory(folderName);
+            }
+
+            bmp.Save(folderName +@"/"+ IdBill + ".png", ImageFormat.Png);
+
+            string pdffiname = @"bills/" + IdBill + @"/" + IdBill + ".png";
             PrintPDF(pdffiname);
 
             clearField();
@@ -415,7 +424,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             PdfPage page = document.AddPage();
             XGraphics gfx = XGraphics.FromPdfPage(page);
             DrawPDFImage(gfx, finame, 0, 0, (int)page.Width, (int)page.Height);
-            document.Save("bills/" + IdBill + ".pdf");
+            document.Save("bills/" + IdBill + @"/" + IdBill + ".pdf");
         }
         private void clearField()
         {
@@ -535,6 +544,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             TextTienTra = "Khách trả: ";
             TextTienThoi = "Trả lại: " + TienThoi.ToString();
             winBill win = new winBill();
+
             win.ShowDialog();
         }
         public void applyDisccount()

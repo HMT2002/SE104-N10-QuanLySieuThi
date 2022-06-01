@@ -182,41 +182,59 @@
 
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <DockPanel VerticalAlignment="Stretch"
-                                                               HorizontalAlignment="Stretch"
-                                                               x:Name="pnlItem"
-                                                               >
-                                                        <Image Source="{Binding Bitimg}"
-                                                               MaxHeight="40"
-                                                               MaxWidth="40"
-                                                               Margin="3 3 3 3"></Image>
-                                                        <TextBlock Text="{Binding  sanpham.TENSP }"
-                                                                   Margin="3 3 3 3"
-                                                                   VerticalAlignment="Center"></TextBlock>
-                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=DecreaseSelectAmmountCmd}"
-                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
-                                                                ToolTip="Thu nhỏ"
-                                                                ToolBar.OverflowMode="AsNeeded"
-                                                                Background="#F0F8FF">
-                                                            <materialDesign:PackIcon Kind="Minus" />
-                                                        </Button>
-                                                        <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                                   Width="30"
-                                                                   FontSize="13"
-                                                                   VerticalAlignment="Center"
-                                                                   HorizontalAlignment="Center"
-                                                                   
-                                                                   >
+                                                    <Grid x:Name="pnlItem">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Grid.Column="0">
+                                                            <Image Source="{Binding Bitimg}"
+                                                                   MaxHeight="40"
+                                                                   MaxWidth="40"
+                                                                   Margin="3 3 3 3"></Image>
 
-                                                        </TextBlock>
-                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=IncreaseSelectAmmountCmd}"
-                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
-                                                                ToolTip="Đóng"
-                                                                ToolBar.OverflowMode="AsNeeded"
-                                                                Background="#FF2800">
-                                                            <materialDesign:PackIcon Kind="Plus" />
-                                                        </Button>
-                                                    </DockPanel>
+                                                        </Grid>
+                                                        <Grid Grid.Column="1">
+                                                            <TextBlock Text="{Binding  sanpham.TENSP }"
+                                                                       Margin="3 3 3 3"
+                                                                       Width="60"
+                                                                       VerticalAlignment="Center"></TextBlock>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="2">
+                                                            <Button Command="{Binding Source={StaticResource SellVM},Path=DecreaseSelectAmmountCmd}"
+                                                                    CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
+                                                                    ToolTip="Thu nhỏ"
+                                                                    ToolBar.OverflowMode="AsNeeded"
+                                                                    Background="#F0F8FF">
+                                                                <materialDesign:PackIcon Kind="Minus" />
+                                                            </Button>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="3">
+                                                            <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                                       Width="30"
+                                                                       FontSize="13"
+                                                                       VerticalAlignment="Center"
+                                                                       HorizontalAlignment="Center">
+
+                                                            </TextBlock>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="4">
+                                                            <Button Command="{Binding Source={StaticResource SellVM},Path=IncreaseSelectAmmountCmd}"
+                                                                    CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
+                                                                    ToolTip="Đóng"
+                                                                    ToolBar.OverflowMode="AsNeeded"
+                                                                    Background="#FF2800">
+                                                                <materialDesign:PackIcon Kind="Plus" />
+                                                            </Button>
+
+                                                        </Grid>
+                                                    </Grid>
                                                 </DataTemplate>
 
                                             </ItemsControl.ItemTemplate>

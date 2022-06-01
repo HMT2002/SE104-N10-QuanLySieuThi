@@ -19,7 +19,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Width="800"
-        Height="550"
+        Height="650"
         DataContext="{StaticResource SellVM}"
         x:Name="BillWin"
         Title="winBill">
@@ -59,15 +59,22 @@
                                     materialDesign:HintAssist.Hint="Ngày bán hàng"
                                     Style="{StaticResource MaterialDesignFilledDatePicker}"
                                     SelectedDate="{Binding BillDate}"
-                                    IsEnabled="True" />
+                                    IsEnabled="True"
+                                    Margin="5" />
 
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" >
 
+                        <ScrollViewer Margin="5"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      MaxHeight="300"
+                                      >
                         <ListView ItemsSource="{Binding ListSelecteditems}"
                                   Width="auto"
                                   Height="auto"
-                                  Padding="5">
+                                  MaxHeight="200"
+                                  >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
@@ -90,6 +97,9 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
+                            
+                        </ScrollViewer>
+
 
 
                     </Grid>
@@ -133,6 +143,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -141,10 +152,12 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
+
                                 <TextBlock Text="{Binding TextThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Left"
                                            Margin="20" />
+
                             </Grid>
                             <Grid Grid.Column="1">
                                 <StackPanel Orientation="Horizontal">
@@ -173,6 +186,12 @@
                             <TextBlock Text="{Binding TextIdBill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
+                                       Margin="20" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBlock Text="{Binding TextThanhTienCoGiamGia,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
                                        Margin="20" />
                         </Grid>
                     </Grid>

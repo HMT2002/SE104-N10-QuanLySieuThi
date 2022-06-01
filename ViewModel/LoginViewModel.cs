@@ -313,9 +313,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     khid = Converter.Instance.RandomString(5);
                 }
-                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0,NGDK=DateTime.Now };
+                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0, NGDK = DateTime.Now };
                 DataProvider.Ins.DB.KHACHHANG.Add(nv);
-                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)),ACC=UserName,PRI=0 };
+                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), ACC = UserName, PRI = 0 };
                 DataProvider.Ins.DB.ACCOUNT.Add(acc);
 
                 DataProvider.Ins.DB.SaveChanges();
@@ -341,11 +341,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
             string pass = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
-            var accCountKhach = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
+            var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
             var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
-            if (accCountKhach!=null)
+            if (accCount.PRI == 0)
             {
                 var user = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == UserName).SingleOrDefault();
+                //MainViewModel._currentUser = "NV001";
+
                 MainViewModelForCustomer._currentUser = user.MAKH;
 
                 CustomerWindow win = new CustomerWindow();
@@ -353,23 +355,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 win.Show();
                 p.Close();
             }
-            else if (accCountNhanVien!=null)
+            else if (accCount.PRI == 1)
             {
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
                 MainViewModel._currentUser = user.MANV;
-                if (accCountNhanVien.PRI == 1)
-                {
-                    MainWindow win = new MainWindow();
-                    win.Show();
-                    p.Close();
-                }
-                else
-                {
-                    MainWindow win = new MainWindow();
-                    win.Show();
-                    p.Close();
-                }
 
+                EmployeeWindow win = new EmployeeWindow();
+                win.Show();
+                p.Close();
+
+            }
+            else if (accCount.PRI == 2)
+            {
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+                MainViewModel._currentUser = user.MANV;
+                MainWindow win = new MainWindow();
+                win.Show();
+                p.Close();
             }
             else
             {
