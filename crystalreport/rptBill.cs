@@ -16,14 +16,14 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class rptHoaDon : ReportClass {
+    public class rptBill : ReportClass {
         
-        public rptHoaDon() {
+        public rptBill() {
         }
         
         public override string ResourceName {
             get {
-                return "rptHoaDon.rpt";
+                return "rptBill.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         public override string FullResourceName {
             get {
-                return "SE104_N10_QuanLySieuThi.crystalreport.rptHoaDon.rpt";
+                return "SE104_N10_QuanLySieuThi.crystalreport.rptBill.rpt";
             }
             set {
                 // Do nothing
@@ -90,9 +90,9 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedrptHoaDon : Component, ICachedReport {
+    public class CachedrptBill : Component, ICachedReport {
         
-        public CachedrptHoaDon() {
+        public CachedrptBill() {
         }
         
         [Browsable(false)]
@@ -129,7 +129,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            rptHoaDon rpt = new rptHoaDon();
+            rptBill rpt = new rptBill();
             rpt.Site = this.Site;
             return rpt;
         }

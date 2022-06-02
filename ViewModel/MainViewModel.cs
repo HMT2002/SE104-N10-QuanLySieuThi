@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    public class MainViewModel:BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
@@ -74,7 +74,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
 
-            
+
         }
 
         void Start(Window p)
@@ -96,27 +96,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 try
                 {
-                loginAcc = loginVM.Acc;
-                var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-                currentUser = nv.MANV;
-                p.Show();
+                    loginAcc = loginVM.Acc;
+                    var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
+                    currentUser = nv.MANV;
+                    p.Show();
                 }
-                catch(Exception ex)
+                catch (Exception e)
                 {
 
                 }
-                //try
-                //{
-                //    loginAcc = loginVM.Acc;
-                //    var nv = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-                //    currentUser = nv.MAKH;
-                //    pageSetting = null;
-                //    p.Show();
-                //}
-                //catch (Exception ex)
-                //{
-
-                //}
             }
             else
             {

@@ -358,7 +358,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 IsLogin = true;
                 p.Close();
             }
-            else if (accCountNhanVien!=null)
+            else 
             {
                 IsLogin = false;
                 MessageBox.Show("Incorrect password or username");
