@@ -148,7 +148,7 @@
                             </materialDesign:Card>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <materialDesign:Card Width="200">
+                            <materialDesign:Card Width="250">
                                 <StackPanel>
                                 <TextBlock Text="Doanh thu so với tháng trước: "
                                            VerticalAlignment="Center"

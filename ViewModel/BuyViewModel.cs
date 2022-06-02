@@ -11,7 +11,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -196,8 +199,62 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             string pdffiname = @"imports/" + ImportID + @"/" + ImportID + ".png";
             PrintPDF(pdffiname);
 
+            List<string> finame = new List<string>();
+
+
+            finame.Add(@"imports/" + ImportID + @"/" + ImportID + ".pdf");
+            finame.Add(@"imports/" + ImportID + @"/" + ImportID + ".png");
             MessageBox.Show("Đã in báo cáo! ");
+
+            //SendReport(finame);
+
         }
+
+
+        private void SendReport(List<string> repos = null)
+        {
+            if (repos == null)
+            {
+                return;
+            }
+            Thread thread = new Thread(() =>
+            {
+                List<Attachment> atts = new List<Attachment>();
+                foreach (string item in repos)
+                {
+                    Attachment att = new Attachment(item);
+                    atts.Add(att);
+                }
+
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
+                string email = user.MAIL;
+                string message = "Import of " + ImportID + " : ";
+                GuiMail("20520850@gm.uit.edu.vn", email, "Import " + ImportID, message, atts);
+
+            });
+            thread.Start();
+            System.Windows.MessageBox.Show("Sent reports!, Please check your email");
+
+        }
+
+        void GuiMail(string from, string to, string sub, string message, List<Attachment> atts = null)
+        {
+            MailMessage mailmess = new MailMessage(from, to, sub, message);
+            int i = 0;
+            foreach (Attachment att in atts)
+            {
+                if (att != null)
+                {
+                    mailmess.Attachments.Add(att);
+                }
+            }
+
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+            client.EnableSsl = true;
+            client.Credentials = new NetworkCredential("se104storemanage@gmail.com", "storepass");
+            client.Send(mailmess);
+        }
+
 
         private void CreateAvatar(Button p)
         {

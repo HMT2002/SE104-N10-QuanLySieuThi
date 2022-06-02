@@ -23,6 +23,7 @@ using System.IO;
 using System.Threading;
 using System.Net.Mail;
 using System.Net;
+using System.Globalization;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -94,6 +95,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private List<string> _SearchType = new List<string>() { "Năm", "Tháng","Ngày" };
 
         public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
+
+        CultureInfo culture;
+        string specifier;
 
         private string _SearchTypeItem;
         public string SearchTypeItem
@@ -367,12 +371,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void loadBoard()
         {
+            specifier = "F";
+            culture = CultureInfo.CreateSpecificCulture("en-CA");
             loadTongDoanhThuThang();
             loadTiLeSoSanh();
         }
 
         private void loadTiLeSoSanh()
         {
+
             var hd = DataProvider.Ins.DB.HOADON;
             foreach (var item in hd)
             {
@@ -383,7 +390,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 int year = time.Year;
                 if (year != DateTime.Now.Year || month != DateTime.Now.Month-1)
                 {
-                    break;
+                    continue;
                 }
                 TongDoanhThuThangTruoc += (decimal)item.TRIGIA;
             }
@@ -391,12 +398,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (TongDoanhThuThangTruoc < TongDoanhThuThang)
             {
                 TiLeSoSanhThangTruoc = (double)(TongDoanhThuThang / (TongDoanhThuThangTruoc + (decimal)0.1));
-                TextTiLeSoSanhThangTruoc = "Tăng " + TiLeSoSanhThangTruoc + @"% so với tháng trước";
+                TextTiLeSoSanhThangTruoc = "Tăng " + TiLeSoSanhThangTruoc.ToString(specifier,culture) + @"% so với tháng trước";
             }
             else if (TongDoanhThuThangTruoc > TongDoanhThuThang)
             {
                 TiLeSoSanhThangTruoc = (double)(TongDoanhThuThangTruoc / (TongDoanhThuThang + (decimal)0.1));
-                TextTiLeSoSanhThangTruoc = "Giảm " + TiLeSoSanhThangTruoc + @"% so với tháng trước";
+                TextTiLeSoSanhThangTruoc = "Giảm " + TiLeSoSanhThangTruoc.ToString(specifier, culture) + @"% so với tháng trước";
             }
             else
             {
@@ -406,6 +413,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void loadTongDoanhThuThang()
         {
+
             var hd = DataProvider.Ins.DB.HOADON;
             foreach (var item in hd)
             {
@@ -416,10 +424,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 int year = time.Year;
                 if (year != DateTime.Now.Year || month != DateTime.Now.Month)
                 {
-                    break;
+                    continue;
                 }
                 TongDoanhThuThang += (decimal)item.TRIGIA;
             }
+
         }
             private void PrintStatistic()
         {
