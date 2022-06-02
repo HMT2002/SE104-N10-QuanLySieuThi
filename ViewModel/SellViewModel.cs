@@ -1,6 +1,8 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using SAPBusinessObjects.WPF.Viewer;
 using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.crystalreport;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -37,6 +39,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedBillCmd { get; set; }
         private WrapPanel _pnlBill = new WrapPanel();
 
+        public ICommand LoadRptCmd { get; set; }
+        public CrystalReportsViewer viewer = new CrystalReportsViewer();
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
 
@@ -202,12 +206,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
 
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
+            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => {return; });
+
+
             ThanhTien = 0;
             TienTra = 0;
             TienThoi = 0;
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
+
             loadListCustomer();
             loadListEmployee();
         }
@@ -223,10 +231,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             finame.Add(@"bills/" + IdBill + ".png");
             finame.Add(@"bills/" + IdBill + ".pdf");
 
-            SendBill(finame);
+            //SendBill(finame);
 
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
+
+
+
+            winBillReport win2 = new winBillReport();
+            win2.Show();
+            CrystalReport1 crys = new CrystalReport1();
+            crys.Load(@"CrystalReport1.rep");
+            viewer.ViewerCore.ReportSource = crys;
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
@@ -413,7 +429,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             encoder.Frames.Add(BitmapFrame.Create(bmp0));
             encoder.Save(stream);
             Bitmap bmp = new Bitmap(stream);
-            string finame = folername+" " + IdBill;
+            string finame = folername + IdBill;
             // If directory does not exist, create it
             if (!Directory.Exists(finame))
             {

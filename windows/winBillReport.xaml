@@ -24,6 +24,14 @@
         Width="800"
         Height="550"
         DataContext="{StaticResource SellVM}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+
+            <i:InvokeCommandAction Command="{Binding LoadRptCmd}"
+                                   CommandParameter="{Binding ElementName=rptBill}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -38,6 +46,7 @@
             <Viewer:CrystalReportsViewer HorizontalAlignment="Left"
                                          Height="auto"
                                          VerticalAlignment="Top"
+                                         Name="rptBill"
                                          Width="790" />
 
         </Grid>
