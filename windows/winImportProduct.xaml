@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        
         Title="winImportProduct"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
@@ -23,11 +22,13 @@
         Width="800"
         Height="550"
         DataContext="{StaticResource BuyVM }"
-        Name="ImportProductWin">
+        Name="ImportProductWin"
+        
+        >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
 
-            <i:InvokeCommandAction Command="{Binding LoadAvaterCmd}"
+            <i:InvokeCommandAction Command="{Binding LoadAvatarCmd}"
                                    CommandParameter="{Binding ElementName=bntPickImage}" />
 
         </i:EventTrigger>
@@ -46,103 +47,122 @@
                                      VerticalAlignment="Stretch"
                                      Height="auto">
                     <Grid>
-                        <Grid.Resources>
-                            <Style TargetType="Grid">
-                                <Setter Property="Margin"
-                                        Value="5 5 5 5"></Setter>
-                            </Style>
-                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition />
-                            <RowDefinition />
-                            <RowDefinition />
+                            <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="Mã nhập hàng"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Text="{Binding ImportID}" />
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Mặt hàng"
-                                          ItemsSource="{Binding ListProduct,Mode=TwoWay}"
-                                          materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
-                                          Height="50"
-                                          SelectedItem="{Binding SeletedProduct,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Ngày nhập hàng"
-                                            Style="{StaticResource MaterialDesignFilledDatePicker}"
-                                            SelectedDate="{Binding ImportDate}"
-                                            IsEnabled="False" />
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
+                            <WrapPanel Background="AliceBlue">
+                                <Grid>
+                                    <Grid.Resources>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Margin"
+                                                    Value="5 5 5 5"></Setter>
+                                        </Style>
+                                    </Grid.Resources>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <TextBox materialDesign:HintAssist.Hint="Mã nhập hàng"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                     VerticalAlignment="Center"
+                                                     Width="200"
+                                                     Text="{Binding ImportID}"
+                                                     IsEnabled="False"
+                                                     Margin="10" />
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                      materialDesign:HintAssist.Hint="Mặt hàng"
+                                                      ItemsSource="{Binding ListProduct,Mode=TwoWay}"
+                                                      materialDesign:TextFieldAssist.HasClearButton="True"
+                                                      Width="230"
+                                                      Height="50"
+                                                      Margin="10"
+                                                      SelectedItem="{Binding SeletedProduct,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                        </Grid>
+                                        <Grid Grid.Column="2">
+                                            <DatePicker Width="200"
+                                                        materialDesign:HintAssist.Hint="Ngày nhập hàng"
+                                                        Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                                        SelectedDate="{Binding ImportDate}"
+                                                        Margin="10" />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Giá"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding Price}"
-                                         IsReadOnly="True"
-                                         IsEnabled="False"
-                                         />
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Số  lượng tồn kho"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding Ammount}"
-                                         IsReadOnly="True"
-                                         IsEnabled="False" 
-                                         />
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Số  lượng nhập vào"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding AmmountImport}"
-                                         />
-                            </Grid>
-                            <Grid Grid.Column="3">
-                                <TextBox materialDesign:HintAssist.Hint="Tổng giá trị"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding SummaryImport}"
-                                         />
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_THÊM"
-                                    VerticalAlignment="Bottom"
-                                    HorizontalAlignment="Right"
-                                    Margin="10"
-                                    Width="100"
-                                    Command="{Binding ImportProductCmd}"
-                                    CommandParameter="{Binding ElementName=ImportProductWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                            <TextBox materialDesign:HintAssist.Hint="Giá"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Price}"
+                                                     IsReadOnly="True"
+                                                     IsEnabled="False"
+                                                     Margin="10" />
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <TextBox materialDesign:HintAssist.Hint="Số  lượng tồn kho"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding Ammount}"
+                                                     IsReadOnly="True"
+                                                     IsEnabled="False" 
+                                                     Margin="10"
+                                                     />
+                                        </Grid>
+                                        <Grid Grid.Column="2">
+                                            <TextBox materialDesign:HintAssist.Hint="Số  lượng nhập vào"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding AmmountImport}"
+                                                     Margin="10" />
+                                        </Grid>
+                                        <Grid Grid.Column="3">
+                                            <TextBox materialDesign:HintAssist.Hint="Trị giá đơn nhập"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                     VerticalAlignment="Center"
+                                                     Text="{Binding SummaryImport}"
+                                                     Margin="10" />
+                                        </Grid>
+                                    </Grid>
 
+                                    <Grid Grid.Row="2">
+                                        <Button x:Name="bntPickImage"
+                                                Height="200"
+                                                Width="200"
+                                                Background="AliceBlue" />
+                                    </Grid>
+                                </Grid>
+
+                            </WrapPanel>
+                            <Grid Grid.Row="1">
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                        Content="_THÊM"
+                                        VerticalAlignment="Bottom"
+                                        HorizontalAlignment="Right"
+                                        Margin="10"
+                                        Width="100"
+                                        Command="{Binding ImportProductCmd}"
+                                        CommandParameter="{Binding ElementName=ImportProductWin}"
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
+                            </Grid>
                         </Grid>
                     </Grid>
 

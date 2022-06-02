@@ -245,6 +245,9 @@
     <Compile Include="windows\winCustomerDetail.xaml.cs">
       <DependentUpon>winCustomerDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="windows\winImportDetail.xaml.cs">
+      <DependentUpon>winImportDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="windows\winImportProduct.xaml.cs">
       <DependentUpon>winImportProduct.xaml</DependentUpon>
     </Compile>
@@ -379,6 +382,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="windows\winCustomerDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="windows\winImportDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -369,23 +369,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Khachhang.khachhang.DOANHSO += ThanhTienCoGiamGia;
             DataProvider.Ins.DB.SaveChanges();
 
+            string folername = @"bills/";
+            drawBillBitMap(folername);
 
-            RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlBill.ActualWidth, (int)_pnlBill.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            bmp0.Render(_pnlBill);
-            MemoryStream stream = new MemoryStream();
-            BitmapEncoder encoder = new BmpBitmapEncoder();
-            encoder.Frames.Add(BitmapFrame.Create(bmp0));
-            encoder.Save(stream);
-            Bitmap bmp = new Bitmap(stream);
-
-            string folderName = @"bills/" + IdBill;
-            // If directory does not exist, create it
-            if (!Directory.Exists(folderName))
-            {
-                Directory.CreateDirectory(folderName);
-            }
-
-            bmp.Save(folderName +@"/"+ IdBill + ".png", ImageFormat.Png);
 
             string pdffiname = @"bills/" + IdBill + @"/" + IdBill + ".png";
             PrintPDF(pdffiname);
@@ -417,6 +403,26 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             win.Close();
 
         }
+
+        public void drawBillBitMap(string folername)
+        {
+            RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlBill.ActualWidth, (int)_pnlBill.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+            bmp0.Render(_pnlBill);
+            MemoryStream stream = new MemoryStream();
+            BitmapEncoder encoder = new BmpBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(bmp0));
+            encoder.Save(stream);
+            Bitmap bmp = new Bitmap(stream);
+            string finame = folername+" " + IdBill;
+            // If directory does not exist, create it
+            if (!Directory.Exists(finame))
+            {
+                Directory.CreateDirectory(finame);
+            }
+            bmp.Save(finame + @"/" + IdBill + ".png", ImageFormat.Png);
+        }
+
+
         private void PrintPDF(string finame)
         {
             PdfDocument document = new PdfDocument();

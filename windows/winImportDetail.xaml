@@ -1,0 +1,182 @@
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winImportDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
+        mc:Ignorable="d"
+        Title="winImportDetail"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Width="800"
+        Height="550"
+        DataContext="{StaticResource BuyVM }"
+        Name="ImportDetailWin">
+    <Grid>
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+
+                <i:InvokeCommandAction Command="{Binding LoadAvatarCmd}"
+                                       CommandParameter="{Binding ElementName=bntPickImage}" />
+
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ucControlBar></uc:ucControlBar>
+        </Grid>
+        <Grid Grid.Row="1">
+            <materialDesign:Card Margin="20"
+                                 VerticalAlignment="Stretch"
+                                 Height="auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <WrapPanel Background="AliceBlue"
+                                   Name="pnlImport">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Loaded">
+                                    <i:InvokeCommandAction Command="{Binding LoadedImportCmd}"
+                                                           CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type WrapPanel}}}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Margin"
+                                                Value="5 5 5 5"></Setter>
+                                    </Style>
+                                </Grid.Resources>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <TextBox materialDesign:HintAssist.Hint="Mã nhập hàng"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 VerticalAlignment="Center"
+                                                 Width="200"
+                                                 Text="{Binding ImportID}"
+                                                 IsEnabled="False"
+                                                 Margin="10" />
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Mặt hàng"
+                                                  ItemsSource="{Binding ListProduct,Mode=TwoWay}"
+                                                  materialDesign:TextFieldAssist.HasClearButton="True"
+                                                  Width="230"
+                                                  Height="50"
+                                                  Margin="10"
+                                                  IsEnabled="False"
+                                                  SelectedItem="{Binding SeletedProduct,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <DatePicker Width="200"
+                                                    materialDesign:HintAssist.Hint="Ngày nhập hàng"
+                                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                                    SelectedDate="{Binding ImportDate}"
+                                                    IsEnabled="False"
+                                                    Margin="10" />
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+
+                                        <TextBox materialDesign:HintAssist.Hint="Giá"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Price}"
+                                                 IsReadOnly="True"
+                                                 IsEnabled="False"
+                                                 Margin="10" />
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <TextBox materialDesign:HintAssist.Hint="Số  lượng tồn kho"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding Ammount}"
+                                                 IsReadOnly="True"
+                                                 IsEnabled="False"
+                                                 Margin="10" />
+                                    </Grid>
+                                    <Grid Grid.Column="2">
+                                        <TextBox materialDesign:HintAssist.Hint="Số  lượng nhập vào"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 VerticalAlignment="Center"
+                                                 IsEnabled="False"
+                                                 Text="{Binding AmmountImport}"
+                                                 Margin="10" />
+                                    </Grid>
+                                    <Grid Grid.Column="3">
+                                        <TextBox materialDesign:HintAssist.Hint="Trị giá đơn nhập"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 VerticalAlignment="Center"
+                                                 Text="{Binding SummaryImport}"
+                                                 IsEnabled="False"
+                                                 Margin="10" />
+                                    </Grid>
+                                </Grid>
+
+                                <Grid Grid.Row="2">
+                                    <Button x:Name="bntPickImage"
+                                            Height="200"
+                                            Width="200"
+                                            Background="AliceBlue" />
+                                </Grid>
+                            </Grid>
+
+                        </WrapPanel>
+                        <Grid Grid.Row="1">
+                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                    Content="_IN BÁO CÁO"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Right"
+                                    Margin="10"
+                                    Width="150"
+                                    Command="{Binding ReportImportCmd}"
+                                    CommandParameter="{Binding ElementName=ImportProductWin}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+
+
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+            </materialDesign:Card>
+
+        </Grid>
+    </Grid>
+</Window>
