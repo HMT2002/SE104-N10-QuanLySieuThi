@@ -74,7 +74,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private Account acc;
         public Account Acc { get => acc; set => acc = value; }
 
-        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
+        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-542L238N\SQLEXPRESS;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
         private Random random = new Random();
 

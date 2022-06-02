@@ -88,7 +88,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
         private BitmapImage bitimg = new BitmapImage();
 
-        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
+        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-542L238N\SQLEXPRESS;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
 
         private ObservableCollection<NhanVien> _NhanVienList;

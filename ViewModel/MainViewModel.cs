@@ -14,7 +14,7 @@ using System.Windows.Input;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    public class MainViewModel:BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
