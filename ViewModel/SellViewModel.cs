@@ -240,8 +240,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             winBillReport win2 = new winBillReport();
             win2.Show();
-            CrystalReport1 crys = new CrystalReport1();
-            crys.Load(@"CrystalReport1.rep");
+            rptBill crys = new rptBill();
+            crys.Load(@"rptBill.rep");
             viewer.ViewerCore.ReportSource = crys;
         }
 
