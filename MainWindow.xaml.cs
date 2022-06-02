@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.pages;
+using SE104_N10_QuanLySieuThi.windows;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -27,12 +28,11 @@ namespace SE104_N10_QuanLySieuThi
     /// </summary>
     public partial class MainWindow : Window
     {
-        public SqlConnection ketnoi = new SqlConnection(@"Data Source=.;Initial Catalog=QuanLySieuThi;Integrated Security=True");
-        public SqlCommand command;
 
         public MainWindow()
         {
             InitializeComponent();
         }
+
     }
 }

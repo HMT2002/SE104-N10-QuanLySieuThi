@@ -1,4 +1,6 @@
-﻿using SE104_N10_QuanLySieuThi.classes;
+﻿using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using SE104_N10_QuanLySieuThi.classes;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -40,8 +42,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     if (ncc != null)
                     {
                         curProduct = ncc;
-                        ProductName = curProduct.TENSP;
                         ProductID = curProduct.MASP;
+                        ProductName = curProduct.TENSP;
                         Ammount = (int)curProduct.SL;
                         Price = (decimal)curProduct.GIA;
                         
@@ -56,12 +58,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _Ammount; set
             {
                 _Ammount = value;
-                Summary = value * Price;
                 OnPropertyChanged();
             }
         }
-        private decimal _Summary;
-        public decimal Summary { get => _Summary; set { _Summary = value; OnPropertyChanged(); } }
         private decimal _SummaryImport;
         public decimal SummaryImport { get => _SummaryImport; set { _SummaryImport = value; OnPropertyChanged(); } }
         private int _AmmountImport;
@@ -80,7 +79,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             get => _Price; set
             {
                 _Price = value;
-                Summary = Ammount * value;
                 OnPropertyChanged();
             }
         }
@@ -88,12 +86,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand ImportProductCmd { get; set; }
 
 
-
         public ImportProductViewModel()
         {
             ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(); });
             ImportID = Converter.Instance.RandomString(5);
             ImportDate = DateTime.Now;
+            Price = 0;
+            AmmountImport = 0;
             LoadProductList();
         }
 
@@ -105,16 +104,38 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP,MANV = MainViewModel._currentUser,NGNH=ImportDate,SLNHAPHANG=AmmountImport };
             DataProvider.Ins.DB.NHAPHANG.Add(nv);
+
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductID).SingleOrDefault();
             if (sp.SL == null)
             {
                 sp.SL = 0;
             }
-            sp.SL = sp.SL + AmmountImport;
+            sp.SL +=AmmountImport;
             DataProvider.Ins.DB.SaveChanges();
+
+
+
             NewImport();
+            LoadProductList();
         }
 
+        private void PrintPDF(string finame)
+        {
+            PdfDocument document = new PdfDocument();
+            document.Info.Title = "PDF Bill " + ImportID;
+            PdfPage page = document.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            DrawPDFImage(gfx, finame, 0, 0, (int)page.Width, (int)page.Height);
+            document.Save("imports/" + ImportID + @"/" + ImportID + ".pdf");
+        }
+
+        private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
+        {
+            XImage image = XImage.FromFile(finame);
+            gfx.DrawImage(image, x, y, width, height);
+
+
+        }
         private void NewImport()
         {
             SeletedProduct = null;
@@ -125,8 +146,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void LoadProductList()
         {
+            ListProduct = new List<string>();
             var supplierList = DataProvider.Ins.DB.SANPHAM;
-            int i = 1;
             foreach (var item in supplierList)
             {
                 ListProduct.Add(item.TENSP);

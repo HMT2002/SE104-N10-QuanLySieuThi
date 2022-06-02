@@ -26,6 +26,9 @@ insert into KHACHHANG(MAKH,HOTEN,SODT,NGSINH,NGDK,DOANHSO)values('KH004','Lý V�
 
 select * from KHACHHANG
 
+
+update KHACHHANG set NGDK='2022-05-13 00:00:00'
+
 CREATE TABLE NHANVIEN
 (
  MANV varchar(10),
@@ -52,7 +55,6 @@ alter table NHACUNGCAP add GHICHU nvarchar(250)
 
 select * from NHANVIEN
 delete from NHANVIEN where MANV='45'
-update NHANVIEN where MANV='NV001' 
 
 CREATE TABLE NHACUNGCAP(
 MACC varchar(10),
@@ -62,11 +64,6 @@ XUATXU nvarchar(40),
 primary key(MACC)
 )
 select * from NHACUNGCAP
-
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC001','Coca Corp','09999999','Mỹ')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC002','Nestle Corp','09999998','Anh')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC003','Amazon Corp','09999997','Canada')
-insert into NHACUNGCAP(MACC,TEN,SODT,XUATXU)values('CC004','Tribeco Corp','09999996','Thái')
 
 CREATE TABLE SANPHAM(
 MASP varchar(10),
@@ -78,9 +75,18 @@ constraint LK_CUNGCAP foreign key(MACC) references NHACUNGCAP(MACC),
 GIA money,
 SL int,
 PICBI varbinary(MAX),
+NGDK smalldatetime,
+LOAI nvarchar(20),
+
 primary key(MASP)
 )
+
+alter table SANPHAM add LOAI nvarchar(20)
+update SANPHAM set LOAI='Khác'
 select * from SANPHAM
+
+alter table SANPHAM add NGDK smalldatetime
+
 
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP001','Coca cola','chai','CC001',10000,100)
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP002','Lays','chai','CC002',15000,40)
@@ -92,6 +98,10 @@ insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP006','7up','chai','CC00
 
 insert into SANPHAM(MASP,TENSP,DVT,MACC,GIA,SL)values('SP007','Sting','chai','CC004',7000,50)
 
+
+select* from SANPHAM
+
+
 delete from SANPHAM
 
 CREATE TABLE HOADON(
@@ -102,8 +112,12 @@ constraint LK_KHACHHANG foreign key(MAKH) references KHACHHANG(MAKH),
 MANV varchar(10),
 constraint LK_NHANVIEN foreign key(MANV) references NHANVIEN(MANV),
 TRIGIA money,
+GIAMGIA float,
 primary key(SOHD)
 )
+
+select * from HOADON
+
 
 CREATE TABLE CTHD(
 SOHD varchar(10),
@@ -111,10 +125,15 @@ constraint LK_HOADON foreign key(SOHD) references HOADON(SOHD),
 MASP varchar(10),
 constraint LK_SANPHAM foreign key(MASP) references SANPHAM(MASP),
 SL int,
-primary key(SOHD)
+primary key(SOHD,MASP)
 )
-drop table CTHD 
-select * from CTHD where SOHD=''
+
+select * from CTHD 
+
+
+delete from CTHD
+
+
 
 drop table CTHD
 CREATE TABLE ACCOUNT(
@@ -134,6 +153,7 @@ constraint LK_NHAPHANG_SANPHAM foreign key(MASP) references SANPHAM(MASP),
 
 SLNHAPHANG int,
 NGNH smalldatetime,
+TRIGIA money,
 primary key (MANH)
 )
 select * from NHAPHANG
@@ -150,7 +170,9 @@ insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
 
+select * from KHACHHANG
 select * from ACCOUNT 
-delete from ACCOUNT where ACC='tuee'
+update ACCOUNT set PRI=0 where ACC='toof'
+delete from ACCOUNT where ACC!='tue'
 alter table ACCOUNT alter column PASS nvarchar(MAX)
 select * from KHACHHANG

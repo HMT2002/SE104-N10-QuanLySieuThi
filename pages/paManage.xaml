@@ -20,6 +20,8 @@
                                    CommandParameter="{Binding ElementName=ProductPage}" />
             <i:InvokeCommandAction Command="{Binding LoadAvaterCmd}"
                                    CommandParameter="{Binding ElementName=bntPickImage}" />
+            <i:InvokeCommandAction Command="{Binding LoadedStateCmd}"
+                                   CommandParameter="{Binding ElementName=txtLuong}" />
 
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -55,7 +57,9 @@
                         <TextBox materialDesign:HintAssist.Hint="Mã nhân viên"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
-                                 Text="{Binding Id}" />
+                                 Text="{Binding Id}"
+                                 IsReadOnly="True"
+                                 />
                     </Grid>
                     <Grid Grid.Row="1">
                         <TextBox materialDesign:HintAssist.Hint="Mail"
@@ -85,6 +89,7 @@
                     </Grid>
                     <Grid Grid.Row="4">
                         <TextBox materialDesign:HintAssist.Hint="Lương"
+                                 Name="txtLuong"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  VerticalAlignment="Center"
                                  Text="{Binding Salary}"
@@ -169,8 +174,11 @@
                                 Height="auto"
                                 Width="auto"
                                 Content="{Binding imgAvatar}"
-                                Background="AliceBlue"
                                 Margin="5">
+                            <Button.Background>
+                                <ImageBrush ImageSource="photo_photography_image_picture_add-128.png"
+                                            Stretch="Uniform" />
+                            </Button.Background>
                         </Button>
 
                     </Grid>
@@ -210,7 +218,7 @@
                             <Grid Grid.Column="0">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_Mới"
+                                        Content="_MỚI"
                                         Command="{Binding NewEmployeeCmd}"
                                         CommandParameter="{Binding ElementName=stackpnItem}"
                                         IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />

@@ -18,6 +18,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
     {
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
+        public ICommand LogoutWindowCmd { get; set; }
+
         public Account LoginAcc { get => loginAcc; set => loginAcc = value; }
 
         public Account loginAcc;
@@ -41,6 +43,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
         public Page pageHome { get; set; }
+
+        public Page pageLogout { get; set; }
 
         public ICommand ChangeTab { get; set; }
 
@@ -71,45 +75,55 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             pageStatic = new paStatic();
 
+            pageLogout = new paLogout();
+
 
             LoadedWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Start(p); });
 
+            LogoutWindowCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { Logout(p); });
 
+        }
+
+        private void Logout(Window p)
+        {
+            winLogin win = new winLogin();
+            win.ShowDialog();
+            p.Close();
         }
 
         void Start(Window p)
         {
-            IsLoad = true;
-            if (p == null)
-            {
-                return;
-            }
+            //IsLoad = true;
+            //if (p == null)
+            //{
+            //    return;
+            //}
 
-            p.Hide();
-            winLogin loginWindow = new winLogin();
-            loginWindow.ShowDialog();
-            if (loginWindow.DataContext == null)
-                return;
-            var loginVM = loginWindow.DataContext as LoginViewModel;
+            //p.Hide();
+            //winLogin loginWindow = new winLogin();
+            //loginWindow.ShowDialog();
+            //if (loginWindow.DataContext == null)
+            //    return;
+            //var loginVM = loginWindow.DataContext as LoginViewModel;
 
-            if (loginVM.IsLogin)
-            {
-                try
-                {
-                    loginAcc = loginVM.Acc;
-                    var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-                    currentUser = nv.MANV;
-                    p.Show();
-                }
-                catch (Exception e)
-                {
+            //if (loginVM.IsLogin)
+            //{
+            //    try
+            //    {
+            //    loginAcc = loginVM.Acc;
+            //    var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
+            //    currentUser = nv.MANV;
+            //    p.Show();
+            //    }
+            //    catch(Exception ex)
+            //    {
 
-                }
-            }
-            else
-            {
-                p.Close();
-            }
+            //    }
+            //}
+            //else
+            //{
+            //    p.Close();
+            //}
         }
     }
 }

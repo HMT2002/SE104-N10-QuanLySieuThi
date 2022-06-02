@@ -151,20 +151,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-            if (MD5Encrypt(Base64Encode(Password)).CompareTo(MD5Encrypt(Base64Encode(RePassword))) == 0)
-            {
-                Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
-            }
-            if (Acc.RegistCustomer() == true)
-            {
-                winRegistInformation win = new winRegistInformation();
-                win.ShowDialog();
-                p.Close();
-            }
-            else
-            {
-                return;
-            }
+            winRegistInformation win = new winRegistInformation();
+            win.ShowDialog();
+            p.Close();
 
         }
 
@@ -233,8 +222,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
 
-            client.Credentials = new NetworkCredential("20520850@gm.uit.edu.vn", "tue6tri123");
-
+            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
             client.Send(mailmess);
         }
 
@@ -325,8 +313,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     khid = Converter.Instance.RandomString(5);
                 }
-                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0,NGDK=DateTime.Now };
+                var nv = new KHACHHANG() { HOTEN = Name, MAKH = khid, SODT = Phone, MAIL = MailAdress, PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg), GENDER = Gender, NGSINH = Birthday, ACC = UserName, DOANHSO = 0, NGDK = DateTime.Now };
                 DataProvider.Ins.DB.KHACHHANG.Add(nv);
+                var acc = new ACCOUNT() { PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), ACC = UserName, PRI = 0 };
+                DataProvider.Ins.DB.ACCOUNT.Add(acc);
+
                 DataProvider.Ins.DB.SaveChanges();
 
             }
@@ -348,78 +339,47 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            Acc = new Account(UserName, MD5Encrypt(Base64Encode(Password)));
-
-            var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == Password).Count();
-
-
-            if (accCount > 0)
+            Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
+            string pass = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
+            var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
+            var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
+            if (accCount.PRI == 0)
             {
-                IsLogin = true;
+                var user = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == UserName).SingleOrDefault();
+                //MainViewModel._currentUser = "NV001";
+
+                MainViewModelForCustomer._currentUser = user.MAKH;
+
+                CustomerWindow win = new CustomerWindow();
+
+                win.Show();
                 p.Close();
             }
-            else 
+            else if (accCount.PRI == 1)
+            {
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+                MainViewModel._currentUser = user.MANV;
+
+                EmployeeWindow win = new EmployeeWindow();
+                win.Show();
+                p.Close();
+
+            }
+            else if (accCount.PRI == 2)
+            {
+                var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == UserName).SingleOrDefault();
+                MainViewModel._currentUser = user.MANV;
+                MainWindow win = new MainWindow();
+                win.Show();
+                p.Close();
+            }
+            else
             {
                 IsLogin = false;
                 MessageBox.Show("Incorrect password or username");
             }
         }
 
-        public static string Base64Encode(string plainText)
-        {
-            string res = "";
-            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
-            res = System.Convert.ToBase64String(plainTextBytes);
-            return res;
-        }
-        public static string Base64Decode(string base64Text)
-        {
-            string res = "";
-            var data = Convert.FromBase64String(base64Text);
-            res = Encoding.UTF8.GetString(data);
-            return res;
-        }
-        static string key { get; set; } = "eFh4VHVlRGVwVHJhxXxTueDepTraiVjpProxXxaVZqcFByb3hYeA==";
-
-        public static string MD5Encrypt(string text)
-        {
-            using (var md5 = new MD5CryptoServiceProvider())
-            {
-                using (var tdes = new TripleDESCryptoServiceProvider())
-                {
-                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-                    tdes.Mode = CipherMode.ECB;
-                    tdes.Padding = PaddingMode.PKCS7;
-
-                    using (var transform = tdes.CreateEncryptor())
-                    {
-                        byte[] textBytes = UTF8Encoding.UTF8.GetBytes(text);
-                        byte[] bytes = transform.TransformFinalBlock(textBytes, 0, textBytes.Length);
-                        return Convert.ToBase64String(bytes, 0, bytes.Length);
-                    }
-                }
-            }
-        }
-
-        public static string MD5Decrypt(string cipher)
-        {
-            using (var md5 = new MD5CryptoServiceProvider())
-            {
-                using (var tdes = new TripleDESCryptoServiceProvider())
-                {
-                    tdes.Key = md5.ComputeHash(UTF8Encoding.UTF8.GetBytes(key));
-                    tdes.Mode = CipherMode.ECB;
-                    tdes.Padding = PaddingMode.PKCS7;
-
-                    using (var transform = tdes.CreateDecryptor())
-                    {
-                        byte[] cipherBytes = Convert.FromBase64String(cipher);
-                        byte[] bytes = transform.TransformFinalBlock(cipherBytes, 0, cipherBytes.Length);
-                        return UTF8Encoding.UTF8.GetString(bytes);
-                    }
-                }
-            }
-        }
     }
 
 }

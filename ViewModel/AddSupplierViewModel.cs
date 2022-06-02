@@ -33,10 +33,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public AddSupplierViewModel()
         {
-            AddSupplierCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddSupplier(); });
+            AddSupplierCmd = new RelayCommand<object>((p) => { return true; }, (p) => { AddSupplier(p); });
             NewSupplier();
         }
-        private void AddSupplier()
+        private void AddSupplier(object p)
         {
             if (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SuppliertName).Count() > 0)
             {
@@ -46,8 +46,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var nv = new NHACUNGCAP() { GHICHU = Note, MACC = SuppliertId, TEN = SuppliertName, SODT = Phone, XUATXU = Origin };
             DataProvider.Ins.DB.NHACUNGCAP.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
-            LoadTonKhoData();
             NewSupplier();
+            Complete(p);
+
         }
 
         private void NewSupplier()
@@ -62,9 +63,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SuppliertName = "";
             Note = "";
         }
-        private void LoadTonKhoData()
+        private void Complete(object p)
         {
-
+            Window win = p as Window;
+            win.Close();
         }
     }
 }

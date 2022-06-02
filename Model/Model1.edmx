@@ -16,9 +16,10 @@
         <EntityType Name="CTHD">
           <Key>
             <PropertyRef Name="SOHD" />
+            <PropertyRef Name="MASP" />
           </Key>
           <Property Name="SOHD" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="MASP" Type="varchar" MaxLength="10" />
+          <Property Name="MASP" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="SL" Type="int" />
         </EntityType>
         <EntityType Name="HOADON">
@@ -30,6 +31,7 @@
           <Property Name="MAKH" Type="varchar" MaxLength="10" />
           <Property Name="MANV" Type="varchar" MaxLength="10" />
           <Property Name="TRIGIA" Type="money" />
+          <Property Name="GIAMGIA" Type="float" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -84,6 +86,7 @@
           <Property Name="MASP" Type="varchar" MaxLength="10" />
           <Property Name="SLNHAPHANG" Type="int" />
           <Property Name="NGNH" Type="smalldatetime" />
+          <Property Name="TRIGIA" Type="money" />
         </EntityType>
         <EntityType Name="SANPHAM">
           <Key>
@@ -97,6 +100,8 @@
           <Property Name="SL" Type="int" />
           <Property Name="PICBI" Type="varbinary(max)" />
           <Property Name="GHICHU" Type="nvarchar" MaxLength="250" />
+          <Property Name="NGDK" Type="smalldatetime" />
+          <Property Name="LOAI" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <Association Name="LK_CUNGCAP">
           <End Role="NHACUNGCAP" Type="Self.NHACUNGCAP" Multiplicity="0..1" />
@@ -112,7 +117,7 @@
         </Association>
         <Association Name="LK_HOADON">
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
-          <End Role="CTHD" Type="Self.CTHD" Multiplicity="0..1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HOADON">
               <PropertyRef Name="SOHD" />
@@ -171,7 +176,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="LK_SANPHAM">
-          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
           <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SANPHAM">
@@ -236,9 +241,10 @@
         <EntityType Name="CTHD">
           <Key>
             <PropertyRef Name="SOHD" />
+            <PropertyRef Name="MASP" />
           </Key>
           <Property Name="SOHD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="SL" Type="Int32" />
           <NavigationProperty Name="HOADON" Relationship="Self.LK_HOADON" FromRole="CTHD" ToRole="HOADON" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.LK_SANPHAM" FromRole="CTHD" ToRole="SANPHAM" />
@@ -252,6 +258,7 @@
           <Property Name="MAKH" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="MANV" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GIAMGIA" Type="Double" />
           <NavigationProperty Name="CTHD" Relationship="Self.LK_HOADON" FromRole="HOADON" ToRole="CTHD" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.LK_KHACHHANG" FromRole="HOADON" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHANVIEN" FromRole="HOADON" ToRole="NHANVIEN" />
@@ -313,6 +320,7 @@
           <Property Name="MASP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="SLNHAPHANG" Type="Int32" />
           <Property Name="NGNH" Type="DateTime" Precision="0" />
+          <Property Name="TRIGIA" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.LK_NHAPHANG_NHANVIEN" FromRole="NHAPHANG" ToRole="NHANVIEN" />
           <NavigationProperty Name="SANPHAM" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="NHAPHANG" ToRole="SANPHAM" />
         </EntityType>
@@ -328,13 +336,15 @@
           <Property Name="SL" Type="Int32" />
           <Property Name="PICBI" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="GHICHU" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NGDK" Type="DateTime" Precision="0" />
+          <Property Name="LOAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CTHD" Relationship="Self.LK_SANPHAM" FromRole="SANPHAM" ToRole="CTHD" />
           <NavigationProperty Name="NHACUNGCAP" Relationship="Self.LK_CUNGCAP" FromRole="SANPHAM" ToRole="NHACUNGCAP" />
           <NavigationProperty Name="NHAPHANG" Relationship="Self.LK_NHAPHANG_SANPHAM" FromRole="SANPHAM" ToRole="NHAPHANG" />
         </EntityType>
         <Association Name="LK_HOADON">
           <End Role="HOADON" Type="Self.HOADON" Multiplicity="1" />
-          <End Role="CTHD" Type="Self.CTHD" Multiplicity="0..1" />
+          <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="HOADON">
               <PropertyRef Name="SOHD" />
@@ -345,7 +355,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="LK_SANPHAM">
-          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="0..1" />
+          <End Role="SANPHAM" Type="Self.SANPHAM" Multiplicity="1" />
           <End Role="CTHD" Type="Self.CTHD" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SANPHAM">
@@ -486,6 +496,7 @@
                 <ScalarProperty Name="MAKH" ColumnName="MAKH" />
                 <ScalarProperty Name="MANV" ColumnName="MANV" />
                 <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
+                <ScalarProperty Name="GIAMGIA" ColumnName="GIAMGIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -544,6 +555,7 @@
                 <ScalarProperty Name="MASP" ColumnName="MASP" />
                 <ScalarProperty Name="SLNHAPHANG" ColumnName="SLNHAPHANG" />
                 <ScalarProperty Name="NGNH" ColumnName="NGNH" />
+                <ScalarProperty Name="TRIGIA" ColumnName="TRIGIA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -558,6 +570,8 @@
                 <ScalarProperty Name="SL" ColumnName="SL" />
                 <ScalarProperty Name="PICBI" ColumnName="PICBI" />
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="NGDK" ColumnName="NGDK" />
+                <ScalarProperty Name="LOAI" ColumnName="LOAI" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,6 +19,7 @@ namespace SE104_N10_QuanLySieuThi.Model
         public string MASP { get; set; }
         public Nullable<int> SLNHAPHANG { get; set; }
         public Nullable<System.DateTime> NGNH { get; set; }
+        public Nullable<decimal> TRIGIA { get; set; }
     
         public virtual NHANVIEN NHANVIEN { get; set; }
         public virtual SANPHAM SANPHAM { get; set; }

@@ -5,65 +5,212 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Width="800"
-        Height="550"
-        
-        DataContext="{StaticResource ProductVM}"
+        Height="650"
+        DataContext="{StaticResource SellVM}"
         x:Name="BillWin"
         Title="winBill">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
+            <uc:ucControlBar Tag="{Binding Title,ElementName=BillWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView
-ItemsSource="{Binding listSelecteditems}">
-  <ListView.View>
-    <GridView>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding Stt}"
-        Header="Stt" />
-      <GridViewColumn
-        DisplayMemberBinding="{Binding MaSP}"
-        Header="Mã sản phẩm"
-        Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding TenSP}"
-        Header="Tên hàng"
-        Width="150"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding SoLuongSP}"
-        Header="Số lượng"
-        Width="120"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding DonGia}"
-        Header="Đơn giá"
-        Width="110"/>
-      <GridViewColumn
-        DisplayMemberBinding="{Binding ThanhTien}"
-        Header="Thành tiền"
-        Width="150"/>
-    </GridView>
-  </ListView.View>
-</ListView>
+            <WrapPanel Background="AliceBlue"
+                       Name="pnlBill">
+                <!--Đừng sửa cái Name-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding LoadedBillCmd}"
+                                               CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type WrapPanel}}}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <DatePicker Width="auto"
+                                    materialDesign:HintAssist.Hint="Ngày bán hàng"
+                                    Style="{StaticResource MaterialDesignFilledDatePicker}"
+                                    SelectedDate="{Binding BillDate}"
+                                    IsEnabled="True"
+                                    Margin="5" />
+
+                    </Grid>
+                    <Grid Grid.Row="1" >
+
+                        <ScrollViewer Margin="5"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      MaxHeight="300"
+                                      >
+                        <ListView ItemsSource="{Binding ListSelecteditems}"
+                                  Width="auto"
+                                  Height="auto"
+                                  MaxHeight="200"
+                                  >
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
+                                                    Header="Stt" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
+                                                    Header="Mã sản phẩm"
+                                                    Width="150" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding sanpham.TENSP}"
+                                                    Header="Tên hàng"
+                                                    Width="150" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Amount}"
+                                                    Header="Số lượng"
+                                                    Width="120" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding sanpham.GIA}"
+                                                    Header="Đơn giá"
+                                                    Width="110" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Summary}"
+                                                    Header="Thành tiền"
+                                                    Width="150" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                            
+                        </ScrollViewer>
+
+
+
+                    </Grid>
+                    <Grid Grid.Row="2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}"
+                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                 Width="200"
+                                                 Padding="8"
+                                                 Height="50">
+                                <TextBlock FontSize="16"
+                                           Text="{Binding Nhanvien.nhanvien.HOTEN}" />
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <materialDesign:Card Background="{DynamicResource PrimaryHueLightBrush}"
+                                                 Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+                                                 Width="200"
+                                                 Height="50"
+                                                 Padding="8">
+                                <TextBlock FontSize="16"
+                                           Text="{Binding Khachhang.khachhang.HOTEN}" />
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="2">
+                            <TextBox materialDesign:HintAssist.Hint="Giảm giá (%)"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     VerticalAlignment="Center"
+                                     Text="{Binding GiamGia}"
+                                     IsReadOnly="True" />
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="3">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+
+                                <TextBlock Text="{Binding TextThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TextTienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="20" />                                                  
+                                    <TextBox Text="{Binding TienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+
+                                </StackPanel>
+
+                                
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <TextBlock Text="{Binding TextTienThoi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="{Binding TextIdBill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Margin="20" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBlock Text="{Binding TextThanhTienCoGiamGia,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="20" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </WrapPanel>
         </Grid>
+
+        <Grid Grid.Row="2">
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                    Content="Confirm"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="20"
+                    Command="{Binding ConfirmPaymentCmd}"
+                    CommandParameter="{Binding ElementName=BillWin}"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    DataContext="{StaticResource SellVM}" />
+        </Grid>
+
     </Grid>
 </Window>

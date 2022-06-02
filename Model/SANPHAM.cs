@@ -29,6 +29,8 @@ namespace SE104_N10_QuanLySieuThi.Model
         public Nullable<int> SL { get; set; }
         public byte[] PICBI { get; set; }
         public string GHICHU { get; set; }
+        public Nullable<System.DateTime> NGDK { get; set; }
+        public string LOAI { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTHD> CTHD { get; set; }

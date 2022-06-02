@@ -14,13 +14,21 @@ namespace SE104_N10_QuanLySieuThi.Model
     
     public partial class HOADON
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public HOADON()
+        {
+            this.CTHD = new HashSet<CTHD>();
+        }
+    
         public string SOHD { get; set; }
         public Nullable<System.DateTime> NGHD { get; set; }
         public string MAKH { get; set; }
         public string MANV { get; set; }
         public Nullable<decimal> TRIGIA { get; set; }
+        public Nullable<double> GIAMGIA { get; set; }
     
-        public virtual CTHD CTHD { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTHD> CTHD { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
     }

@@ -17,4 +17,7 @@
     <viewmodel:ImportProductViewModel x:Key="ImportProductVM"></viewmodel:ImportProductViewModel>
     <viewmodel:AddSupplierViewModel x:Key="AddSupplierVM"></viewmodel:AddSupplierViewModel>
     <viewmodel:AmountControlViewModel x:Key="AmountControlVM"></viewmodel:AmountControlViewModel>
+    <viewmodel:LogoutViewModel x:Key="LogoutVM"></viewmodel:LogoutViewModel>
+    <viewmodel:MainViewModelForCustomer x:Key="MainVMForCustomer"></viewmodel:MainViewModelForCustomer>
+    <viewmodel:CustomerViewModelForCustomer x:Key="CustomerVMForCustomer"></viewmodel:CustomerViewModelForCustomer>
 </ResourceDictionary>
