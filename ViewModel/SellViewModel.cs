@@ -239,10 +239,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
             winBillReport win2 = new winBillReport();
+
             win2.Show();
+            loadReport();
+
+        }
+
+        public void loadReport()
+        {
             CrystalReport1 crys = new CrystalReport1();
-            crys.Load(@"rptBill.rep");
+            crys.Load(@"CrystalReport1.rep");
             viewer.ViewerCore.ReportSource = crys;
+            viewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + IdBill+"'";
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
@@ -281,7 +289,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
                 var khach = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Khachhang.khachhang.MAKH).SingleOrDefault();
                 string emailkh = khach.MAIL;
-                //GuiMail("20520850@gm.uit.edu.vn", emailkh, "Bill " + IdBill, message, atts);
+                GuiMail("20520850@gm.uit.edu.vn", emailkh, "Bill " + IdBill, message, atts);
 
             });
             thread.Start();
@@ -566,7 +574,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             TextTienTra = "Khách trả: ";
             TextTienThoi = "Trả lại: " + TienThoi.ToString();
             winBill win = new winBill();
-
             win.ShowDialog();
         }
         public void applyDisccount()

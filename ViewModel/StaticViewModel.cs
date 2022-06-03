@@ -24,6 +24,9 @@ using System.Threading;
 using System.Net.Mail;
 using System.Net;
 using System.Globalization;
+using SE104_N10_QuanLySieuThi.windows;
+using SE104_N10_QuanLySieuThi.crystalreport;
+using SAPBusinessObjects.WPF.Viewer;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -58,6 +61,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand LoadedPageCmd { get; set; }
 
         public ICommand PrintStatisticCmd { get; set; }
+
+
+        public ICommand LoadRptCmd { get; set; }
+
+        public CrystalReportsViewer viewer = new CrystalReportsViewer();
 
 
         PieChart pieChart = new PieChart();
@@ -128,7 +136,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void loadLineChartProfitDay()
         {
-            yFormatter = value => value.ToString("N");
+            yFormatter = value => value.ToString("F");
 
         }
 
@@ -349,6 +357,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             PrintStatisticCmd = new RelayCommand<object>((p) => { return true; }, (p) => { PrintStatistic(); });
 
+            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
+
 
             SeriesMostProduct = new SeriesCollection();
             SeriesMoney = new SeriesCollection();
@@ -510,7 +520,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
             //SendReport(finame);
+
+            openPrintBillWin();
         }
+
+        private void openPrintBillWin()
+        {
+            winStaticReport win = new winStaticReport();
+            win.Show();
+            CrystalReport2 crys = new CrystalReport2();
+            crys.Load(@"CrystalReport2.rep");
+            viewer.ViewerCore.ReportSource = crys;
+            //viewer.ViewerCore.SelectionFormula = "{(MONTH)HOADON.NGHD}=" + SelectedDate.Month  ;
+        }
+
         private void SendReport(List<string> repos=null)
         {
             if (repos == null)
@@ -533,7 +556,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             });
             thread.Start();
-            System.Windows.MessageBox.Show("Sent reports!, Please check your email");
+            //System.Windows.MessageBox.Show("Sent reports!, Please check your email");
 
         }
 
@@ -664,7 +687,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Kinds = new[] { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
 
 
-            zFormatter = value => value.ToString("N");
+            zFormatter = value => value.ToString("F");
 
 
         }
@@ -817,7 +840,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //SeriesMoney.Add(lns2);
 
             Lables = new[] { "Jan", "Ferb", "Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec" };
-            yFormatter = value => value.ToString("N");
+            yFormatter = value => value.ToString("F");
 
             //SeriesMoney.Add(new LineSeries
             //{
