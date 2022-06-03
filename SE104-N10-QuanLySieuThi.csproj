@@ -232,7 +232,7 @@
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\SellViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
-    <Compile Include="ViewModel\StaticViewModel.cs" />
+    <Compile Include="windows\StaticViewModel.cs" />
     <Compile Include="windows\winAddProduct.xaml.cs">
       <DependentUpon>winAddProduct.xaml</DependentUpon>
     </Compile>
