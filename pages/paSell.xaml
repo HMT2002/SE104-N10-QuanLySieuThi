@@ -251,9 +251,9 @@
                                 <StackPanel>
                                     <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                             ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                            Content="_Button"
+                                            Content="Thành tiền"
                                             VerticalAlignment="Bottom"
-                                            Margin="20"
+                                            Margin="220,20,0,20"
                                             Command="{Binding BuyProductCmd}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                             HorizontalAlignment="Right" />
