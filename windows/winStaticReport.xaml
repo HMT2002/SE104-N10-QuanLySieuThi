@@ -6,16 +6,15 @@
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
         Title="winStaticReport"
-        
-        
-                        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
-        TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"        
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         ResizeMode="NoResize"
@@ -24,39 +23,33 @@
         Width="800"
         Height="550"
         DataContext="{StaticResource StaticVM}"
-                Name="StaticReportWin"
-        >
+        Name="StaticReportWin">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+
+            <i:InvokeCommandAction Command="{Binding LoadRptCmd}"
+                                   CommandParameter="{Binding ElementName=rptStat}" />
+
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <uc:ucControlBar Tag="{Binding Title,ElementName=LoginWin}"></uc:ucControlBar>
+            <uc:ucControlBar Tag="{Binding Title,ElementName=StaticReportWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <ListView
-ItemsSource="{Binding listSelecteditems}">
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn
-        DisplayMemberBinding="{Binding Stt}"
-        Header="Stt" />
-                        <GridViewColumn
-        DisplayMemberBinding="{Binding MaSP}"
-        Header="Mã sản phẩm"
-        Width="150"/>
-                        <GridViewColumn
-        DisplayMemberBinding="{Binding TenSP}"
-        Header="Tên hàng"
-        Width="150"/>
-                        <GridViewColumn
-        DisplayMemberBinding="{Binding ThanhTien}"
-        Header="Thành tiền"
-        Width="150"/>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <Viewer:CrystalReportsViewer HorizontalAlignment="Left"
+                                         Height="auto"
+                                         VerticalAlignment="Top"
+                                         Name="rptStat"
+                                         Width="790" />
+        </Grid>
+        <Grid Grid.Row="2">
+            
         </Grid>
     </Grid>
 </Window>
