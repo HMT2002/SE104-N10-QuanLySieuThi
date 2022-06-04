@@ -111,6 +111,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private ObservableCollection<SanPham> _ListSelecteditems;
         public ObservableCollection<SanPham> ListSelecteditems { get => _ListSelecteditems; set { _ListSelecteditems = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<HoaDon> _ListSellHistory;
+        public ObservableCollection<HoaDon> ListSellHistory { get => _ListSellHistory; set { _ListSellHistory = value; OnPropertyChanged(); } }
+
         public static ObservableCollection<SanPham> SelectedBillList { get; set; }
 
 
@@ -122,6 +125,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ObservableCollection<SanPham> SanPhamList { get => _SanPhamList; set { _SanPhamList = value; OnPropertyChanged(); } }
 
         public CollectionView view;
+
+        public CollectionView view2;
+
 
         private int _SelectAmmount = 1;
         public int SelectAmmount { get => _SelectAmmount; set { _SelectAmmount = value; OnPropertyChanged(); } }
@@ -194,7 +200,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public SellViewModel()
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
-            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) => { if (!isMainLoaded) { LoadSanPhamData(); isMainLoaded = true; }; });
+            ListSellHistory = new ObservableCollection<HoaDon>();
+            LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) =>
+            {
+                if (!isMainLoaded)
+                {
+                    LoadSanPhamData();
+                    LoadListSell();
+                    isMainLoaded = true;
+                };
+            });
             BuyProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openBill(); });
             ConfirmPaymentCmd = new RelayCommand<Window>((p) => { return true; }, (p) => { confirmPayment(p); });
 
@@ -220,6 +235,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             loadListEmployee();
         }
 
+        private void LoadListSell()
+        {
+            ListSellHistory = new ObservableCollection<HoaDon>();
+            var objectList = DataProvider.Ins.DB.HOADON;
+            foreach (var item in objectList)
+            {
+                HoaDon hoadon = new HoaDon();
+                hoadon.hoadon = item;
+                ListSellHistory.Add(hoadon);
+            }
+            view2 = (CollectionView)CollectionViewSource.GetDefaultView(ListSellHistory);
+            view2.Filter = HistoryFilter;
+        }
+
         private void PrintBill(Window p)
         {
             if (_pnlBill == null )
@@ -238,15 +267,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
 
-            winBillReport win2 = new winBillReport();
 
-            win2.Show();
             loadReport();
 
         }
 
         public void loadReport()
         {
+            winBillReport win2 = new winBillReport();
+
+            win2.Show();
             CrystalReport1 crys = new CrystalReport1();
             crys.Load(@"CrystalReport1.rep");
             viewer.ViewerCore.ReportSource = crys;
@@ -402,6 +432,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             clearField();
             LoadSanPhamData();
+            LoadListSell();
 
             //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
             //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
@@ -517,8 +548,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     break;
             }
 
-            return true; ;
+            return true; 
         }
+
+        public bool HistoryFilter(object obj)
+        {
+            if (string.IsNullOrEmpty(SearchSellHistory))
+            {
+                return true;
+            }
+
+            return (obj as HoaDon).hoadon.SOHD.IndexOf(SearchSellHistory, StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+
         private string _Search;
 
         public string Search
@@ -531,9 +574,27 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string _SearchSellHistory;
+
+        public string SearchSellHistory
+        {
+            get => _SearchSellHistory; set
+            {
+                _SearchSellHistory = value;
+                view2.Filter = HistoryFilter;
+                FilterHistory();
+                OnPropertyChanged();
+            }
+        }
         private void FilterItem()
         {
             CollectionViewSource.GetDefaultView(SanPhamList).Refresh();
+        }
+
+        private void FilterHistory()
+        {
+            CollectionViewSource.GetDefaultView(ListSellHistory).Refresh();
         }
         private string _SearchTypeItem;
         public string SearchTypeItem
@@ -627,6 +688,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 if (SelectedSelectItem != null)
                 {
 
+                }
+                OnPropertyChanged();
+            }
+        }
+
+        private HoaDon _SelectedSellHistory;
+        public HoaDon SelectedSellHistory
+        {
+            get => _SelectedSellHistory; set
+            {
+                _SelectedSellHistory = value;
+                if (SelectedSellHistory != null)
+                {
+                    IdBill = SelectedSellHistory.hoadon.SOHD;
+                    loadReport();
                 }
                 OnPropertyChanged();
             }

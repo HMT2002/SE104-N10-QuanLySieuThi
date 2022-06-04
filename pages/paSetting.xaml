@@ -163,6 +163,7 @@
                                     materialDesign:HintAssist.Hint="Lương"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center"
+                                        IsEnabled="False"
                                         Text="{Binding Salary}"
                                         IsReadOnly="True"
                                     Margin="20"/>

@@ -342,7 +342,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
             string pass = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
             var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
-            var accCountNhanVien = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
+            if (accCount == null)
+            {
+                IsLogin = false;
+                MessageBox.Show("Incorrect password or username");
+                return;
+            }
             if (accCount.PRI == 0)
             {
                 var user = DataProvider.Ins.DB.KHACHHANG.Where(x => x.ACC == UserName).SingleOrDefault();

@@ -145,7 +145,7 @@
                             <materialDesign:PackIcon Width="24" Height="24" Kind="Plus" />
                         </Button>
                     </materialDesign:NavigationRailAssist.FloatingContent>-->
-                    <TabItem>
+                    <!--<TabItem>
                         <TabItem.Header>
                             <StackPanel Width="auto" Height="auto">
                                 <materialDesign:PackIcon Width="24" Height="24" HorizontalAlignment="Center" Kind="HomeCircleOutline" />
@@ -155,7 +155,7 @@
                         <Frame Content="{Binding pageHome}" Width="1350" Height="620">
 
                         </Frame>
-                    </TabItem>
+                    </TabItem>-->
 
                     <TabItem>
                         <TabItem.Header>

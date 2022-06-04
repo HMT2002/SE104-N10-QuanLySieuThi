@@ -336,7 +336,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     if (nv != null)
                     {
                         Password =Converter.Instance.Base64Decode(Converter.Instance.MD5Decrypt( nv.PASS)); 
-                        
                     }
                     else
                     {

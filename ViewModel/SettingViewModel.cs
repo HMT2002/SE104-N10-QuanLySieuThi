@@ -171,16 +171,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
             var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == Acc).SingleOrDefault();
-            if (account == null)
-            {
-                account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
-                DataProvider.Ins.DB.ACCOUNT.Add(account);
-            }
-            else
-            {
-                account.PASS = Password;
-                account.PRI = pri;
-            }
+            var newaccount = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
+            DataProvider.Ins.DB.ACCOUNT.Remove(account);
+            DataProvider.Ins.DB.ACCOUNT.Add(newaccount);
+            //if (account == null)
+            //{
+            //    account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
+            //    DataProvider.Ins.DB.ACCOUNT.Add(account);
+            //}
+            //else
+            //{
+            //    account.PASS = Password;
+            //    account.PRI = pri;
+            //}
             DataProvider.Ins.DB.SaveChanges();
             loadEmployee();
         }
