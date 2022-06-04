@@ -148,6 +148,12 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="crystalreport\CrystalReport3.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport3.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomerWindow.xaml.cs">
       <DependentUpon>CustomerWindow.xaml</DependentUpon>
     </Compile>
@@ -233,7 +239,7 @@
     <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\SellViewModel.cs" />
     <Compile Include="ViewModel\SettingViewModel.cs" />
-    <Compile Include="windows\StaticViewModel.cs" />
+    <Compile Include="ViewModel\StaticViewModel.cs" />
     <Compile Include="windows\winAddProduct.xaml.cs">
       <DependentUpon>winAddProduct.xaml</DependentUpon>
     </Compile>
@@ -257,6 +263,9 @@
     </Compile>
     <Compile Include="windows\winImportProduct.xaml.cs">
       <DependentUpon>winImportProduct.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="windows\winImportReport.xaml.cs">
+      <DependentUpon>winImportReport.xaml</DependentUpon>
     </Compile>
     <Compile Include="windows\winLogin.xaml.cs">
       <DependentUpon>winLogin.xaml</DependentUpon>
@@ -400,6 +409,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="windows\winImportReport.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="windows\winLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -478,6 +491,10 @@
     <EmbeddedResource Include="crystalreport\CrystalReport2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="crystalreport\CrystalReport3.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport3.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

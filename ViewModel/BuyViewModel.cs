@@ -1,6 +1,8 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using SAPBusinessObjects.WPF.Viewer;
 using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.crystalreport;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -57,8 +59,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     convertImgFromByte(SelectedImport.nhaphang.SANPHAM.PICBI);
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
-                    winImportDetail win = new winImportDetail();
-                    win.ShowDialog();
+                    loadReport();
+                    //winImportDetail win = new winImportDetail();
+                    //win.ShowDialog();
                 }
                 OnPropertyChanged();
             }
@@ -116,6 +119,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                         Ammount = (int)curProduct.SL;
                         Price = (decimal)curProduct.GIA;
 
+
                     }
                     else
                     {
@@ -129,6 +133,18 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
                 OnPropertyChanged();
             }
+        }
+        public CrystalReportsViewer viewer = new CrystalReportsViewer();
+
+        public void loadReport()
+        {
+            winImportReport win2 = new winImportReport();
+
+            win2.ShowDialog();
+            CrystalReport3 crys = new CrystalReport3();
+            crys.Load(@"CrystalReport3.rep");
+            viewer.ViewerCore.ReportSource = crys;
+            //viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
         }
         private int _Ammount;
         public int Ammount
@@ -167,6 +183,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public CollectionView view;
 
+        public ICommand LoadRptCmd { get; set; }
 
         public ICommand ImportProductCmd { get; set; }
 
@@ -178,6 +195,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             openImportproductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
             ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(p); });
             ReportImportCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ReportImport(); });
+
+            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
 
             LoadedImportCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlImport = p; });
 

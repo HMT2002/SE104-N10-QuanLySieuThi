@@ -170,8 +170,10 @@ insert into ACCOUNT(ACC,PRI,PASS) values('tue',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('ngan',2,'1')
 insert into ACCOUNT(ACC,PRI,PASS) values('huy',2,'1')
 
+update NHANVIEN set ACC ='tue' where MANV='NV001' 
 select * from KHACHHANG
 select * from ACCOUNT 
+select * from NHANVIEN
 update ACCOUNT set PRI=0 where ACC='toof'
 delete from ACCOUNT where ACC!='tue'
 alter table ACCOUNT alter column PASS nvarchar(MAX)
