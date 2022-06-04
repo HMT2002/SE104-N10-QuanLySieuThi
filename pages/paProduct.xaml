@@ -50,13 +50,29 @@
                                   SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         </ComboBox>
 
-                        <TextBox x:Name="CommentTextBox"
-                                 VerticalAlignment="Center"
-                                 Margin="10 10 10 10"
-                                 Width="400"
-                                 materialDesign:HintAssist.Hint="Find"
-                                 materialDesign:HintAssist.HelperTextFontSize="20"
-                                 Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                        <Grid>
+                            <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                </Grid>
+                                <Grid Grid.Column="0">
+                                    <materialDesign:PackIcon Kind="Magnify"
+                                                             VerticalAlignment="Center" />
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <TextBox x:Name="CommentTextBox"
+                                             VerticalAlignment="Center"
+                                             Margin="30 10 0 10"
+                                             Width="400"
+                                             materialDesign:HintAssist.Hint="Find"
+                                             materialDesign:HintAssist.HelperTextFontSize="20"
+                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                                </Grid>
+                            </Grid>
 
                     </StackPanel>
 

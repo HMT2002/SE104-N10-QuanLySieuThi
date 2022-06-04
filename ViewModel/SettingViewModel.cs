@@ -134,11 +134,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
                 var pass = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == nv.nhanvien.ACC).SingleOrDefault();
                 Password = Converter.Instance.Base64Decode(Converter.Instance.MD5Decrypt(pass.PASS));
-
+                tempacc = nv.nhanvien.ACC;
             }
 
         }
-
+        string tempacc;
         private void ModifyEmployee()
         {
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).SingleOrDefault();
@@ -170,7 +170,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
 
 
-            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == Acc).SingleOrDefault();
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == tempacc).SingleOrDefault();
+
             var newaccount = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
             DataProvider.Ins.DB.ACCOUNT.Remove(account);
             DataProvider.Ins.DB.ACCOUNT.Add(newaccount);
