@@ -1,22 +1,24 @@
-﻿<Page x:Class="SE104_N10_QuanLySieuThi.paSetting"
+﻿<Page x:Class="SE104_N10_QuanLySieuThi.pages.paCustomerForCustomer"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi"
+      xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1120"
-      Title="paSetting"
-      Background="#FB6558"
-      
-      
+      Title="paCustomerForCustomer"
+      d:DesignHeight="620"
+      d:DesignWidth="1120"
+      Background="#81B4FA"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      DataContext="{StaticResource SettingVM}"
+      DataContext="{StaticResource CustomerVMForCustomer}"
+      x:Name="CustomerPage"
       
-      x:Name="SettingPage"
-
+      
       >
+
+
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
@@ -32,11 +34,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <materialDesign:Card
-                        Background="AliceBlue"
-                        Margin="20">
+                    <materialDesign:Card Background="AliceBlue"
+                                         Margin="20">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -54,6 +56,7 @@
                                             CommandParameter="{Binding ElementName=bntPickImage}"
                                             Height="auto"
                                             Width="auto"
+                                            Padding="10"
                                             Content="{Binding imgAvatar}"
                                             Background="AliceBlue">
                                     </Button>
@@ -87,41 +90,30 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <TextBox materialDesign:HintAssist.Hint="Mã nhân viên"
+                                    <TextBox materialDesign:HintAssist.Hint="Họ tên"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              VerticalAlignment="Center"
-                                             Text="{Binding Id}"
-                                             IsReadOnly="True"
+                                             Text="{Binding Name}"
                                              Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="Số điện thoại"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
+                                    <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                             VerticalAlignment="Center"
                                              Text="{Binding Phone}"
-                                             Margin="20"/>
+                                             Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="Mail"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    <TextBox materialDesign:HintAssist.Hint="Mail"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              Text="{Binding Mail}"
                                              VerticalAlignment="Center"
-                                    Margin="20"/>
+                                             Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="3">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="Chức vụ"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
-                                             Text="{Binding Position}"
-                                             Margin="20"
-                                        IsReadOnly="True"
-                                        />
+
                                 </Grid>
                             </Grid>
 
@@ -131,42 +123,33 @@
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
                                     <RowDefinition></RowDefinition>
-                                    <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="Họ tên"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
-                                             Text="{Binding Name}"
-                                             Margin="20"/>
+                                    <TextBox materialDesign:HintAssist.Hint="Mã Khách hàng"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                             VerticalAlignment="Center"
+                                             Text="{Binding Id}"
+                                             IsReadOnly="True"
+                                             Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <DatePicker
-                                        materialDesign:HintAssist.Hint="Ngày vào làm"
-                                        materialDesign:TextFieldAssist.HasClearButton="True"
+                                    <DatePicker materialDesign:HintAssist.Hint="Ngày đăng kí"
+                                                materialDesign:TextFieldAssist.HasClearButton="True"
                                                 SelectedDate="{Binding Joineddate}"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                        IsEnabled="False"
-                                                Margin="20"/>
+                                                IsEnabled="False"
+                                                Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="CMND"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
-                                             Text="{Binding CMND}"
-                                             Margin="20"/>
+                                    <DatePicker materialDesign:HintAssist.Hint="Ngày sinh"
+                                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                                SelectedDate="{Binding Birthday}"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                                IsEnabled="False"
+                                                Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="3">
-                                    <TextBox
-                                    materialDesign:HintAssist.Hint="Lương"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
-                                        IsEnabled="False"
-                                        Text="{Binding Salary}"
-                                        IsReadOnly="True"
-                                    Margin="20"/>
+
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -179,28 +162,36 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Grid
-                            Margin="20"
-                            Background="AliceBlue">
+                        <Grid Margin="20"
+                              Background="AliceBlue">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
                                 <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Tài khoản"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding Acc}"
-                                    Margin="20"/>
-                            </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Mật khẩu"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Password}"
-                                    VerticalAlignment="Center"
-                                    Margin="20"/>
+                                <TextBox materialDesign:HintAssist.Hint="Tài khoản"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         VerticalAlignment="Center"
+                                         Text="{Binding Acc}"
+                                         Margin="20" />
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <TextBox materialDesign:HintAssist.Hint="Mật khẩu"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Password}"
+                                         VerticalAlignment="Center"
+                                         Margin="20" />
+                            </Grid>
+                            <Grid Grid.Column="0">
+                                <TextBox materialDesign:HintAssist.Hint="Doanh số"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Salary}"
+                                         VerticalAlignment="Center"
+                                         Margin="20" 
+                                         IsEnabled="False"
+                                         IsReadOnly="True"
+                                         />
                             </Grid>
                         </Grid>
                     </Grid>

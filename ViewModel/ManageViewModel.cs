@@ -88,7 +88,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
         private BitmapImage bitimg = new BitmapImage();
 
-        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-H3DR409O\MSSQLSERVER01;Initial Catalog=QuanLySieuThi;Integrated Security=True");
+        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-542L238N\SQLEXPRESS;Initial Catalog=QuanLySieuThi;Integrated Security=True");
 
 
         private ObservableCollection<NhanVien> _NhanVienList;
@@ -283,6 +283,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             p.Content = imgAvatar;
         }
 
+
+        string tempacc = "";
         private NhanVien _SelectedItem;
         public NhanVien SelectedItem
         {
@@ -329,11 +331,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     }
 
                     Acc = SelectedItem.nhanvien.ACC;
+                    tempacc = Acc;
                     var nv = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == SelectedItem.nhanvien.ACC).SingleOrDefault();
                     if (nv != null)
                     {
                         Password =Converter.Instance.Base64Decode(Converter.Instance.MD5Decrypt( nv.PASS)); 
-
                     }
                     else
                     {
@@ -395,12 +397,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 pri = 2;
             }
 
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == tempacc).SingleOrDefault();
+            var newaccount = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
 
-            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == SelectedItem.nhanvien.ACC).SingleOrDefault();
-            account.ACC = Acc;
-            account.PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
-            account.PRI = pri;
-
+            DataProvider.Ins.DB.ACCOUNT.Remove(account);
+            DataProvider.Ins.DB.ACCOUNT.Add(newaccount);
+            tempacc = "";
 
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();

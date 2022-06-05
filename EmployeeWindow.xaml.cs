@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SE104_N10_QuanLySieuThi
 {
     /// <summary>
-    /// Interaction logic for paSell.xaml
+    /// Interaction logic for EmployeeWindow.xaml
     /// </summary>
-    public partial class paSell : Page
+    public partial class EmployeeWindow : Window
     {
-        public paSell()
+        public EmployeeWindow()
         {
             InitializeComponent();
         }
-        
     }
 }

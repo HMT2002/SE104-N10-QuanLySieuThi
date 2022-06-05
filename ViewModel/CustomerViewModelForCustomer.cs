@@ -1,5 +1,7 @@
 ﻿using SE104_N10_QuanLySieuThi.classes;
 using SE104_N10_QuanLySieuThi.Model;
+using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,9 +18,9 @@ using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    class SettingViewModel : BaseViewModel
+    class CustomerViewModelForCustomer:BaseViewModel
     {
-        public NhanVien nv = new NhanVien();
+        public KhachHang kh = new KhachHang();
         private string _Id;
         public string Id { get => _Id; set { _Id = value; OnPropertyChanged(); } }
 
@@ -75,7 +77,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private string _Gender;
         public string Gender { get => _Gender; set { _Gender = value; OnPropertyChanged(); } }
-        public SettingViewModel()
+        public CustomerViewModelForCustomer()
         {
             LoadedPageCmd = new RelayCommand<Page>((p) => { return true; }, (p) => { LoadPage(p); });
             LoadAvaterCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
@@ -83,7 +85,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             PickImage = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { Imagepick(p); });
 
             ModifyEmployeeCmd = new RelayCommand<object>((p) => {
-                var display = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id);
+                var display = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Id);
 
                 if (display == null || display.Count() == 0)
                 {
@@ -92,32 +94,32 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
                 return true;
             }, (p) => { ModifyEmployee(); });
+
+            loadEmployee();
         }
         public void loadEmployee()
         {
-            var obj = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
+            var obj = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == MainViewModelForCustomer._currentUser).SingleOrDefault();
             if (obj != null)
             {
-                nv.nhanvien = obj;
-                Name = nv.nhanvien.HOTEN;
-                Id = nv.nhanvien.MANV;
-                Phone = nv.nhanvien.SODT;
-                CMND = nv.nhanvien.CMND;
-                Salary = (decimal)nv.nhanvien.LUONG;
+                kh.khachhang = obj;
+                Name = kh.khachhang.HOTEN;
+                Id = kh.khachhang.MAKH;
+                Phone = kh.khachhang.SODT;
+                Salary = (decimal)kh.khachhang.DOANHSO;
 
-                Birthday = (DateTime)nv.nhanvien.NGSINH;
-                Joineddate = (DateTime)nv.nhanvien.NGVL;
+                Birthday = (DateTime)kh.khachhang.NGSINH;
+                Joineddate = (DateTime)kh.khachhang.NGDK;
 
-                Position = nv.nhanvien.POSITION;
-                Mail = nv.nhanvien.MAIL;
-                Note = nv.nhanvien.GHICHU;
-                Acc = nv.nhanvien.ACC;
-                Bitimg = Converter.Instance.ConvertByteToBitmapImage(nv.nhanvien.PICBI);
+                Mail = kh.khachhang.MAIL;
+                Note = kh.khachhang.GHICHU;
+                Acc = kh.khachhang.ACC;
+                Bitimg = Converter.Instance.ConvertByteToBitmapImage(kh.khachhang.PICBI);
                 imgAvatar.Source = Bitimg;
                 btnAvatar.Content = imgAvatar;
 
-                Gender = nv.nhanvien.GENDER;
-                if (nv.nhanvien.GENDER == null)
+                Gender = kh.khachhang.GENDER;
+                if (kh.khachhang.GENDER == null)
                 {
                     Gender = "unknow";
                 }
@@ -132,25 +134,22 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     IsMale = false;
                     IsFeMale = true;
                 }
-                var pass = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == nv.nhanvien.ACC).SingleOrDefault();
+                var pass = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == kh.khachhang.ACC).SingleOrDefault();
                 Password = Converter.Instance.Base64Decode(Converter.Instance.MD5Decrypt(pass.PASS));
-                tempacc = nv.nhanvien.ACC;
             }
 
         }
-        string tempacc;
+
         private void ModifyEmployee()
         {
-            var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).SingleOrDefault();
+            var nv = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Id).SingleOrDefault();
             nv.HOTEN = Name;
-            nv.LUONG = Salary;
-            nv.POSITION = Position;
-            nv.CMND = CMND;
+            nv.DOANHSO = Salary;
             nv.MAIL = Mail;
-            nv.MANV = Id;
+            nv.MAKH = Id;
             nv.SODT = Phone;
             nv.NGSINH = Birthday;
-            nv.NGVL = Joineddate;
+            nv.NGDK = Joineddate;
             nv.GHICHU = Note;
             nv.ACC = Acc;
             nv.PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg);
@@ -163,28 +162,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 nv.GENDER = "Female";
             }
-            int pri = 1;
-            if (Position.CompareTo("Quản lí") == 0)
+
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == Acc).SingleOrDefault();
+            if (account == null)
             {
-                pri = 2;
+                account = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = 0 };
+                DataProvider.Ins.DB.ACCOUNT.Add(account);
             }
-
-
-            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == tempacc).SingleOrDefault();
-
-            var newaccount = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
-            DataProvider.Ins.DB.ACCOUNT.Remove(account);
-            DataProvider.Ins.DB.ACCOUNT.Add(newaccount);
-            //if (account == null)
-            //{
-            //    account = new ACCOUNT() { ACC = Acc, PASS = Password, PRI = pri };
-            //    DataProvider.Ins.DB.ACCOUNT.Add(account);
-            //}
-            //else
-            //{
-            //    account.PASS = Password;
-            //    account.PRI = pri;
-            //}
+            else
+            {
+                account.ACC = Acc;
+                account.PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
+                account.PRI = 0;
+            }
             DataProvider.Ins.DB.SaveChanges();
             loadEmployee();
         }
@@ -192,7 +182,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void LoadPage(Page p)
         {
-            loadEmployee();
+            //loadEmployee();
 
         }
 
@@ -215,9 +205,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void Imagepick(Button p)
         {
-            nv.chooseImg();
-            Bitimg = nv.Bitimg;
-            imgAvatar.Source = nv.Bitimg;
+            kh.chooseImg();
+            Bitimg = kh.Bitimg;
+            imgAvatar.Source = kh.Bitimg;
             p.Content = imgAvatar;
         }
     }

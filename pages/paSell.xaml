@@ -18,6 +18,7 @@
       x:Name="SellPage">
 
     <Grid>
+
         <materialDesign:Card>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -145,7 +146,9 @@
                                                     <TextBlock Text="{Binding sanpham.GIA}"
                                                                Margin="3 3 3 3 "
                                                                HorizontalAlignment="Center"
-                                                               VerticalAlignment="Center"></TextBlock
+                                                               VerticalAlignment="Center">
+                                                        
+                                                    </TextBlock
                                                                >
                                                 </StackPanel>
                                             </materialDesign:Card>
@@ -169,7 +172,8 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <materialDesign:Card Margin="20"
@@ -182,41 +186,59 @@
 
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <DockPanel VerticalAlignment="Stretch"
-                                                               HorizontalAlignment="Stretch"
-                                                               x:Name="pnlItem"
-                                                               >
-                                                        <Image Source="{Binding Bitimg}"
-                                                               MaxHeight="40"
-                                                               MaxWidth="40"
-                                                               Margin="3 3 3 3"></Image>
-                                                        <TextBlock Text="{Binding  sanpham.TENSP }"
-                                                                   Margin="3 3 3 3"
-                                                                   VerticalAlignment="Center"></TextBlock>
-                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=DecreaseSelectAmmountCmd}"
-                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
-                                                                ToolTip="Thu nhỏ"
-                                                                ToolBar.OverflowMode="AsNeeded"
-                                                                Background="#F0F8FF">
-                                                            <materialDesign:PackIcon Kind="Minus" />
-                                                        </Button>
-                                                        <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                                   Width="30"
-                                                                   FontSize="13"
-                                                                   VerticalAlignment="Center"
-                                                                   HorizontalAlignment="Center"
-                                                                   
-                                                                   >
+                                                    <Grid x:Name="pnlItem">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid Grid.Column="0">
+                                                            <Image Source="{Binding Bitimg}"
+                                                                   MaxHeight="40"
+                                                                   MaxWidth="40"
+                                                                   Margin="3 3 3 3"></Image>
 
-                                                        </TextBlock>
-                                                        <Button Command="{Binding Source={StaticResource SellVM},Path=IncreaseSelectAmmountCmd}"
-                                                                CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
-                                                                ToolTip="Đóng"
-                                                                ToolBar.OverflowMode="AsNeeded"
-                                                                Background="#FF2800">
-                                                            <materialDesign:PackIcon Kind="Plus" />
-                                                        </Button>
-                                                    </DockPanel>
+                                                        </Grid>
+                                                        <Grid Grid.Column="1">
+                                                            <TextBlock Text="{Binding sanpham.TENSP }"
+                                                                       Margin="3 3 3 3"
+                                                                       Width="60"
+                                                                       VerticalAlignment="Center"></TextBlock>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="2">
+                                                            <Button Command="{Binding Source={StaticResource SellVM},Path=DecreaseSelectAmmountCmd}"
+                                                                    CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
+                                                                    ToolTip="Thu nhỏ"
+                                                                    ToolBar.OverflowMode="AsNeeded"
+                                                                    Background="#F0F8FF">
+                                                                <materialDesign:PackIcon Kind="Minus" />
+                                                            </Button>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="3">
+                                                            <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                                       Width="30"
+                                                                       FontSize="13"
+                                                                       VerticalAlignment="Center"
+                                                                       HorizontalAlignment="Center">
+
+                                                            </TextBlock>
+
+                                                        </Grid>
+                                                        <Grid Grid.Column="4">
+                                                            <Button Command="{Binding Source={StaticResource SellVM},Path=IncreaseSelectAmmountCmd}"
+                                                                    CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
+                                                                    ToolTip="Đóng"
+                                                                    ToolBar.OverflowMode="AsNeeded"
+                                                                    Background="#FF2800">
+                                                                <materialDesign:PackIcon Kind="Plus" />
+                                                            </Button>
+
+                                                        </Grid>
+                                                    </Grid>
                                                 </DataTemplate>
 
                                             </ItemsControl.ItemTemplate>
@@ -228,18 +250,88 @@
 
                         </Grid>
                         <Grid Grid.Row="1">
+                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                                    Content="Thành tiền"
+                                    VerticalAlignment="Bottom"
+                                    Margin="220,20,0,20"
+                                    Command="{Binding BuyProductCmd}"
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                    HorizontalAlignment="Right" />
+                        </Grid>
+                        <Grid Grid.Row="2">
                             <materialDesign:Card Margin="20"
                                                  Background="AliceBlue">
-                                <StackPanel>
-                                    <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                            ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                            Content="_Button"
-                                            VerticalAlignment="Bottom"
-                                            Margin="20"
-                                            Command="{Binding BuyProductCmd}"
-                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                            HorizontalAlignment="Right" />
-                                </StackPanel>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                        </Grid>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon Kind="Magnify"
+                                                                     VerticalAlignment="Center"
+                                                                     />
+                                        </Grid>
+
+                                        <Grid Grid.Column="1">
+                                            <TextBox 
+                                                     VerticalAlignment="Center"
+                                                     Margin="30 0 0 0 "
+                                                     Width="auto"
+                                                     materialDesign:HintAssist.Hint="Find"
+                                                     materialDesign:HintAssist.HelperTextFontSize="20"
+                                                     Text="{Binding SearchSellHistory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                                              VerticalScrollBarVisibility="Auto">
+                                    <StackPanel>
+                                                <ListView x:Name="listboxSellHistory"
+                                                          ItemsSource="{Binding ListSellHistory}"
+                                                          SelectedItem="{Binding SelectedSellHistory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                                    <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <materialDesign:Card Background="Crimson">
+                                                                    <TextBlock Text="{Binding hoadon.SOHD }"
+                                                                               Width="180"
+                                                                               Height="25"
+                                                                               FontSize="13"
+                                                                               Margin="3 3 3 3"
+                                                                               HorizontalAlignment="Center"
+                                                                               VerticalAlignment="Center">
+                                                                    </TextBlock>
+                                                                </materialDesign:Card>
+                                                        <materialDesign:Card>
+                                                            <TextBlock Text="{Binding hoadon.NGHD }"
+                                                                       Width="180"
+                                                                       Height="25"
+                                                                       FontSize="13"
+                                                                       Margin="3 3 3 3"
+                                                                       HorizontalAlignment="Center"
+                                                                       VerticalAlignment="Center"></TextBlock>
+
+                                                        </materialDesign:Card>
+                                                    </StackPanel>
+                                                </DataTemplate>
+
+                                            </ItemsControl.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </ScrollViewer>
+                                        
+                                    </Grid>
+                                </Grid>
+
                             </materialDesign:Card>
                         </Grid>
                     </Grid>

@@ -1,11 +1,11 @@
-﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winStaticReport"
+﻿<Window x:Class="SE104_N10_QuanLySieuThi.windows.winImportReport"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
-        Title="winStaticReport"
+        Title="winImportReport"
         xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
@@ -22,21 +22,19 @@
         WindowStartupLocation="CenterScreen"
         Width="800"
         Height="550"
-        DataContext="{StaticResource StaticVM}"
-        Name="StaticReportWin"
-        >
+        DataContext="{StaticResource BuyVM}"
+        Name="ImportReportWin">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-
             <i:InvokeCommandAction Command="{Binding LoadRptCmd}"
-                                   CommandParameter="{Binding ElementName=rptStat}" />
+                                   CommandParameter="{Binding ElementName=rptImport}" />
 
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -46,11 +44,11 @@
             <Viewer:CrystalReportsViewer HorizontalAlignment="Left"
                                          Height="auto"
                                          VerticalAlignment="Top"
-                                         Name="rptStat"
+                                         Name="rptImport"
                                          Width="790" />
         </Grid>
         <Grid Grid.Row="2">
-            
+
         </Grid>
     </Grid>
 </Window>

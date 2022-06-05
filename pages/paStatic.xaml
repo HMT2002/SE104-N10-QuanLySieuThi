@@ -1,25 +1,20 @@
 ﻿<Page x:Class="SE104_N10_QuanLySieuThi.pages.paStatic"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       xmlns:Wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-
-      mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1120"
+      mc:Ignorable="d"
+      d:DesignHeight="620"
+      d:DesignWidth="1120"
       Title="paStatic"
       Background="White"
-      
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{StaticResource StaticVM}"
-      
-      x:Name="StaticPage"
-
-      >
+      x:Name="StaticPage">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
@@ -41,66 +36,167 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="310" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0"
+              Margin="0 0 5 10 ">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <!--<DatePicker Width="140"
-                            materialDesign:HintAssist.Hint="Thời điểm"
-                            Style="{StaticResource MaterialDesignFilledDatePicker}"
-                            SelectedDate="{Binding SelectedDate}" 
-                            
-                            />-->
                 <Calendar materialDesign:CalendarAssist.Orientation="Horizontal"
-                          Width="auto"
+                          Width="370"
+                          Height="auto"
                           materialDesign:HintAssist.Hint="Thời điểm"
-                          SelectedDate="{Binding SelectedDate}"
-                          />
+                          SelectedDate="{Binding SelectedDate}" />
             </Grid>
             <Grid Grid.Column="1">
-                <Button Margin="5"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                        Width="180"
-                        Height="50"
-                        ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                        Content="Print statistic"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                        Command="{Binding PrintStatisticCmd}" 
-                        DataContext="{StaticResource StaticVM}"
-                        />
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <WrapPanel Width="auto">
+                        <materialDesign:Card Padding="5"
+                                             materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                             Foreground="{x:Null}"
+                                             UniformCornerRadius="10">
+                            <!--Đừng sửa cái Name-->
+                            <WrapPanel Name="pnlpieChart"
+                                       Background="AliceBlue">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="auto" />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <Wpf:PieChart Hoverable="True"
+                                                      InnerRadius="0"
+                                                      LegendLocation="Top"
+                                                      Series="{Binding SeriesMostProduct}"
+                                                      Name="pieChart"
+                                                      Height="250"
+                                                      Width="300">
+
+                                            <Wpf:PieChart.ChartLegend>
+                                                <Wpf:DefaultLegend BulletSize="15"
+                                                                   TextBlock.Foreground="#0B87F4"
+                                                                   TextBlock.FontSize="10" />
+                                            </Wpf:PieChart.ChartLegend>
+
+                                            <Wpf:PieChart.DataTooltip>
+                                                <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
+                                            </Wpf:PieChart.DataTooltip>
+                                        </Wpf:PieChart>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <TextBlock Text="{Binding TextNamThongKe,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center"
+                                                   Foreground="Black"
+                                                   FontWeight="ExtraBold" />
+                                    </Grid>
+                                </Grid>
+
+
+                            </WrapPanel>
+                        </materialDesign:Card>
+
+
+
+                    </WrapPanel>
+
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Button Margin="5"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Width="180"
+                                Height="50"
+                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
+                                Content="Print statistic"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                                Command="{Binding PrintStatisticCmd}"
+                                DataContext="{StaticResource StaticVM}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <materialDesign:Card Width="200">
+                                <StackPanel>
+                                    <TextBlock Text="Tổng doanh thu tháng này là: "
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="Black"
+                                               FontWeight="ExtraBold" />
+                                    <TextBlock Text="{Binding TongDoanhThuThang,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="Black"
+                                               FontWeight="ExtraBold" />
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <materialDesign:Card Width="250">
+                                <StackPanel>
+                                <TextBlock Text="Doanh thu so với tháng trước: "
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Foreground="Black"
+                                           FontWeight="ExtraBold" />
+                                <TextBlock Text="{Binding TextTiLeSoSanhThangTruoc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Foreground="Black"
+                                           FontWeight="ExtraBold" />                                    
+                                </StackPanel>
+
+                            </materialDesign:Card>
+                        </Grid>
+                    </Grid>
+
+                </Grid>
             </Grid>
 
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <WrapPanel Background="AliceBlue"
-                           MaxHeight="300"
-                           MaxWidth="300">
-                    <materialDesign:Card Padding="8"
+                <!--<WrapPanel Background="AliceBlue"
+                           MaxHeight="310"
+                           MaxWidth="320">
+                    <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10"
                                          >
-                        <!--Đừng sửa cái Name-->
+                        -->
+                <!--Đừng sửa cái Name-->
+                <!--
                         <WrapPanel Name="pnlpieChart"
                                    Background="AliceBlue">
                             <Wpf:PieChart Hoverable="True"
                                           InnerRadius="0"
                                           LegendLocation="Right"
-                                          Margin="40"
+                                          Margin="20"
                                           Series="{Binding SeriesMostProduct}"
                                           Name="pieChart"
-                                          Height="200"
+                                          Height="310"
                                           Width="200">
 
                                 <Wpf:PieChart.ChartLegend>
@@ -121,88 +217,124 @@
 
 
 
-                </WrapPanel>
+                </WrapPanel>-->
             </Grid>
             <Grid Grid.Column="1">
-                <WrapPanel 
-                           MaxHeight="310"
-                           MaxWidth="410">
+                <WrapPanel MaxHeight="310"
+                           Width="auto">
                     <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10">
-                <!--Đừng sửa cái Name-->      <WrapPanel Name="pnlLineChart"
-                           Background="AliceBlue"
-                                   >
-                            
-                    <Wpf:CartesianChart LegendLocation="Bottom"
-                                        Series="{Binding SeriesMoney}"
-                                        Height="300"
-                                        Width="400"
-                                        x:Name="lineChart"
-                                        Hoverable="True"
-                                        >
-                                <Wpf:CartesianChart.ChartLegend>
-                                    <Wpf:DefaultLegend BulletSize="5"
-                                                       TextBlock.Foreground="#0B87F4"
-                                                       TextBlock.FontSize="10">
-                                    </Wpf:DefaultLegend>
-                                </Wpf:CartesianChart.ChartLegend>
-                                <Wpf:CartesianChart.AxisY>
-                            <Wpf:Axis Title="Money"
-                                      LabelFormatter="{Binding yFormatter}" />
+                        <!--Đừng sửa cái Name-->
+                        <WrapPanel Name="pnlLineChart"
+                                   Background="AliceBlue">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Wpf:CartesianChart LegendLocation="Top"
+                                                        Series="{Binding SeriesMoney}"
+                                                        Height="300"
+                                                        Width="700"
+                                                        x:Name="lineChart"
+                                                        Hoverable="True">
+                                        <Wpf:CartesianChart.ChartLegend>
+                                            <Wpf:DefaultLegend BulletSize="5"
+                                                               TextBlock.Foreground="#0B87F4"
+                                                               TextBlock.FontSize="10">
+                                            </Wpf:DefaultLegend>
+                                        </Wpf:CartesianChart.ChartLegend>
+                                        <Wpf:CartesianChart.AxisY>
+                                            <Wpf:Axis Title="Money"
+                                                      LabelFormatter="{Binding yFormatter}" />
 
-                        </Wpf:CartesianChart.AxisY>
-                        <Wpf:CartesianChart.AxisX>
-                                    <Wpf:Axis Title="Month"
-                                              Labels="{Binding Lables}" />
-                                </Wpf:CartesianChart.AxisX>
-                    </Wpf:CartesianChart>
-                            
-                </WrapPanel>
+                                        </Wpf:CartesianChart.AxisY>
+                                        <Wpf:CartesianChart.AxisX>
+                                            <Wpf:Axis Title="Month"
+                                                      Labels="{Binding Lables}" />
+                                        </Wpf:CartesianChart.AxisX>
+                                    </Wpf:CartesianChart>
+
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <!--<ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                                                  materialDesign:HintAssist.Hint="Type"
+                                                  ItemsSource="{Binding SearchType,Mode=TwoWay}"
+                                                  materialDesign:TextFieldAssist.HasClearButton="True"
+                                                  Width="auto"
+                                                  Height="50"
+                                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                        </ComboBox>-->
+                                    <TextBlock Text="{Binding TextThangThongKe,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="Black"
+                                               FontWeight="ExtraBold" />
+
+                                </Grid>
+                            </Grid>
+
+                        </WrapPanel>
                     </materialDesign:Card>
                 </WrapPanel>
 
             </Grid>
 
             <Grid Grid.Column="2">
-                <WrapPanel 
-                           MaxHeight="310"
-                           MaxWidth="410">
+                <WrapPanel MaxHeight="310"
+                           Width="auto">
                     <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
                                          UniformCornerRadius="10">
                         <!--Đừng sửa cái Name-->
                         <WrapPanel Name="pnlColumnChart"
-                            Background="AliceBlue">
-                    <Wpf:CartesianChart LegendLocation="Bottom"
-                                        Series="{Binding SeriesProduct}"
-                                        Height="300"
-                                        Width="370"
-                                        Name="barChart"
-                                        Hoverable="True"
-                                        >
+                                   Background="AliceBlue">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Wpf:CartesianChart LegendLocation="Right"
+                                                        Series="{Binding SeriesProduct}"
+                                                        Height="300"
+                                                        Width="540"
+                                                        Name="barChart"
+                                                        Hoverable="True">
 
-                                <Wpf:CartesianChart.ChartLegend>
-                                    <Wpf:DefaultLegend BulletSize="5"
-                                                       TextBlock.Foreground="#0B87F4"
-                                                       TextBlock.FontSize="10">
-                                    </Wpf:DefaultLegend>
-                                </Wpf:CartesianChart.ChartLegend>
+                                        <Wpf:CartesianChart.ChartLegend>
+                                            <Wpf:DefaultLegend BulletSize="5"
+                                                               TextBlock.Foreground="#0B87F4"
+                                                               TextBlock.FontSize="10">
+                                            </Wpf:DefaultLegend>
+                                        </Wpf:CartesianChart.ChartLegend>
 
-                                <Wpf:CartesianChart.AxisY>
-                            <Wpf:Axis Title="Product"
-                                      LabelFormatter="{Binding zFormatter}" />
+                                        <Wpf:CartesianChart.AxisY>
+                                            <Wpf:Axis Title="Product"
+                                                      LabelFormatter="{Binding zFormatter}" />
 
-                        </Wpf:CartesianChart.AxisY>
-                        <Wpf:CartesianChart.AxisX>
-                            <Wpf:Axis Title="Kind"
-                                      Labels="{Binding Kinds}" />
+                                        </Wpf:CartesianChart.AxisY>
+                                        <Wpf:CartesianChart.AxisX>
+                                            <Wpf:Axis Title="Kind"
+                                                      Labels="{Binding Kinds}" />
 
-                        </Wpf:CartesianChart.AxisX>
-                    </Wpf:CartesianChart>
-                </WrapPanel>
+                                        </Wpf:CartesianChart.AxisX>
+                                    </Wpf:CartesianChart>
+
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBlock Text="{Binding TextNgayThongKe,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="Black"
+                                               FontWeight="ExtraBold" />
+                                </Grid>
+                            </Grid>
+                        </WrapPanel>
                     </materialDesign:Card>
                 </WrapPanel>
 

@@ -271,13 +271,28 @@
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
-                                 Name="txtSearch"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                 VerticalAlignment="Center"
-                                 Margin="5">
-                        </TextBox>
+                        <Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <Grid Grid.Column="0">
+                                <materialDesign:PackIcon Kind="Magnify"
+                                                         VerticalAlignment="Center" />
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                                         Name="txtSearch"
+                                         Width="auto"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                         VerticalAlignment="Center"
+                                         Margin="30 0 0 0" />
+                            </Grid>
+                        </Grid>
                     </Grid>
                     <Grid Grid.Row="2">
                         <TextBox TextWrapping="Wrap"

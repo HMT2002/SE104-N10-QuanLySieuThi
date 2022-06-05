@@ -19,7 +19,7 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Width="800"
-        Height="550"
+        Height="650"
         DataContext="{StaticResource SellVM}"
         x:Name="BillWin"
         Title="winBill">
@@ -30,6 +30,7 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -58,15 +59,22 @@
                                     materialDesign:HintAssist.Hint="Ngày bán hàng"
                                     Style="{StaticResource MaterialDesignFilledDatePicker}"
                                     SelectedDate="{Binding BillDate}"
-                                    IsEnabled="False" />
+                                    IsEnabled="True"
+                                    Margin="5" />
 
                     </Grid>
-                    <Grid Grid.Row="1">
+                    <Grid Grid.Row="1" >
 
+                        <ScrollViewer Margin="5"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      MaxHeight="300"
+                                      >
                         <ListView ItemsSource="{Binding ListSelecteditems}"
                                   Width="auto"
                                   Height="auto"
-                                  Padding="5">
+                                  MaxHeight="200"
+                                  >
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
@@ -89,6 +97,9 @@
                                 </GridView>
                             </ListView.View>
                         </ListView>
+                            
+                        </ScrollViewer>
+
 
 
                     </Grid>
@@ -129,39 +140,77 @@
                     </Grid>
                     <Grid Grid.Row="3">
 
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
 
-                        <DockPanel 
-                                    >
-                            <TextBlock Text="{Binding ThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                       VerticalAlignment="Center" 
-                                       HorizontalAlignment="Left"
-                                       Margin="20"
-                                       />
-                            <TextBlock Text="{Binding IdBill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                <TextBlock Text="{Binding TextThanhTien,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TextTienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Left"
+                                               Margin="20" />                                                  
+                                    <TextBox Text="{Binding TienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+
+                                </StackPanel>
+
+                                
+                            </Grid>
+                            <Grid Grid.Column="2">
+                                <TextBlock Text="{Binding TextTienThoi,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Left"
+                                           Margin="20" />
+                            </Grid>
+
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBlock Text="{Binding TextIdBill,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
-                                       Margin="20"
-                                       />
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="Confirm"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"
-                                    Margin="20"
-                                    Command="{Binding ConfirmPaymentCmd}"
-                                    CommandParameter="{Binding ElementName=BillWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
-                                    
-                                    DataContext="{StaticResource SellVM}"
-                                    />
-                            
-                        </DockPanel>
-
+                                       Margin="20" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBlock Text="{Binding TextThanhTienCoGiamGia,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="20" />
+                        </Grid>
                     </Grid>
                 </Grid>
             </WrapPanel>
         </Grid>
 
+        <Grid Grid.Row="2">
+            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="Resource name: MaterialDesignRaisedLightButton"
+                    Content="Confirm"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="20"
+                    Command="{Binding ConfirmPaymentCmd}"
+                    CommandParameter="{Binding ElementName=BillWin}"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    DataContext="{StaticResource SellVM}" />
+        </Grid>
 
     </Grid>
 </Window>

@@ -14,8 +14,9 @@ using System.Windows.Input;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    class MainViewModelForCustomer:BaseViewModel
     {
+
         public bool IsLoad = false;
         public ICommand LoadedWindowCmd { get; set; }
         public ICommand LogoutWindowCmd { get; set; }
@@ -24,25 +25,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public Account loginAcc;
 
-        public Page pageProduct { get; set; }
-
-        public Page pageManage { get; set; }
-
-
-        public Page pageSell { get; set; }
-
-
-        public Page pageBuy { get; set; }
-
-        public Page pageStatic { get; set; }
-
-        public Page pageSetting { get; set; }
-
-
         public Page pageCustomer { get; set; }
-
-
-        public Page pageHome { get; set; }
 
         public Page pageLogout { get; set; }
 
@@ -52,28 +35,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public static string _currentUser;
         public string currentUser { get => _currentUser; set { _currentUser = value; OnPropertyChanged(); } }
 
-        public MainViewModel()
+        public MainViewModelForCustomer()
         {
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
             loginAcc = new Account();
 
-            pageProduct = new paProduct();
-
-
-            pageBuy = new paBuy();
-
-            pageSell = new paSell();
-
-            pageManage = new paManage();
-
-            pageSetting = new paSetting();
-
-            pageCustomer = new paCustomer();
-
-            pageHome = new paHome();
-
-            pageStatic = new paStatic();
+            pageCustomer = new paCustomerForCustomer();
 
             pageLogout = new paLogout();
 
@@ -93,37 +61,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         void Start(Window p)
         {
-            //IsLoad = true;
-            //if (p == null)
-            //{
-            //    return;
-            //}
 
-            //p.Hide();
-            //winLogin loginWindow = new winLogin();
-            //loginWindow.ShowDialog();
-            //if (loginWindow.DataContext == null)
-            //    return;
-            //var loginVM = loginWindow.DataContext as LoginViewModel;
-
-            //if (loginVM.IsLogin)
-            //{
-            //    try
-            //    {
-            //    loginAcc = loginVM.Acc;
-            //    var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.ACC == loginAcc.Acc).SingleOrDefault();
-            //    currentUser = nv.MANV;
-            //    p.Show();
-            //    }
-            //    catch(Exception ex)
-            //    {
-
-            //    }
-            //}
-            //else
-            //{
-            //    p.Close();
-            //}
         }
     }
 }

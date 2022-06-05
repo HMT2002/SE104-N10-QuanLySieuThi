@@ -16,14 +16,14 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CrystalReport1 : ReportClass {
+    public class rptBill : ReportClass {
         
-        public CrystalReport1() {
+        public rptBill() {
         }
         
         public override string ResourceName {
             get {
-                return "CrystalReport1.rpt";
+                return "rptBill.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         public override string FullResourceName {
             get {
-                return "SE104_N10_QuanLySieuThi.crystalreport.CrystalReport1.rpt";
+                return "SE104_N10_QuanLySieuThi.crystalreport.rptBill.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,33 +82,17 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[6];
+                return this.ReportDefinition.Sections[4];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCrystalReport1 : Component, ICachedReport {
+    public class CachedrptBill : Component, ICachedReport {
         
-        public CachedCrystalReport1() {
+        public CachedrptBill() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CrystalReport1 rpt = new CrystalReport1();
+            rptBill rpt = new rptBill();
             rpt.Site = this.Site;
             return rpt;
         }

@@ -10,20 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SE104_N10_QuanLySieuThi
+namespace SE104_N10_QuanLySieuThi.windows
 {
     /// <summary>
-    /// Interaction logic for paSell.xaml
+    /// Interaction logic for winImportReport.xaml
     /// </summary>
-    public partial class paSell : Page
+    public partial class winImportReport : Window
     {
-        public paSell()
+        public winImportReport()
         {
             InitializeComponent();
         }
-        
     }
 }

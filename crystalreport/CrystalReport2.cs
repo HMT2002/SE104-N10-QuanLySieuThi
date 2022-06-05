@@ -16,14 +16,14 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class CrystalReport1 : ReportClass {
+    public class CrystalReport2 : ReportClass {
         
-        public CrystalReport1() {
+        public CrystalReport2() {
         }
         
         public override string ResourceName {
             get {
-                return "CrystalReport1.rpt";
+                return "CrystalReport2.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         
         public override string FullResourceName {
             get {
-                return "SE104_N10_QuanLySieuThi.crystalreport.CrystalReport1.rpt";
+                return "SE104_N10_QuanLySieuThi.crystalreport.CrystalReport2.rpt";
             }
             set {
                 // Do nothing
@@ -106,9 +106,9 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCrystalReport1 : Component, ICachedReport {
+    public class CachedCrystalReport2 : Component, ICachedReport {
         
-        public CachedCrystalReport1() {
+        public CachedCrystalReport2() {
         }
         
         [Browsable(false)]
@@ -145,7 +145,7 @@ namespace SE104_N10_QuanLySieuThi.crystalreport {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            CrystalReport1 rpt = new CrystalReport1();
+            CrystalReport2 rpt = new CrystalReport2();
             rpt.Site = this.Site;
             return rpt;
         }

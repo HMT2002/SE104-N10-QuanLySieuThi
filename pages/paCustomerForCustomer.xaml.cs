@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SE104_N10_QuanLySieuThi
+namespace SE104_N10_QuanLySieuThi.pages
 {
     /// <summary>
-    /// Interaction logic for paSell.xaml
+    /// Interaction logic for paCustomerForCustomer.xaml
     /// </summary>
-    public partial class paSell : Page
+    public partial class paCustomerForCustomer : Page
     {
-        public paSell()
+        public paCustomerForCustomer()
         {
             InitializeComponent();
         }
-        
     }
 }
