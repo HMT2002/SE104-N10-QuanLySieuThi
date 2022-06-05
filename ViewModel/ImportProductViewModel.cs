@@ -88,12 +88,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public ImportProductViewModel()
         {
-            ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(); });
-            ImportID = Converter.Instance.RandomString(5);
-            ImportDate = DateTime.Now;
-            Price = 0;
-            AmmountImport = 0;
-            LoadProductList();
+            //ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(); });
+            //ImportID = Converter.Instance.RandomString(5);
+            //ImportDate = DateTime.Now;
+            //Price = 0;
+            //AmmountImport = 0;
+            //LoadProductList();
         }
 
         private void ImportProduct()

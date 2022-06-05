@@ -205,8 +205,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 if (!isMainLoaded)
                 {
-                    LoadSanPhamData();
-                    LoadListSell();
+
                     isMainLoaded = true;
                 };
             });
@@ -230,9 +229,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
+                    LoadSanPhamData();
+                    LoadListSell();
+                    loadListCustomer();
+                    loadListEmployee();
 
-            loadListCustomer();
-            loadListEmployee();
         }
 
         private void LoadListSell()

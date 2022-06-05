@@ -339,7 +339,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-            Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
+            //Acc = new Account(UserName, Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)));
             string pass = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password));
             var accCount = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == UserName && x.PASS == pass).SingleOrDefault();
             if (accCount == null)
