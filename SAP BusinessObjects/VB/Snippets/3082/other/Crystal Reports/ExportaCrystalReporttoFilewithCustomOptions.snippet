@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Exporta un informe de Crystal Reports a un archivo PDF mediante las opciones de formato de exportación personalizadas</Title>
+            <Author>Business Objects</Author>
+            <Description>Exporta un informe de Crystal Reports a un archivo PDF mediante las opciones de formato de exportación personalizadas </Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crExportRptWithOptions</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL />
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL />
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Reemplace esta cadena por el nombre del archivo del informe desde el que desee exportar.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.rpt"</Default>
+                </Literal>
+                <Literal>
+                    <ID>DestinationFileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Reemplace esta cadena por el nombre del archivo al que desee exportar el informe.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.pdf"</Default>
+                </Literal>
+                <Literal>
+                    <ID>usePageRange</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>Establezca este valor booleano en true si se deben utilizar FirstPageNumber y LastPageNumber.</ToolTip>
+                    <Default>True</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Reemplace este número por el número de la primera página que se va a imprimir; utilice 0 para especificar un informe completo.</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Reemplace este número por el número de la última página que se va a imprimir; utilice 0 para especificar un informe completo.</ToolTip>
+                    <Default>5</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="VB" Kind="method body"><![CDATA[Dim report As New ReportDocument()
+                Dim exportOptions As New ExportOptions()
+                Dim pdfExportFormatOptions As New PdfRtfWordFormatOptions()
+                Dim diskDestinationOptions As New DiskFileDestinationOptions()
+
+                ' Establezca el formato de exportación y las opciones de formato
+                exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat
+                pdfExportFormatOptions.FirstPageNumber = $startPage$
+                pdfExportFormatOptions.LastPageNumber = $endPage$
+                pdfExportFormatOptions.UsePageRange = $usePageRange$
+                exportOptions.ExportFormatOptions = pdfExportFormatOptions
+
+                ' Establezca las opciones de archivo del disco.
+                exportOptions.ExportDestinationType = ExportDestinationType.DiskFile
+                diskDestinationOptions.DiskFileName = $DestinationFileName$
+                exportOptions.DestinationOptions = diskDestinationOptions
+
+                report.Load($FileName$)
+                report.Export(exportOptions)
+                report.Close()
+                    ]]>
+                </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
