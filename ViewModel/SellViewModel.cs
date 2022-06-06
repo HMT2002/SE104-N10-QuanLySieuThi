@@ -276,7 +276,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public void loadReport()
         {
             winBillReport win2 = new winBillReport();
-
             win2.Show();
             CrystalReport1 crys = new CrystalReport1();
             crys.Load(@"CrystalReport1.rep");

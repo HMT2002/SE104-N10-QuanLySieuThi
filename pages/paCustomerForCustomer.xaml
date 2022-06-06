@@ -145,7 +145,7 @@
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 SelectedDate="{Binding Birthday}"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                                IsEnabled="False"
+                                                IsEnabled="True"
                                                 Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="3">

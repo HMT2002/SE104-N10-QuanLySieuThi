@@ -73,7 +73,7 @@
 
                                     </Grid.RowDefinitions>
                                     <Grid Grid.Row="0">
-                                        <Wpf:PieChart Hoverable="True"
+                                        <Wpf:PieChart Hoverable="False"
                                                       InnerRadius="0"
                                                       LegendLocation="Top"
                                                       Series="{Binding SeriesMostProduct}"

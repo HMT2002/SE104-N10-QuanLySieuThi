@@ -36,7 +36,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ucControlBar Tag="{Binding Title, ElementName=PrintBillWin}" />
@@ -49,34 +48,6 @@
                                          Name="rptBill"
                                          Width="790" />
 
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                        Content="Cancel"
-                        VerticalAlignment="Center"
-                        Margin="20"
-                        Width="150"
-                        Command="{Binding PrintBillCmd}"
-                        CommandParameter="{Binding ElementName=PrintBillWin}"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
-            </Grid>
-            <Grid Grid.Column="2">
-                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                        Content="Yes"
-                        VerticalAlignment="Center"
-                        Margin="20"
-                        Width="150"
-                        Command="{Binding CancelPrintBillCmd}"
-                        CommandParameter="{Binding ElementName=PrintBillWin}"
-                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
-            </Grid>
         </Grid>
     </Grid>
 </Window>

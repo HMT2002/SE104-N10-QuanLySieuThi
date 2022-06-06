@@ -36,19 +36,6 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=RegistWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <Button
-                Width="75"
-                Margin="7,8,0,0"
-                HorizontalAlignment="Left"
-                VerticalAlignment="top"
-                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
-                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
-                materialDesign:ButtonProgressAssist.Value="-1"
-                Command="{Binding BackCmd}"
-                CommandParameter="{Binding ElementName=RegistWin}"
-                Content="BACK"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignRaisedButton}" />
             <Grid
                 Height="240"
                 Margin="35,80"

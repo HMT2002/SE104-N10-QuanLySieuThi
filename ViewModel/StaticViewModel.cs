@@ -530,10 +530,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             winStaticReport win = new winStaticReport();
             win.Show();
-            CrystalReport2 crys = new CrystalReport2();
-            crys.Load(@"CrystalReport2.rep");
+            CrystalReport4 crys = new CrystalReport4();
+            crys.Load(@"CrystalReport4.rep");
             viewer.ViewerCore.ReportSource = crys;
-            //viewer.ViewerCore.SelectionFormula = "{(MONTH)HOADON.NGHD}=" + SelectedDate.Month  ;
+            viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month  ;
         }
 
         private void SendReport(List<string> repos=null)
