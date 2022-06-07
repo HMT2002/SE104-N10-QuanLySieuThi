@@ -76,10 +76,10 @@
                                      Text="{Binding Acc}"
                                      VerticalAlignment="Center"
                                      Margin="5"
-                                     materialDesign:HintAssist.Hint="Tài khoản" />
+                                     materialDesign:HintAssist.Hint="Username" />
                         </Grid>
                         <Grid Grid.Column="1">
-                            <TextBox materialDesign:HintAssist.Hint="Mật khẩu"
+                            <TextBox materialDesign:HintAssist.Hint="Password"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding Password,Mode=TwoWay}"
                                      VerticalAlignment="Center"
@@ -116,7 +116,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="Mã khách hàng"
+                                <TextBox materialDesign:HintAssist.Hint="ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Id}"
@@ -124,14 +124,14 @@
                             </Grid>
                             <Grid Grid.Column="1">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Ngày sinh"
+                                            materialDesign:HintAssist.Hint="Birth"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Birthday}"
                                             IsEnabled="False" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Ngày đăng kí"
+                                            materialDesign:HintAssist.Hint="Join Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Joineddate}"
                                             IsEnabled="False" />
@@ -145,19 +145,19 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Tên khách hàng"
+                                <TextBox materialDesign:HintAssist.Hint="Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Name}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Phone}" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Doanh thu"
+                                <TextBox materialDesign:HintAssist.Hint="Gross"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Gross}" />
@@ -176,7 +176,7 @@
                                              AcceptsReturn="True"
                                              VerticalScrollBarVisibility="Auto"
                                              SpellCheck.IsEnabled="True"
-                                             materialDesign:HintAssist.Hint="Ghi chú"
+                                             materialDesign:HintAssist.Hint="Note"
                                              Text="{Binding Note}"
                                              Height="80"
                                              Margin="5" />
@@ -215,7 +215,7 @@
                             <Grid Grid.Column="0">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_XOÁ"
+                                        Content="_DELETE"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
                                         Margin="10"
@@ -228,7 +228,7 @@
                             <Grid Grid.Column="1">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_SỬA"
+                                        Content="_EDIT"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
                                         Margin="10"

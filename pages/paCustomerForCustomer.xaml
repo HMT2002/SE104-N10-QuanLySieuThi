@@ -92,14 +92,14 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <TextBox materialDesign:HintAssist.Hint="Họ tên"
+                                    <TextBox materialDesign:HintAssist.Hint="Name"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              VerticalAlignment="Center"
                                              Text="{Binding Name}"
                                              Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                    <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              VerticalAlignment="Center"
                                              Text="{Binding Phone}"
@@ -125,7 +125,7 @@
                                     <RowDefinition></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <TextBox materialDesign:HintAssist.Hint="Mã Khách hàng"
+                                    <TextBox materialDesign:HintAssist.Hint="ID"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              VerticalAlignment="Center"
                                              Text="{Binding Id}"
@@ -133,7 +133,7 @@
                                              Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <DatePicker materialDesign:HintAssist.Hint="Ngày đăng kí"
+                                    <DatePicker materialDesign:HintAssist.Hint="Join Date"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 SelectedDate="{Binding Joineddate}"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
@@ -141,7 +141,7 @@
                                                 Margin="20" />
                                 </Grid>
                                 <Grid Grid.Row="2">
-                                    <DatePicker materialDesign:HintAssist.Hint="Ngày sinh"
+                                    <DatePicker materialDesign:HintAssist.Hint="Birth"
                                                 materialDesign:TextFieldAssist.HasClearButton="True"
                                                 SelectedDate="{Binding Birthday}"
                                                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
@@ -170,21 +170,21 @@
                                 <ColumnDefinition></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Tài khoản"
+                                <TextBox materialDesign:HintAssist.Hint="Username"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Acc}"
                                          Margin="20" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Mật khẩu"
+                                <TextBox materialDesign:HintAssist.Hint="Password"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Password}"
                                          VerticalAlignment="Center"
                                          Margin="20" />
                             </Grid>
                             <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="Doanh số"
+                                <TextBox materialDesign:HintAssist.Hint="Salary"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Salary}"
                                          VerticalAlignment="Center"
@@ -202,7 +202,7 @@
                         </Grid.RowDefinitions>
                         <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                 ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                Content="_Cập nhật thông tin"
+                                Content="_EDIT"
                                 VerticalAlignment="Bottom"
                                 Margin="0,0,20,20"
                                 Command="{Binding ModifyEmployeeCmd}"
