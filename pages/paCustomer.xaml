@@ -52,13 +52,13 @@
                         </Grid>
 
                         <Grid Grid.Column="1">
-                            <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                            <TextBox materialDesign:HintAssist.Hint="Type here"
                                      Name="txtSearch"
                                      Width="auto"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                      VerticalAlignment="Center"
-                                     Margin="30 0 0 0" />
+                                     Margin="30,6,534,6.6" />
                         </Grid>
                     </Grid>
                 </Grid>
