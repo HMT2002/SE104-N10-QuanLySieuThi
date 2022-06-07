@@ -140,11 +140,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             winImportReport win2 = new winImportReport();
 
-            win2.ShowDialog();
-            CrystalReport3 crys = new CrystalReport3();
+            win2.Show();
+            CrystalReport2 crys = new CrystalReport2();
             crys.Load(@"CrystalReport3.rep");
             viewer.ViewerCore.ReportSource = crys;
-            //viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
+            viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
         }
         private int _Ammount;
         public int Ammount

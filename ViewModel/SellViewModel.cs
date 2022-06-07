@@ -220,7 +220,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
 
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
-            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => {return; });
+            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
 
 
             ThanhTien = 0;
@@ -229,10 +229,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
-                    LoadSanPhamData();
-                    LoadListSell();
-                    loadListCustomer();
-                    loadListEmployee();
+            LoadSanPhamData();
+            LoadListSell();
+            loadListCustomer();
+            loadListEmployee();
 
         }
 
@@ -280,7 +280,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CrystalReport1 crys = new CrystalReport1();
             crys.Load(@"CrystalReport1.rep");
             viewer.ViewerCore.ReportSource = crys;
-            viewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + IdBill+"'";
+            viewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + IdBill + "'";
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
