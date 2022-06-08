@@ -10,8 +10,7 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       DataContext="{StaticResource ProductVM }"
-      Background="#8F40E8"
-
+      Background="#87CEEB"
       x:Name="ProductPage"
       Title="paProduct"
       
@@ -43,6 +42,7 @@
                     <StackPanel Orientation="Horizontal">
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Type"
+                                  Margin="20 10 20 10"
                                   ItemsSource="{Binding SearchType,Mode=TwoWay}"
                                   materialDesign:TextFieldAssist.HasClearButton="True"
                                   Width="auto"
@@ -52,27 +52,28 @@
 
                         <Grid>
                             <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
-                                <Grid Grid.Column="0">
-                                    <materialDesign:PackIcon Kind="Magnify"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <Grid Grid.Column="0">
+                                <materialDesign:PackIcon Kind="Magnify"
                                                              VerticalAlignment="Center" />
-                                </Grid>
+                            </Grid>
 
-                                <Grid Grid.Column="1">
-                                    <TextBox x:Name="CommentTextBox"
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="CommentTextBox"
                                              VerticalAlignment="Center"
-                                             Margin="30 10 0 10"
+                                             Margin="25,25,10,25"
+                                             Height="30"
                                              Width="400"
                                              materialDesign:HintAssist.Hint="Find"
-                                             materialDesign:HintAssist.HelperTextFontSize="20"
-                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                             materialDesign:HintAssist.HelperTextFontSize="25"
+                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" />
 
-                                </Grid>
                             </Grid>
+                        </Grid>
 
                     </StackPanel>
 
@@ -80,7 +81,7 @@
                 </Grid>
                 <Grid Grid.Column="1">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Margin="10 10 10 10"
+                        <Button Margin="10 10 20 10"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="auto"
                                 Height="50"
@@ -89,7 +90,7 @@
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding BillCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
-                        <Button Margin="10 10 10 10"
+                        <Button Margin="10 10 20 10"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="auto"
                                 Height="50"
@@ -98,7 +99,7 @@
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding openNewSupplierCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
-                    </StackPanel>    
+                    </StackPanel>
                 </Grid>
             </Grid>
 
@@ -133,7 +134,7 @@
                                                      HorizontalContentAlignment="Stretch"
                                                      VerticalContentAlignment="Stretch"
                                                      VerticalAlignment="Stretch"
-                                                     
+                                                     Margin="30 0 0 0"
                                                      >
                                     <StackPanel Background="#00F5F50C"
                                                 Height="auto"

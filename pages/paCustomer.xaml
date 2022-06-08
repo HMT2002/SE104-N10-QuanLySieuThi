@@ -8,7 +8,7 @@
       d:DesignHeight="620"
       d:DesignWidth="1120"
       Title="paCustomer"
-      Background="#81B4FA"
+      Background="#87CEEB"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       DataContext="{StaticResource CustomerVM}"
@@ -35,6 +35,7 @@
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               Width="120"
                               Height="50"
+                              Margin="20 20 20 20"
                               SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                     </ComboBox>
                 </Grid>

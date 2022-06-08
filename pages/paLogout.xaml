@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.pages"
       mc:Ignorable="d"
-      Background="#00008B"
+      Background="#87CEEB"
       d:DesignHeight="620"
       d:DesignWidth="1120"
       x:Name="LogoutPage"
@@ -17,7 +17,7 @@
     <Grid>
         <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                 ToolTip="MaterialDesignFlatDarkButton"
-                Content="You sure want to quit?"
+                Content="You sure want to quit? Click here!!!"
                 Width="500"
                 Height="200"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
