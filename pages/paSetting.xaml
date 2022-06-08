@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paSetting"
-      Background="#FB6558"
+      Background="#87CEEB"
       
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -27,8 +27,7 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
-        <materialDesign:Card Margin="10">
-            <Grid>
+        <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition></RowDefinition>
@@ -36,7 +35,7 @@
                 <Grid Grid.Row="0">
                     <materialDesign:Card
                         Background="AliceBlue"
-                        Margin="20">
+                        Margin="20 20 20 20">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -152,7 +151,7 @@
                                 </Grid>
                                 <Grid Grid.Row="2">
                                     <TextBox
-                                    materialDesign:HintAssist.Hint="Personal Card ID"
+                                    materialDesign:HintAssist.Hint="Card ID"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     VerticalAlignment="Center"
                                              Text="{Binding CMND}"
@@ -180,7 +179,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
                         <Grid
-                            Margin="20"
+                            Margin="20 20 20 20"
                             Background="AliceBlue">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition></ColumnDefinition>
@@ -221,6 +220,5 @@
                     </Grid>
                 </Grid>
             </Grid>
-        </materialDesign:Card>
     </Grid>
 </Page>
