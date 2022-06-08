@@ -88,7 +88,7 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Nhà cung cấp"
+                                          materialDesign:HintAssist.Hint="Supplier"
                                           ItemsSource="{Binding SupplierType,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
@@ -107,7 +107,7 @@
                             </Grid>
                             <Grid Grid.Column="2">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Ngày nhập hàng"
+                                            materialDesign:HintAssist.Hint="Import Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding ImportDate}"
                                             IsEnabled="False" />
@@ -121,20 +121,20 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Tên sản phẩm"
+                                <TextBox materialDesign:HintAssist.Hint="Product's Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductName}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
+                                <TextBox materialDesign:HintAssist.Hint="Product's ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductId}"
                                          IsReadOnly="True" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Giá"
+                                <TextBox materialDesign:HintAssist.Hint="Price"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
@@ -148,7 +148,7 @@
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Kind"
+                                          materialDesign:HintAssist.Hint="Type of Product"
                                           ItemsSource="{Binding ProductKind,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
@@ -156,7 +156,7 @@
                                           SelectedItem="{Binding SeletedProductKind,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                 </ComboBox>
                             </Grid>
-                            <Grid Grid.Row="1">
+                            <Grid Grid.Row="1" Margin="5,5,4.4,-46.4">
                                 <TextBox TextWrapping="Wrap"
                                          VerticalAlignment="Stretch"
                                          MinWidth="230"
@@ -170,36 +170,36 @@
                             </Grid>
 
                         </Grid>
-                        <Grid Grid.Row="3">
+                        <Grid Grid.Row="3" Margin="5,29.4,5,4.8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            <Grid Grid.Column="0" Margin="5,43,5.4,4.2">
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_THÊM"
+                                    Content="_ADD"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Center"
-                                    Margin="10"
+                                    Margin="30,-20,30,9.6"
                                     Width="100"
                                     Command="{Binding AddProductCmd}"
                                     CommandParameter="{Binding ElementName=AddProductWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Height="40" />
 
-                                
+
                             </Grid>
-                            <Grid Grid.Column="1">
+                            <Grid Grid.Column="1" Margin="4.6,43,4.8,5">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_MỚI"
+                                        Content="_NEW"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
-                                        Margin="10"
+                                        Margin="30,-22,31,9.8"
                                         Width="100"
                                         Command="{Binding NewProductCmd}"
                                         CommandParameter="{Binding ElementName=stackpnItem}"
-                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Height="41" />
 
 
                             </Grid>

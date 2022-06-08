@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paBuy"
-      Background="#6CF605"
+      Background="AliceBlue"
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -36,6 +36,7 @@
                     <Grid Grid.Column="0">
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Type"
+                                  Margin="20 10 20 10"
                                   ItemsSource="{Binding SearchType,Mode=TwoWay}"
                                   materialDesign:TextFieldAssist.HasClearButton="True"
                                   Width="120"
@@ -57,9 +58,9 @@
                             </Grid>
 
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                                <TextBox materialDesign:HintAssist.Hint="Type Here"
                                          Name="txtSearch"
-                                         Width="400"
+                                         Width="350"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                          VerticalAlignment="Center"
@@ -71,7 +72,7 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Margin="10 10 10 10"
+                    <Button Margin="10 10 20 10"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Width="auto"
                             Height="50"
@@ -96,14 +97,14 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.MANH}"
-                                                Header="Mã nhập hàng"
-                                                Width="150" />
+                                                Header="Import Product's ID"
+                                                Width="200" />
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NHANVIEN.HOTEN}"
-                                                Header="Nhân viên"
-                                                Width="150" />
+                                                Header="Employee's Name"
+                                                Width="200" />
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NGNH}"
-                                                Header="Ngày"
-                                                Width="150" />
+                                                Header="Import Date"
+                                                Width="200" />
                             </GridView>
                         </ListView.View>
                     </ListView>

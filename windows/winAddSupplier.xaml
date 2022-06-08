@@ -19,8 +19,8 @@
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        Width="800"
-        Height="550"
+        Width="350"
+        Height="450"
         DataContext="{StaticResource AddSupplierVM }"
         Name="RegistSupplierWin">
     <i:Interaction.Triggers>
@@ -165,67 +165,69 @@
                             <RowDefinition />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-
-
-                                <TextBox materialDesign:HintAssist.Hint="Mã Nhà cung cấp"
+                        <Grid Grid.Row="0" Margin="5,5,4.4,46.6" Grid.RowSpan="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBox materialDesign:HintAssist.Hint="Supplier's ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertId}"
-                                         IsReadOnly="True" />
+                                         IsReadOnly="True"
+                                         />
                             </Grid>
-                            <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Tên Nhà cung cấp"
+                            <Grid Grid.Row="1">
+                                <TextBox materialDesign:HintAssist.Hint="Supplier's Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertName}" />
 
                             </Grid>
-                            <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                            <Grid Grid.Row="2">
+                                <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
+                                         
                                          Text="{Binding Phone}" />
                             </Grid>
-                            <Grid Grid.Column="3">
-                                <TextBox materialDesign:HintAssist.Hint="Nước"
+                            <Grid Grid.Row="3">
+                                <TextBox materialDesign:HintAssist.Hint="Country"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Margin="0,0,-0.2,-0.4"
+                                         
                                          Text="{Binding Origin}" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="93*"/>
+                                <ColumnDefinition Width="92*"/>
+                            </Grid.ColumnDefinitions>
                             <TextBox TextWrapping="Wrap"
-                                     VerticalAlignment="Stretch"
+                                     VerticalAlignment="Bottom"
                                      MinWidth="280"
                                      AcceptsReturn="True"
                                      VerticalScrollBarVisibility="Auto"
                                      SpellCheck.IsEnabled="True"
-                                     materialDesign:HintAssist.Hint="Ghi chú"
+                                     materialDesign:HintAssist.Hint="Note"
                                      Text="{Binding Note}"
-                                     Height="100"
-                                     Margin="5" />
+                                     Margin="5,-48,4.2,57.4" Grid.ColumnSpan="2" Height="95" />
                         </Grid>
                         <Grid Grid.Row="3">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_THÊM"
+                                    Content="_ADD"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Right"
-                                    Margin="10"
+                                    Margin="0,0,100.8,0.4"
                                     Width="100"
                                     Command="{Binding AddSupplierCmd}"
                                     CommandParameter="{Binding ElementName=RegistSupplierWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" RenderTransformOrigin="-0.484,0.575" />
 
                         </Grid>
                     </Grid>
