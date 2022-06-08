@@ -163,7 +163,7 @@
                                          AcceptsReturn="True"
                                          VerticalScrollBarVisibility="Auto"
                                          SpellCheck.IsEnabled="True"
-                                         materialDesign:HintAssist.Hint="Ghi chú"
+                                         materialDesign:HintAssist.Hint="Note"
                                          Text="{Binding Note}"
                                          Height="80"
                                          Margin="5" />

@@ -10,8 +10,7 @@
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       DataContext="{StaticResource ProductVM }"
-      Background="AliceBlue"
-
+      Background="#87CEEB"
       x:Name="ProductPage"
       Title="paProduct"
       
@@ -53,28 +52,28 @@
 
                         <Grid>
                             <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                </Grid>
-                                <Grid Grid.Column="0">
-                                    <materialDesign:PackIcon Kind="Magnify"
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                            </Grid>
+                            <Grid Grid.Column="0">
+                                <materialDesign:PackIcon Kind="Magnify"
                                                              VerticalAlignment="Center" />
-                                </Grid>
+                            </Grid>
 
-                                <Grid Grid.Column="1">
-                                    <TextBox x:Name="CommentTextBox"
+                            <Grid Grid.Column="1">
+                                <TextBox x:Name="CommentTextBox"
                                              VerticalAlignment="Center"
-                                             Margin="10 10 10 10"
+                                             Margin="25,25,10,25"
                                              Height="30"
                                              Width="400"
                                              materialDesign:HintAssist.Hint="Find"
                                              materialDesign:HintAssist.HelperTextFontSize="25"
-                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" />
 
-                                </Grid>
                             </Grid>
+                        </Grid>
 
                     </StackPanel>
 
@@ -100,7 +99,7 @@
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding openNewSupplierCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
-                    </StackPanel>    
+                    </StackPanel>
                 </Grid>
             </Grid>
 
