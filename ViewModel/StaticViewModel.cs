@@ -518,9 +518,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             bmp.Save(folderName + @"/columnchart_" + dat + ".png", ImageFormat.Png);
             finame.Add(folderName + @"/columnchart_" + dat + ".png");
-
-
-
             SendReport(finame);
 
             openPrintBillWin();
@@ -533,7 +530,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CrystalReport4 crys = new CrystalReport4();
             crys.Load(@"CrystalReport4.rep");
             viewer.ViewerCore.ReportSource = crys;
-            viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month  ;
+            viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month + "and {Command.NAM}=" + SelectedDate.Year;
         }
 
         private void SendReport(List<string> repos=null)
@@ -831,31 +828,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             };
             SeriesMoney.Add(lns1);
-
-            //LineSeries lns2 = new LineSeries
-            //{
-            //    Title = "Bán",
-            //    Values = new ChartValues<double> { 10, 10, 10, 12, 10, 15, 5,15, 20, 20, 15, 10 },
-            //    PointGeometry = DefaultGeometries.Square,
-
-            //};
-            //SeriesMoney.Add(lns2);
-
             Lables = new[] { "Jan", "Ferb", "Mar", "Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec" };
             yFormatter = value => value.ToString("F");
-
-            //SeriesMoney.Add(new LineSeries
-            //{
-            //    Title = "8",
-            //    Values = new ChartValues<double> { 5, 3, 2 },
-            //    LineSmoothness = 0,
-            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-            //    PointGeometrySize = 50,
-            //    PointForeground=Brushes.Green
-            //});
-            //SeriesMoney[2].Values.Add(2D);
-
-
         }
 
         private void loadPieChartMostProduct()

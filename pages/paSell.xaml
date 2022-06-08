@@ -307,7 +307,6 @@
                                                                     <ColumnDefinition Width="auto" />
                                                                 </Grid.ColumnDefinitions>
                                                                 <Grid Grid.Column="0">
-                                                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                                                         <TextBlock Text="{Binding hoadon.SOHD }"
                                                                                    Width="auto"
                                                                                    Height="25"
@@ -316,12 +315,10 @@
                                                                                    HorizontalAlignment="Center"
                                                                                    VerticalAlignment="Center">
                                                                         </TextBlock>
-                                                                    </materialDesign:Card>
 
 
                                                                 </Grid>
                                                                 <Grid Grid.Column="1">
-                                                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                                                         <TextBlock Text="{Binding hoadon.NGHD }"
                                                                                    Width="auto"
                                                                                    Height="25"
@@ -330,10 +327,8 @@
                                                                                    HorizontalAlignment="Center"
                                                                                    VerticalAlignment="Center"></TextBlock>
 
-                                                                    </materialDesign:Card>
                                                                 </Grid>
                                                                 <Grid Grid.Column="2">
-                                                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                                                         <TextBlock Text="{Binding hoadon.NHANVIEN.HOTEN }"
                                                                                    Width="auto"
                                                                                    Height="25"
@@ -341,11 +336,9 @@
                                                                                    Margin="5"
                                                                                    HorizontalAlignment="Center"
                                                                                    VerticalAlignment="Center"></TextBlock>
-                                                                    </materialDesign:Card>
 
                                                                 </Grid>
                                                                 <Grid Grid.Column="3">
-                                                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                                                         <TextBlock Text="{Binding hoadon.KHACHHANG.HOTEN }"
                                                                                    Width="auto"
                                                                                    Height="25"
@@ -353,11 +346,9 @@
                                                                                    Margin="5"
                                                                                    HorizontalAlignment="Center"
                                                                                    VerticalAlignment="Center"></TextBlock>
-                                                                    </materialDesign:Card>
 
                                                                 </Grid>
                                                                 <Grid Grid.Column="4">
-                                                                    <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3">
                                                                         <TextBlock Text="{Binding hoadon.TRIGIA }"
                                                                                    Width="auto"
                                                                                    Height="25"
@@ -365,7 +356,6 @@
                                                                                    Margin="5"
                                                                                    HorizontalAlignment="Center"
                                                                                    VerticalAlignment="Center"></TextBlock>
-                                                                    </materialDesign:Card>
 
                                                                 </Grid>
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -54,6 +55,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public MainViewModel()
         {
+            BitmapImage Bitimg = new BitmapImage(new Uri(@"..\ImageResource\photo_photography_image_picture_add-128.png", UriKind.Relative));
+
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
             loginAcc = new Account();

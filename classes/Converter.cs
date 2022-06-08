@@ -69,6 +69,8 @@ namespace SE104_N10_QuanLySieuThi.classes
         }
         public byte[] ConvertBitmapImageToBytes(BitmapImage bitmapImage)
         {
+            try
+            {
             if (bitmapImage == null)
             {
                 return null;
@@ -82,6 +84,12 @@ namespace SE104_N10_QuanLySieuThi.classes
                 data = ms.ToArray();
             }
             return data;
+            }
+            catch
+            {
+                return null;
+            }
+
         }
 
         public string Base64Encode(string plainText)

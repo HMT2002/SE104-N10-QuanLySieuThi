@@ -38,16 +38,29 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void AddSupplier(object p)
         {
-            if (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SuppliertName).Count() > 0)
+            try
             {
-                MessageBox.Show("Supplier name existed.");
-                return;
+                if (DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SuppliertName).Count() > 0)
+                {
+                    MessageBox.Show("Supplier name existed.");
+                    return;
+                }
+                if (SuppliertName.CompareTo(string.Empty) == 0 || Phone.CompareTo(string.Empty) == 0 || Origin.CompareTo(string.Empty) == 0)
+                {
+                    MessageBox.Show("Please fill information.");
+                    return;
+                }
+                var nv = new NHACUNGCAP() { GHICHU = Note, MACC = SuppliertId, TEN = SuppliertName, SODT = Phone, XUATXU = Origin };
+                DataProvider.Ins.DB.NHACUNGCAP.Add(nv);
+                DataProvider.Ins.DB.SaveChanges();
+                NewSupplier();
+                Complete(p);
             }
-            var nv = new NHACUNGCAP() { GHICHU = Note, MACC = SuppliertId, TEN = SuppliertName, SODT = Phone, XUATXU = Origin };
-            DataProvider.Ins.DB.NHACUNGCAP.Add(nv);
-            DataProvider.Ins.DB.SaveChanges();
-            NewSupplier();
-            Complete(p);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
 
         }
 

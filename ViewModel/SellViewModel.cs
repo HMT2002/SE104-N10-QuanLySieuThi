@@ -222,7 +222,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
             LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
 
-
             ThanhTien = 0;
             TienTra = 0;
             TienThoi = 0;
@@ -257,18 +256,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             List<string> finame = new List<string>();
-
             finame.Add(@"bills/" + IdBill + ".png");
             finame.Add(@"bills/" + IdBill + ".pdf");
-
             //SendBill(finame);
-
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
-
-
-
-
             loadReport();
 
         }
@@ -613,6 +605,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
             if (Khachhang.khachhang == null || Nhanvien.nhanvien == null)
             {
+                MessageBox.Show("Choose customer to process payment.");
                 return;
             }
             SelectedBillList = ListSelecteditems;
@@ -629,25 +622,25 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             IdBill = sohd;
 
-            TextThanhTien = "Tổng cộng: " + ThanhTien.ToString();
-            TextThanhTienCoGiamGia = "Sau khi áp dụng giảm giá: " + ThanhTienCoGiamGia.ToString();
-            TextIdBill = "Mã hoá đơn là: " + IdBill;
-            TextTienTra = "Khách trả: ";
-            TextTienThoi = "Trả lại: " + TienThoi.ToString();
+            TextThanhTien = "Summary: " + ThanhTien.ToString();
+            TextThanhTienCoGiamGia = "After discount: " + ThanhTienCoGiamGia.ToString();
+            TextIdBill = "Bill ID: " + IdBill;
+            TextTienTra = "Customer payment: ";
+            TextTienThoi = "Changes: " + TienThoi.ToString();
             winBill win = new winBill();
             win.ShowDialog();
         }
         public void applyDisccount()
         {
-            if (Khachhang.khachhang.DOANHSO >= 1000000)
+            if (Khachhang.khachhang.DOANHSO >= 1000)
             {
                 GiamGia = 10;
             }
-            if (Khachhang.khachhang.DOANHSO >= 3000000)
+            if (Khachhang.khachhang.DOANHSO >= 3000)
             {
                 GiamGia = 20;
             }
-            if (Khachhang.khachhang.DOANHSO >= 5000000)
+            if (Khachhang.khachhang.DOANHSO >= 5000)
             {
                 GiamGia = 30;
             }

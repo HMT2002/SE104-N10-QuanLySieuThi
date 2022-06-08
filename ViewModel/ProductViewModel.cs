@@ -194,13 +194,23 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ModifyProduct(object p)
         {
-            var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).SingleOrDefault();
+            if (SeletedSupplierType == null)
+            {
+                MessageBox.Show("Please select supplier");
+                return;
+            }
+            if (SeletedSupplierType.CompareTo(string.Empty) == 0)
+            {
+                MessageBox.Show("Please select supplier");
+                return;
+            }
+            var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).FirstOrDefault();
             sp.GIA = Price;
             sp.NGDK = ImportDate;
             sp.GHICHU = Note;
             sp.DVT = SeletedProductType;
             sp.LOAI = SeletedProductKind;
-            var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
+            var ncc= DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).FirstOrDefault();
             sp.MACC = ncc.MACC;
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
@@ -252,9 +262,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void AddProduct(object p)
         {
-            if (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0)
+            if (SeletedSupplierType == null)
             {
-                MessageBox.Show("Product ID existed.");
+                MessageBox.Show("Please select supplier");
+                return;
+            }
+            if (SeletedSupplierType.CompareTo(string.Empty) == 0)
+            {
+                MessageBox.Show("Please select supplier");
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();

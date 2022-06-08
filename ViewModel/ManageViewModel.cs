@@ -273,6 +273,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Gender = "Male";
             CMND = "";
             Acc = "";
+            SelectedPositon = null;
             btnAvatar.Background = new SolidColorBrush(Colors.AliceBlue);
 
         }
@@ -368,6 +369,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ModifyEmployee()
         {
+            if (SelectedPositon == null)
+            {
+                MessageBox.Show("Please select position");
+                return;
+            }
+            if (SelectedPositon.CompareTo(string.Empty) == 0)
+            {
+                MessageBox.Show("Please select position");
+                return;
+            }
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
             nv.HOTEN = Name;
             nv.LUONG = Salary;
@@ -397,7 +408,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 pri = 2;
             }
 
-            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == tempacc).SingleOrDefault();
+            var account = DataProvider.Ins.DB.ACCOUNT.Where(x => x.ACC == tempacc).FirstOrDefault();
             var newaccount = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
 
             DataProvider.Ins.DB.ACCOUNT.Remove(account);
@@ -411,7 +422,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void DeleteEmployee()
         {
-            NHANVIEN nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
+            NHANVIEN nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).FirstOrDefault();
             DataProvider.Ins.DB.NHANVIEN.Remove(nv);
             DataProvider.Ins.DB.SaveChanges();
             SelectedItem = null;
@@ -422,9 +433,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void CreateEmployee()
         {
-            if (DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).Count() > 0)
+            if (SelectedPositon == null)
             {
-                MessageBox.Show("Employee ID existed.");
+                MessageBox.Show("Please select position");
+                return;
+            }
+            if (SelectedPositon.CompareTo(string.Empty) == 0||Name.CompareTo(string.Empty) == 0||Phone.CompareTo(string.Empty) == 0||CMND.CompareTo(string.Empty) == 0||Mail.CompareTo(string.Empty) == 0||Gender.CompareTo(string.Empty) == 0||Acc.CompareTo(string.Empty) == 0||Password.CompareTo(string.Empty) == 0)
+            {
+                MessageBox.Show("Please fill information");
                 return;
             }
             int pri = 1;
@@ -433,14 +449,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 pri = 2;
             }
 
-
-            var nv = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = Position,LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc};
+            var nv1 = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = SelectedPositon, LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc};
             var account = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
 
-            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = Position, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv };
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = SelectedPositon, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv1 };
             NhanVienList.Add(nv2);
 
-            DataProvider.Ins.DB.NHANVIEN.Add(nv);
+            DataProvider.Ins.DB.NHANVIEN.Add(nv1);
             DataProvider.Ins.DB.ACCOUNT.Add(account);
 
             DataProvider.Ins.DB.SaveChanges();

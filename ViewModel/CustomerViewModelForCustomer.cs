@@ -142,6 +142,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ModifyEmployee()
         {
+            if (Name.CompareTo(string.Empty) == 0 || Phone.CompareTo(string.Empty) == 0 || Mail.CompareTo(string.Empty) == 0 || Gender.CompareTo(string.Empty) == 0 || Acc.CompareTo(string.Empty) == 0 || Password.CompareTo(string.Empty) == 0)
+            {
+                MessageBox.Show("Please fill information");
+                return;
+            }
             var nv = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Id).SingleOrDefault();
             nv.HOTEN = Name;
             nv.DOANHSO = Salary;
