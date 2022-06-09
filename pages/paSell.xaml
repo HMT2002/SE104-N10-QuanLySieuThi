@@ -222,6 +222,7 @@
                                                             <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                                        Width="30"
                                                                        FontSize="13"
+                                                                       Margin="3 3 3 3"
                                                                        VerticalAlignment="Center"
                                                                        HorizontalAlignment="Center">
 

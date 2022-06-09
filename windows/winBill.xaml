@@ -27,6 +27,11 @@
         <i:EventTrigger EventName="Loaded">
 
         </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding CloseBillCmd}"
+                                    />
+
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>
@@ -164,11 +169,11 @@
                                     <TextBlock Text="{Binding TextTienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Left"
-                                               Margin="20" />                                                  
+                                               Margin="20" />
                                     <TextBox Text="{Binding TienTra,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Left"
-                                           Margin="20" />
+                                             VerticalAlignment="Center"
+                                             HorizontalAlignment="Left"
+                                             Margin="20" />
 
                                 </StackPanel>
 

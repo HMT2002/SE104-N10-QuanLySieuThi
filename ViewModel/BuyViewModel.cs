@@ -259,7 +259,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         void GuiMail(string from, string to, string sub, string message, List<Attachment> atts = null)
         {
             MailMessage mailmess = new MailMessage(from, to, sub, message);
-            int i = 0;
             foreach (Attachment att in atts)
             {
                 if (att != null)

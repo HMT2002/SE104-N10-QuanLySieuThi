@@ -34,7 +34,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand ConfirmPaymentCmd { get; set; }
         public ICommand CancelPrintBillCmd { get; set; }
         public ICommand ConfirmPrintBillCmd { get; set; }
-
+        public ICommand CloseBillCmd { get; set; }
 
         public ICommand LoadedBillCmd { get; set; }
         private WrapPanel _pnlBill = new WrapPanel();
@@ -81,7 +81,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     TextTienTra = "Khách trả: ";
                     TextTienThoi = "Trả lại: " + TienThoi.ToString();
                 }
-                OnPropertyChanged(); } }
+                OnPropertyChanged(); 
+            }
+        }
+
+        private string _fDecimal=@".000";
+        public string fDecimal { get => _fDecimal; set { _fDecimal = value; OnPropertyChanged(); } }
 
         private decimal _TienThoi;
         public decimal TienThoi { get => _TienThoi; set { _TienThoi = value; OnPropertyChanged(); } }
@@ -199,6 +204,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public SellViewModel()
         {
+            fDecimal = @".000";
             ListSelecteditems = new ObservableCollection<SanPham>();
             ListSellHistory = new ObservableCollection<HoaDon>();
             LoadedItemCtrlCmd = new RelayCommand<ListBox>((p) => { lstbxSelected = p; return true; }, (p) =>
@@ -221,6 +227,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
             LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
+            CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
 
             ThanhTien = 0;
             TienTra = 0;
@@ -232,6 +239,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadListSell();
             loadListCustomer();
             loadListEmployee();
+
+        }
+
+        private void closeBill()
+        {
+            LoadSanPhamData();
+            LoadListSell();
+            loadListCustomer();
+            loadListEmployee();
+            clearField();
 
         }
 
@@ -322,7 +339,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         void GuiMail(string from, string to, string sub, string message, List<Attachment> atts = null)
         {
             MailMessage mailmess = new MailMessage(from, to, sub, message);
-            int i = 0;
             foreach (Attachment att in atts)
             {
                 if (att != null)
@@ -426,24 +442,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadSanPhamData();
             LoadListSell();
 
-            //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
-            //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
-            //using (Bitmap bitmap = new Bitmap((int)panel.Width, (int)panel.Height))
-            //{
-            //    panel.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
-            //    bitmap.Save("test.png", ImageFormat.Png);
-            //}
-
-            //RenderTargetBitmap renderTargetBitmap = new RenderTargetBitmap((int)_pnlBill.ActualWidth, (int)_pnlBill.ActualHeight, 96, 96, PixelFormats.Pbgra32);
-            //renderTargetBitmap.Render(_pnlBill);
-            //PngBitmapEncoder pngImage = new PngBitmapEncoder();
-            //pngImage.Frames.Add(BitmapFrame.Create(renderTargetBitmap));
-            //using (Stream fileStream = File.Create(@"test.png"))
-            //{
-            //    pngImage.Save(fileStream);
-            //}
-
-
             winPrintBillConfirmation newwin = new winPrintBillConfirmation();
             newwin.Show();
             winBill win = p as winBill;
@@ -482,6 +480,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void clearField()
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
+            SeletedCustomer = null;
             ThanhTien = 0;
             ThanhTienCoGiamGia = 0;
             GiamGia = 0;
