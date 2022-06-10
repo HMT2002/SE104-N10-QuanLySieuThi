@@ -93,7 +93,7 @@
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
@@ -102,7 +102,7 @@
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14">
                                 </ComboBox>
                             </Grid>
                             <Grid Grid.Column="2">
@@ -110,7 +110,7 @@
                                             materialDesign:HintAssist.Hint="Import Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding ImportDate}"
-                                            IsEnabled="False" />
+                                            IsEnabled="False" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -124,21 +124,21 @@
                                 <TextBox materialDesign:HintAssist.Hint="Product's Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Text="{Binding ProductName}" />
+                                         Text="{Binding ProductName}" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <TextBox materialDesign:HintAssist.Hint="Product's ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductId}"
-                                         IsReadOnly="True" />
+                                         IsReadOnly="True" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <TextBox materialDesign:HintAssist.Hint="Price"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
-                                         Text="{Binding Price}" />
+                                         Text="{Binding Price}" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -152,9 +152,7 @@
                                           ItemsSource="{Binding ProductKind,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
-                                          Height="50"
-                                          SelectedItem="{Binding SeletedProductKind,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                                </ComboBox>
+                                          SelectedItem="{Binding SeletedProductKind,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14" Margin="0,-14,-0.2,0"/>
                             </Grid>
                             <Grid Grid.Row="1" Margin="5,5,4.4,-46.4">
                                 <TextBox TextWrapping="Wrap"
@@ -166,7 +164,7 @@
                                          materialDesign:HintAssist.Hint="Note"
                                          Text="{Binding Note}"
                                          Height="80"
-                                         Margin="5" />
+                                         Margin="5" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
 
                         </Grid>
@@ -185,7 +183,7 @@
                                     Width="100"
                                     Command="{Binding AddProductCmd}"
                                     CommandParameter="{Binding ElementName=AddProductWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Height="40" />
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Height="40" FontFamily="Segoe UI" FontSize="14" />
 
 
                             </Grid>

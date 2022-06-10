@@ -177,29 +177,27 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertId}"
-                                         IsReadOnly="True"
+                                         IsReadOnly="True" FontFamily="Segoe UI" FontSize="13" Height="47" Margin="0,0,-0.8,-12.2"
                                          />
                             </Grid>
                             <Grid Grid.Row="1">
                                 <TextBox materialDesign:HintAssist.Hint="Supplier's Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
-                                         Text="{Binding SuppliertName}" />
+                                         Text="{Binding SuppliertName}" FontFamily="Segoe UI" FontSize="13" Height="48" Margin="0,0,-0.8,-13.2" />
 
                             </Grid>
                             <Grid Grid.Row="2">
                                 <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
                                          
-                                         Text="{Binding Phone}" />
+                                         Text="{Binding Phone}" FontFamily="Segoe UI" FontSize="13" Margin="0,0,-0.8,-14.2" />
                             </Grid>
                             <Grid Grid.Row="3">
                                 <TextBox materialDesign:HintAssist.Hint="Country"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         VerticalAlignment="Center"
                                          
-                                         Text="{Binding Origin}" />
+                                         Text="{Binding Origin}" FontFamily="Segoe UI" FontSize="13" Margin="0,1,-0.8,-6" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="2">
@@ -215,7 +213,7 @@
                                      SpellCheck.IsEnabled="True"
                                      materialDesign:HintAssist.Hint="Note"
                                      Text="{Binding Note}"
-                                     Margin="5,-48,4.2,57.4" Grid.ColumnSpan="2" Height="95" />
+                                     Margin="5,-39,4.2,57.4" Grid.ColumnSpan="2" Height="86" FontFamily="Segoe UI" FontSize="13" />
                         </Grid>
                         <Grid Grid.Row="3">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
@@ -227,7 +225,7 @@
                                     Width="100"
                                     Command="{Binding AddSupplierCmd}"
                                     CommandParameter="{Binding ElementName=RegistSupplierWin}"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" RenderTransformOrigin="-0.484,0.575" />
+                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" RenderTransformOrigin="-0.484,0.575" FontFamily="Segoe UI" FontSize="13" />
 
                         </Grid>
                     </Grid>

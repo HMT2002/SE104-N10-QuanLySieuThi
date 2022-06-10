@@ -42,13 +42,11 @@
                     <StackPanel Orientation="Horizontal">
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Type"
-                                  Margin="20 10 20 10"
+                                  Margin="20,15,20,10"
                                   ItemsSource="{Binding SearchType,Mode=TwoWay}"
                                   materialDesign:TextFieldAssist.HasClearButton="True"
-                                  Width="auto"
-                                  Height="50"
-                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                        </ComboBox>
+                                  Width="120"
+                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
 
                         <Grid>
                             <Grid>
@@ -59,18 +57,18 @@
                             </Grid>
                             <Grid Grid.Column="0">
                                 <materialDesign:PackIcon Kind="Magnify"
-                                                             VerticalAlignment="Center" />
+                                                             VerticalAlignment="Center" RenderTransformOrigin="0.6,1.175" Margin="-11,34,0,24" Height="22" Width="20" />
                             </Grid>
 
                             <Grid Grid.Column="1">
-                                <TextBox x:Name="CommentTextBox"
-                                             VerticalAlignment="Center"
-                                             Margin="25,25,10,25"
-                                             Height="30"
-                                             Width="400"
-                                             materialDesign:HintAssist.Hint="Find"
-                                             materialDesign:HintAssist.HelperTextFontSize="25"
-                                             Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" />
+                                <TextBox materialDesign:HintAssist.Hint="Type here to find"
+                                     Name="txtSearch"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     VerticalAlignment="Center"
+                                     Margin="22,5,538,10"
+                                     Width="400"
+                                     FontSize="20" Height="65"/>
 
                             </Grid>
                         </Grid>
@@ -128,7 +126,7 @@
                             <WrapPanel HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"
                                        >
-                                <materialDesign:Card Background="NavajoWhite"
+                                <materialDesign:Card Background="CadetBlue"
                                                      UniformCornerRadius="10"
                                                      HorizontalAlignment="Stretch"
                                                      HorizontalContentAlignment="Stretch"
@@ -147,22 +145,27 @@
                                                Margin="3 3 3 3"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"></Image>
-                                        <TextBlock Text="{Binding sanpham.MASP}"
-                                                   Margin="3 3 3 3"
-                                                   HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"></TextBlock>
                                         <TextBlock Text="{Binding sanpham.TENSP}"
                                                    Margin="3 3 3 3 "
                                                    HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"></TextBlock>
+                                                   VerticalAlignment="Center"
+                                                   FontSize="15"
+                                                   FontWeight="Medium"></TextBlock>
+                                        <TextBlock Text="{Binding sanpham.MASP}"
+                                                   Margin="3 3 3 3"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="15"></TextBlock>
                                         <TextBlock Text="{Binding sanpham.SL}"
                                                    Margin="3 3 3 3 "
                                                    HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"></TextBlock>
+                                                   VerticalAlignment="Center"
+                                                   FontSize="15"></TextBlock>
                                         <TextBlock Text="{Binding sanpham.GIA}"
                                                    Margin="3 3 3 3 "
                                                    HorizontalAlignment="Center"
-                                                   VerticalAlignment="Center"></TextBlock>
+                                                   VerticalAlignment="Center"
+                                                   FontSize="15"></TextBlock>
                                     </StackPanel>
                                 </materialDesign:Card>
                             </WrapPanel>
