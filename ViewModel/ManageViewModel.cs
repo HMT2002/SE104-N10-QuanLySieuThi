@@ -77,8 +77,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private string _Acc;
         public string Acc { get => _Acc; set { _Acc = value; OnPropertyChanged(); } }
-        private decimal _Salary;
-        public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
+        private static readonly System.Text.RegularExpressions.Regex _regex = new System.Text.RegularExpressions.Regex("[^0-9.-]+");
+
+        private string _Salary;
+        public string Salary { get => _Salary; set { 
+                _Salary = value;
+                OnPropertyChanged();
+            }
+        }
         private DateTime _Joineddate;
         public DateTime Joineddate { get => _Joineddate; set { _Joineddate = value; OnPropertyChanged(); } }
 
@@ -87,9 +93,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public BitmapImage Bitimg { get => bitimg; set => bitimg = value; }
         private BitmapImage bitimg = new BitmapImage();
-
-        public SqlConnection ketnoi = new SqlConnection(@"Data Source=LAPTOP-542L238N\SQLEXPRESS;Initial Catalog=QuanLySieuThi;Integrated Security=True");
-
 
         private ObservableCollection<NhanVien> _NhanVienList;
 
@@ -140,7 +143,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 Id = Converter.Instance.RandomString(5);
             }
-            Salary = 0;
+            Salary = 0.ToString();
             Joineddate = DateTime.Now;
             Birthday = DateTime.Now;
             IsMale = true;
@@ -262,7 +265,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Position = "";
             Phone = "";
             imgAvatar = new Image();
-            Salary = 0;
+            Salary = 0.ToString();
             Name = "";
             Joineddate = DateTime.Now;
             Birthday = DateTime.Now;
@@ -301,7 +304,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     Id = SelectedItem.nhanvien.MANV;
                     Phone = SelectedItem.nhanvien.SODT;
                     CMND = SelectedItem.nhanvien.CMND;
-                    Salary =(decimal) SelectedItem.nhanvien.LUONG;
+                    Salary = ((decimal)SelectedItem.nhanvien.LUONG).ToString();
 
                     Birthday =(DateTime) SelectedItem.nhanvien.NGSINH;
                     Joineddate =(DateTime) SelectedItem.nhanvien.NGVL;
@@ -369,6 +372,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ModifyEmployee()
         {
+            decimal n1;
+
+            if (!decimal.TryParse(Salary, out n1))
+            {
+                MessageBox.Show("Enter salary as number only");
+                return;
+            }
             if (SelectedPositon == null)
             {
                 MessageBox.Show("Please select position");
@@ -381,7 +391,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == SelectedItem.nhanvien.MANV).SingleOrDefault();
             nv.HOTEN = Name;
-            nv.LUONG = Salary;
+            nv.LUONG = Decimal.Parse(Salary);
             nv.POSITION = SelectedPositon;
             nv.CMND = CMND;
             nv.MAIL = Mail;
@@ -433,6 +443,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void CreateEmployee()
         {
+            decimal n1;
+
+            if (!decimal.TryParse(Salary, out n1))
+            {
+                MessageBox.Show("Enter salary as number only");
+                return;
+            }
             if (SelectedPositon == null)
             {
                 MessageBox.Show("Please select position");
@@ -449,10 +466,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 pri = 2;
             }
 
-            var nv1 = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = SelectedPositon, LUONG=Salary,CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc};
+            var nv1 = new NHANVIEN() { HOTEN = Name, MANV = Id, SODT = Phone, POSITION = SelectedPositon, LUONG= Decimal.Parse(Salary), CMND=CMND,MAIL=Mail,PICBI= Converter.Instance.ConvertBitmapImageToBytes(Bitimg),GENDER=Gender,NGSINH=Birthday,NGVL=Joineddate ,GHICHU=Note,ACC=Acc};
             var account = new ACCOUNT() { ACC = Acc, PASS = Converter.Instance.MD5Encrypt(Converter.Instance.Base64Encode(Password)), PRI = pri };
 
-            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = SelectedPositon, Salary = Salary, Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv1 };
+            var nv2 = new NhanVien() { Name = Name, ID = Id, Phone = Phone, Position = SelectedPositon, Salary = Decimal.Parse(Salary), Cmnd = CMND, Mail = Mail,Bitimg=Bitimg,Gender=Gender,Birthday=Birthday,Startdate=Joineddate,nhanvien=nv1 };
             NhanVienList.Add(nv2);
 
             DataProvider.Ins.DB.NHANVIEN.Add(nv1);

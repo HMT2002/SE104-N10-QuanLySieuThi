@@ -202,7 +202,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 //{ }
                 string email = MailAdress;
                 string message = "Here is your verify code for supermarket account: " + VerifyCode;
-                GuiMail("20520850@gm.uit.edu.vn", email, "Verify account code", message, file);
+                GuiMail("se104storemanage@gmai.com", email, "Verify account code", message, file);
 
             });
             thread.Start();

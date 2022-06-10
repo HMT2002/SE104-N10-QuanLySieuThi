@@ -53,8 +53,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     ImportDate =(DateTime) SelectedImport.nhaphang.NGNH;
                     Price =(decimal) SelectedImport.nhaphang.SANPHAM.GIA;
                     Ammount = (int)(SelectedImport.nhaphang.SANPHAM.SL - SelectedImport.nhaphang.SLNHAPHANG);
-                    AmmountImport = (int)SelectedImport.nhaphang.SLNHAPHANG;
-                    SummaryImport = (decimal)SelectedImport.nhaphang.TRIGIA;
+                    AmmountImport = ((int)SelectedImport.nhaphang.SLNHAPHANG).ToString();
+                    SummaryImport = ((decimal)SelectedImport.nhaphang.TRIGIA).ToString();
                     imgAvatar = new System.Windows.Controls.Image();
                     convertImgFromByte(SelectedImport.nhaphang.SANPHAM.PICBI);
                     imgAvatar.Source = Bitimg;
@@ -128,7 +128,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                         Ammount = 0;
                         Price = 0;
                         Ammount = 0;
-                        SummaryImport = 0;
+                        SummaryImport = 0.ToString();
                     }
                 }
                 OnPropertyChanged();
@@ -155,15 +155,30 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
-        private decimal _SummaryImport;
-        public decimal SummaryImport { get => _SummaryImport; set { _SummaryImport = value; OnPropertyChanged(); } }
-        private int _AmmountImport;
-        public int AmmountImport
+        private string _SummaryImport;
+        public string SummaryImport { get => _SummaryImport; set { 
+                _SummaryImport = value;
+                decimal n1;
+                if (!decimal.TryParse(value, out n1))
+                {
+                    return;
+                }
+                OnPropertyChanged(); }
+        }
+        private string _AmmountImport;
+        public string AmmountImport
         {
             get => _AmmountImport; set
             {
+
                 _AmmountImport = value;
-                SummaryImport = value * Price;
+                int n2;
+                if (!int.TryParse(value, out n2))
+                {
+                    SummaryImport = 0.ToString();
+                    return;
+                }
+                SummaryImport = (int.Parse(value) * Price).ToString();
                 OnPropertyChanged();
             }
         }
@@ -303,7 +318,22 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void ImportProduct(object p)
         {
-            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP, MANV = MainViewModel._currentUser, NGNH = ImportDate, SLNHAPHANG = AmmountImport ,TRIGIA=SummaryImport};
+
+            decimal n1;
+
+            if (!decimal.TryParse(SummaryImport, out n1))
+            {
+                MessageBox.Show("Enter summary import as number only");
+                return;
+            }
+            int n2;
+
+            if (!int.TryParse(AmmountImport, out n2))
+            {
+                MessageBox.Show("Enter ammount import as number only");
+                return;
+            }
+            var nv = new NHAPHANG() { MANH = ImportID, MASP = curProduct.MASP, MANV = MainViewModel._currentUser, NGNH = ImportDate, SLNHAPHANG = Int32.Parse(AmmountImport), TRIGIA = Decimal.Parse(SummaryImport) };
             DataProvider.Ins.DB.NHAPHANG.Add(nv);
 
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductID).SingleOrDefault();
@@ -311,7 +341,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 sp.SL = 0;
             }
-            sp.SL += AmmountImport;
+            sp.SL += Int32.Parse(AmmountImport);
             DataProvider.Ins.DB.SaveChanges();
 
             LoadProductList();
@@ -323,8 +353,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void NewImport()
         {
             SeletedProduct = null;
-            AmmountImport = 0;
-            SummaryImport = 0;
+            AmmountImport = 0.ToString();
+            SummaryImport = 0.ToString();
             Ammount = 0;
             Price = 0;
             while (DataProvider.Ins.DB.NHAPHANG.Where(x => x.MANH == ImportID).Count() > 0)

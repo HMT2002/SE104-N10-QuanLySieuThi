@@ -45,8 +45,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private string _Acc;
         public string Acc { get => _Acc; set { _Acc = value; OnPropertyChanged(); } }
-        private decimal _Salary;
-        public decimal Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
+        private string _Salary;
+        public string Salary { get => _Salary; set { _Salary = value; OnPropertyChanged(); } }
         private DateTime _Joineddate;
         public DateTime Joineddate { get => _Joineddate; set { _Joineddate = value; OnPropertyChanged(); } }
 
@@ -103,7 +103,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 Id = nv.nhanvien.MANV;
                 Phone = nv.nhanvien.SODT;
                 CMND = nv.nhanvien.CMND;
-                Salary = (decimal)nv.nhanvien.LUONG;
+                Salary = ((decimal)nv.nhanvien.LUONG).ToString();
 
                 Birthday = (DateTime)nv.nhanvien.NGSINH;
                 Joineddate = (DateTime)nv.nhanvien.NGVL;
@@ -141,9 +141,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         string tempacc;
         private void ModifyEmployee()
         {
+            decimal n1;
+
+            if (!decimal.TryParse(Salary, out n1))
+            {
+                MessageBox.Show("Enter salary as number only");
+                return;
+            }
             var nv = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == Id).SingleOrDefault();
             nv.HOTEN = Name;
-            nv.LUONG = Salary;
+            nv.LUONG = Decimal.Parse(Salary);
             nv.POSITION = Position;
             nv.CMND = CMND;
             nv.MAIL = Mail;

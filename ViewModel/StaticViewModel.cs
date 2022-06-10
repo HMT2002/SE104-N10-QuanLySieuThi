@@ -448,14 +448,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return;
             }
-
-            //System.Windows.Point toggleButtonPosition = panel.TranslatePoint(new System.Windows.Point(0, 0), panel);
-            //Rectangle bounds = Screen.GetBounds(System.Drawing.Point.Empty);
-            //using (Bitmap bitmap = new Bitmap((int)panel.Width, (int)panel.Height))
-            //{
-            //    panel.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
-            //    bitmap.Save("test.png", ImageFormat.Png);
-            //}
             List<string> finame = new List<string>();
 
             RenderTargetBitmap bmp0 = new RenderTargetBitmap((int)_pnlPieChart.ActualWidth, (int)_pnlPieChart.ActualHeight, 96, 96, PixelFormats.Pbgra32);
@@ -551,7 +543,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string email = user.MAIL;
                 string message = "Report of "+SelectedDate.ToString("d-MM-yyyy")+" : ";
-                GuiMail("20520850@gm.uit.edu.vn", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
+                GuiMail("se104storemanage@gmai.com", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
 
             });
             thread.Start();

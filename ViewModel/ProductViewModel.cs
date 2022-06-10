@@ -55,25 +55,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public int Ammount { get => _Ammount; set
             { 
                 _Ammount = value;
-                Summary = value * Price;
+                Summary = value * Decimal.Parse(Price);
                 OnPropertyChanged();
             }
         }
-        private int _AmmountImport;
-        public int AmmountImport
-        {
-            get => _AmmountImport; set
-            {
-                _AmmountImport = value;
-                Summary = value * Price;
-                OnPropertyChanged();
-            }
-        }
-        private decimal _Price;
-        public decimal Price { get => _Price; set 
+        private string _Price="0";
+        public string Price { get => _Price; set 
             {
                 _Price = value;
-                Summary = Ammount * value;
+                Summary = Ammount * Decimal.Parse(value);
                 OnPropertyChanged();
             } 
         }
@@ -107,7 +97,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     SeletedSupplierType = ncc.TEN;
                     ProductName = SelectedItem.sanpham.TENSP;
                     ProductId = SelectedItem.sanpham.MASP;
-                    Price = (decimal)SelectedItem.sanpham.GIA;
+                    Price = ((decimal)SelectedItem.sanpham.GIA).ToString();
                     Ammount =(int) SelectedItem.sanpham.SL;
                     Note = SelectedItem.sanpham.GHICHU;
                     ImportDate = (DateTime)SelectedItem.sanpham.NGDK;
@@ -168,7 +158,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Console.OutputEncoding = Encoding.Unicode;
             Console.InputEncoding = Encoding.Unicode;
             Ammount = 0;
-            Price = 0;
+            Price = 0.ToString();
             ImportDate = DateTime.Now;
             Phone = "";
             Origin = "";
@@ -194,6 +184,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void ModifyProduct(object p)
         {
+            decimal n1;
+
+            if (!decimal.TryParse(Price, out n1))
+            {
+                MessageBox.Show("Enter price as number only");
+                return;
+            }
             if (SeletedSupplierType == null)
             {
                 MessageBox.Show("Please select supplier");
@@ -205,7 +202,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).FirstOrDefault();
-            sp.GIA = Price;
+            sp.GIA = Decimal.Parse(Price);
             sp.NGDK = ImportDate;
             sp.GHICHU = Note;
             sp.DVT = SeletedProductType;
@@ -262,6 +259,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void AddProduct(object p)
         {
+            decimal n1;
+
+            if (!decimal.TryParse(Price, out n1))
+            {
+                MessageBox.Show("Enter price as number only");
+                return;
+            }
             if (SeletedSupplierType == null)
             {
                 MessageBox.Show("Please select supplier");
@@ -273,7 +277,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var ncc = DataProvider.Ins.DB.NHACUNGCAP.Where(x => x.TEN == SeletedSupplierType).SingleOrDefault();
-            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA=Price,SL=0 ,LOAI=SeletedProductKind,NGDK=ImportDate};
+            var nv = new SANPHAM() { TENSP = ProductName, MASP = ProductId,  PICBI = Converter.Instance.ConvertBitmapImageToBytes(Bitimg),MACC=ncc.MACC,GHICHU=Note,DVT= SeletedProductType,GIA= Decimal.Parse(Price), SL=0 ,LOAI=SeletedProductKind,NGDK=ImportDate};
             DataProvider.Ins.DB.SANPHAM.Add(nv);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();
@@ -325,7 +329,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             while (DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).Count() > 0);
             ProductName = "";
             ImportDate = DateTime.Now;
-            Price = 0;
+            Price = 0.ToString();
             Ammount = 0;
             Bitimg = null;
             imgAvatar = null;

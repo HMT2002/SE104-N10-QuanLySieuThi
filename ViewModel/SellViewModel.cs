@@ -67,9 +67,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private decimal _ThanhTien;
         public decimal ThanhTien { get => _ThanhTien; set { _ThanhTien = value; OnPropertyChanged(); } }
 
-        private decimal _TienTra;
-        public decimal TienTra { get => _TienTra; set { _TienTra = value;
-                if (TienTra < ThanhTienCoGiamGia)
+        private string _TienTra;
+        public string TienTra { get => _TienTra; set { _TienTra = value;
+                decimal n1;
+                if (!decimal.TryParse(value, out n1))
+                {
+                    TienThoi = 0;
+                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+                    return;
+                }
+                if (Decimal.Parse(TienTra) < ThanhTienCoGiamGia)
                 {
                     TienThoi = 0;
                     TextTienThoi = "Trả lại: " + TienThoi.ToString();
@@ -77,7 +84,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 }
                 else
                 {
-                    TienThoi = TienTra - ThanhTienCoGiamGia;
+                    TienThoi = Decimal.Parse(TienTra) - ThanhTienCoGiamGia;
                     TextTienTra = "Khách trả: ";
                     TextTienThoi = "Trả lại: " + TienThoi.ToString();
                 }
@@ -230,7 +237,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
 
             ThanhTien = 0;
-            TienTra = 0;
+            TienTra = 0.ToString();
             TienThoi = 0;
             BillDate = DateTime.Now;
             SelectAmmount = 1;
@@ -275,7 +282,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             List<string> finame = new List<string>();
             finame.Add(@"bills/" + IdBill + ".png");
             finame.Add(@"bills/" + IdBill + ".pdf");
-            //SendBill(finame);
+            SendBill(finame);
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
             loadReport();
@@ -324,15 +331,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string emailnv = user.MAIL;
                 string message = "Bill " + IdBill + " : ";
-                GuiMail("20520850@gm.uit.edu.vn", emailnv, "Bill " + IdBill, message, atts);
+                GuiMail("se104storemanage@gmai.com", emailnv, "Bill " + IdBill, message, atts);
 
-                var khach = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Khachhang.khachhang.MAKH).SingleOrDefault();
-                string emailkh = khach.MAIL;
-                GuiMail("20520850@gm.uit.edu.vn", emailkh, "Bill " + IdBill, message, atts);
+                //var khach = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Khachhang.khachhang.MAKH).SingleOrDefault();
+                //string emailkh = khach.MAIL;
+                //GuiMail("se104storemanage@gmai.com", emailkh, "Bill " + IdBill, message, atts);
 
             });
             thread.Start();
-            System.Windows.MessageBox.Show("Sent bill!, Please check your email");
 
         }
 
@@ -413,10 +419,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void confirmPayment(Window p)
         {
-            if (TienTra < ThanhTienCoGiamGia)
+            decimal n1;
+            if (!decimal.TryParse(TienTra, out n1))
+            {
+                MessageBox.Show("Enter payment as number only");
+                return;
+            }
+            if (Decimal.Parse(TienTra) < ThanhTienCoGiamGia)
             {
                 return;
             }
+
             var hd = new HOADON() { SOHD = IdBill, NGHD = BillDate, MANV = MainViewModel._currentUser, MAKH = Khachhang.khachhang.MAKH, TRIGIA = ThanhTienCoGiamGia, GIAMGIA = GiamGia };
             foreach (SanPham sp in ListSelecteditems)
             {
@@ -484,7 +497,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             ThanhTien = 0;
             ThanhTienCoGiamGia = 0;
             GiamGia = 0;
-            TienTra = 0;
+            TienTra = 0.ToString();
             TienThoi = 0;
             BillDate = DateTime.Now;
         }
