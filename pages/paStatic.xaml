@@ -48,9 +48,9 @@
             <Grid Grid.Column="0">
                 <Calendar materialDesign:CalendarAssist.Orientation="Horizontal"
                           Width="370"
-                          Height="auto"
+                          Height="301"
                           materialDesign:HintAssist.Hint="Thời điểm"
-                          SelectedDate="{Binding SelectedDate}" />
+                          SelectedDate="{Binding SelectedDate}" Margin="0,0,-0.4,-6.2" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
@@ -62,7 +62,7 @@
                         <materialDesign:Card Padding="5"
                                              materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                              Foreground="{x:Null}"
-                                             UniformCornerRadius="10">
+                                             UniformCornerRadius="10" Height="302">
                             <!--Đừng sửa cái Name-->
                             <WrapPanel Name="pnlpieChart"
                                        Background="AliceBlue">
@@ -79,7 +79,7 @@
                                                       Series="{Binding SeriesMostProduct}"
                                                       Name="pieChart"
                                                       Height="250"
-                                                      Width="300">
+                                                      Width="300" Margin="0,24,0,-26">
 
                                             <Wpf:PieChart.ChartLegend>
                                                 <Wpf:DefaultLegend BulletSize="15"
@@ -116,7 +116,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <Button Margin="5"
+                        <Button Margin="0,5,128,4.2"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="180"
                                 Height="50"
@@ -124,7 +124,7 @@
                                 Content="Print statistic"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding PrintStatisticCmd}"
-                                DataContext="{StaticResource StaticVM}" />
+                                DataContext="{StaticResource StaticVM}" HorizontalAlignment="Right" />
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -132,9 +132,9 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <materialDesign:Card Width="200">
+                            <materialDesign:Card Width="209" HorizontalAlignment="Right" Margin="0,0,0.4,-0.4" Height="242" VerticalAlignment="Bottom">
                                 <StackPanel>
-                                    <TextBlock Text="Tổng doanh thu tháng này là: "
+                                    <TextBlock Text="This Month Total Revenue: "
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"
                                                Foreground="Black"
@@ -148,18 +148,18 @@
                             </materialDesign:Card>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <materialDesign:Card Width="250">
+                            <materialDesign:Card Width="208" HorizontalAlignment="Right" Margin="0,0,-0.4,-0.4" Height="242" VerticalAlignment="Bottom">
                                 <StackPanel>
-                                <TextBlock Text="Doanh thu so với tháng trước: "
+                                    <TextBlock Text="Compared to the Previous Month: "
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            Foreground="Black"
                                            FontWeight="ExtraBold" />
-                                <TextBlock Text="{Binding TextTiLeSoSanhThangTruoc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    <TextBlock Text="{Binding TextTiLeSoSanhThangTruoc,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            Foreground="Black"
-                                           FontWeight="ExtraBold" />                                    
+                                           FontWeight="ExtraBold" />
                                 </StackPanel>
 
                             </materialDesign:Card>
@@ -238,9 +238,8 @@
                                     <Wpf:CartesianChart LegendLocation="Top"
                                                         Series="{Binding SeriesMoney}"
                                                         Height="300"
-                                                        Width="700"
                                                         x:Name="lineChart"
-                                                        Hoverable="True">
+                                                        Hoverable="True" Margin="0,0,0.2,-15.2" HorizontalAlignment="Right" Width="547" VerticalAlignment="Bottom">
                                         <Wpf:CartesianChart.ChartLegend>
                                             <Wpf:DefaultLegend BulletSize="5"
                                                                TextBlock.Foreground="#0B87F4"
@@ -289,7 +288,7 @@
                     <materialDesign:Card Padding="5"
                                          materialDesign:ShadowAssist.ShadowDepth="Depth3"
                                          Foreground="{x:Null}"
-                                         UniformCornerRadius="10">
+                                         UniformCornerRadius="10" Width="556">
                         <!--Đừng sửa cái Name-->
                         <WrapPanel Name="pnlColumnChart"
                                    Background="AliceBlue">
@@ -299,12 +298,12 @@
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
                                 <Grid Grid.Row="0">
-                                    <Wpf:CartesianChart LegendLocation="Right"
+                                    <Wpf:CartesianChart LegendLocation="Top"
                                                         Series="{Binding SeriesProduct}"
                                                         Height="300"
                                                         Width="540"
                                                         Name="barChart"
-                                                        Hoverable="True">
+                                                        Hoverable="True" Margin="0,0,-6.4,-15.2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
 
                                         <Wpf:CartesianChart.ChartLegend>
                                             <Wpf:DefaultLegend BulletSize="5"

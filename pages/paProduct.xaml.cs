@@ -30,5 +30,7 @@ namespace SE104_N10_QuanLySieuThi
         {
             InitializeComponent();
         }
+
+        
     }
 }
