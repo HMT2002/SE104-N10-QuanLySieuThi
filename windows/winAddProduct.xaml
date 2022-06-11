@@ -88,29 +88,29 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Nhà cung cấp"
+                                          materialDesign:HintAssist.Hint="Supplier"
                                           ItemsSource="{Binding SupplierType,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
+                                          Width="115"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,-11.4,20.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="Type"
                                           ItemsSource="{Binding ProductType,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
+                                          Width="94"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,-0.4,20.6" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                                 </ComboBox>
                             </Grid>
                             <Grid Grid.Column="2">
-                                <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Ngày nhập hàng"
+                                <DatePicker Width="104"
+                                            materialDesign:HintAssist.Hint="Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding ImportDate}"
-                                            IsEnabled="False" />
+                                            IsEnabled="False" HorizontalAlignment="Right" Margin="0,24,-0.4,23.6" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -121,20 +121,20 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Tên sản phẩm"
+                                <TextBox materialDesign:HintAssist.Hint="Product Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductName}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Mã mặt hàng"
+                                <TextBox materialDesign:HintAssist.Hint="Product ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductId}"
                                          IsReadOnly="True" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Giá"
+                                <TextBox materialDesign:HintAssist.Hint="Price"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
@@ -163,7 +163,7 @@
                                          AcceptsReturn="True"
                                          VerticalScrollBarVisibility="Auto"
                                          SpellCheck.IsEnabled="True"
-                                         materialDesign:HintAssist.Hint="Ghi chú"
+                                         materialDesign:HintAssist.Hint="Note"
                                          Text="{Binding Note}"
                                          Height="80"
                                          Margin="5" />
@@ -176,9 +176,9 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                            <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_THÊM"
+                                    Content="_ADD"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Center"
                                     Margin="10"
@@ -187,12 +187,12 @@
                                     CommandParameter="{Binding ElementName=AddProductWin}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" />
 
-                                
+
                             </Grid>
                             <Grid Grid.Column="1">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_MỚI"
+                                        Content="_NEW"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
                                         Margin="10"

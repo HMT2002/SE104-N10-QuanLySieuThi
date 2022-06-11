@@ -40,7 +40,7 @@
                                   materialDesign:TextFieldAssist.HasClearButton="True"
                                   Width="120"
                                   Height="50"
-                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="22,31,-13.2,19" />
 
                     </Grid>
                     <Grid Grid.Column="1">
@@ -53,17 +53,17 @@
                             </Grid>
                             <Grid Grid.Column="0">
                                 <materialDesign:PackIcon Kind="Magnify"
-                                                         VerticalAlignment="Center" />
+                                                         VerticalAlignment="Center" Margin="20,48,0,36" />
                             </Grid>
 
-                            <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                            <Grid Margin="10,0,0.2,0">
+                                <TextBox materialDesign:HintAssist.Hint="Search"
                                          Name="txtSearch"
                                          Width="400"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                          VerticalAlignment="Center"
-                                         Margin="30 0 0 0" />
+                                         Margin="31,32,0,32" HorizontalAlignment="Left" />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -71,7 +71,7 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Margin="10 10 10 10"
+                    <Button Margin="10,25,23,25"
                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                             Width="auto"
                             Height="50"
@@ -90,19 +90,19 @@
                               ItemsSource="{Binding DealingHistoryList,Mode=TwoWay}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
                               Width="auto"
-                              Height="auto"
+                              Height="459"
                               SelectedItem="{Binding SelectedImport}"
                               >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.MANH}"
-                                                Header="Mã nhập hàng"
+                                                Header="Import ID"
                                                 Width="150" />
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NHANVIEN.HOTEN}"
-                                                Header="Nhân viên"
+                                                Header="Employee"
                                                 Width="150" />
                                 <GridViewColumn DisplayMemberBinding="{Binding nhaphang.NGNH}"
-                                                Header="Ngày"
+                                                Header="Date"
                                                 Width="150" />
                             </GridView>
                         </ListView.View>

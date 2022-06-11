@@ -175,28 +175,28 @@
                             <Grid Grid.Column="0">
 
 
-                                <TextBox materialDesign:HintAssist.Hint="Mã Nhà cung cấp"
+                                <TextBox materialDesign:HintAssist.Hint="Supplier ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertId}"
                                          IsReadOnly="True" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Tên Nhà cung cấp"
+                                <TextBox materialDesign:HintAssist.Hint="Supplier Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding SuppliertName}" />
 
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Số điện thoại"
+                                <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
                                          Text="{Binding Phone}" />
                             </Grid>
                             <Grid Grid.Column="3">
-                                <TextBox materialDesign:HintAssist.Hint="Nước"
+                                <TextBox materialDesign:HintAssist.Hint="Nationality"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Margin="0,0,-0.2,-0.4"
@@ -210,7 +210,7 @@
                                      AcceptsReturn="True"
                                      VerticalScrollBarVisibility="Auto"
                                      SpellCheck.IsEnabled="True"
-                                     materialDesign:HintAssist.Hint="Ghi chú"
+                                     materialDesign:HintAssist.Hint="Note"
                                      Text="{Binding Note}"
                                      Height="100"
                                      Margin="5" />
@@ -218,7 +218,7 @@
                         <Grid Grid.Row="3">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="_THÊM"
+                                    Content="_ADD"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Right"
                                     Margin="10"

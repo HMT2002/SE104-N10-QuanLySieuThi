@@ -45,7 +45,7 @@
                     Margin="0 0 0 0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    Content="REGIST CUSTOMER"
+                    Content="REGISTRATION"
                     FontSize="18"
                     FontWeight="Bold"
                     Foreground="Gray" />
@@ -70,7 +70,7 @@
                 materialDesign:ButtonProgressAssist.Value="-1"
                 Command="{Binding SendVerifyCmd}"
                 CommandParameter="{Binding ElementName=RegistWin}"
-                Content="SEND VERIFY"
+                Content="VERIFY"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
         </Grid>

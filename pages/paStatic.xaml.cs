@@ -24,5 +24,10 @@ namespace SE104_N10_QuanLySieuThi.pages
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

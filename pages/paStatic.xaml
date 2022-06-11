@@ -65,7 +65,7 @@
                                              UniformCornerRadius="10" Height="302">
                             <!--Đừng sửa cái Name-->
                             <WrapPanel Name="pnlpieChart"
-                                       Background="AliceBlue">
+                                       Background="AliceBlue" Margin="0,0,0,-9.2" Width="308">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition />
@@ -78,8 +78,8 @@
                                                       LegendLocation="Top"
                                                       Series="{Binding SeriesMostProduct}"
                                                       Name="pieChart"
-                                                      Height="250"
-                                                      Width="300" Margin="0,24,0,-26">
+                                                      Height="292"
+                                                      Width="300" Margin="0,0,0,-68" VerticalAlignment="Bottom" HorizontalAlignment="Right">
 
                                             <Wpf:PieChart.ChartLegend>
                                                 <Wpf:DefaultLegend BulletSize="15"
@@ -116,15 +116,15 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <Button Margin="0,5,128,4.2"
+                        <Button Margin="0,0,128,0.2"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="180"
-                                Height="50"
+                                Height="Auto"
                                 ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
                                 Content="Print statistic"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding PrintStatisticCmd}"
-                                DataContext="{StaticResource StaticVM}" HorizontalAlignment="Right" />
+                                DataContext="{StaticResource StaticVM}" HorizontalAlignment="Right" Click="Button_Click" />
                     </Grid>
                     <Grid Grid.Row="1">
                         <Grid.ColumnDefinitions>
@@ -132,7 +132,7 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <materialDesign:Card Width="209" HorizontalAlignment="Right" Margin="0,0,0.4,-0.4" Height="242" VerticalAlignment="Bottom">
+                            <materialDesign:Card Width="214" HorizontalAlignment="Right" Margin="0,0,0.4,0" Height="260" VerticalAlignment="Top">
                                 <StackPanel>
                                     <TextBlock Text="This Month Total Revenue: "
                                                VerticalAlignment="Center"
@@ -148,7 +148,7 @@
                             </materialDesign:Card>
                         </Grid>
                         <Grid Grid.Column="1">
-                            <materialDesign:Card Width="208" HorizontalAlignment="Right" Margin="0,0,-0.4,-0.4" Height="242" VerticalAlignment="Bottom">
+                            <materialDesign:Card Width="214" HorizontalAlignment="Left" Margin="1,0,-0.6,0" Height="260" VerticalAlignment="Top">
                                 <StackPanel>
                                     <TextBlock Text="Compared to the Previous Month: "
                                            VerticalAlignment="Center"
@@ -170,7 +170,7 @@
             </Grid>
 
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Margin="0,310,0,-0.2" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto"/>
@@ -239,7 +239,7 @@
                                                         Series="{Binding SeriesMoney}"
                                                         Height="300"
                                                         x:Name="lineChart"
-                                                        Hoverable="True" Margin="0,0,0.2,-15.2" HorizontalAlignment="Right" Width="547" VerticalAlignment="Bottom">
+                                                        Hoverable="True" Margin="0,0,0.2,-15.2" HorizontalAlignment="Right" Width="547" VerticalAlignment="Top">
                                         <Wpf:CartesianChart.ChartLegend>
                                             <Wpf:DefaultLegend BulletSize="5"
                                                                TextBlock.Foreground="#0B87F4"
@@ -291,19 +291,19 @@
                                          UniformCornerRadius="10" Width="556">
                         <!--Đừng sửa cái Name-->
                         <WrapPanel Name="pnlColumnChart"
-                                   Background="AliceBlue">
+                                   Background="AliceBlue" Margin="0,0,-9.6,0" Height="309">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
+                                <Grid Grid.Row="0" Margin="0,0,0.4,15.8" Grid.RowSpan="2">
                                     <Wpf:CartesianChart LegendLocation="Top"
                                                         Series="{Binding SeriesProduct}"
                                                         Height="300"
-                                                        Width="540"
+                                                        Width="539"
                                                         Name="barChart"
-                                                        Hoverable="True" Margin="0,0,-6.4,-15.2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                                        Hoverable="True" Margin="-5,0,0,-15" HorizontalAlignment="Left" VerticalAlignment="Top">
 
                                         <Wpf:CartesianChart.ChartLegend>
                                             <Wpf:DefaultLegend BulletSize="5"
@@ -325,7 +325,7 @@
                                     </Wpf:CartesianChart>
 
                                 </Grid>
-                                <Grid Grid.Row="1">
+                                <Grid Grid.Row="1" Margin="0,16.2,0.4,-0.2">
                                     <TextBlock Text="{Binding TextNgayThongKe,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                                VerticalAlignment="Center"
                                                HorizontalAlignment="Center"

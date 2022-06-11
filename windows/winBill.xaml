@@ -56,7 +56,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <DatePicker Width="auto"
-                                    materialDesign:HintAssist.Hint="Ngày bán hàng"
+                                    materialDesign:HintAssist.Hint="Date of Sales"
                                     Style="{StaticResource MaterialDesignFilledDatePicker}"
                                     SelectedDate="{Binding BillDate}"
                                     IsEnabled="True"
@@ -78,21 +78,21 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
-                                                    Header="Stt" />
+                                                    Header="No." />
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.MASP}"
-                                                    Header="Mã sản phẩm"
+                                                    Header="Product ID"
                                                     Width="150" />
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.TENSP}"
-                                                    Header="Tên hàng"
+                                                    Header="Product Name"
                                                     Width="150" />
                                     <GridViewColumn DisplayMemberBinding="{Binding Amount}"
-                                                    Header="Số lượng"
+                                                    Header="Quantity"
                                                     Width="120" />
                                     <GridViewColumn DisplayMemberBinding="{Binding sanpham.GIA}"
-                                                    Header="Đơn giá"
+                                                    Header="Price"
                                                     Width="110" />
                                     <GridViewColumn DisplayMemberBinding="{Binding Summary}"
-                                                    Header="Thành tiền"
+                                                    Header="Total price"
                                                     Width="150" />
                                 </GridView>
                             </ListView.View>
@@ -131,7 +131,7 @@
                             </materialDesign:Card>
                         </Grid>
                         <Grid Grid.Column="2">
-                            <TextBox materialDesign:HintAssist.Hint="Giảm giá (%)"
+                            <TextBox materialDesign:HintAssist.Hint="Discount (%)"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      VerticalAlignment="Center"
                                      Text="{Binding GiamGia}"
