@@ -24,5 +24,10 @@ namespace SE104_N10_QuanLySieuThi
         {
             InitializeComponent();
         }
+
+        void Button_Click(Object sender, EventArgs e)
+        {
+
+        }
     }
 }

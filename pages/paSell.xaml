@@ -27,8 +27,8 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <materialDesign:Card Margin="20"
-                                         Background="AliceBlue">
+                    <materialDesign:Card Margin="0,0,7.8,32"
+                                         Background="AliceBlue" Height="557" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="333">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -68,24 +68,23 @@
                                     </ComboBox>
                                 </Grid>
                                 <Grid Grid.Row="1">
-                                    <TextBox materialDesign:HintAssist.Hint="Điền thông tin ở đây"
+                                    <TextBox materialDesign:HintAssist.Hint="Fill in your information"
                                              Name="txtSearch"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                             VerticalAlignment="Center"
-                                             Margin="5">
+                                             VerticalAlignment="Bottom"
+                                             Margin="0,0,9.8,29.6" Height="35" HorizontalAlignment="Right" Width="313">
                                     </TextBox>
                                 </Grid>
                             </Grid>
                             <Grid Grid.Row="2">
 
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                          materialDesign:HintAssist.Hint="Khách hàng"
+                                          materialDesign:HintAssist.Hint="Customer"
                                           ItemsSource="{Binding ListCustomer,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
-                                          Height="50"
-                                          SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                          SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,57,-0.2,76.6">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding khachhang.HOTEN}" />
@@ -99,11 +98,11 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <materialDesign:Card Margin="20"
-                                         Background="AliceBlue">
-                        <ScrollViewer>
+                    <materialDesign:Card Margin="0,0,19.6,31"
+                                         Background="AliceBlue" HorizontalAlignment="Right" Width="334" Height="557" VerticalAlignment="Bottom">
+                        <ScrollViewer Margin="0,26,-0.4,0">
                             <ListBox ItemsSource="{Binding SanPhamList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
+                                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}" Height="542">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <UniformGrid Columns="5"
@@ -176,9 +175,9 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
-                            <materialDesign:Card Margin="20"
+                            <materialDesign:Card Margin="4,33,35.6,19.8"
                                                  Background="AliceBlue">
-                                <ScrollViewer>
+                                <ScrollViewer Margin="0,0,-0.4,1">
                                     <StackPanel>
                                         <ListView x:Name="listboxSelectedItem"
                                                   ItemsSource="{Binding ListSelecteditems}"
@@ -253,16 +252,16 @@
                         <Grid Grid.Row="1">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                    Content="Thành tiền"
+                                    Content="Total"
                                     VerticalAlignment="Bottom"
-                                    Margin="220,20,0,20"
+                                    Margin="0,0,51.6,-14.6"
                                     Command="{Binding BuyProductCmd}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    HorizontalAlignment="Right" />
+                                    HorizontalAlignment="Right" Height="33" Width="83" />
                         </Grid>
                         <Grid Grid.Row="2">
-                            <materialDesign:Card Margin="20"
-                                                 Background="AliceBlue">
+                            <materialDesign:Card Margin="0,0,31.6,31.6"
+                                                 Background="AliceBlue" Height="234" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="334">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
@@ -277,22 +276,22 @@
                                         </Grid>
                                         <Grid Grid.Column="0">
                                             <materialDesign:PackIcon Kind="Magnify"
-                                                                     VerticalAlignment="Center" />
+                                                                     VerticalAlignment="Center" Margin="0,18,303.6,-10.8" HorizontalAlignment="Right" />
                                         </Grid>
 
-                                        <Grid Grid.Column="1">
+                                        <Grid Margin="0,-2,-0.4,2.2">
                                             <TextBox VerticalAlignment="Center"
-                                                     Margin="30 0 0 0 "
-                                                     Width="auto"
+                                                     Margin="0,14,22.6,-13.8"
+                                                     Width="273"
                                                      materialDesign:HintAssist.Hint="Find"
                                                      materialDesign:HintAssist.HelperTextFontSize="20"
-                                                     Text="{Binding SearchSellHistory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                                                     Text="{Binding SearchSellHistory,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" />
 
                                         </Grid>
                                     </Grid>
                                     <Grid Grid.Row="1">
                                         <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                                      VerticalScrollBarVisibility="Auto">
+                                                      VerticalScrollBarVisibility="Auto" Margin="0,-2,-0.4,2.4">
                                             <StackPanel>
                                                 <ListView x:Name="listboxSellHistory"
                                                           ItemsSource="{Binding ListSellHistory}"

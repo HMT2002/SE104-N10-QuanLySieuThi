@@ -39,14 +39,15 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,-83,0">
+
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Type"
-                                  Margin="20,15,20,10"
-                                  ItemsSource="{Binding SearchType,Mode=TwoWay}"
+                                  ItemsSource="{Binding SearchType, Mode=TwoWay}"
                                   materialDesign:TextFieldAssist.HasClearButton="True"
-                                  Width="120"
-                                  SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontSize="14"/>
+                                  Width="94"
+                                  Height="50"
+                                  SelectedItem="{Binding SearchTypeItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5,15"/>
 
                         <Grid>
                             <Grid>
@@ -57,18 +58,17 @@
                             </Grid>
                             <Grid Grid.Column="0">
                                 <materialDesign:PackIcon Kind="Magnify"
-                                                             VerticalAlignment="Center" RenderTransformOrigin="0.6,1.175" Margin="-11,34,0,24" Height="22" Width="20" />
+                                                             VerticalAlignment="Center" Margin="22,32,0,32" />
                             </Grid>
 
-                            <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Type here to find"
-                                     Name="txtSearch"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                     VerticalAlignment="Center"
-                                     Margin="22,5,538,10"
-                                     Width="400"
-                                     FontSize="20" Height="65"/>
+                            <Grid Margin="14,0,-13.6,0">
+                                <TextBox x:Name="CommentTextBox"
+                                             VerticalAlignment="Center"
+                                             Margin="30 10 0 10"
+                                             Width="400"
+                                             materialDesign:HintAssist.Hint="Find"
+                                             materialDesign:HintAssist.HelperTextFontSize="20"
+                                             Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                             </Grid>
                         </Grid>
@@ -78,22 +78,22 @@
 
                 </Grid>
                 <Grid Grid.Column="1">
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Margin="10 10 20 10"
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="296">
+                        <Button Margin="10,15"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="auto"
                                 Height="50"
                                 ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Add product"
+                                Content="Add Product"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding BillCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
-                        <Button Margin="10 10 20 10"
+                        <Button Margin="10,15"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Width="auto"
                                 Height="50"
                                 ToolTip="Resource name: MaterialDesignRaisedLightDarkButton"
-                                Content="Add supplier"
+                                Content="Add Supplier"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                                 Command="{Binding openNewSupplierCommand}"
                                 CommandParameter="{Binding ElementName=ProductPage}" />
