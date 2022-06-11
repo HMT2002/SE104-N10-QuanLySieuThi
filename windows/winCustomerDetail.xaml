@@ -116,7 +116,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="ID"
+                                <TextBox materialDesign:HintAssist.Hint="Customer ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Id}"
@@ -124,14 +124,14 @@
                             </Grid>
                             <Grid Grid.Column="1">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Birth"
+                                            materialDesign:HintAssist.Hint="Date of Birth"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Birthday}"
                                             IsEnabled="False" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Join Date"
+                                            materialDesign:HintAssist.Hint="Register Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Joineddate}"
                                             IsEnabled="False" />
@@ -145,19 +145,19 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Name"
+                                <TextBox materialDesign:HintAssist.Hint="Customer Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Name}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Phone Number"
+                                <TextBox materialDesign:HintAssist.Hint="Phone number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Phone}" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Gross"
+                                <TextBox materialDesign:HintAssist.Hint="Spending"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Gross}" />
@@ -228,7 +228,7 @@
                             <Grid Grid.Column="1">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_EDIT"
+                                        Content="_MODIFY"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
                                         Margin="10"

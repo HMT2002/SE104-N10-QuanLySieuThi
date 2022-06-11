@@ -91,26 +91,26 @@
                                           materialDesign:HintAssist.Hint="Supplier"
                                           ItemsSource="{Binding SupplierType,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
+                                          Width="115"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14" />
+                                          SelectedItem="{Binding SeletedSupplierType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,-11.4,20.6" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
                             </Grid>
                             <Grid Grid.Column="1">
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="Type"
                                           ItemsSource="{Binding ProductType,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
-                                          Width="auto"
+                                          Width="94"
                                           Height="50"
-                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontFamily="Segoe UI" FontSize="14">
+                                          SelectedItem="{Binding SeletedProductType,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,-0.4,20.6" VerticalAlignment="Bottom" HorizontalAlignment="Right">
                                 </ComboBox>
                             </Grid>
                             <Grid Grid.Column="2">
-                                <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Import Date"
+                                <DatePicker Width="104"
+                                            materialDesign:HintAssist.Hint="Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding ImportDate}"
-                                            IsEnabled="False" FontFamily="Segoe UI" FontSize="14" />
+                                            IsEnabled="False" HorizontalAlignment="Right" Margin="0,24,-0.4,23.6" />
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
@@ -121,13 +121,13 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Product's Name"
+                                <TextBox materialDesign:HintAssist.Hint="Product Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductName}" FontFamily="Segoe UI" FontSize="14" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Product's ID"
+                                <TextBox materialDesign:HintAssist.Hint="Product ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding ProductId}"
@@ -173,7 +173,7 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0" Margin="5,43,5.4,4.2">
+                            <Grid Grid.Column="0">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
                                     Content="_ADD"

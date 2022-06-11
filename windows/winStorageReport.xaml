@@ -40,30 +40,30 @@ ItemsSource="{Binding listSelecteditems}">
     <GridView>
       <GridViewColumn
         DisplayMemberBinding="{Binding Stt}"
-        Header="Stt" />
+        Header="No." />
       <GridViewColumn
         DisplayMemberBinding="{Binding MaSP}"
-        Header="Mã sản phẩm"
+        Header="Product ID"
       />
       <GridViewColumn
         DisplayMemberBinding="{Binding TenSP}"
-        Header="Tên hàng"
+        Header="Product Name"
       />
       <GridViewColumn
         DisplayMemberBinding="{Binding SoLuongSP}"
-        Header="Tồn đầu kỳ"
+        Header="Beginning inventory"
       />
       <GridViewColumn
         DisplayMemberBinding="{Binding DonGia}"
-        Header="Nhập"
+        Header="Price"
       />
       <GridViewColumn
         DisplayMemberBinding="{Binding ThanhTien}"
-        Header="Xuất"
+        Header="Total price"
        />
         <GridViewColumn
         DisplayMemberBinding="{Binding ThanhTien}"
-        Header="Tồn cuối kỳ"
+        Header="Ending inventory"
         />
         <GridViewColumn
         DisplayMemberBinding="{Binding ThanhTien}"

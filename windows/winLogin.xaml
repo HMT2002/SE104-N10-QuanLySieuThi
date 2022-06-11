@@ -99,7 +99,7 @@
                 materialDesign:ButtonProgressAssist.Value="-1"
                 Command="{Binding RegistCmd}"
                 CommandParameter="{Binding ElementName=LoginWin}"
-                Content="REGIST"
+                Content="REGISTER"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Style="{StaticResource MaterialDesignRaisedButton}" />
 

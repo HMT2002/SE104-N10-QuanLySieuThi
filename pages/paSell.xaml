@@ -26,8 +26,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
-                    <materialDesign:Card Margin="0,0,7.8,32"
+                <Grid Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,4.8,0" Width="367" Height="620" VerticalAlignment="Bottom">
+                    <materialDesign:Card Margin="0,0,29.8,29"
                                          Background="AliceBlue" Height="557" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="333">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -47,8 +47,8 @@
                                               ItemsSource="{Binding CategoryList,Mode=TwoWay}"
                                               SelectedItem="{Binding SearchCategory,Mode=TwoWay}"
                                               materialDesign:TextFieldAssist.HasClearButton="True"
-                                              Width="auto"
-                                              Height="auto">
+                                              Width="311"
+                                              Height="157">
                                     </ListView>
                                 </ScrollViewer>
                             </Grid>
@@ -67,24 +67,24 @@
                                               SelectedItem="{Binding SearchTypeItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     </ComboBox>
                                 </Grid>
-                                <Grid Grid.Row="1">
-                                    <TextBox materialDesign:HintAssist.Hint="Fill in your information"
+                                <Grid Grid.Row="1" Margin="0,0,-0.2,31.6">
+                                    <TextBox materialDesign:HintAssist.Hint="Search"
                                              Name="txtSearch"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              Text="{Binding Search,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                              VerticalAlignment="Bottom"
-                                             Margin="0,0,9.8,29.6" Height="35" HorizontalAlignment="Right" Width="313">
+                                             Margin="0,0,10,38" Height="35" HorizontalAlignment="Right" Width="313">
                                     </TextBox>
                                 </Grid>
                             </Grid>
-                            <Grid Grid.Row="2">
+                            <Grid Grid.Row="1" Margin="0,154.4,-0.2,-0.2" Grid.RowSpan="2">
 
                                 <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                           materialDesign:HintAssist.Hint="Customer"
                                           ItemsSource="{Binding ListCustomer,Mode=TwoWay}"
                                           materialDesign:TextFieldAssist.HasClearButton="True"
                                           Width="auto"
-                                          SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,57,-0.2,76.6">
+                                          SelectedItem="{Binding SeletedCustomer,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,157" Height="50" VerticalAlignment="Bottom">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding khachhang.HOTEN}" />
@@ -97,15 +97,15 @@
                     </materialDesign:Card>
 
                 </Grid>
-                <Grid Grid.Column="1">
-                    <materialDesign:Card Margin="0,0,19.6,31"
-                                         Background="AliceBlue" HorizontalAlignment="Right" Width="334" Height="557" VerticalAlignment="Bottom">
-                        <ScrollViewer Margin="0,26,-0.4,0">
+                <Grid Grid.ColumnSpan="2" Margin="350,0,0.4,0">
+                    <materialDesign:Card Margin="0,0,10,31"
+                                         Background="AliceBlue" HorizontalAlignment="Right" Width="384" Height="557" VerticalAlignment="Bottom">
+                        <ScrollViewer Margin="0,0,0,-0.2">
                             <ListBox ItemsSource="{Binding SanPhamList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}" Height="542">
+                                     SelectedItem="{Binding SelectedItem,Mode=TwoWay}" Height="555" Width="355">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <UniformGrid Columns="5"
+                                        <UniformGrid Columns="2"
                                                      IsItemsHost="True"
                                                      Width="auto"
                                                      Height="auto">
@@ -116,11 +116,11 @@
                                     <DataTemplate>
                                         <WrapPanel HorizontalAlignment="Stretch"
                                                    VerticalAlignment="Stretch">
-                                            <materialDesign:Card Background="NavajoWhite"
-                                                                 UniformCornerRadius="10"
+                                            <materialDesign:Card Background="White"
+                                                                 UniformCornerRadius="15"
                                                                  HorizontalAlignment="Stretch"
-                                                                 HorizontalContentAlignment="Stretch"
-                                                                 VerticalContentAlignment="Stretch"
+                                                                 HorizontalContentAlignment="Left"
+                                                                 VerticalContentAlignment="Top"
                                                                  VerticalAlignment="Stretch">
                                                 <StackPanel Background="#00F5F50C"
                                                             Height="auto"
@@ -128,8 +128,8 @@
                                                             HorizontalAlignment="Stretch"
                                                             VerticalAlignment="Stretch">
                                                     <Image Source="{Binding Bitimg}"
-                                                           Width="100"
-                                                           Height="100"
+                                                           Width="90"
+                                                           Height="90"
                                                            Margin="3 3 3 3"
                                                            HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"></Image>
@@ -174,10 +174,10 @@
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <materialDesign:Card Margin="4,33,35.6,19.8"
+                        <Grid Grid.Row="0" Margin="0,0,9.6,10.4" Height="292" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="364">
+                            <materialDesign:Card Margin="22,33,17,20"
                                                  Background="AliceBlue">
-                                <ScrollViewer Margin="0,0,-0.4,1">
+                                <ScrollViewer Margin="10,10,-0.6,1" HorizontalAlignment="Left" Width="309">
                                     <StackPanel>
                                         <ListView x:Name="listboxSelectedItem"
                                                   ItemsSource="{Binding ListSelecteditems}"
@@ -195,9 +195,11 @@
                                                         </Grid.ColumnDefinitions>
                                                         <Grid Grid.Column="0">
                                                             <Image Source="{Binding Bitimg}"
-                                                                   MaxHeight="40"
-                                                                   MaxWidth="40"
-                                                                   Margin="3 3 3 3"></Image>
+                                                                   RenderOptions.BitmapScalingMode="Fant"
+                                                                   Height="40"
+                                                                   Width="40"
+                                                                   Margin="3 3 3 3"
+                                                                   HorizontalAlignment="Center"></Image>
 
                                                         </Grid>
                                                         <Grid Grid.Column="1">
@@ -212,18 +214,18 @@
                                                                     CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
                                                                     ToolTip="Thu nhỏ"
                                                                     ToolBar.OverflowMode="AsNeeded"
-                                                                    Background="#F0F8FF">
+                                                                    Background="#FF2800">
                                                                 <materialDesign:PackIcon Kind="Minus" />
                                                             </Button>
 
                                                         </Grid>
                                                         <Grid Grid.Column="3">
                                                             <TextBlock Text="{Binding Amount,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                                                       Width="30"
+                                                                       Width="40"
                                                                        FontSize="13"
                                                                        Margin="3 3 3 3"
                                                                        VerticalAlignment="Center"
-                                                                       HorizontalAlignment="Center">
+                                                                       HorizontalAlignment="Right">
 
                                                             </TextBlock>
 
@@ -233,7 +235,7 @@
                                                                     CommandParameter="{Binding RelativeSource={ RelativeSource Mode=FindAncestor, AncestorType={x:Type ListViewItem}}}"
                                                                     ToolTip="Đóng"
                                                                     ToolBar.OverflowMode="AsNeeded"
-                                                                    Background="#FF2800">
+                                                                    Background="#FF00FF00">
                                                                 <materialDesign:PackIcon Kind="Plus" />
                                                             </Button>
 
@@ -249,19 +251,19 @@
                             </materialDesign:Card>
 
                         </Grid>
-                        <Grid Grid.Row="1">
+                        <Grid RenderTransformOrigin="0.498,1.228" Margin="0,287,-0.4,293.4" Grid.RowSpan="3">
                             <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton"
                                     Content="Total"
                                     VerticalAlignment="Bottom"
-                                    Margin="0,0,51.6,-14.6"
+                                    Margin="0,0,68,-2"
                                     Command="{Binding BuyProductCmd}"
                                     IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                                    HorizontalAlignment="Right" Height="33" Width="83" />
+                                    HorizontalAlignment="Right" Height="40" Width="117" />
                         </Grid>
-                        <Grid Grid.Row="2">
-                            <materialDesign:Card Margin="0,0,31.6,31.6"
-                                                 Background="AliceBlue" Height="234" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="334">
+                        <Grid Grid.Row="2" Margin="0,34.8,-0.4,0" HorizontalAlignment="Right" Width="374">
+                            <materialDesign:Card Margin="0,-13,32,10"
+                                                 Background="AliceBlue" Height="269" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="342">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
@@ -291,7 +293,7 @@
                                     </Grid>
                                     <Grid Grid.Row="1">
                                         <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                                      VerticalScrollBarVisibility="Auto" Margin="0,-2,-0.4,2.4">
+                                                      VerticalScrollBarVisibility="Auto" Margin="10,24,-0.6,9.6">
                                             <StackPanel>
                                                 <ListView x:Name="listboxSellHistory"
                                                           ItemsSource="{Binding ListSellHistory}"
