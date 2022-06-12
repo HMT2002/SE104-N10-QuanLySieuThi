@@ -1,0 +1,23 @@
+   =========================================================================
+   ==  NOTICE file corresponding to section 4(d) of the Apache License,   ==
+   ==  Version 2.0, in this case for the Apache Xerces distribution.      ==
+   =========================================================================
+
+   This product includes software developed by
+   The Apache Software Foundation (http://www.apache.org/).
+
+   Portions of this software were originally based on the following:
+     - software copyright (c) 1999, IBM Corporation., http://www.ibm.com.
+
+   ==================
+   ==  SAP updates ==
+   ==================
+
+   In src/xercesc/internal/MemoryManagerImpl.cpp, allocated memory is
+   initialized with zeros.
+
+   In src/xercesc/dom/impl/DOMDocumentImpl.cpp, in function DOMDocumentImpl::importNode,
+   code from line 1105 to 1118 and from line 1154 to 1167 has been disabled on AIX to
+   prevent the bug described in the post "Bug in DOMElement::getSchemaTypeInfo() ?" on
+   2012/03/22 in mailing list c-users@xerces.apache.org.
+   Archive site: http://mail-archives.apache.org/mod_mbox/xerces-c-users/

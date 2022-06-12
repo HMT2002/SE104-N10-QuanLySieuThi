@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Set Database Logon to a Crystal Report and its subreports</Title>
+            <Author>Business Objects</Author>
+            <Description>Sets a database logon to a Crystal Report and its subreports.</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crSetDBLogon</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL />
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL />
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the name of the report file you want to set the database logon to.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.rpt"</Default>
+                </Literal>
+                <Literal>
+                    <ID>ServerName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the name of the server that you would like to logon. </ToolTip>
+                    <Default>"Server1"</Default>
+                </Literal>
+                <Literal>
+                    <ID>UserID</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the user ID to logon to the new server. </ToolTip>
+                    <Default>"MyUserID"</Default>
+                </Literal>
+                <Literal>
+                    <ID>Password</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the user's password to logon to the new server. </ToolTip>
+                    <Default>"MyPassword"</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="VB" Kind="method body"><![CDATA[Dim report As New ReportDocument()
+            Dim connection As IConnectionInfo
+            Dim serverName1 As String = $ServerName$
+            Dim userID As String = $UserID$
+            Dim password As String = $Password$
+
+            report.Load($FileName$)
+
+            ' Set Database Logon to main report
+            For Each connection In report.DataSourceConnections
+                Select Case connection.ServerName
+                    Case serverName1
+                        connection.SetLogon(userID, password)
+                End Select
+            Next
+
+            ' Set Database Logon to subreport
+            Dim subreport As ReportDocument
+            For Each subreport In report.Subreports
+                For Each connection In subreport.DataSourceConnections
+                    Select Case connection.ServerName
+                        Case serverName1
+                            connection.SetLogon(userID, password)
+                    End Select
+                Next
+            Next
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

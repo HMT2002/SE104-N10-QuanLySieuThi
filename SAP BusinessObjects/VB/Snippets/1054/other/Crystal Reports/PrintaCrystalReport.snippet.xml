@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>พิมพ์ Crystal Report </Title>
+            <Author>Business Objects</Author>
+            <Description>พิมพ์ Crystal Report ออกทางเครื่องพิมพ์ที่ระบุไว้ใน PrintOptions</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crPrintRpt</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL/>
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL/>
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>แทนที่สตริงนี้ด้วยชื่อไฟล์รายงานที่คุณต้องการพิมพ์</ToolTip>
+                    <Default>&quot;C:\My Crystal Reports\Report Name.rpt&quot;</Default>
+                </Literal>
+                <Literal>
+                    <ID>copies</ID>
+                    <Type>String</Type>
+                    <ToolTip>แทนที่ค่าตัวเลขนี้ด้วยจำนวนสำเนาของ Crystal Report ที่คุณต้องการพิมพ์</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>collated</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>แทนที่บูลีนนี้ด้วยเท็จ หากคุณไม่ต้องการพิมพ์ Crystal Report ทีละชุด</ToolTip>
+                    <Default>true</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>แทนที่ค่าตัวเลขนี้ด้วยหมายเลขเพจแรกที่จะพิมพ์ ใช้ 0 ระบุถึงรายงานทั้งหมด</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>แทนที่ค่าตัวเลขนี้ด้วยหมายเลขเพจสุดท้ายที่จะพิมพ์ ใช้ 0 ระบุถึงรายงานทั้งหมด</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+            </Declarations>
+            <Code Kind="method body" Language="VB"><![CDATA[' คุณสามารถเปลี่ยนตัวเลือกการพิมพ์เพิ่มเติมได้โดยผ่านคุณสมบัติ PrintOptions ของ ReportDocument
+                Dim report As New ReportDocument()
+                report.Load($FileName$)
+                report.PrintToPrinter($copies$, $collated$, $startPage$, $endPage$)
+                report.Close()
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

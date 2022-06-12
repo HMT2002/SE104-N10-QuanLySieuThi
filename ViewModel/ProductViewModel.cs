@@ -202,6 +202,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             var sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == ProductId).FirstOrDefault();
+            sp.TENSP = ProductName;
             sp.GIA = Decimal.Parse(Price);
             sp.NGDK = ImportDate;
             sp.GHICHU = Note;

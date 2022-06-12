@@ -1,0 +1,618 @@
+﻿<VSTemplateManifest Version="1.0" xmlns="http://schemas.microsoft.com/developer/vstemplatemanifest/2015">
+  <VSTemplateContainer TemplateType="Project" Locale="1028">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1028\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451"/>
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003"/>
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1029">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1029\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1030">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1030\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1031">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1031\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1033">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1033\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1035">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1035\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1036">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1036\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1038">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1038\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1040">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1040\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1041">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1041\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1042">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1042\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1043">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1043\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1044">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1044\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1045">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1045\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1046">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1046\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1049">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1049\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1051">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1051\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1053">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1053\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1054">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1054\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="1055">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\1055\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="2052">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\2052\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+  <VSTemplateContainer TemplateType="Project" Locale="3082">
+    <RelativePathOnDisk>VisualBasic\Web\Web Site\3082\CRWebSite</RelativePathOnDisk>
+    <TemplateFileName>CrystalReportsWebSite.vstemplate</TemplateFileName>
+    <VSTemplateHeader>
+      <TemplateData xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+        <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="450" />
+        <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="451" />
+        <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5003" />
+        <TemplateID>CrystalReports.Web.VisualBasic.WebApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+        <ProjectType>VisualBasic</ProjectType>
+        <ProjectSubType>Web</ProjectSubType>
+        <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+        <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+        <CreateNewFolder>true</CreateNewFolder>
+        <DefaultName>CrystalReportsWebSite</DefaultName>
+        <ProvideDefaultName>true</ProvideDefaultName>
+        <PromptForSaveOnCreation>true</PromptForSaveOnCreation>
+        <EnableEditOfLocationField>true</EnableEditOfLocationField>
+        <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+        <LocationField>hidden</LocationField>
+        <LanguageTag>visualbasic</LanguageTag>
+        <PlatformTag>windows</PlatformTag>
+        <ProjectTypeTag>web</ProjectTypeTag>
+        <ProjectTypeTag>Reporting</ProjectTypeTag>
+      </TemplateData>
+    </VSTemplateHeader>
+  </VSTemplateContainer>
+</VSTemplateManifest>

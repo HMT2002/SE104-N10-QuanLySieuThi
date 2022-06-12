@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>设置 Crystal 报表的离散参数值</Title>
+            <Author>Business Objects</Author>
+            <Description>设置离散参数值。</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crSetDiscreteParam</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL/>
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL/>
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>ReportName</ID>
+                    <Type>String</Type>
+                    <ToolTip>用要设置其参数值的报表文件名替换此字符串。</ToolTip>
+                    <Default>&quot;C:\My Crystal Reports\Report Name.rpt&quot;</Default>
+                </Literal>
+                <Literal>
+                    <ID>DiscreteValue</ID>
+                    <Type>String</Type>
+                    <ToolTip>根据报表将使用的参数值类型，用新值替换此值。</ToolTip>
+                    <Default>100.0</Default>
+                </Literal>
+                <Literal>
+                    <ID>ParameterName</ID>
+                    <Type>String</Type>
+                    <ToolTip>用报表将使用的参数名称替换此值。</ToolTip>
+                    <Default>&quot;Parameter1&quot;</Default>
+                </Literal>
+                <Literal>
+                    <ID>SubreportName</ID>
+                    <Type>String</Type>
+                    <ToolTip>用报表将使用的子报表名称替换此值。</ToolTip>
+                    <Default>subreportName.rpt</Default>
+                </Literal>
+            </Declarations>
+            <Code Kind="method body" Language="VB"><![CDATA[Dim report as new ReportDocument()
+                report.Load($ReportName$)
+                
+                Dim parameterField As ParameterField
+                parameterField = report.ParameterFields($ParameterName$)
+
+                ' 如果参数来自子报表，请指定子报表名称
+                ' parameterField = report.ParameterFields($ParameterName$, $SubreportName$)
+
+                ' 在此添加所有参数值
+                parameterField.CurrentValues.AddValue($DiscreteValue$)
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

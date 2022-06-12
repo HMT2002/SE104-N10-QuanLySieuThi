@@ -204,7 +204,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 //{ }
                 string email = MailAdress;
                 string message = "Here is your verify code for supermarket account: " + VerifyCode;
-                GuiMail("<mail>", email, "Verify account code", message, file);
+                //GuiMail("<mail>", email, "Verify account code", message, file);
 
             });
             thread.Start();

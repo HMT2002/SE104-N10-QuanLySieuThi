@@ -1,0 +1,42 @@
+; ------------------------------------------------------------------------------
+; Dependency file for setup wizards.
+
+
+[Version]
+Version=12.0.0.88
+; ------------------------------------------------------------------------------
+; Dependencies for CRViewer.DLL
+
+
+[CRViewer.DLL]
+Dest=$(CommonFiles)\Business Objects\4.0\crystalreportviewers120\ActiveXControls
+Register=$(DLLSelfRegister)
+Version=12.0.0.88
+Uses1=CRAXDRT.DLL
+Uses2=COMCAT.DLL
+Uses3=OLEPRO32.DLL
+Uses4=gdiplus.dll
+Uses5=usp10.dll
+Uses6=
+
+[gdiplus.dll]
+Dest=$(CommonFiles)\Business Objects\4.0\bin
+Uses1=
+
+[usp10.dll]
+Dest=$(WinSysPath)
+Uses1=
+
+[COMCAT.DLL]
+Dest=$(WinSysPathSysFile)
+Register=$(DLLSelfRegister)
+Uses1=
+
+[OLEPRO32.DLL]
+Dest=$(WinSysPath)
+Uses1=
+
+[CRAXDRT.DLL]
+Dest=$(CommonFiles)\Business Objects\4.0\bin
+Register=$(dllSelfRegister)
+Uses1=
