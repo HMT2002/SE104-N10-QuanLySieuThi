@@ -90,6 +90,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             kh.chooseImg();
             Bitimg = kh.Bitimg;
             imgAvatar.Source = kh.Bitimg;
+            p.Background = null;
             p.Content = imgAvatar;
         }
         public Button btnAvatar = new Button();
@@ -160,11 +161,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void SendVerifyMail(Window p)
         {
             VerifyCode = RandomString(8);
-            if (!IsValidEmail(MailAdress))
-            {
-                return;
-            }
-            SendVerifyCode(VerifyCode);
+            //if (!IsValidEmail(MailAdress))
+            //{
+            //    return;
+            //}
+            //SendVerifyCode(VerifyCode);
+            MessageBox.Show("Your verify code is: " + VerifyCode);
             winVerifyMail win = new winVerifyMail();
             win.ShowDialog();
             p.Close();
@@ -202,7 +204,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 //{ }
                 string email = MailAdress;
                 string message = "Here is your verify code for supermarket account: " + VerifyCode;
-                GuiMail("se104storemanage@gmai.com", email, "Verify account code", message, file);
+                //GuiMail("se104storemanage@gmai.com", email, "Verify account code", message, file);
 
             });
             thread.Start();
@@ -222,7 +224,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
 
-            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
+            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "<kolaman...>");
             client.Send(mailmess);
         }
 

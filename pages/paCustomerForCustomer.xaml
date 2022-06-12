@@ -181,7 +181,7 @@
                                          Margin="20" />
                             </Grid>
                             <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="Salary"
+                                <TextBox materialDesign:HintAssist.Hint="Revenue"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Salary}"
                                          VerticalAlignment="Center"

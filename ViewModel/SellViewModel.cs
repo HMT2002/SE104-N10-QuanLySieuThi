@@ -355,7 +355,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
+            client.Credentials = new NetworkCredential("<colammoicoan>", "<kolaman...>");
             client.Send(mailmess);
         }
 
