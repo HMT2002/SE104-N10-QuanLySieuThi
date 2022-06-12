@@ -262,7 +262,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string email = user.MAIL;
                 string message = "Import of " + ImportID + " : ";
-                GuiMail("20520850@gm.uit.edu.vn", email, "Import " + ImportID, message, atts);
+                //GuiMail("20520850@gm.uit.edu.vn", email, "Import " + ImportID, message, atts);
 
             });
             thread.Start();

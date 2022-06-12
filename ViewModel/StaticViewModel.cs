@@ -543,7 +543,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string email = user.MAIL;
                 string message = "Report of "+SelectedDate.ToString("d-MM-yyyy")+" : ";
-                GuiMail("<mail>", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
+                //GuiMail("<mail>", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
 
             });
             thread.Start();
@@ -565,6 +565,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
             client.Credentials = new NetworkCredential("<mail>", "<pass>");
             client.Send(mailmess);
         }
