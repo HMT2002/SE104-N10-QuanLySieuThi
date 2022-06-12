@@ -36,7 +36,6 @@
                     <Grid Grid.Column="0">
                         <ComboBox Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                   materialDesign:HintAssist.Hint="Type"
-                                  Margin="20 10 20 10"
                                   ItemsSource="{Binding SearchType,Mode=TwoWay}"
                                   materialDesign:TextFieldAssist.HasClearButton="True"
                                   Width="120"
