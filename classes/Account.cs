@@ -13,6 +13,9 @@ namespace SE104_N10_QuanLySieuThi.classes
         private string acc;
         private int pri;
         private string password;
+        
+
+
 
         public Account(string acc, string password)
         {

@@ -90,6 +90,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             kh.chooseImg();
             Bitimg = kh.Bitimg;
             imgAvatar.Source = kh.Bitimg;
+            p.Background = null;
             p.Content = imgAvatar;
         }
         public Button btnAvatar = new Button();
@@ -160,11 +161,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void SendVerifyMail(Window p)
         {
             VerifyCode = RandomString(8);
-            if (!IsValidEmail(MailAdress))
-            {
-                return;
-            }
-            SendVerifyCode(VerifyCode);
+            //if (!IsValidEmail(MailAdress))
+            //{
+            //    return;
+            //}
+            //SendVerifyCode(VerifyCode);
+            MessageBox.Show("Your verify code is: " + VerifyCode);
             winVerifyMail win = new winVerifyMail();
             win.ShowDialog();
             p.Close();
