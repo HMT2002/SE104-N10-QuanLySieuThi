@@ -50,7 +50,7 @@
                                      Margin="20"
                                      Height="auto"
                                      Width="auto">
-                    
+
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition />
@@ -67,25 +67,25 @@
                             </Button>
                         </Grid>
                         <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBox Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding Acc}"
                                      VerticalAlignment="Center"
                                      Margin="5"
                                      materialDesign:HintAssist.Hint="Username" />
-                        </Grid>
-                        <Grid Grid.Column="1">
-                            <TextBox materialDesign:HintAssist.Hint="Password"
+                            </Grid>
+                            <Grid Grid.Column="1">
+                                <TextBox materialDesign:HintAssist.Hint="Password"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      Text="{Binding Password,Mode=TwoWay}"
                                      VerticalAlignment="Center"
                                      Margin="5" />
+                            </Grid>
                         </Grid>
-                    </Grid>
                     </Grid>
 
                 </materialDesign:Card>
@@ -116,7 +116,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
-                                <TextBox materialDesign:HintAssist.Hint="Customer ID"
+                                <TextBox materialDesign:HintAssist.Hint="ID"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Id}"
@@ -124,14 +124,14 @@
                             </Grid>
                             <Grid Grid.Column="1">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Date of Birth"
+                                            materialDesign:HintAssist.Hint="Birth"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Birthday}"
                                             IsEnabled="False" />
                             </Grid>
                             <Grid Grid.Column="2">
                                 <DatePicker Width="auto"
-                                            materialDesign:HintAssist.Hint="Register Date"
+                                            materialDesign:HintAssist.Hint="Join Date"
                                             Style="{StaticResource MaterialDesignFilledDatePicker}"
                                             SelectedDate="{Binding Joineddate}"
                                             IsEnabled="False" />
@@ -145,19 +145,19 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
 
-                                <TextBox materialDesign:HintAssist.Hint="Customer Name"
+                                <TextBox materialDesign:HintAssist.Hint="Name"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Name}" />
                             </Grid>
                             <Grid Grid.Column="1">
-                                <TextBox materialDesign:HintAssist.Hint="Phone number"
+                                <TextBox materialDesign:HintAssist.Hint="Phone Number"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Phone}" />
                             </Grid>
                             <Grid Grid.Column="2">
-                                <TextBox materialDesign:HintAssist.Hint="Spending"
+                                <TextBox materialDesign:HintAssist.Hint="Gross"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          VerticalAlignment="Center"
                                          Text="{Binding Gross}" />
@@ -178,8 +178,7 @@
                                              SpellCheck.IsEnabled="True"
                                              materialDesign:HintAssist.Hint="Note"
                                              Text="{Binding Note}"
-                                             Height="80"
-                                             Margin="5" />
+                                             Margin="5,5,4.2,0.4" />
                                 </Grid>
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
@@ -228,7 +227,7 @@
                             <Grid Grid.Column="1">
                                 <Button Style="{StaticResource MaterialDesignRaisedLightButton}"
                                         ToolTip="Resource name: MaterialDesignRaisedLightButton"
-                                        Content="_MODIFY"
+                                        Content="_EDIT"
                                         VerticalAlignment="Bottom"
                                         HorizontalAlignment="Center"
                                         Margin="10"
