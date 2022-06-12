@@ -162,40 +162,40 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 switch (month)
                 {
                     case 1:
-                        jan += (decimal)item.TRIGIA;
+                        jan += (decimal)item.TRIGIA -( (decimal)item.TRIGIA*(decimal)(item.GIAMGIA/100));
                         break;
                     case 2:
-                        feb += (decimal)item.TRIGIA;
+                        feb += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 3:
-                        mar += (decimal)item.TRIGIA;
+                        mar += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 4:
-                        apr += (decimal)item.TRIGIA;
+                        apr += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 5:
-                        may += (decimal)item.TRIGIA;
+                        may += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 6:
-                        jun += (decimal)item.TRIGIA;
+                        jun += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 7:
-                        jul += (decimal)item.TRIGIA;
+                        jul += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 8:
-                        aug += (decimal)item.TRIGIA;
+                        aug += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 9:
-                        sep += (decimal)item.TRIGIA;
+                        sep += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 10:
-                        oct += (decimal)item.TRIGIA;
+                        oct += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 11:
-                        nov += (decimal)item.TRIGIA;
+                        nov += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 12:
-                        dec += (decimal)item.TRIGIA;
+                        dec += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
 
                     default:
@@ -705,41 +705,42 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 switch (month)
                 {
                     case 1:
-                        jan += (decimal)item.TRIGIA;
+                        jan += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 2:
-                        feb += (decimal)item.TRIGIA;
+                        feb += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 3:
-                        mar += (decimal)item.TRIGIA;
+                        mar += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 4:
-                        apr += (decimal)item.TRIGIA;
+                        apr += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 5:
-                        may += (decimal)item.TRIGIA;
+                        may += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 6:
-                        jun += (decimal)item.TRIGIA;
+                        jun += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 7:
-                        jul += (decimal)item.TRIGIA;
+                        jul += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 8:
-                        aug += (decimal)item.TRIGIA;
+                        aug += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 9:
-                        sep += (decimal)item.TRIGIA;
+                        sep += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 10:
-                        oct += (decimal)item.TRIGIA;
+                        oct += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 11:
-                        nov += (decimal)item.TRIGIA;
+                        nov += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
                     case 12:
-                        dec += (decimal)item.TRIGIA;
+                        dec += (decimal)item.TRIGIA - ((decimal)item.TRIGIA * (decimal)(item.GIAMGIA / 100));
                         break;
+
 
                     default:
                         break;

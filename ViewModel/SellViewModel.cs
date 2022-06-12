@@ -282,7 +282,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             List<string> finame = new List<string>();
             finame.Add(@"bills/" + IdBill + ".png");
             finame.Add(@"bills/" + IdBill + ".pdf");
-            SendBill(finame);
+            //SendBill(finame);
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
             loadReport();
