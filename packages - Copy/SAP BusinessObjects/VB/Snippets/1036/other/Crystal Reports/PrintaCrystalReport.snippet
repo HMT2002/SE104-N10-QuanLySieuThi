@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Imprimer un rapport Crystal </Title>
+            <Author>Business Objects</Author>
+            <Description>Imprime un rapport Crystal vers l'imprimante spécifiée dans PrintOptions.</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crPrintRpt</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL />
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL />
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Remplacer cette chaîne par le nom du fichier de rapport que vous voulez imprimer.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.rpt"</Default>
+                </Literal>
+                <Literal>
+                    <ID>copies</ID>
+                    <Type>String</Type>
+                    <ToolTip>Remplacer ce nombre par le nombre de copies du rapport Crystal que vous voulez imprimer.</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>collated</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>Remplacer cet opérateur booléen par false pour ne pas imprimer toutes les pages du rapport ensemble.</ToolTip>
+                    <Default>true</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Remplacer ce nombre par la première page à imprimer ; utiliser 0 pour indiquer l'intégralité du rapport.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Remplacer ce nombre par la dernière page à imprimer ; utiliser 0 pour indiquer l'intégralité du rapport.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="VB" Kind="method body"><![CDATA[' Vous pouvez changer d'autres options d'impression via la propriété PrintOptions de ReportDocument.
+                Dim report As New ReportDocument()
+                report.Load($FileName$)
+                report.PrintToPrinter($copies$, $collated$, $startPage$, $endPage$)
+                report.Close()
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

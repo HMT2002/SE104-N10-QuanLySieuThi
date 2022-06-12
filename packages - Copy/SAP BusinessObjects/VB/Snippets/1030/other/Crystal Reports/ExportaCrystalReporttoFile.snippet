@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+	<CodeSnippet Format="1.0.0">
+		<Header>
+			<Title>Eksporter en Crystal-rapport til en fil</Title>
+			<Author>Business Objects</Author>
+			<Description>Eksporterer en Crystal-rapport til en fil.</Description>
+			<HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+			<Keywords>
+			</Keywords>
+			<Shortcut>crExportRptToDisk</Shortcut>
+			<Location>Crystal Reports</Location>
+		</Header>
+		<Snippet>
+			<References>
+				<Reference>
+					<Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+					<URL/>
+				</Reference>
+				<Reference>
+					<Assembly>CrystalDecisions.Shared.dll</Assembly>
+					<URL/>
+				</Reference>
+			</References>
+			<Imports>
+				<Import>
+					<Namespace>System</Namespace>
+				</Import>
+				<Import>
+					<Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+				</Import>
+				<Import>
+					<Namespace>CrystalDecisions.Shared</Namespace>
+				</Import>
+			</Imports>
+			<Declarations>
+				<Literal>
+					<ID>FileName</ID>
+					<Type>String</Type>
+					<ToolTip>Erstat denne streng med navnet på den rapportfil, som du vil eksportere fra.</ToolTip>
+					<Default>&quot;C:\My Crystal Reports\Report Name.rpt&quot;</Default>
+				</Literal>
+				<Literal>
+					<ID>ExportFormatType</ID>
+					<Type>String</Type>
+					<ToolTip>Erstat denne værdi med det eksportformat, som du vil eksportere rapporten til.</ToolTip>
+					<Default>ExportFormatType.PortableDocFormat</Default>
+				</Literal>
+				<Literal>
+					<ID>DestinationFileName</ID>
+					<Type>String</Type>
+					<ToolTip>Erstat denne streng med det filnavn, som du vil eksportere rapporten til.</ToolTip>
+					<Default>&quot;C:\My Crystal Reports\Report Name.pdf&quot;</Default>
+				</Literal>
+			</Declarations>
+			<Code Kind="method body" Language="VB"><![CDATA[' Du kan ændre andre eksportindstillinger som f.eks. sideområde ved at kalde eksportmetode med et objekt i eksportindstillinger.
+				Dim report As New ReportDocument()
+				report.Load($FileName$)
+				report.ExportToDisk($ExportFormatType$, $DestinationFileName$)
+				report.Close()
+                ]]>
+			</Code>
+		</Snippet>
+	</CodeSnippet>
+</CodeSnippets>

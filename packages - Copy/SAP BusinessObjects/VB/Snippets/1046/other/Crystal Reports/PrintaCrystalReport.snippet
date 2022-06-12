@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Print a Crystal Report </Title>
+            <Author>Business Objects</Author>
+            <Description>Prints a Crystal Report to the printer specified in the PrintOptions.</Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crPrintRpt</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL />
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL />
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the name of the report file you want to print.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.rpt"</Default>
+                </Literal>
+                <Literal>
+                    <ID>copies</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this number with the number of copies of Crystal Report you want to print.</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>collated</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>Replace this boolean with false if you do not want to print the Crystal Report collated.</ToolTip>
+                    <Default>true</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this number with the first page number to print; use 0 to specify whole report.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this number with the last page number to print; use 0 to specify whole report.</ToolTip>
+                    <Default>0</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="VB" Kind="method body"><![CDATA[' You can change more print options via PrintOptions property of ReportDocument
+                Dim report As New ReportDocument()
+                report.Load($FileName$)
+                report.PrintToPrinter($copies$, $collated$, $startPage$, $endPage$)
+                report.Close()
+                ]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>

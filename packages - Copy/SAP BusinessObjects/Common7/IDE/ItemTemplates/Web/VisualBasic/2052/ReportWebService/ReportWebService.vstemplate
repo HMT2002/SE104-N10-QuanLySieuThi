@@ -1,0 +1,34 @@
+<VSTemplate Version="2.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="300"/>
+    <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="301"/>
+    <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5000"/>
+    <ProjectType>Web</ProjectType>
+    <ProjectSubType>VisualBasic</ProjectSubType>
+        <SortOrder>3000</SortOrder>
+    <SupportsLanguageDropdown>true</SupportsLanguageDropdown>
+    <SupportsCodeSeparation>false</SupportsCodeSeparation>
+    <DefaultName>ReportWebService.asmx</DefaultName>
+    <Hidden>true</Hidden>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304</Assembly>
+      </Reference>
+      <Reference>
+        <Assembly>CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304</Assembly>
+      </Reference>      
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$Service.asmx">ReportWebService.asmx</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

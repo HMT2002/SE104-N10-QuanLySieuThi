@@ -1,0 +1,15 @@
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name Package="{C0A76456-F970-471A-B209-8D35F6CD9119}" ID="15003"/>
+    <Description Package="{C0A76456-F970-471A-B209-8D35F6CD9119}" ID="15004"/>
+    <Icon Package="{C0A76456-F970-471A-B209-8D35F6CD9119}" ID="4521"/>
+    <TemplateID>CrystalReports.CSharp.ItemTemplate</TemplateID>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>2.0</RequiredFrameworkVersion>
+    <DefaultName>CrystalReport.rpt</DefaultName>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectItem>CrystalReport.rpt</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

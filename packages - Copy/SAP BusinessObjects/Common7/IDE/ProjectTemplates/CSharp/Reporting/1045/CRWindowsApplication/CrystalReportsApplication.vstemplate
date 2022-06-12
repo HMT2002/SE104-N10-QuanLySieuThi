@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="300" />
+    <Description Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="301"/>
+    <Icon Package="{FE73BB80-53F4-4AD0-A5F9-6A0BCE662292}" ID="5000"/>
+    <TemplateID>CrystalReports.Win.CSharp.WindowsFormsApplication</TemplateID>
+        <SortOrder>3000</SortOrder>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <NumberOfParentCategoriesToRollUp>0</NumberOfParentCategoriesToRollUp>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>CrystalReportsApplication</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="CrystalReportsApplication.csproj" ReplaceParameters="true">
+    <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+    <ProjectItem TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+    <ProjectItem TargetFileName="Properties\Settings.settings">Settings.settings</ProjectItem>
+    <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Settings.Designer.cs">Settings.Designer.cs</ProjectItem>
+    <ProjectItem ReplaceParameters="true" OpenInEditor="true">Form1.cs</ProjectItem>
+    <ProjectItem ReplaceParameters="true">Form1.resx</ProjectItem>
+    <ProjectItem ReplaceParameters="true">Form1.Designer.cs</ProjectItem>	
+    <ProjectItem ReplaceParameters="true">Program.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>CrystalDecisions.VSDesigner, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, Custom=null</Assembly>
+    <FullClassName>CrystalDecisions.VSDesigner.Wizard.ReportProjectItemWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>
