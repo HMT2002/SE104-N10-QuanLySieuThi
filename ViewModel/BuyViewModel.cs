@@ -46,9 +46,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 _SelectedImport = value;
                 if (SelectedImport != null)
                 {
-                    NewImport();
-
                     ImportID = SelectedImport.nhaphang.MANH;
+                    loadReport();
                     SeletedProduct = SelectedImport.nhaphang.SANPHAM.TENSP;
                     ImportDate =(DateTime) SelectedImport.nhaphang.NGNH;
                     Price =(decimal) SelectedImport.nhaphang.SANPHAM.GIA;
@@ -59,9 +58,9 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     convertImgFromByte(SelectedImport.nhaphang.SANPHAM.PICBI);
                     imgAvatar.Source = Bitimg;
                     btnAvatar.Content = imgAvatar;
-                    loadReport();
                     //winImportDetail win = new winImportDetail();
                     //win.ShowDialog();
+
                 }
                 OnPropertyChanged();
             }
@@ -142,7 +141,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             win2.Show();
             CrystalReport2 crys = new CrystalReport2();
-            crys.Load(@"CrystalReport3.rep");
+            crys.Load(@"CrystalReport2.rep");
             viewer.ViewerCore.ReportSource = crys;
             viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
         }
@@ -284,7 +283,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("se104storemanage@gmail.com", "storepass");
+            client.Credentials = new NetworkCredential("<mail>", "<pass>");
             client.Send(mailmess);
         }
 
@@ -357,12 +356,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SummaryImport = 0.ToString();
             Ammount = 0;
             Price = 0;
-            while (DataProvider.Ins.DB.NHAPHANG.Where(x => x.MANH == ImportID).Count() > 0)
+            do
             {
                 ImportID = Converter.Instance.RandomString(5);
-            }
+            } while (DataProvider.Ins.DB.NHAPHANG.Where(x => x.MANH == ImportID).Count() > 0);
             imgAvatar = new System.Windows.Controls.Image();
             btnAvatar.Content = imgAvatar;
+            ImportDate = DateTime.Now;
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)

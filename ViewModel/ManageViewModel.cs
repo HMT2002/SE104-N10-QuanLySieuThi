@@ -118,7 +118,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
 
-        private List<string> _PositionType = new List<string>() { "Quản lí", "Nhân viên" };
+        private List<string> _PositionType = new List<string>() { "Manager", "Employee" };
 
         public List<string> PositionType { get => _PositionType; set { _PositionType = value; OnPropertyChanged(); } }
 
@@ -413,7 +413,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
 
             int pri = 1;
-            if (SelectedPositon.CompareTo("Quản lí") == 0)
+            if (SelectedPositon.CompareTo("Manager") == 0)
             {
                 pri = 2;
             }
@@ -461,7 +461,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 return;
             }
             int pri = 1;
-            if (SelectedPositon.CompareTo("Quản lí") == 0)
+            if (SelectedPositon.CompareTo("Manager") == 0)
             {
                 pri = 2;
             }

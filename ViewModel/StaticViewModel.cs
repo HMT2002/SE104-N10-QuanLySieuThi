@@ -102,7 +102,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private string _TextTiLeSoSanhThangTruoc;
         public string TextTiLeSoSanhThangTruoc { get => _TextTiLeSoSanhThangTruoc; set { _TextTiLeSoSanhThangTruoc = value; OnPropertyChanged(); } }
 
-        private List<string> _SearchType = new List<string>() { "Năm", "Tháng","Ngày" };
+        private List<string> _SearchType = new List<string>() { "Year", "Month","Day" };
 
         public List<string> SearchType { get => _SearchType; set { _SearchType = value; OnPropertyChanged(); } }
 
@@ -117,15 +117,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 _SearchTypeItem = value;
                 switch (SearchTypeItem)
                 {
-                    case "Ngày":
+                    case "Day":
                         TextLineThongKe = TextNgayThongKe;
                         loadLineChartProfitDay();
                         break;
-                    case "Tháng":
+                    case "Month":
                         TextLineThongKe = TextThangThongKe;
                         loadLineChartProfitMonth();
                         break;
-                    case "Năm":
+                    case "Year":
                         TextLineThongKe = TextNamThongKe;
                         loadLineChartProfitYear();
                         break;
@@ -263,7 +263,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             LineSeries lns0 = new LineSeries
             {
-                Title = "Nhập",
+                Title = "Import",
                 Values = new ChartValues<double> { decimal.ToDouble(jan1), decimal.ToDouble(feb1), decimal.ToDouble(mar1), decimal.ToDouble(apr1), decimal.ToDouble(may1), decimal.ToDouble(jun1), decimal.ToDouble(jul1), decimal.ToDouble(aug1), decimal.ToDouble(sep1), decimal.ToDouble(oct1), decimal.ToDouble(nov1), decimal.ToDouble(dec1) },
                 DataLabels = true,
 
@@ -271,7 +271,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesMoney.Add(lns0);
             LineSeries lns1 = new LineSeries
             {
-                Title = "Bán",
+                Title = "Sell",
                 Values = new ChartValues<double> { decimal.ToDouble(jan), decimal.ToDouble(feb), decimal.ToDouble(mar), decimal.ToDouble(apr), decimal.ToDouble(may), decimal.ToDouble(jun), decimal.ToDouble(jul), decimal.ToDouble(aug), decimal.ToDouble(sep), decimal.ToDouble(oct), decimal.ToDouble(nov), decimal.ToDouble(dec) },
                 PointGeometry = DefaultGeometries.Square,
                 DataLabels = true,
@@ -306,7 +306,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     selectedYear = SelectedDate.Year;
 
-                    TextNamThongKe = "Tổng sán phẩm bán ra năm : " + SelectedDate.Year.ToString();
+                    TextNamThongKe = "Summary sold products: " + SelectedDate.Year.ToString();
                     TextThangThongKe = SelectedDate.Month + @"/" + SelectedDate.Year;
                     TextNgayThongKe = SelectedDate.Day + @"/" + SelectedDate.Month + @"/" + SelectedDate.Year;
 
@@ -371,7 +371,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             TongDoanhThuThangTruoc = 0;
             TiLeSoSanhThangTruoc = 1;
 
-            TextNamThongKe ="Tổng sán phẩm bán ra năm : " +SelectedDate.Year.ToString();
+            TextNamThongKe ="Summary sold products: " +SelectedDate.Year.ToString();
             TextThangThongKe = SelectedDate.Month + @"/" + SelectedDate.Year;
             TextNgayThongKe = SelectedDate.Day + @"/" + SelectedDate.Month + @"/" + SelectedDate.Year;
 
@@ -410,16 +410,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             if (TongDoanhThuThangTruoc < TongDoanhThuThang)
             {
                 TiLeSoSanhThangTruoc = (double)(TongDoanhThuThang / (TongDoanhThuThangTruoc + (decimal)0.1));
-                TextTiLeSoSanhThangTruoc = "Tăng " + TiLeSoSanhThangTruoc.ToString(specifier,culture) + @"% so với tháng trước";
+                TextTiLeSoSanhThangTruoc = "Increase " + TiLeSoSanhThangTruoc.ToString(specifier,culture);
             }
             else if (TongDoanhThuThangTruoc > TongDoanhThuThang)
             {
                 TiLeSoSanhThangTruoc = (double)(TongDoanhThuThangTruoc / (TongDoanhThuThang + (decimal)0.1));
-                TextTiLeSoSanhThangTruoc = "Giảm " + TiLeSoSanhThangTruoc.ToString(specifier, culture) + @"% so với tháng trước";
+                TextTiLeSoSanhThangTruoc = "Decrease " + TiLeSoSanhThangTruoc.ToString(specifier, culture) + @"% so với tháng trước";
             }
             else
             {
-                TextTiLeSoSanhThangTruoc = "Doanh thu không thay đổi";
+                TextTiLeSoSanhThangTruoc = "Sellings don't change";
             }
         }
 
@@ -510,7 +510,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             bmp.Save(folderName + @"/columnchart_" + dat + ".png", ImageFormat.Png);
             finame.Add(folderName + @"/columnchart_" + dat + ".png");
-            SendReport(finame);
+            //SendReport(finame);
 
             openPrintBillWin();
         }
@@ -543,7 +543,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string email = user.MAIL;
                 string message = "Report of "+SelectedDate.ToString("d-MM-yyyy")+" : ";
-                GuiMail("se104storemanage@gmai.com", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
+                GuiMail("<mail>", email, "Report " + SelectedDate.ToString("d-MM-yyyy"), message, atts);
 
             });
             thread.Start();
@@ -565,7 +565,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("se104storemanage@gmail.com", "storepass");
+            client.Credentials = new NetworkCredential("<mail>", "<pass>");
             client.Send(mailmess);
         }
 
@@ -605,19 +605,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     var loaisell = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == item.MASP);
                     foreach (var loai in loaisell)
                     {
-                        if (loai.LOAI == "Gia dụng")
+                        if (loai.LOAI == "Appliances")
                         {
                             countGiaDung += (int)item.SL;
                         }
-                        if (loai.LOAI == "Thực phẩm ")
+                        if (loai.LOAI == "Foods")
                         {
                             countThucPham += (int)item.SL;
                         }
-                        if (loai.LOAI == "Hoá mỹ phẩm")
+                        if (loai.LOAI == "Cosmetic")
                         {
                             countHoaMyPham += (int)item.SL;
                         }
-                        if (loai.LOAI == "Khác")
+                        if (loai.LOAI == "Others")
                         {
                             countKhac += (int)item.SL;
                         }
@@ -633,17 +633,17 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 {
                     switch (child.LOAI)
                     {
-                        case "Gia dụng":
+                        case "Appliances":
                             countGiaDung1 += (int)item.SLNHAPHANG;
                             break;
-                        case "Thực phẩm":
+                        case "Foods":
                             countThucPham1 += (int)item.SLNHAPHANG;
                             break;
-                        case "Hoá mỹ phẩm":
+                        case "Cosmetic":
                             countHoaMyPham1 += (int)item.SLNHAPHANG;
                             break;
 
-                        case "Khác":
+                        case "Others":
                             countKhac1 += (int)item.SLNHAPHANG;
                             break;
                         default:
@@ -657,7 +657,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesProduct = new SeriesCollection();
             ColumnSeries lns0 = new ColumnSeries
             {
-                Title = "Nhập",
+                Title = "Import",
                 Values = new ChartValues<int> { countGiaDung1, countThucPham1,countHoaMyPham1, countKhac1 },
                 DataLabels = true,
 
@@ -667,7 +667,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesProduct.Add(lns0);
             ColumnSeries lns1 = new ColumnSeries
             {
-                Title = "Bán",
+                Title = "Sell",
                 Values = new ChartValues<int> { countGiaDung, countThucPham, countHoaMyPham, countKhac },
                 DataLabels = true,
 
@@ -675,7 +675,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             };
 
             SeriesProduct.Add(lns1);
-            Kinds = new[] { "Gia dụng", "Thực phẩm", "Hoá mỹ phẩm", "Khác" };
+            Kinds = new[] { "Appliances", "Foods", "Cosmetic", "Others" };
 
 
             zFormatter = value => value.ToString("F");
@@ -805,7 +805,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             LineSeries lns0 = new LineSeries
             {
-                Title = "Nhập",
+                Title = "Import",
                 Values = new ChartValues<double> { decimal.ToDouble(jan1), decimal.ToDouble(feb1), decimal.ToDouble(mar1), decimal.ToDouble(apr1), decimal.ToDouble(may1), decimal.ToDouble(jun1), decimal.ToDouble(jul1), decimal.ToDouble(aug1), decimal.ToDouble(sep1), decimal.ToDouble(oct1), decimal.ToDouble(nov1), decimal.ToDouble(dec1) },
                 DataLabels = true,
 
@@ -813,7 +813,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesMoney.Add(lns0);
             LineSeries lns1 = new LineSeries
             {
-                Title = "Bán",
+                Title = "Sell",
                 Values = new ChartValues<double> { decimal.ToDouble(jan), decimal.ToDouble(feb), decimal.ToDouble(mar), decimal.ToDouble(apr), decimal.ToDouble(may), decimal.ToDouble(jun), decimal.ToDouble(jul), decimal.ToDouble(aug), decimal.ToDouble(sep), decimal.ToDouble(oct), decimal.ToDouble(nov), decimal.ToDouble(dec) },
                 PointGeometry = DefaultGeometries.Square,
                 DataLabels = true,
@@ -849,19 +849,19 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     var loaisell = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == item.MASP);
                     foreach(var loai in loaisell)
                     {
-                        if (loai.LOAI == "Gia dụng")
+                        if (loai.LOAI == "Appliances")
                         {
                             countGiaDung +=(int) item.SL;
                         }
-                        if (loai.LOAI == "Thực phẩm")
+                        if (loai.LOAI == "Foods")
                         {
                             countThucPham += (int)item.SL;
                         }
-                        if (loai.LOAI == "Hoá mỹ phẩm")
+                        if (loai.LOAI == "Cosmetic")
                         {
                             countHoaMyPham += (int)item.SL;
                         }
-                        if (loai.LOAI == "Khác")
+                        if (loai.LOAI == "Others")
                         {
                             countKhac += (int)item.SL;
                         }
@@ -872,7 +872,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SeriesMostProduct = new SeriesCollection();
             PieSeries giadungseries = new PieSeries
             {
-                Title = "Gia dụng",
+                Title = "Appliances",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(countGiaDung) },
                 DataLabels = true
             };
@@ -880,7 +880,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             PieSeries thucphamseries = new PieSeries()
             {
-                Title = "Thực phẩm",
+                Title = "Foods",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(countThucPham) },
                 DataLabels = true
             };
@@ -889,7 +889,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             PieSeries hoathucphamseries = new PieSeries
             {
-                Title = "Hoá mỹ phẩm",
+                Title = "Cosmetic",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(countHoaMyPham) },
                 DataLabels = true
 
@@ -898,7 +898,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             PieSeries hoaseries = new PieSeries
             {
-                Title = "Khác",
+                Title = "Others",
                 Values = new ChartValues<ObservableValue> { new ObservableValue(countKhac) },
                 DataLabels = true
             };

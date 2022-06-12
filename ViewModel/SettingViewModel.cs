@@ -171,7 +171,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 nv.GENDER = "Female";
             }
             int pri = 1;
-            if (Position.CompareTo("Quản lí") == 0)
+            if (Position.CompareTo("Manager") == 0)
             {
                 pri = 2;
             }

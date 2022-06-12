@@ -73,20 +73,20 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 if (!decimal.TryParse(value, out n1))
                 {
                     TienThoi = 0;
-                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+                    TextTienThoi = "Changes: " + TienThoi.ToString();
                     return;
                 }
                 if (Decimal.Parse(TienTra) < ThanhTienCoGiamGia)
                 {
                     TienThoi = 0;
-                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+                    TextTienThoi = "Changes: " + TienThoi.ToString();
 
                 }
                 else
                 {
                     TienThoi = Decimal.Parse(TienTra) - ThanhTienCoGiamGia;
-                    TextTienTra = "Khách trả: ";
-                    TextTienThoi = "Trả lại: " + TienThoi.ToString();
+                    TextTienTra = "Customer payment: ";
+                    TextTienThoi = "Changes: " + TienThoi.ToString();
                 }
                 OnPropertyChanged(); 
             }
@@ -116,7 +116,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private float _GiamGia;
         public float GiamGia { get => _GiamGia; set { _GiamGia = value; OnPropertyChanged(); } }
 
-        private List<string> _CategoryList = new List<string>() { "Tất cả", "Gia dụng", "Hoá mỹ phẩm", "Thực phẩm", "Khác" };
+        private List<string> _CategoryList = new List<string>() { "All", "Appliances", "Cosmetic", "Foods", "Others" };
 
         public List<string> CategoryList { get => _CategoryList; set { _CategoryList = value; OnPropertyChanged(); } }
 
@@ -331,11 +331,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 var user = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
                 string emailnv = user.MAIL;
                 string message = "Bill " + IdBill + " : ";
-                GuiMail("se104storemanage@gmai.com", emailnv, "Bill " + IdBill, message, atts);
+                GuiMail("<mail>", emailnv, "Bill " + IdBill, message, atts);
 
                 //var khach = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == Khachhang.khachhang.MAKH).SingleOrDefault();
                 //string emailkh = khach.MAIL;
-                //GuiMail("se104storemanage@gmai.com", emailkh, "Bill " + IdBill, message, atts);
+                //GuiMail("<mail>", emailkh, "Bill " + IdBill, message, atts);
 
             });
             thread.Start();
@@ -355,7 +355,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
+            client.Credentials = new NetworkCredential("<mail>", "<pass>");
             client.Send(mailmess);
         }
 
@@ -387,7 +387,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var sanpham = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == SelectedSelectItem.sanpham.MASP).SingleOrDefault();
             if (sanpham.SL < SelectedSelectItem.Amount)
             {
-                MessageBox.Show("đã hết hàng");
+                MessageBox.Show("Sold out");
                 return;
             }
             SelectedSelectItem.Amount++;
@@ -526,7 +526,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             {
                 return true;
             }
-            if(SearchCategory=="Tất cả")
+            if(SearchCategory=="All")
             {
                 return true;
 

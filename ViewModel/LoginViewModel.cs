@@ -202,7 +202,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 //{ }
                 string email = MailAdress;
                 string message = "Here is your verify code for supermarket account: " + VerifyCode;
-                GuiMail("se104storemanage@gmai.com", email, "Verify account code", message, file);
+                GuiMail("<mail>", email, "Verify account code", message, file);
 
             });
             thread.Start();
@@ -222,7 +222,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
             client.EnableSsl = true;
 
-            client.Credentials = new NetworkCredential("se104storemanage@gmai.com", "storepass");
+            client.Credentials = new NetworkCredential("<mail>", "<pass>");
             client.Send(mailmess);
         }
 
