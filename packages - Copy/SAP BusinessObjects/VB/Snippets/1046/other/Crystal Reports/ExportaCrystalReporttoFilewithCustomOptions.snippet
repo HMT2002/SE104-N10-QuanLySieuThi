@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>Exports a Crystal Report to a PDF file with custom export format options</Title>
+            <Author>Business Objects</Author>
+            <Description>Exports a Crystal Report to a PDF file with custom export format options. </Description>
+            <HelpUrl>http://www.businessobjects.com/products/dev_zone/net/default.asp</HelpUrl>
+            <Keywords>
+            </Keywords>
+            <Shortcut>crExportRptWithOptions</Shortcut>
+            <Location>Crystal Reports</Location>
+        </Header>
+        <Snippet>
+            <References>
+                <Reference>
+                    <Assembly>CrystalDecisions.CrystalReports.Engine.dll</Assembly>
+                    <URL />
+                </Reference>
+                <Reference>
+                    <Assembly>CrystalDecisions.Shared.dll</Assembly>
+                    <URL />
+                </Reference>
+            </References>
+            <Imports>
+                <Import>
+                    <Namespace>System</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.CrystalReports.Engine</Namespace>
+                </Import>
+                <Import>
+                    <Namespace>CrystalDecisions.Shared</Namespace>
+                </Import>
+            </Imports>
+            <Declarations>
+                <Literal>
+                    <ID>FileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the name of the report file you want to export from.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.rpt"</Default>
+                </Literal>
+                <Literal>
+                    <ID>DestinationFileName</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this string with the file name you want to export the report to.</ToolTip>
+                    <Default>"C:\My Crystal Reports\Report Name.pdf"</Default>
+                </Literal>
+                <Literal>
+                    <ID>usePageRange</ID>
+                    <Type>Boolean</Type>
+                    <ToolTip>Set this boolean to true if the FirstPageNumber and LastPageNumber should be used.</ToolTip>
+                    <Default>True</Default>
+                </Literal>
+                <Literal>
+                    <ID>startPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this number with the first page number to print; use 0 to specify whole report.</ToolTip>
+                    <Default>1</Default>
+                </Literal>
+                <Literal>
+                    <ID>endPage</ID>
+                    <Type>String</Type>
+                    <ToolTip>Replace this number with the last page number to print; use 0 to specify whole report.</ToolTip>
+                    <Default>5</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="VB" Kind="method body"><![CDATA[Dim report As New ReportDocument()
+                Dim exportOptions As New ExportOptions()
+                Dim pdfExportFormatOptions As New PdfRtfWordFormatOptions()
+                Dim diskDestinationOptions As New DiskFileDestinationOptions()
+
+                ' Set the export format and format options
+                exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat
+                pdfExportFormatOptions.FirstPageNumber = $startPage$
+                pdfExportFormatOptions.LastPageNumber = $endPage$
+                pdfExportFormatOptions.UsePageRange = $usePageRange$
+                exportOptions.ExportFormatOptions = pdfExportFormatOptions
+
+                ' Set the disk file options.
+                exportOptions.ExportDestinationType = ExportDestinationType.DiskFile
+                diskDestinationOptions.DiskFileName = $DestinationFileName$
+                exportOptions.DestinationOptions = diskDestinationOptions
+
+                report.Load($FileName$)
+                report.Export(exportOptions)
+                report.Close()
+                    ]]>
+                </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
