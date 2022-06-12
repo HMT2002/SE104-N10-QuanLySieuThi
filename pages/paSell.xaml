@@ -18,8 +18,7 @@
       x:Name="SellPage">
 
     <Grid>
-
-        <materialDesign:Card>
+        <materialDesign:Card Background="#87CEEB">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
@@ -116,12 +115,13 @@
                                     <DataTemplate>
                                         <WrapPanel HorizontalAlignment="Stretch"
                                                    VerticalAlignment="Stretch">
-                                            <materialDesign:Card Background="White"
+                                            <materialDesign:Card Background="CadetBlue"
                                                                  UniformCornerRadius="15"
                                                                  HorizontalAlignment="Stretch"
                                                                  HorizontalContentAlignment="Left"
                                                                  VerticalContentAlignment="Top"
-                                                                 VerticalAlignment="Stretch">
+                                                                 VerticalAlignment="Stretch"
+                                                                 Margin="25">
                                                 <StackPanel Background="#00F5F50C"
                                                             Height="auto"
                                                             Width="auto"
@@ -177,7 +177,7 @@
                         <Grid Grid.Row="0" Margin="0,0,9.6,10.4" Height="292" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="364">
                             <materialDesign:Card Margin="22,33,17,20"
                                                  Background="AliceBlue">
-                                <ScrollViewer Margin="10,10,-0.6,1" HorizontalAlignment="Left" Width="309">
+                                <ScrollViewer Margin="10,10,5.8,1.2">
                                     <StackPanel>
                                         <ListView x:Name="listboxSelectedItem"
                                                   ItemsSource="{Binding ListSelecteditems}"
