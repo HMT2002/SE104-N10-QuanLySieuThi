@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1120"
       Title="paBuy"
-      Background="AliceBlue"
+      Background="#87CEEB"
       
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -86,7 +86,7 @@
         </Grid>
         <Grid Grid.Row="1">
             <materialDesign:Card VerticalAlignment="Bottom" Margin="20" Height="500">
-                <ScrollViewer>
+                <ScrollViewer Background="AliceBlue">
                     <ListView materialDesign:HintAssist.Hint="Category"
                               ItemsSource="{Binding DealingHistoryList,Mode=TwoWay}"
                               materialDesign:TextFieldAssist.HasClearButton="True"
