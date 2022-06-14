@@ -452,12 +452,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Khachhang.khachhang.DOANHSO += ThanhTienCoGiamGia;
             DataProvider.Ins.DB.SaveChanges();
 
-            string folername = @"bills/";
-            drawBillBitMap(folername);
+            //string folername = @"bills/";
+            //drawBillBitMap(folername);
 
 
-            string pdffiname = @"bills/" + IdBill + @"/" + IdBill + ".png";
-            PrintPDF(pdffiname);
+            //string pdffiname = @"bills/" + IdBill + @"/" + IdBill + ".png";
+            //PrintPDF(pdffiname);
 
             clearField();
             LoadSanPhamData();
@@ -518,6 +518,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             var objectList = DataProvider.Ins.DB.SANPHAM;
             foreach (var item in objectList)
             {
+                if (item.SL <= 0)
+                {
+                    continue;
+                }
                 SanPham sanpham = new SanPham();
                 sanpham.sanpham = item;
                 sanpham.Amount = 0;

@@ -282,18 +282,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             Lables = new[] { "January", "Ferbuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             yFormatter = value => value.ToString("N");
 
-            //SeriesMoney.Add(new LineSeries
-            //{
-            //    Title = "8",
-            //    Values = new ChartValues<double> { 5, 3, 2 },
-            //    LineSmoothness = 0,
-            //    PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
-            //    PointGeometrySize = 50,
-            //    PointForeground=Brushes.Green
-            //});
-            //SeriesMoney[2].Values.Add(2D);
-
-
         }
 
         private DateTime _SelectedDate;
@@ -309,21 +297,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     TextNamThongKe = "Summary sold products: " + SelectedDate.Year.ToString();
                     TextThangThongKe = SelectedDate.Month + @"/" + SelectedDate.Year;
                     TextNgayThongKe = SelectedDate.Day + @"/" + SelectedDate.Month + @"/" + SelectedDate.Year;
-
-
-                    //if (SearchTypeItem == "Ngày")
-                    //{
-                    //    loadLineChartProfitDay();
-                    //}
-                    //else if (SearchTypeItem == "Tháng")
-                    //{
-                    //    loadLineChartProfitMonth();
-
-                    //}
-                    //else if (SearchTypeItem == "Năm")
-                    //{
-                    //    loadLineChartProfitYear();
-                    //}
                     loadLineChartProfitMonth();
                     loadBarChart();
                     loadPieChartMostProduct();
@@ -379,6 +352,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             loadLineChartProfitMonth();
             loadBarChart();
             loadBoard();
+            crys = new CrystalReport4();
+
         }
 
         private void loadBoard()
@@ -514,15 +489,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             openPrintBillWin();
         }
+        CrystalReport4 crys = new CrystalReport4();
 
         private void openPrintBillWin()
         {
             winStaticReport win = new winStaticReport();
             win.Show();
-            CrystalReport4 crys = new CrystalReport4();
-            crys.Load(@"CrystalReport4.rep");
-            Thread.Sleep(5000);
-
+            crys = new CrystalReport4();
+            crys.Load(@"CrystalReport3.rep");
             viewer.ViewerCore.ReportSource = crys;
             viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month + "and {Command.NAM}=" + SelectedDate.Year;
         }
