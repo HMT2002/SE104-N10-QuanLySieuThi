@@ -35,6 +35,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand CancelPrintBillCmd { get; set; }
         public ICommand ConfirmPrintBillCmd { get; set; }
         public ICommand CloseBillCmd { get; set; }
+        public ICommand CloseRptCmd { get; set; }
 
         public ICommand LoadedBillCmd { get; set; }
         private WrapPanel _pnlBill = new WrapPanel();
@@ -235,6 +236,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
             LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
             CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
+            CloseRptCmd = new RelayCommand<object>((p) => { return true; }, (p) => { closeRpt(); });
+
 
             ThanhTien = 0;
             TienTra = 0.ToString();
@@ -258,7 +261,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             clearField();
 
         }
-
+        private void closeRpt()
+        {
+            viewer = null;
+        }
         private void LoadListSell()
         {
             ListSellHistory = new ObservableCollection<HoaDon>();
@@ -285,6 +291,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //SendBill(finame);
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
+            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((x) => { viewer = x; return true; }, (x) => { return; });
+
             loadReport();
 
         }
@@ -494,6 +502,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             ListSelecteditems = new ObservableCollection<SanPham>();
             SeletedCustomer = null;
+            CustomerId = "";
             ThanhTien = 0;
             ThanhTienCoGiamGia = 0;
             GiamGia = 0;
@@ -615,7 +624,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
             Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
-            if (Khachhang.khachhang == null || Nhanvien.nhanvien == null)
+            if (Khachhang.khachhang == null || Nhanvien.nhanvien == null||CustomerId.CompareTo(string.Empty)==0)
             {
                 MessageBox.Show("Choose customer to process payment.");
                 return;
@@ -673,6 +682,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                     }
                     if (SelectedItem.sanpham.SL <= 0)
                     {
+                        MessageBox.Show("Sold out");
                         return;
                     }
                     if (SelectedItem.Amount > 0)

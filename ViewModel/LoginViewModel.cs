@@ -161,10 +161,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private void SendVerifyMail(Window p)
         {
             VerifyCode = RandomString(8);
-            //if (!IsValidEmail(MailAdress))
-            //{
-            //    return;
-            //}
+            if (!IsValidEmail(MailAdress))
+            {
+                return;
+            }
             //SendVerifyCode(VerifyCode);
             MessageBox.Show("Your verify code is: " + VerifyCode);
             winVerifyMail win = new winVerifyMail();
@@ -281,7 +281,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             if (p == null)
                 return;
-
+            if (UserName.Length < 6 || Password.Length < 6 || !UserName.Any(char.IsDigit) || !Password.Any(char.IsDigit))
+            {
+                MessageBox.Show("Username or password must be over 6 letters, contains number");
+                return;
+            }
             KhachHang kh = new KhachHang();
             kh.Name = Name;
             kh.Phone = Phone;

@@ -379,6 +379,13 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 MessageBox.Show("Enter salary as number only");
                 return;
             }
+
+            if (Acc.Length < 6 || Password.Length < 6||!Acc.Any(char.IsDigit)||!Password.Any(char.IsDigit))
+            {
+                MessageBox.Show("Username or password must be over 6 letters, contains number");
+                return;
+            }
+
             if (SelectedPositon == null)
             {
                 MessageBox.Show("Please select position");
@@ -427,7 +434,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             DataProvider.Ins.DB.SaveChanges();
             LoadNhanVienData();
-
+            NewEmployee();
         }
 
         private void DeleteEmployee()
@@ -443,6 +450,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void CreateEmployee()
         {
+
+
             decimal n1;
 
             if (!decimal.TryParse(Salary, out n1))
@@ -450,6 +459,14 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 MessageBox.Show("Enter salary as number only");
                 return;
             }
+
+            if (Acc.Length < 6 || Password.Length < 6 || !Acc.Any(char.IsDigit) || !Password.Any(char.IsDigit))
+            {
+                MessageBox.Show("Username or password must be over 6 letters, contains number");
+                return;
+            }
+
+
             if (SelectedPositon == null)
             {
                 MessageBox.Show("Please select position");

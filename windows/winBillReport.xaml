@@ -31,6 +31,10 @@
                                    CommandParameter="{Binding ElementName=rptBill}" />
 
         </i:EventTrigger>
+        <i:EventTrigger EventName="Closed">
+            <i:InvokeCommandAction Command="{Binding CloseRptCmd}" />
+
+        </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
         <Grid.RowDefinitions>

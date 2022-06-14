@@ -521,6 +521,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             win.Show();
             CrystalReport4 crys = new CrystalReport4();
             crys.Load(@"CrystalReport4.rep");
+            Thread.Sleep(5000);
+
             viewer.ViewerCore.ReportSource = crys;
             viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month + "and {Command.NAM}=" + SelectedDate.Year;
         }
