@@ -435,6 +435,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             }
             if (Decimal.Parse(TienTra) < ThanhTienCoGiamGia)
             {
+                MessageBox.Show("Payment is not sufficent");
                 return;
             }
 
@@ -626,6 +627,11 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void openBill()
         {
+            if (ListSelecteditems.Count <= 0)
+            {
+                MessageBox.Show("Baseket is empty");
+                return;
+            }
             Khachhang.khachhang = DataProvider.Ins.DB.KHACHHANG.Where(x => x.MAKH == CustomerId).SingleOrDefault();
             Nhanvien.nhanvien = DataProvider.Ins.DB.NHANVIEN.Where(x => x.MANV == MainViewModel._currentUser).SingleOrDefault();
             if (Khachhang.khachhang == null || Nhanvien.nhanvien == null||CustomerId.CompareTo(string.Empty)==0)
