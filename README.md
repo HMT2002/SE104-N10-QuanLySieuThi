@@ -1,6 +1,8 @@
 <head>
 <h1>
-SE104.M21.PMCL- software engineering
+SE104.M21.PMCL- Software Engineering
+<br>
+Supermarket Managing System
 </h1>
 <h3>
 Hồ Minh Tuệ - 20520850 (Leader)
