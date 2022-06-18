@@ -1,10 +1,20 @@
 <head>
+<h1>
+SE104.M21.PMCL- software engineering
+</h1>
+<h3>
+Hồ Minh Tuệ - 20520850 (Leader)
+<br>
+Vũ Quang Huy - 20521419
+<br>
+Hồ Minh Ngân - 20520647
+</h3>
+</head>
+<body>
 <h2>
 Before use the program, you need to follow these step to create database and change the connection to the database
 
 </h2>
-</head>
-<body>
 <div>
 Step 1: Open folder ScriptsForDatabase\ScriptrForDatabase.sql and run the whole script
 
@@ -25,4 +35,3 @@ Password: admin123
 </div>
 
 </body>
-
