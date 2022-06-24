@@ -352,7 +352,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             loadLineChartProfitMonth();
             loadBarChart();
             loadBoard();
-            crys = new CrystalReport4();
+            crys = new CrystalReport42();
 
         }
 
@@ -489,14 +489,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             openPrintBillWin();
         }
-        CrystalReport4 crys = new CrystalReport4();
+        CrystalReport42 crys = new CrystalReport42();
 
         private void openPrintBillWin()
         {
             winStaticReport win = new winStaticReport();
             win.Show();
-            crys = new CrystalReport4();
-            crys.Load(@"CrystalReport3.rep");
+            crys = new CrystalReport42();
+            //Thread.Sleep(2000);
+
+            crys.Load(@"CrystalReport42.rep");
             viewer.ViewerCore.ReportSource = crys;
             viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month + "and {Command.NAM}=" + SelectedDate.Year;
         }

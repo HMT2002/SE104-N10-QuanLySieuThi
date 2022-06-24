@@ -140,8 +140,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             winImportReport win2 = new winImportReport();
 
             win2.Show();
-            crys = new CrystalReport2();
-            crys.Load(@"CrystalReport2.rep");
+            crys = new CrystalReport22();
+            crys.Load(@"CrystalReport22.rep");
             viewer.ViewerCore.ReportSource = crys;
             viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
         }
@@ -206,7 +206,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private WrapPanel _pnlImport = new WrapPanel();
 
-        CrystalReport2 crys = new CrystalReport2();
+        CrystalReport22 crys = new CrystalReport22();
 
 
         public BuyViewModel()
@@ -220,7 +220,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadAvatarCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             imgAvatar = new System.Windows.Controls.Image();
 
-            crys = new CrystalReport2();
+            crys = new CrystalReport22();
 
         }
 
