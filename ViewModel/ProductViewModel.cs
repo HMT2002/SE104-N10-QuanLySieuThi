@@ -249,7 +249,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private void DeleteProduct(object p)
         {
-            SANPHAM sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MACC == SelectedItem.sanpham.MACC).SingleOrDefault();
+            SANPHAM sp = DataProvider.Ins.DB.SANPHAM.Where(x => x.MASP == SelectedItem.sanpham.MASP).SingleOrDefault();
             DataProvider.Ins.DB.SANPHAM.Remove(sp);
             DataProvider.Ins.DB.SaveChanges();
             LoadTonKhoData();

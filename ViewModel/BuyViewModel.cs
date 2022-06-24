@@ -202,6 +202,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         public ICommand ImportProductCmd { get; set; }
 
         public ICommand LoadedImportCmd { get; set; }
+        public ICommand LoadedPageCmd { get; set; }
 
         private WrapPanel _pnlImport = new WrapPanel();
 
@@ -213,19 +214,21 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             openImportproductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
             ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(p); });
             ReportImportCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ReportImport(); });
-
             LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
-
             LoadedImportCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlImport = p; });
-
+            LoadedPageCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { { LoadPage(); }; });
             LoadAvatarCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             imgAvatar = new System.Windows.Controls.Image();
-            NewImport();
 
-            LoadProductList();
-            loadHistory();
             crys = new CrystalReport2();
 
+        }
+
+        private void LoadPage()
+        {
+            NewImport();
+            LoadProductList();
+            loadHistory();
         }
 
         private void ReportImport()

@@ -81,6 +81,10 @@ LOAI nvarchar(20),
 primary key(MASP)
 )
 
+delete from HOADON
+delete from CTHD
+delete from NHAPHANG
+
 alter table SANPHAM add LOAI nvarchar(20)
 update SANPHAM set LOAI='Khác'
 select * from SANPHAM

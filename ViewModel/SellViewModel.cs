@@ -209,6 +209,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
+        public ICommand LoadedPageCmd { get; set; }
 
         public SellViewModel()
         {
@@ -237,6 +238,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
             CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
             CloseRptCmd = new RelayCommand<object>((p) => { return true; }, (p) => { closeRpt(); });
+            LoadedPageCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { { LoadPage(); }; });
 
 
             ThanhTien = 0;
@@ -245,10 +247,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             BillDate = DateTime.Now;
             SelectAmmount = 1;
             GiamGia = 0;
+
+        }
+
+        private void LoadPage()
+        {
             LoadSanPhamData();
             LoadListSell();
             loadListCustomer();
             loadListEmployee();
+            clearField();
 
         }
 

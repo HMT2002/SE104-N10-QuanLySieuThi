@@ -16,7 +16,13 @@
       FontFamily="{DynamicResource MaterialDesignFont}"
       DataContext="{StaticResource SellVM}"
       x:Name="SellPage">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
+                                   CommandParameter="{Binding ElementName=ProductPage}" />
 
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <materialDesign:Card Background="#87CEEB">
             <Grid>

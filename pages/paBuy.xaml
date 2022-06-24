@@ -15,7 +15,13 @@
       
       x:Name="BuyPage"
       >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedPageCmd}"
+                                   CommandParameter="{Binding ElementName=ProductPage}" />
 
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid x:Name="grdMain">
 
         <Grid.RowDefinitions>
