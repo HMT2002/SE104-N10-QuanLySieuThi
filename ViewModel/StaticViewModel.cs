@@ -27,8 +27,6 @@ using System.Net.Mail;
 using System.Net;
 using System.Globalization;
 using SE104_N10_QuanLySieuThi.windows;
-using SE104_N10_QuanLySieuThi.crystalreport;
-using SAPBusinessObjects.WPF.Viewer;
 
 namespace SE104_N10_QuanLySieuThi.ViewModel
 {
@@ -66,8 +64,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
 
         public ICommand LoadRptCmd { get; set; }
-
-        public CrystalReportsViewer viewer = new CrystalReportsViewer();
 
 
         PieChart pieChart = new PieChart();
@@ -332,7 +328,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             PrintStatisticCmd = new RelayCommand<object>((p) => { return true; }, (p) => { PrintStatistic(); });
 
-            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
 
 
             SeriesMostProduct = new SeriesCollection();
@@ -352,7 +347,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             loadLineChartProfitMonth();
             loadBarChart();
             loadBoard();
-            crys = new CrystalReport42();
 
         }
 
@@ -489,18 +483,10 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
             openPrintBillWin();
         }
-        CrystalReport42 crys = new CrystalReport42();
 
         private void openPrintBillWin()
         {
-            winStaticReport win = new winStaticReport();
-            win.Show();
-            crys = new CrystalReport42();
-            //Thread.Sleep(2000);
 
-            crys.Load(@"CrystalReport42.rep");
-            viewer.ViewerCore.ReportSource = crys;
-            viewer.ViewerCore.SelectionFormula = "{Command.THANG}=" + SelectedDate.Month + "and {Command.NAM}=" + SelectedDate.Year;
         }
 
         private void SendReport(List<string> repos=null)

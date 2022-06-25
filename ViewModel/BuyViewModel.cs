@@ -1,8 +1,6 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using SAPBusinessObjects.WPF.Viewer;
 using SE104_N10_QuanLySieuThi.classes;
-using SE104_N10_QuanLySieuThi.crystalreport;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -133,17 +131,12 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 OnPropertyChanged();
             }
         }
-        public CrystalReportsViewer viewer = new CrystalReportsViewer();
 
         public void loadReport()
         {
             winImportReport win2 = new winImportReport();
 
             win2.Show();
-            crys = new CrystalReport22();
-            crys.Load(@"CrystalReport22.rep");
-            viewer.ViewerCore.ReportSource = crys;
-            viewer.ViewerCore.SelectionFormula = "{NHAPHANG.MANH}='" + ImportID + "'";
         }
         private int _Ammount;
         public int Ammount
@@ -206,21 +199,16 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         private WrapPanel _pnlImport = new WrapPanel();
 
-        CrystalReport22 crys = new CrystalReport22();
-
-
         public BuyViewModel()
         {
             openImportproductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { openWinAddSupplier(); });
             ImportProductCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ImportProduct(p); });
             ReportImportCmd = new RelayCommand<object>((p) => { return true; }, (p) => { ReportImport(); });
-            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
             LoadedImportCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlImport = p; });
             LoadedPageCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { { LoadPage(); }; });
             LoadAvatarCmd = new RelayCommand<Button>((p) => { btnAvatar = p; return true; }, (p) => { CreateAvatar(p); });
             imgAvatar = new System.Windows.Controls.Image();
 
-            crys = new CrystalReport22();
 
         }
 

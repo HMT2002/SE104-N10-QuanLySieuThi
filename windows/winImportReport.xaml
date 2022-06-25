@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:SE104_N10_QuanLySieuThi.windows"
         mc:Ignorable="d"
         Title="winImportReport"
-        xmlns:Viewer="clr-namespace:SAPBusinessObjects.WPF.Viewer;assembly=SAPBusinessObjects.WPF.Viewer"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:SE104_N10_QuanLySieuThi.usercontrols"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -41,11 +40,6 @@
             <uc:ucControlBar Tag="{Binding Title,ElementName=StaticReportWin}"></uc:ucControlBar>
         </Grid>
         <Grid Grid.Row="1">
-            <Viewer:CrystalReportsViewer HorizontalAlignment="Left"
-                                         Height="auto"
-                                         VerticalAlignment="Top"
-                                         Name="rptImport"
-                                         Width="790" />
         </Grid>
         <Grid Grid.Row="2">
 

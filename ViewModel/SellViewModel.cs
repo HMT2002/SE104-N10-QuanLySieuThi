@@ -1,8 +1,6 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
-using SAPBusinessObjects.WPF.Viewer;
 using SE104_N10_QuanLySieuThi.classes;
-using SE104_N10_QuanLySieuThi.crystalreport;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -41,7 +39,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         private WrapPanel _pnlBill = new WrapPanel();
 
         public ICommand LoadRptCmd { get; set; }
-        public CrystalReportsViewer viewer = new CrystalReportsViewer();
 
         public ICommand listboxSelectedItem_SelectionChangedCmd { get; set; }
 
@@ -235,7 +232,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             DecreaseSelectAmmountCmd = new RelayCommand<object>((p) => { return true; }, (p) => { Decrease(p); });
 
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
-            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((p) => { viewer = p; return true; }, (p) => { return; });
             CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
             CloseRptCmd = new RelayCommand<object>((p) => { return true; }, (p) => { closeRpt(); });
             LoadedPageCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { { LoadPage(); }; });
@@ -271,7 +267,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         private void closeRpt()
         {
-            viewer = null;
+
         }
         private void LoadListSell()
         {
@@ -299,7 +295,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             //SendBill(finame);
             winPrintBillConfirmation win = p as winPrintBillConfirmation;
             win.Close();
-            LoadRptCmd = new RelayCommand<CrystalReportsViewer>((x) => { viewer = x; return true; }, (x) => { return; });
 
             loadReport();
 
@@ -309,10 +304,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         {
             winBillReport win2 = new winBillReport();
             win2.Show();
-            CrystalReport1 crys = new CrystalReport1();
-            crys.Load(@"CrystalReport1.rep");
-            viewer.ViewerCore.ReportSource = crys;
-            viewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + IdBill + "'";
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
