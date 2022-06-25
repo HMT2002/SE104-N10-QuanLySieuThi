@@ -1,6 +1,8 @@
 ﻿using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using SAPBusinessObjects.WPF.Viewer;
 using SE104_N10_QuanLySieuThi.classes;
+using SE104_N10_QuanLySieuThi.crystalreport;
 using SE104_N10_QuanLySieuThi.Model;
 using SE104_N10_QuanLySieuThi.windows;
 using System;
@@ -208,6 +210,8 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
         }
         public ICommand LoadedPageCmd { get; set; }
 
+        public CrystalReportsViewer reportsViewer;
+
         public SellViewModel()
         {
             fDecimal = @".000";
@@ -234,6 +238,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             LoadedBillCmd = new RelayCommand<WrapPanel>((p) => { return true; }, (p) => { _pnlBill = p; });
             CloseBillCmd=new RelayCommand<object> ((p) => { return true; }, (p) => { closeBill(); });
             CloseRptCmd = new RelayCommand<object>((p) => { return true; }, (p) => { closeRpt(); });
+            LoadRptCmd=new RelayCommand<CrystalReportsViewer> ((p) => { reportsViewer = p; return true; }, (p) => { return; });
             LoadedPageCmd = new RelayCommand<ItemsControl>((p) => { return true; }, (p) => { { LoadPage(); }; });
 
 
@@ -302,8 +307,15 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
 
         public void loadReport()
         {
+            reportsViewer = new CrystalReportsViewer();
             winBillReport win2 = new winBillReport();
             win2.Show();
+            CrystalReport1 crys = new CrystalReport1();
+            crys.Load("@CrystalReport1.rpt");
+            crys.Refresh();
+            reportsViewer.ViewerCore.ReportSource = crys;
+            //reportsViewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + SelectedSellHistory.hoadon.SOHD + @"'";
+
         }
 
         private void DrawPDFImage(XGraphics gfx, string finame, int x, int y, int width, int height)
@@ -725,7 +737,6 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
                 _SelectedSellHistory = value;
                 if (SelectedSellHistory != null)
                 {
-                    IdBill = SelectedSellHistory.hoadon.SOHD;
                     loadReport();
                 }
                 OnPropertyChanged();
