@@ -26,14 +26,15 @@ Step 2: Open App.config, change the connection string
 
 to
 
-<b> string=&quot;data source=.\Your database name </b>
+<b> string=&quot;data source=Your database name </b>
 
 Username: admin123
 <br>
 Password: admin123
 
 <br>
-*Notice*: If there is any package missing, change name folder <b>"packages - Copy"</b> to <b>"packages"</b>
+*Notice*:<br>-If there is any package missing, change name folder <b>"packages - Copy"</b> to <b>"packages"</b>
+         <br>-If there something wrong with the printing report .pdf files, try delete all file in Debug and try again, It's probably because the mapping on different machine.
 </div>
 
 </body>
