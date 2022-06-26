@@ -314,7 +314,7 @@ namespace SE104_N10_QuanLySieuThi.ViewModel
             crys.Load("@CrystalReport1.rpt");
             crys.Refresh();
             reportsViewer.ViewerCore.ReportSource = crys;
-            //reportsViewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + SelectedSellHistory.hoadon.SOHD + @"'";
+            reportsViewer.ViewerCore.SelectionFormula = "{HOADON.SOHD}='" + SelectedSellHistory.hoadon.SOHD + @"'";
 
         }
 
